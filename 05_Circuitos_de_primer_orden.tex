@@ -10,6 +10,8 @@
 \usepackage[spanish]{babel}
 \usepackage{booktabs}
 \usepackage{pgfplots}
+\usepgfplotslibrary{units, fillbetween} 
+\pgfplotsset{compat=1.16}
 \title{Electricidad I \\ \emph{Circuitos de primer orden}}
 
 \usetikzlibrary{arrows, arrows.meta}
@@ -21,7 +23,6 @@
 \date{\today}
 \background{fig/background.jpg}
 \renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-
 
 \begin{document}
 
@@ -88,7 +89,7 @@
 \end{frame}
 
 \begin{frame}{Circuito RC: respuesta natural}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \centering
         \only<1-12>{
@@ -110,35 +111,36 @@
             \begin{axis}[
                 %yshift=-1cm,
                 width= \linewidth,
-                height= 0.7\linewidth,
+                height= \linewidth,
                 %grid=major, % Display a grid
                 %grid style={dashed,gray!30}, % Set the style
                 %every axis plot/.append style={thick},
                 ymin=0, ymax=1.1,
-                xmin=0, xmax=6,
+                xmin=-0.5, xmax=5.5,
                 axis x line=bottom,
                 axis y line=left,
                 axis line style={-},
-                xtick=\empty,
-                xticklabels=\empty,
-                ytick=\empty,
-                yticklabels=\empty,
-                xlabel=Voltage, % Set the labels
-                ylabel=Current,
-                x unit=V, 
-                y unit=A,
+                % xtick=\empty,
+                % xticklabels=\empty,
+                % ytick=\empty,
+                % yticklabels=\empty,
+                xlabel=$t/\tau$, % Set the labels
+                ylabel=$v(t)/v(0)$,
+                x unit=, 
+                y unit=,
                 %legend pos=north east,
                 %legend style={cells={anchor=west}}
                 %legend style={at={(1,0.7)},anchor=west}, % Put the legend below the plot
                 smooth,
                 ]
-                \addplot [name path=VI, mark=none, color=black,forget plot, thick]       
-                table[x=t,y=mag,col sep=comma] {./python/resp_nat.csv};
+                \addplot [mark=none, color=black,forget plot, thick]       
+                table[x=t,y=mag,col sep=comma] {python/resp_nat.csv};
             \end{axis}
             \end{tikzpicture}
         }
     \end{column}
     \begin{column}{0.5\textwidth}
+    \centering
     \only<1-3>{
         \onslide<1-3>{
         Aplicando LCK tenemos que:
@@ -221,9 +223,9 @@
     }
     \only<13-15>{
         \onslide<13-15>{
-       la velocidad a la que la tensión decrese $RC$:
+        la velocidad a la que el voltaje decrece se conoce como tau ($\tau$) y es igual a $RC\,$:
         \begin{equation*}
-            e\,^{\ln \left( v(t)/v(0)\right)} = e\,^{-(t-t_0)/RC}
+            v(t) = Ve\,^{-t/\tau}
         \end{equation*}
         }
         \onslide<14-15>{
@@ -242,8 +244,6 @@
     \end{column}
 \end{columns}
 \end{frame}
-
-
 
 \begin{frame}{Inductores en serie}
 \begin{columns}
