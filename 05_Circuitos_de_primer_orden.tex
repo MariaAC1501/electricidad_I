@@ -9,6 +9,7 @@
 \usepackage{tabu}
 \usepackage[spanish]{babel}
 \usepackage{booktabs}
+\usepackage{pgfplots}
 \title{Electricidad I \\ \emph{Circuitos de primer orden}}
 
 \usetikzlibrary{arrows, arrows.meta}
@@ -90,7 +91,7 @@
     \begin{columns}
     \begin{column}{0.5\textwidth}
         \centering
-        \only<1->{
+        \only<1-12>{
             \begin{circuitikz}[scale=0.8]\draw
             (0,4)
                 to [C, l=$C$, i>^=$i_C$]
@@ -103,6 +104,38 @@
             (2,0)
             ;
         \end{circuitikz}
+        }
+        \only<13-15>{
+            \begin{tikzpicture}
+            \begin{axis}[
+                %yshift=-1cm,
+                width= \linewidth,
+                height= 0.7\linewidth,
+                %grid=major, % Display a grid
+                %grid style={dashed,gray!30}, % Set the style
+                %every axis plot/.append style={thick},
+                ymin=0, ymax=1.1,
+                xmin=0, xmax=6,
+                axis x line=bottom,
+                axis y line=left,
+                axis line style={-},
+                xtick=\empty,
+                xticklabels=\empty,
+                ytick=\empty,
+                yticklabels=\empty,
+                xlabel=Voltage, % Set the labels
+                ylabel=Current,
+                x unit=V, 
+                y unit=A,
+                %legend pos=north east,
+                %legend style={cells={anchor=west}}
+                %legend style={at={(1,0.7)},anchor=west}, % Put the legend below the plot
+                smooth,
+                ]
+                \addplot [name path=VI, mark=none, color=black,forget plot, thick]       
+                table[x=t,y=mag,col sep=comma] {./python/resp_nat.csv};
+            \end{axis}
+            \end{tikzpicture}
         }
     \end{column}
     \begin{column}{0.5\textwidth}
