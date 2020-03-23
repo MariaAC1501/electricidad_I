@@ -1,0 +1,376 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[american,RPvoltages]{circuitikz}
+\usepackage{tabularx}
+\usepackage[spanish]{babel}
+\title{Electricidad I \\ \emph{Leyes básicas}}
+
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+
+\begin{document}
+
+\maketitle
+\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+\begin{frame}{Corriente, Voltaje y Resistencia}
+    \begin{center}
+        \begin{tabular}{c c c}
+        Variable & Derivación & Unidades \\
+        \hline\\[-5pt]
+        Corriente & $i = \frac{dq}{dt}$ & \si{\ampere} [\si{\coulomb \second^{-1}}] \\[5pt]
+        Voltaje & $v = \frac{dw}{dq}$ & \si{\volt} [\si{\joule \coulomb^{-1}}] \\[5pt]
+        Potencia & $p = v \cdot i =  \frac{dw}{dt}$ & \si{\watt} [\si{\joule \second^{-1}}] \\[5pt]
+        Energía & $w = \int_{t_0}^{t_f}p\,dt$ & \si{\watt\hour} [\SI{3600}{\joule}] \\[5pt]
+        \end{tabular}    
+    \end{center}
+\end{frame}
+
+\begin{frame}{Ley de Ohm y Ley de Watt}
+Ley de Ohm
+    \begin{align*}
+         V&=I \cdot R & I&=\frac{V}{R} & R&=\frac{V}{I}\\    
+    \end{align*} 
+Ley de Watt
+    \begin{align*}
+         P&=V \cdot I & P&=\frac{V^2}{R} & P&=I^2 \cdot R\\    
+    \end{align*} 
+\end{frame}
+
+\begin{frame}{Pasivos y activos. Convención pasiva}
+    \begin{tabularx}{\linewidth}{X X}
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[generic]
+            (0,3)
+                to[short,-o,i<=$i$]
+            (1,3)
+                to[open,v=$v$]
+            (1,0)
+            ;
+        \draw (0.5,4)node[above] {Pasivos};
+        \draw (0.5,-1)node[above] {$p=v\cdot i$};
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[generic]
+            (0,3)
+                to[short,-o,i=$i$]
+            (1,3)
+                to[open,v=$v$]
+            (1,0)
+            ;
+        \draw (0.5,4)node[above] {Activos};
+        \draw (0.5,-1)node[above] {$p=-v\cdot i$};
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Fuentes independientes}
+    \begin{tabularx}{\linewidth}{X X}
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[V]
+            (0,3)
+                to[short,-o]
+            (1,3)
+            ;
+        \draw (0.5,3.5)node[above, align=center]{Fuente \\de voltaje \\independiente};
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[I]
+            (0,3)
+                to[short,-o]
+            (1,3)
+            ;
+        \draw (0.5,3.5)node[above, align=center]{Fuente \\ de corriente \\independiente};
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Fuentes dependientes}
+    \begin{tabularx}{\linewidth}{X X}
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[cV]
+            (0,3)
+                to[short,-o]
+            (1,3)
+            ;
+        \draw (0.5,3.5)node[above, align=center]{Fuente \\de voltaje \\dependiente};
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[cI]
+            (0,3)
+                to[short,-o]
+            (1,3)
+            ;
+        \draw (0.5,3.5)node[above, align=center]{Fuente \\ de corriente \\dependiente};
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Elementos de un circuito}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{itemize}
+            \item \textbf{Rama:} un solo elemento
+            \item \textbf{Nodo:} el punto de conexión entre dos o mas ramas
+            \item \textbf{Lazo:} cualquier trayectoria cerrada en un circuito
+            \item \textbf{Malla:} una lazo que no contiene otros lazos 
+        \end{itemize}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (0,0)
+                to[V, l=$v_1$]
+            (0,3)	
+                --
+            (2,3)
+                to[R,l=$R_2$]
+            (4,3)
+            (4,0) 
+                to[V, l=$v_2$]
+            (4,3)
+            (0,0)
+                --
+            (4,0)
+            (2,0)
+                to[R, l=$R_1$]
+            (2,3)
+            ;
+        \end{circuitikz}
+    \end{tabularx}
+%\let\thefootnote\relax\footnote{Tomado de \cite{charles2013fundamentos}}
+\end{frame}
+
+
+\begin{frame}{Ley de corriente de Kirchhoff (LCK)}
+\emph{La suma algebraica de las corrientes que entran y salen de un nodo es igual a cero}\\
+\centering
+\includegraphics[width=0.8\linewidth]{fig/P2.13.PNG}\cite{charles2013fundamentos}
+\end{frame}
+
+\begin{frame}{Ley de voltaje de Kirchhoff (LVK)}
+\emph{La suma algebraica de todas los voltajes alrededor de un lazo es cero}\\
+\centering
+\includegraphics[width=0.8\linewidth]{fig/P2.14.PNG}\cite{charles2013fundamentos}
+\end{frame}
+
+\begin{frame}{Elementos en serie}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{itemize}
+            \item Dos elementos en serie comparten solamente una de sus terminales y esta no se comparte con un tercer elemento.
+            \item Cuando solo existen parejas de elementos en serie en un circuito se le llama circuito en serie.
+            \item La corriente en un circuito en serie es la misma para todos los elementos.
+        \end{itemize}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (3,0)
+                to[R,l=$R_3$,o-]
+            (0,0)	
+                to[R,l=$R_2$]
+            (0,3)
+                to[R,l=$R_1$,i^<=$i$,-o]
+            (3,3)
+            ;
+        \draw (1.5,-1.5)node[above, align=left]{$R_{eq}=R_1+R_2+R_3$};
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Divisor de voltaje}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+        v_n = v_T\cdot \frac{R_n}{R_1+R_2+\cdot\cdot\cdot+R_n}\\
+        \\
+        v_3 = v_T\cdot \frac{R_3}{R_1+R_2+R_3}
+        \end{gather*}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (3,0)
+                to[R,l=$R_3$,v>=$v_3$,o-]
+            (0,0)	
+                to[R,l=$R_2$]
+            (0,3)
+                to[R,l=$R_1$,-o]
+            (3,3)
+            (3,3)
+                to[open,v^=$v_T$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Fuentes de voltaje en serie}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{circuitikz} [scale=1]\draw
+            (3,0)
+                to[V,l=$v_3$,o-]
+            (0,0)	
+                to[V,l=$v_2$, invert]
+            (0,3)
+                to[V,l=$v_1$,-o]
+            (3,3)
+            ;
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[V,l=$v_e$]
+            (0,3)
+                to[short,-o]
+            (1,3)
+            ;
+        \end{circuitikz}
+    \end{tabularx}
+    \begin{equation*}
+    v_{eq} = v_1-v_2+v_3
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Elementos en paralelo}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{itemize}
+            \item Dos o mas elementos en paralelo comparten sus dos terminales.
+            \item Cuando solo existen elementos en paralelo en un circuito se le llama circuito en paralelo.
+            \item El voltaje en un circuito en paralelo es el mismo para todos los elementos.
+        \end{itemize}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,3)
+                to[short,o-]
+            (0,3)	
+                to[R,l_=$R_3$]
+            (0,0)
+                to[short,-o]
+            (1,0)
+            (0,3) -- (-1.5,3)
+                to[R,l_=$R_2$]
+            (-1.5,0) -- (0,0)
+            (-1.5,3) -- (-3,3)
+                to[R,l_=$R_1$]
+            (-3,0) -- (-1.5,0)
+            (1,3)
+                to[open,v^=$v$]
+            (1,0)
+            ;
+            \draw (-1.5,-3)node[above, align=center]{$\frac{1}{R_{eq}}=\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}$\\ \\En caso de solo dos resistencias:\\ \\ $R_{eq}=\frac{R_1 \cdot R_2}{R_1+R_2}$ };
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Divisor de corriente}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+        i_n = i_T\cdot \frac{\frac{1}{R_n}}{\frac{1}{R_1}+\frac{1}{R_2}+\cdot\cdot\cdot+\frac{1}{R_n}}\\
+        \\
+        i_1 = i_T\cdot \frac{\frac{1}{R_1}}{\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}}
+        \end{gather*}
+        En caso de ser solo dos resistencias:
+        \begin{equation*}
+        i_1 = i_T\cdot \frac{R_2}{R_1+R_2}
+        \end{equation*}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,3)
+                to[short,i=$i_T$,o-]
+            (0,3)	
+                to[R,l_=$R_3$]
+            (0,0)
+                to[short,-o]
+            (1,0)
+            (0,3) -- (-1.5,3)
+                to[R,l_=$R_2$]
+            (-1.5,0) -- (0,0)
+            (-1.5,3) -- (-3,3)
+                to[R,l_=$R_1$,i>^=$i_1$]
+            (-3,0) -- (-1.5,0)
+            ;
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Fuentes de corriente en paralelo}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{circuitikz} [scale=1]\draw
+            (1,3)
+                to[short,o-]
+            (0,3)	
+                to[I,l_=$i_3$]
+            (0,0)
+                to[short,-o]
+            (1,0)
+            (0,3) -- (-1.5,3)
+                to[I,l_=$i_2$, invert]
+            (-1.5,0) -- (0,0)
+            (-1.5,3) -- (-3,3)
+                to[I,l_=$i_1$]
+            (-3,0) -- (-1.5,0)
+            ;
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,3)
+                to[short,o-]
+            (0,3)	
+                to[I,l_=$i_e$,invert]
+            (0,0)
+                to[short,-o]
+            (1,0)
+            ;
+        \end{circuitikz}
+    \end{tabularx}
+    \begin{equation*}
+    i_{eq} = -i_1+i_2-i_3
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Referencias}
+
+\bibliographystyle{ieeetr}
+
+\bibliography{referencias}
+
+\end{frame}
+
+
+\end{document}

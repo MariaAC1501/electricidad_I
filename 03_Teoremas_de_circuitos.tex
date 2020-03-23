@@ -1,0 +1,542 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[american,RPvoltages]{circuitikz}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage[spanish]{babel}
+\title{Electricidad I \\ \emph{Teoremas de circuitos}}
+
+\usetikzlibrary{arrows, arrows.meta}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+
+\begin{document}
+
+\maketitle
+\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+
+\begin{frame}{Superposición}
+    \begin{tabularx}{\linewidth}{X X}
+        Pasos:
+        \begin{enumerate}
+            \item Se deja solamente una fuente independiente encendida. 
+            \item Las otras fuentes independientes que no están siendo analizadas se apagan. Fuentes de voltaje se sustituyen por cortos; fuentes de corriente se sustituyen por abiertos.
+        \end{enumerate}
+        \vfill
+        &
+        \begin{enumerate}
+        \setcounter{enumi}{2}
+            \item Se calcula la contribución de la fuente analizada en el valor total de la corriente o el voltaje buscado.
+            \item Se repiten los pasos 1, 2 y 3 para cada una de las fuentes independientes.
+            \item Se suman las contribuciones de todas las fuentes independientes para determinar el valor total de la corriente o voltaje buscado. 
+        \end{enumerate}
+        \vfill
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Superposición}
+        Solucionamos el ejemplo usado en supermallas. Buscamos $i_{R_6}$
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.65]\draw
+            (0,0)
+                to[V,l=$v_1$]
+            (0,6)	
+                to[R, l=$R_1$]
+            (4,6)
+                to[R,l=$R_3$]
+            (8,6)
+                to[R,l=$R_4$]
+            (8,3)
+                to[I,l=$i_1$,invert]
+            (8,0)
+                --
+            (0,0)
+            (4,0)
+                to[R,l=$R_2$]
+            (4,6)
+            (8,6)
+                to[R,l=$R_5$]
+            (12,6)
+                to[R,l=$R_6$, i=$i_{R_6}$]
+            (12,0)
+                --
+            (8,0)
+            ;
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Superposición}
+        1. Se deja solamente una fuente independiente encendida. 2. Las demás se apagan. 3. Se calcula la contribución de la fuente analizada en el valor total de la corriente o el voltaje buscado
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.65]\draw
+            (0,0)
+                to[V,l=$v_1$]
+            (0,6)	
+                to[R, l=$R_1$]
+            (4,6)
+                to[R,l=$R_3$]
+            (8,6)
+                to[open]
+            (8,3)
+                to[open]
+            (8,0)
+                --
+            (0,0)
+            (4,0)
+                to[R,l=$R_2$]
+            (4,6)
+            (8,6)
+                to[R,l=$R_5$]
+            (12,6)
+                to[R,l=$R_6$, i=$i_{R_{6v1}}$]
+            (12,0)
+                --
+            (8,0)
+            ;
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Superposición}
+        4. Se repiten los pasos 1, 2 y 3 para cada una de las fuentes independientes
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.65]\draw
+            (0,0)
+                to[short]
+            (0,6)	
+                to[R, l=$R_1$]
+            (4,6)
+                to[R,l=$R_3$]
+            (8,6)
+                to[R,l=$R_4$]
+            (8,3)
+                to[I,l=$i_1$,invert]
+            (8,0)
+                --
+            (0,0)
+            (4,0)
+                to[R,l=$R_2$]
+            (4,6)
+            (8,6)
+                to[R,l=$R_5$]
+            (12,6)
+                to[R,l=$R_6$, i=$i_{R_{6i1}}$]
+            (12,0)
+                --
+            (8,0)
+            ;
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Superposición}
+        5. Se suman las contribuciones de todas las fuentes independientes para determinar el valor total de la corriente o voltaje buscado.
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.65]\draw
+            (0,0)
+                to[V,l=$v_1$]
+            (0,6)	
+                to[R, l=$R_1$]
+            (4,6)
+                to[R,l=$R_3$]
+            (8,6)
+                to[R,l=$R_4$]
+            (8,3)
+                to[I,l=$i_1$,invert]
+            (8,0)
+                --
+            (0,0)
+            (4,0)
+                to[R,l=$R_2$]
+            (4,6)
+            (8,6)
+                to[R,l=$R_5$]
+            (12,6)
+                to[R,l=$R_6$, i=$i_{R_6}$]
+            (12,0)
+                --
+            (8,0)
+            ;
+            \draw
+            (-4,6) 
+                node[]{$i_{R_6} = i_{R_{6v1}} + i_{R_{6i1}}$}
+            ;
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Transformación de fuentes}
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (4,0)
+                to[short,o-]
+            (0,0)
+                to[V, v=$v_1$]
+            (0,4)	
+                to[R, l=$R_1$, -o]
+            (4,4)
+            (12,0)
+                to[short,o-]
+            (8,0)
+                to[I, l=$i_1$]
+            (8,4)
+                to[short, -o]
+            (12,4)
+            (10,0)
+                to[R, l_=$R_1$]
+            (10,4)
+            ;
+            \draw[thick, >=triangle 45, <->] (4.5,2) -- (6.5,2);
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Teorema de Thevenin}
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (1,-0.5)
+                rectangle node[align=center] {\small Circuito\\\small lineal}
+            (3,4.5)
+            (3,4)	
+                to[short,-o]
+            (4,4)node[above]{$a$}
+                to[short]
+            (6,4)
+                to[generic, l=\small{Carga}, i>^=$i$]
+            (6,0)
+                to[short, -o]
+                node[below]{$b$}
+            (4,0)
+                to[short]
+            (3,0)
+            (4,4)
+                to[open, v^=$v$]
+            (4,0)
+            (11,0)
+                to[V,l=$v_{th}$]
+            (11,4)
+                to[R,l=$R_{th}$,-o]
+                node[above]{$a$}
+            (14,4)
+                to[short]
+            (16,4)
+                to[generic, l=\small{Carga}, i>^=$i$]
+            (16,0)
+                to[short,-o]
+                node[below]{$b$}
+            (14,0)
+                to[short]
+            (11,0)
+            (14,4)
+                to[open, v^=$v$]
+            (14,0)
+            ;
+            \draw[thick, >=triangle 45, ->] (8,2) -- (9.5,2);
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Teorema de Thevenin}
+        Se elimina la carga y podemos encontrar $v_{th}$ 
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (1,-0.5)
+                rectangle node[align=center] {\small Circuito\\\small lineal}
+            (3,4.5)
+            (3,4)	
+                to[short,-o]
+            (4,4)node[above]{$a$}
+            (4,0)node[below]{$b$}
+                to[short,o-]
+            (3,0)
+            (4,4)
+                to[open, v^=$v_{th}$]
+            (4,0)
+            (11,0)
+                to[V,l=$v_{th}$]
+            (11,4)
+                to[R,l=$R_{th}$,-o]
+            (14,4)node[above]{$a$}
+                to[open, v^=$v_{th}$]
+            (14,0)node[below]{$b$}
+                to[short,o-]
+            (11,0)
+            ;
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Teorema de Thevenin}
+        Si no hay fuentes dependientes, se apagan las fuentes independientes y podemos encontrar $R_{th}$
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (1,-0.5)
+                rectangle node[align=center] {\small Circuito\\\small lineal\\\small con\\\small fuentes\\\small indep.\\\small apagadas}
+            (3,4.5)
+            (3,4)	
+                to[short,-o]
+            (4,4)node[above]{$a$}
+            (4,0)node[below]{$b$}
+                to[short,o-]
+            (3,0)
+            (4,4)
+                to[open, l=$R_{th}$]
+            (4,0)
+            (11,0)
+                to[short]
+            (11,4)
+                to[R,l=$R_{th}$,-o]
+            (14,4)node[above]{$a$}
+                to[open, l=$R_{th}$]
+            (14,0)node[below]{$b$}
+                to[short,o-]
+            (11,0)
+            ;
+            \draw[thick, >=triangle 45, <-] (4,1.6) -- (5,1.6);
+            \draw[thick, >=triangle 45, <-] (14,1.6) -- (15,1.6);
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Teorema de Thevenin}
+        Si hay fuentes dependientes, se apagan las fuentes independientes y usamos una fuente de prueba para encontrar $R_{th}$
+        \vfill
+        \begin{tabularx}{\linewidth}{X X}
+            \centering
+            \begin{circuitikz} [scale=0.8]\draw
+                (1,-0.5)
+                    rectangle node[align=center] {\small Circuito\\\small lineal\\\small con\\\small fuentes\\\small indep.\\\small apagadas}
+                (3,4.5)
+                (3,4)	
+                    to[short,-o]
+                (4,4)node[above]{$a$}
+                    to[short]
+                (6,4)
+                    to[V, l=$v_{o}$, i<^=$i_o$, invert]
+                (6,0)
+                    to[short, -o]
+                (4,0)node[below]{$b$}
+                    to[short,o-]
+                (3,0)
+                (6.5,4)node[right]{$R_{th} = \frac{v_o}{i_o}$}
+                ;
+            \end{circuitikz}
+            &
+            \centering
+            \begin{circuitikz} [scale=0.8]\draw
+                (1,-0.5)
+                    rectangle node[align=center] {\small Circuito\\\small lineal\\\small con\\\small fuentes\\\small indep.\\\small apagadas}
+                (3,4.5)
+                (3,4)	
+                    to[short,-o]
+                (4,4)node[above]{$a$}
+                    to[short]
+                (6,4)
+                    to[I, l=$i_{o}$, invert]
+                (6,0)
+                    to[short, -o]
+                (4,0)node[below]{$b$}
+                    to[short,o-]
+                (3,0)
+                (6.5,4)node[right]{$R_{th} = \frac{v_o}{i_o}$}
+                (4,4)
+                    to[open, v^=$v_o$]
+                (4,0)
+                ;
+            \end{circuitikz}
+        \end{tabularx}
+\end{frame}
+
+\begin{frame}{Teorema de Norton}
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (1,-0.5)
+                rectangle node[align=center] {\small Circuito\\\small lineal}
+            (3,4.5)
+            (3,4)	
+                to[short,-o]
+            (4,4)node[above]{$a$}
+                to[short]
+            (6,4)
+                to[generic, l=\small{Carga}, i>^=$i$]
+            (6,0)
+                to[short, -o]
+                node[below]{$b$}
+            (4,0)
+                to[short]
+            (3,0)
+            (4,4)
+                to[open, v^=$v$]
+            (4,0)
+            (11,0)
+                to[I,l=$i_{N}$]
+            (11,4)
+                to[short,-o]
+                node[above]{$a$}
+            (14,4)
+                to[short]
+            (16,4)
+                to[generic, l=\small{Carga}, i>^=$i$]
+            (16,0)
+                to[short,-o]
+                node[below]{$b$}
+            (14,0)
+                to[short]
+            (11,0)
+            (13,4)
+                to[R, l_=$R_N$]
+            (13,0)
+            (14,4)
+                to[open, v^=$v$]
+            (14,0)
+            ;
+            \draw[thick, >=triangle 45, ->] (8,2) -- (9.5,2);
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Teorema de Norton}
+        La carga se pone en cortocircuito y podemos encontrar $i_N$ 
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (1,-0.5)
+                rectangle node[align=center] {\small Circuito\\\small lineal}
+            (3,4.5)
+            (3,4)	
+                to[short,-o]
+            (4,4)node[above]{$a$}
+                to[short]
+            (6,4)
+                to[short, i>^=$i_N$]
+            (6,0)
+                to[short, -o]
+                node[below]{$b$}
+            (4,0)
+                to[short,o-]
+            (3,0)
+            (11,0)
+                to[I,l=$i_{N}$]
+            (11,4)
+                to[short,-o]
+                node[above]{$a$}
+            (14,4)
+                to[short]
+            (16,4)
+                to[short, i>^=$i_N$]
+            (16,0)
+                to[short,-o]
+                node[below]{$b$}
+            (14,0)
+                to[short]
+            (11,0)
+            (13,4)
+                to[R, l_=$R_N$]
+            (13,0)
+            ;
+        \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Teorema de Norton}
+    La resistencia equivalente de Norton es igual a la de Thevenin y se puede encontrar usando el mismo método.\\
+    \begin{equation*}
+        R_{th} = R_N
+    \end{equation*}
+    Luego se pueden relacionar por medio de la Ley de Ohm:
+    \begin{equation*}
+        i_N = \frac{v_{th}}{R_{th}}
+    \end{equation*}
+    \begin{equation*}
+        v_{th} = i_N \cdot R_N
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Teorema de máxima transferencia de potencia}
+    Para transferir la máxima potencia a una carga, esta debe tener una resistencia igual a la resistencia de Thevenin.\\
+    \vfill
+    \centering
+    \begin{circuitikz}[scale=0.8]\draw
+        (0,0)
+            to[V,l=$v_{th}$]
+        (0,4)
+            to[R,l=$R_{th}$,-o]
+            node[above]{$a$}
+        (3,4)
+            to[short]
+        (5,4)
+            to[vR, mirror, l=$R_c$]
+        (5,0)
+            to[short,-o]
+            node[below]{$b$}
+        (3,0)
+            to[short]
+        (0,0)
+        (3,4)
+            to[open, v^=$v$]
+        (3,0)
+        (8,4)node[right]{$p=\left(\frac{v_{th}}{R_{th} + R_c}\right)^2 \cdot R_c$}
+        (8,2)node[right]{$p_{max} \rightarrow R_c = R_{th}$}
+        (8,0)node[right]{$p_{max}=\frac{v_{th}^2}{4\cdot R_{th}}$}
+        ;
+    \end{circuitikz}
+\end{frame}
+
+\begin{frame}{Puente de Wheatstone}
+        \begin{tabularx}{\linewidth}{X X}
+        \begin{equation*}
+            v_a = v_1
+        \end{equation*}
+        \begin{multline*}
+             -\left(\frac{1}{R_1}+\frac{1}{R_2}\right) \cdot v_a + \left(\frac{1}{R_2} + \frac{1}{R_3}\right) \cdot v_b \\+ \left(\frac{1}{R_1} + \frac{1}{R_4}\right) \cdot v_c= 0
+        \end{multline*}
+        \vspace{0.2cm}
+        \begin{equation*}
+            v_b - v_c = v_2
+        \end{equation*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[V,l=$v_1$]
+                node[left]{$v_a$}
+            (0,4)
+                to[short]
+            (0,6)
+                to[R,l=$R_1$]
+                %node[ground]{}
+            (6,6)
+                to[short]
+                node[right]{$v_c$}
+            (6,4)
+                to[R,l=$R_4$]
+            (6,0)
+                to[short]
+                node[ground]{}
+            (3,0)
+                to[short]
+            (0,0)
+            (0,4)
+                 to[R,l=$R_2$]
+                 node[above]{$v_b$}
+            (3,4)
+                to[R,l=$R_3$]
+            (3,0)
+            (6,4)
+                to[V,l_=$v_2$]
+            (3,4)
+            ;
+        \end{circuitikz}
+        \vfill
+        \end{tabularx}
+\end{frame}
+
+\end{document}

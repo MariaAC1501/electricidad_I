@@ -1,0 +1,577 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[american,RPvoltages]{circuitikz}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage[spanish]{babel}
+\title{Electricidad I \\ \emph{Métodos de análisis}}
+
+\usetikzlibrary{arrows, arrows.meta}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+
+\begin{document}
+
+\maketitle
+\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+
+\begin{frame}{Análisis de mallas}
+    \begin{tabularx}{\linewidth}{X X}
+        Pasos:
+        \begin{enumerate}
+            \item Asigne las corrientes de malla
+            \item Aplique la LVK a cada una de las mallas
+            \item Resuelva las ecuaciones simultáneas obtenidas
+        \end{enumerate}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[V,l=$v_1$]
+            (0,4)	
+                to[R, l=$R_1$]
+            (3,4)
+                to[R,l=$R_3$]
+            (6,4)
+                to[V,l=$v_2$,invert]
+            (6,0)
+                --
+            (0,0)
+            (3,0)
+                to[R,l_=$R_2$]
+            (3,4)
+            ;
+            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Análisis de mallas}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+            -v_1+i_a \cdot R_1 + (i_a-i_b)\cdot R_2 = 0\\
+            \\
+            (i_b-i_a)\cdot R_2 + i_b\cdot R_3 + v_2 = 0\\
+        \end{gather*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                node[below]{$a$}
+                to[V,l=$v_1$,*-]
+            (0,4)	
+                to[R, l=$R_1$]
+            (3,4)
+                to[R,l=$R_3$]
+            (6,4)
+                to[V,l=$v_2$,invert]
+            (6,0)
+                --
+            (3,0)
+                node[below]{$b$}
+                to[short,*-]
+            (0,0)
+            (3,0)
+                to[R,l_=$R_2$]
+            (3,4)
+            ;
+            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Análisis de mallas - Inspección}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+            (R_1 + R_2) \cdot i_a - R_2 \cdot i_b  = v_1\\
+            \\
+            - R_2 \cdot i_a   + (R_2 + R_3) \cdot i_b  = -v_2\\
+        \end{gather*}
+        \begin{equation*}
+            \begin{bmatrix} 
+                R_1 + R_2 & -R_2 \\ 
+                -R_2 & R_2 + R_3\\
+            \end{bmatrix}
+            \begin{bmatrix} 
+              i_a \\ 
+              i_b 
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                v_1 \\
+                -v_2
+            \end{bmatrix}
+        \end{equation*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[V,l=$v_1$,*-]
+            (0,4)	
+                to[R, l=$R_1$]
+            (3,4)
+                to[R,l=$R_3$]
+            (6,4)
+                to[V,l=$v_2$,invert]
+            (6,0)
+                --
+            (3,0)
+                to[short,*-]
+            (0,0)
+            (3,0)
+                to[R,l_=$R_2$]
+            (3,4)
+            ;
+            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Análisis de mallas con fuentes de corriente}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+            (R_1+R_2) \cdot i_a - R_2 \cdot i_b = v_1\\
+            \\
+            0 \cdot i_a + i_b = -i_1\\
+        \end{gather*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                node[below]{$a$}
+                to[V,l=$v_1$,*-]
+            (0,4)	
+                to[R, l=$R_1$]
+            (3,4)
+                to[R,l=$R_3$]
+            (6,4)
+                to[I,l=$i_1$,invert]
+            (6,0)
+                --
+            (3,0)
+                node[below]{$b$}
+                to[short,*-]
+            (0,0)
+            (3,0)
+                to[R,l_=$R_2$]
+            (3,4)
+            ;
+            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Supermallas}
+    \begin{tabularx}{\linewidth}{X X X}
+    Es cuando dos mallas tienen una fuente de corriente en común
+    &
+    \centering
+    \begin{circuitikz} [scale=0.65]\draw
+        (0,0)
+            to[V,l=$v_1$]
+        (0,6)	
+            to[R, l=$R_1$]
+        (4,6)
+            to[R,l=$R_3$]
+        (8,6)
+            to[R,l=$R_4$]
+        (8,3)
+            to[I,l=$i_1$,invert]
+        (8,0)
+            --
+        (0,0)
+        (4,0)
+            to[R,l=$R_2$]
+        (4,6)
+        (8,6)
+            to[R,l=$R_5$]
+        (12,6)
+            to[R,l=$R_6$]
+        (12,0)
+            --
+        (8,0)
+        ;
+        \draw[thin, <-, >=triangle 45,blue] (2,3)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+        \draw[thin, <-, >=triangle 45,blue] (6,3)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+        \draw[thin, <-, >=triangle 45,blue] (10,3)node{$i_c$}  ++(-60:0.5) arc (-60:170:0.5);
+        \draw[dashed, blue]
+        (4.5,5.5) 
+            -- 
+        (11.5,5.5)
+            --
+        (11.5,0.5)
+            --
+        (4.5,0.5)
+            --
+        (4.5,5.5)
+        ;
+    \end{circuitikz}
+    &
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Supermallas}
+    \begin{tabularx}{\linewidth}{X X X}
+        \begin{multline*}
+            (R_1+R_2) \cdot i_a \\ - R_2 \cdot i_b + 0 \cdot i_c  = v_1
+        \end{multline*}
+        \begin{multline*}
+            -R_2 \cdot i_a + (R_2+R_3) \cdot i_b \\ + (R_5 + R_6) \cdot i_c = 0
+        \end{multline*}  
+        
+        \begin{equation*}
+            0 \cdot i_a - i_b + i_c = i_1 
+        \end{equation*}
+        &
+     \centering
+    \begin{circuitikz} [scale=0.65]\draw
+        (0,0)
+            to[V,l=$v_1$]
+        (0,6)	
+            to[R, l=$R_1$]
+        (4,6)
+            to[R,l=$R_3$]
+        (8,6)
+            to[R,l=$R_4$]
+        (8,3)
+            to[I,l=$i_1$,invert]
+        (8,0)
+            --
+        (0,0)
+        (4,0)
+            to[R,l=$R_2$]
+        (4,6)
+        (8,6)
+            to[R,l=$R_5$]
+        (12,6)
+            to[R,l=$R_6$]
+        (12,0)
+            --
+        (8,0)
+        ;
+        \draw[thin, <-, >=triangle 45,blue] (2,3)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+        \draw[thin, <-, >=triangle 45,blue] (6,3)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+        \draw[thin, <-, >=triangle 45,blue] (10,3)node{$i_c$}  ++(-60:0.5) arc (-60:170:0.5);
+        \draw[dashed, blue]
+        (4.5,5.5) 
+            -- 
+        (11.5,5.5)
+            --
+        (11.5,0.5)
+            --
+        (4.5,0.5)
+            --
+        (4.5,5.5)
+        ;
+    \end{circuitikz}
+    &
+    \end{tabularx}
+\end{frame}
+
+
+\begin{frame}{Análisis de nodos}
+    \begin{tabularx}{\linewidth}{X X}
+        Pasos:
+        \begin{enumerate}
+            \item Seleccione un nodo como referencia. Asigne voltajes a los demás nodos
+            \item Aplique la LCK a cada uno de los nodos de no referencia 
+            \item Resuelva las ecuaciones simultáneas obtenidas
+        \end{enumerate}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[I,l=$i_1$]
+            (0,4)
+                to[short]
+                node[above left]{$v_a$}
+            (2,4)
+                to[R,l=$R_1$]
+                node[ground]{}
+            (2,0)
+                to[short]
+            (0,0)
+            (2,4)
+                to[R,l=$R_2$]
+                node[above right]{$v_b$}
+            (6,4)
+                to[R,l=$R_3$]
+            (6,0)
+                --
+            (0,0)
+            (2,4) 
+                --
+            (2,6)
+                to[I,l=$i_2$]
+            (6,6)
+                --
+            (6,4)
+            ;
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Análisis de nodos}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+            -i_1 + i_{R_1} + i_{R_2} + i_2 = 0\\
+            \\
+            -i_2 - i_{R_2} + i_{R_3} = 0
+        \end{gather*}
+        \begin{gather*}
+            i_{R_1} = \frac{v_a - 0}{R_1}\\  
+            i_{R_2} = \frac{v_a - v_b}{R_2}\\
+            i_{R_3} = \frac{v_b - 0}{R_3}
+        \end{gather*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[I,l=$i_1$]
+            (0,4)
+                to[short]
+                node[above left]{$v_a$}
+            (2,4)
+                to[R,l=$R_1$,i>^=$i_{R_1}$]
+                node[ground]{}
+            (2,0)
+                to[short]
+            (0,0)
+            (2,4)
+                to[R,l=$R_2$, i>^=$i_{R_2}$]
+                node[above right]{$v_b$}
+            (6,4)
+                to[R,l=$R_3$, i>^=$i_{R_3}$]
+            (6,0)
+                --
+            (0,0)
+            (2,4) 
+                --
+            (2,6)
+                to[I,l=$i_2$]
+            (6,6)
+                --
+            (6,4)
+            ;
+        \end{circuitikz}
+        \vfill
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Análisis de nodos}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+            -i_1 + \frac{v_a - 0}{R_1} + \frac{v_a - v_b}{R_2} + i_2 = 0\\
+            \\
+            -i_2 - \frac{v_a - v_b}{R_2} + \frac{v_b - 0}{R_3} = 0
+        \end{gather*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[I,l=$i_1$]
+            (0,4)
+                to[short]
+                node[above left]{$v_a$}
+            (2,4)
+                to[R,l=$R_1$,i>^=$i_{R_1}$]
+                node[ground]{}
+            (2,0)
+                to[short]
+            (0,0)
+            (2,4)
+                to[R,l=$R_2$, i>^=$i_{R_2}$]
+                node[above right]{$v_b$}
+            (6,4)
+                to[R,l=$R_3$, i>^=$i_{R_3}$]
+            (6,0)
+                --
+            (0,0)
+            (2,4) 
+                --
+            (2,6)
+                to[I,l=$i_2$]
+            (6,6)
+                --
+            (6,4)
+            ;
+        \end{circuitikz}
+        \vfill
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Análisis de nodos - Inspección}
+    \begin{tabularx}{\linewidth}{X X}
+        \begin{gather*}
+             \left(\frac{1}{R_1}+\frac{1}{R_2}\right) \cdot v_a - \frac{1}{R_2} \cdot v_b = i_1 - i_2\\
+            \\
+            - \frac{1}{R_2} \cdot v_a + \left(\frac{1}{R_2} + \frac{1}{R_3}\right)  \cdot v_b = i_2
+        \end{gather*}
+        \vspace{0.5cm}
+        \begin{equation*}
+            \begin{bmatrix} 
+                \frac{1}{R_1}+\frac{1}{R_2} & -\frac{1}{R_2} \\ 
+                - \frac{1}{R_2} & \frac{1}{R_2} + \frac{1}{R_3}\\
+            \end{bmatrix}
+            \begin{bmatrix} 
+              v_a \\ 
+              v_b 
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                i_1 - i_2\\
+                i_2
+            \end{bmatrix}
+        \end{equation*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[I,l=$i_1$]
+            (0,4)
+                to[short]
+                node[above left]{$v_a$}
+            (2,4)
+                to[R,l=$R_1$]
+                node[ground]{}
+            (2,0)
+                to[short]
+            (0,0)
+            (2,4)
+                to[R,l=$R_2$]
+                node[above right]{$v_b$}
+            (6,4)
+                to[R,l=$R_3$]
+            (6,0)
+                --
+            (0,0)
+            (2,4) 
+                --
+            (2,6)
+                to[I,l=$i_2$]
+            (6,6)
+                --
+            (6,4)
+            ;
+        \end{circuitikz}
+        \vfill
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Supernodos}
+        \begin{tabularx}{\linewidth}{X X}
+        Es cuando hay una fuente de voltaje entre dos nodos de no referencia.  
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[V,l=$v_1$]
+                node[left]{$v_a$}
+            (0,4)
+                to[short]
+            (0,6)
+                to[R,l=$R_1$]
+                %node[ground]{}
+            (6,6)
+                to[short]
+                node[right]{$v_c$}
+            (6,4)
+                to[R,l=$R_4$]
+            (6,0)
+                to[short]
+                node[ground]{}
+            (3,0)
+                to[short]
+            (0,0)
+            (0,4)
+                 to[R,l=$R_2$]
+                 node[above]{$v_b$}
+            (3,4)
+                to[R,l=$R_3$]
+            (3,0)
+            (6,4)
+                to[V,l_=$v_2$]
+            (3,4)
+            ;
+        \end{circuitikz}
+        \vfill
+        \end{tabularx}
+\end{frame}
+
+\begin{frame}{Supernodos}
+        \begin{tabularx}{\linewidth}{X X}
+        \begin{equation*}
+            v_a = v_1
+        \end{equation*}
+        \begin{multline*}
+             -\left(\frac{1}{R_1}+\frac{1}{R_2}\right) \cdot v_a + \left(\frac{1}{R_2} + \frac{1}{R_3}\right) \cdot v_b \\+ \left(\frac{1}{R_1} + \frac{1}{R_4}\right) \cdot v_c= 0
+        \end{multline*}
+        \vspace{0.2cm}
+        \begin{equation*}
+            v_b - v_c = v_2
+        \end{equation*}
+        &
+        \centering
+        \begin{circuitikz} [scale=0.8]\draw
+            (0,0)
+                to[V,l=$v_1$]
+                node[left]{$v_a$}
+            (0,4)
+                to[short]
+            (0,6)
+                to[R,l=$R_1$]
+                %node[ground]{}
+            (6,6)
+                to[short]
+                node[right]{$v_c$}
+            (6,4)
+                to[R,l=$R_4$]
+            (6,0)
+                to[short]
+                node[ground]{}
+            (3,0)
+                to[short]
+            (0,0)
+            (0,4)
+                 to[R,l=$R_2$]
+                 node[above]{$v_b$}
+            (3,4)
+                to[R,l=$R_3$]
+            (3,0)
+            (6,4)
+                to[V,l_=$v_2$]
+            (3,4)
+            ;
+        \end{circuitikz}
+        \vfill
+        \end{tabularx}
+\end{frame}
+
+\begin{frame}{Delta-Estrella}
+    \centering
+    \includegraphics[width=0.4\linewidth]{fig/Delta-Wye-Calculator-with-Equations.png}
+\end{frame}
+
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+
+\end{document}
