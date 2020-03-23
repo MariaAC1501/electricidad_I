@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 ttau = np.arange(-0.5,5.5,0.001)
-mag = (ttau>0)*np.exp(-ttau)
+mag = (ttau>0)*np.exp(-ttau)+(ttau<0)*1
 ### Remove the csv file if it exists
 try:
     os.remove("resp_nat.csv")
@@ -17,7 +17,6 @@ except:
 with open("resp_nat.csv", "ab") as file:
     np.savetxt(file, np.column_stack(['t','mag']) , delimiter = ",", fmt='%s')
     np.savetxt(file, np.column_stack([ttau,mag]) , delimiter = "," , fmt='%1.4f' )
-
 
 plt.plot(ttau,mag,label=r'$\frac{v(t)}{v(0)}$')
 plt.plot([-0.5,1],[np.exp(-1),np.exp(-1)],'-.')
