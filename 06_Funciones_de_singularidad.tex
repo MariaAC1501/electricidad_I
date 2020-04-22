@@ -1,0 +1,228 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[american,RPvoltages]{circuitikz}
+\ctikzset{capacitors/scale=0.7}
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\usepackage{tabu}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepgfplotslibrary{units, fillbetween} 
+\pgfplotsset{compat=1.16}
+\title{Electricidad I \\ \emph{Funciones de singularidad}}
+
+\usetikzlibrary{arrows, arrows.meta}
+\author{
+    Juan J. Rojas
+}
+
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+\begin{document}
+
+\maketitle
+\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+
+
+\begin{frame}{Funciones singulares}
+    \begin{columns}
+    \begin{column}{0.6\textwidth}
+    \begin{itemize}
+        \item La función, su derivada o ambas son discontinuas.
+        \item Permiten modelar matemáticamente operaciones de conmutación de interruptores, relés y fuentes.
+    \end{itemize}
+    \footnotesize
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X l}
+        \toprule
+        Función & Nombre\\
+        \midrule
+        $u(t-t_0)$ & escalón unitario o escalón de Heaviside \\[5pt]
+        $\delta(t-t_0)$ & impulso unitario o delta de Dirac \\[5pt]
+        $r(t-t_0)$ & rampa unitaria  \\[5pt]
+        \bottomrule
+    \end{tabularx}
+    \normalsize 
+    \end{column}
+    \begin{column}{0.4\textwidth}
+    \centering
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$u(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$},
+                xtick={2},
+                xmin=-1,
+                axis on top
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (4,1)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$\delta(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick=false,
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$},
+                xtick={2},
+                xmin=-1,
+                axis on top
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (2,0) (4,0)};
+            \draw[->,blue,thick](2,1)--(2,1.3);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$r(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_0+1$},
+                xtick={1,3},
+                xmin=-1,
+                xmax=4,
+                axis on top
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (3,1) (5,2)};
+            \draw[dashed, gray] (0,1) -- (3,1) -- (3,0);
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Función impulso unitario}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$u(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$},
+                xtick={2},
+                xmin=-1,
+                axis on top
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (4,1)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+    \centering
+    \begin{column}{0.5\textwidth}
+        \begin{equation*}
+            u(t-t_0) =
+            \begin{cases}
+                0, & t > t_0\\
+                1, & t < t_0
+            \end{cases}
+        \end{equation*}
+        \vspace{0.5cm}
+        \begin{equation*}
+            \frac{d}{dt} u(t-t_0) = \delta(t-t_0)
+        \end{equation*}
+        \vspace{0.5cm}
+        \begin{equation*}
+            \int_{-\infty}^{t} u(t-t_0)dt = r(t-t_0)
+        \end{equation*}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Función escalón unitario}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$\delta(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick=false,
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$},
+                xtick={2},
+                xmin=-1,
+                axis on top
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (2,0) (4,0)};
+            \draw[->,thick,blue](2,1)--(2,1.3);
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+    \centering
+    \begin{column}{0.5\textwidth}
+        \begin{equation*}
+            \delta(t-t_0) =
+            \begin{cases}
+                0, & t \ne t_0\\
+                \infty, & t = t_0
+            \end{cases}
+        \end{equation*}
+        \vspace{0.5cm}
+        \begin{equation*}
+            \int_{t_0^-}^{t_0^+} \delta(t-t_0)dt = 1
+        \end{equation*}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Resumen}
+    \begin{center}
+        \begin{tabularx}{14cm}{C C C}
+        \toprule
+        Variable & Ecuación $v-i$ & Ecuación $i-v$ \\
+        \midrule
+       Capacitor & $v=\frac{1}{C}\int_{t_0}^{t} i(t)dt + v(t_0) $ & $i = C\,\frac{dv}{dt}$ \\[5pt]
+        Inductor & $v = L\,\frac{di}{dt}$ & $i=\frac{1}{L}\int_{t_0}^{t} v(t)dt + i(t_0) $\\[5pt]
+        \bottomrule
+        \end{tabularx}   
+    \end{center}
+\end{frame}
+
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}

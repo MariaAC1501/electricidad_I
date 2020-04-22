@@ -1,0 +1,503 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[american,RPvoltages]{circuitikz}
+\ctikzset{capacitors/scale=0.7}
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\usepackage{tabu}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepgfplotslibrary{units, fillbetween} 
+\pgfplotsset{compat=1.16}
+\title{Electricidad I \\ \emph{Respuestas naturales}}
+
+\usetikzlibrary{arrows, arrows.meta}
+\author{
+    Juan J. Rojas
+}
+
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+\begin{document}
+
+\maketitle
+\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+
+\begin{frame}{Resumen}
+    \begin{center}
+        \begin{tabularx}{14cm}{C C C}
+        \toprule
+        Variable & Ecuación $v-i$ & Ecuación $i-v$ \\
+        \midrule
+       Capacitor & $v=\frac{1}{C}\int_{t_0}^{t} i(t)dt + v(t_0) $ & $i = C\,\frac{dv}{dt}$ \\[5pt]
+        Inductor & $v = L\,\frac{di}{dt}$ & $i=\frac{1}{L}\int_{t_0}^{t} v(t)dt + i(t_0) $\\[5pt]
+        \bottomrule
+        \end{tabularx}   
+    \end{center}
+\end{frame}
+
+\begin{frame}{Circuito RC: respuesta natural}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \only<1>{
+            \begin{circuitikz}[scale=0.8]\draw
+            (0,2.5) node[spdt, rotate = 90, anchor=in] (Sw) {}
+            (Sw.in) 
+                to [C, l=$C$, voltage shift=3]
+            (0,1) -- (0,0)
+            (Sw.out 1) |- (-1,4) to [R,l=$R_f$,o-] (-4,4)
+                to[V, l_=$V$, invert]
+            (-4,0)
+            (Sw.out 2) |- (1.5,4) to[short,o-] (3,4)
+                to[R,l=$R$]
+            (3,0) to[short,-o] (1.5,0) to[short,-o] (-1,0) -- (-4,0)
+            (-1,4)
+                to[open,v=$v$,voltage shift=-3]
+            (-1,0)
+            ;
+        \end{circuitikz}
+        }
+        \only<2>{
+            \begin{circuitikz}[scale=0.8]\draw
+            (0,2.5) node[spdt, rotate = 90, yscale = -1, anchor=in] (Sw) {}
+            (Sw.in) 
+                to [C, l=$C$, voltage shift=3]
+            (0,1) -- (0,0)
+            (Sw.out 2) |- (-1,4) to [R,l=$R_f$,o-] (-4,4)
+                to[V, l_=$V$, invert]
+            (-4,0)
+            (Sw.out 1) |- (1.5,4) to[short,o-] (3,4)
+                to[R,l=$R$]
+            (3,0) to[short,-o] (1.5,0) to[short,-o] (-1,0) -- (-4,0)
+            (1.5,4)
+                to[open,v=$v$,voltage shift=-3]
+            (1.5,0)
+            ;
+        \end{circuitikz}
+        }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \only<1>{
+        Después de mucho tiempo...
+        \begin{equation*}
+            v = V
+        \end{equation*}
+        }
+        \only<2>{
+        Si se cambia la posición del interruptor en $t_0$
+        \begin{equation*}
+            v(t_0) = V
+        \end{equation*}
+        }
+    
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Circuito RC: respuesta natural}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \only<1-12>{
+            \begin{circuitikz}[scale=0.8]\draw
+            (0,4)
+                to [C, l=$C$, i>^=$i_C$]
+            (0,0)
+            (0,4) -- (2,4) to[short,o-] (4,4)
+                to[R,l=$R$, i>^=$i_R$]
+            (4,0) to[short,-o] (2,0) -- (0,0)
+            (2,4)
+                to[open,v=$v$,voltage shift=-3]
+            (2,0)
+            ;
+        \end{circuitikz}
+        }
+        \only<13-15>{
+            \begin{tikzpicture}
+            \begin{axis}[
+                %yshift=-1cm,
+                width= 0.8\linewidth,
+                height= 0.8\linewidth,
+                %grid=major, % Display a grid
+                %grid style={dashed,gray!30}, % Set the style
+                %every axis plot/.append style={thick},
+                ymin=0, ymax=1.1,
+                xmin=-0.5, xmax=5.5,
+                axis x line=bottom,
+                axis y line=left,
+                axis line style={-},
+                ytick={0,0.368,1},
+                % yticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+                xtick={0,1,2,3,4,5},
+                % yticklabels=\empty,
+                xlabel=$\frac{t-t_0}{\tau}$, % Set the labels
+                ylabel=$\frac{v(t)}{v(t_0)}$,
+                x unit=, 
+                y unit=,
+                yticklabel style={/pgf/number format/precision=3}
+                %legend pos=north east,
+                %legend style={cells={anchor=west}}
+                %legend style={at={(1,0.7)},anchor=west}, % Put the legend below the plot
+                %smooth,
+                ]
+                \addplot [mark=none, color=black,forget plot, thick]       
+                table[x=t,y=mag,col sep=comma] {python/resp_nat.csv};
+                \addplot[color=red,dashed,mark=none] coordinates {
+            		(-0.5,0.368)
+            		(1,0.368)
+            		(1,0)
+            	};
+            	\addplot[color=blue,dashed,mark=none] coordinates {
+            		(0,1)
+            		(1,0)
+            	};
+            \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \centering
+    \only<1-3>{
+        \onslide<1-3>{
+        aplicando LCK tenemos que:
+        \begin{equation*}
+            i_C + i_R = 0
+        \end{equation*}
+        }
+        \onslide<2-3>{
+        y sabemos que: 
+        \begin{equation*}
+            i_C = C\,\frac{dv}{dt},\, i_R=\frac{v}{R}
+        \end{equation*}
+        }
+        \onslide<3>{
+        entonces:
+        \begin{equation*}
+            C\,\frac{dv}{dt} + \frac{v}{R} = 0
+        \end{equation*}
+        }
+    }
+    \only<4-6>{
+        \onslide<4-6>{
+        dividiendo entre $C\,$ y reordenando:
+        \begin{equation*}
+            \frac{dv}{dt} = -\frac{v}{RC}
+        \end{equation*}
+        }
+        \onslide<5-6>{
+        reordenando nuevamente:
+        \begin{equation*}
+            \frac{1}{v} dv = -\frac{1}{RC} dt
+        \end{equation*}
+        }
+        \onslide<6>{
+        integrando a ambos lados:
+        \begin{equation*}
+            \int\limits_{v(t_0)}^{v(t)}\frac{1}{v} dv = \int\limits_{t_0}^{t}-\frac{1}{RC} dt
+        \end{equation*}
+        }
+    }
+    \only<7-9>{
+        \onslide<7-9>{
+        tenemos que:
+        \begin{equation*}
+            \ln v\,\bigg|_{v(t_0)}^{v(t)} = -\frac{t}{RC}\,\bigg|_{t_0}^{t}
+        \end{equation*}
+        }
+        \onslide<8-9>{
+        evaluando:
+        \begin{equation*}
+            \ln v(t) - \ln v(t_0) = -\frac{1}{RC}\left(t - t_0\right)
+        \end{equation*}
+        }
+        \onslide<9>{
+        entonces:
+        \begin{equation*}
+            \ln\frac{v(t)}{v(t_0)} = -\frac{1}{RC}\left(t - t_0\right)
+        \end{equation*}
+        }
+    }
+    \only<10-12>{
+        \onslide<10-12>{
+        eliminamos el logaritmo natural:
+        \begin{equation*}
+            e\,^{\ln \left( v(t)/v(t_0)\right)} = e\,^{-(t-t_0)/RC}
+        \end{equation*}
+        }
+        \onslide<11-12>{
+        y obtenemos:
+        \begin{equation*}
+            \frac{v(t)}{v(t_0)} =  e\,^{-(t-t_0)/RC}
+        \end{equation*}
+        }
+        \onslide<12>{
+        pero la constante de tiempo es $\tau=RC\,$, entonces:
+        \begin{equation*}
+            \frac{v(t)}{v(t_0)} = e\,^{-(t-t_0)/\tau}
+        \end{equation*}
+        }
+    }
+    \only<13-15>{
+        \onslide<13-15>{
+        $\tau \rightarrow$ es la pendiente en $t(0)$, ver linea azul\\
+        }
+        
+        \vspace{0.5cm}
+                
+        \onslide<14-15>{
+        $\tau \rightarrow$ es el tiempo que se requiere para que el voltaje se reduzca en un $36.8\%$, ver linea roja
+        }
+                
+        \vspace{0.5cm}
+        
+        \onslide<15>{
+        En $5 \tau \rightarrow$ el voltaje se reduce a un $0.67\%$ de su valor original\\
+        }
+    }
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Circuito RL: respuesta natural}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \only<1>{
+            \begin{circuitikz}[scale=0.8]\draw
+            (0,2.5) node[spdt, rotate = 90, anchor=in] (Sw) {}
+            (Sw.in) 
+                to [L, l=$L$]
+            (0,1) -- (0,0)
+            (Sw.out 1) |- (-1,4) to [short,o-] (-4,4)
+                to[I, l_=$I$]
+            (-4,0)
+            (Sw.out 2) |- (1.5,4) to[short,o-] (3,4)
+                to[R,l=$R$]
+            (3,0) to[short,-o] (1.5,0) -- (0,0)
+            (-4,0) -- (-2,0) -- (-1,0) to[short,o-,i=$i$] (0,0)
+            (-2,4)
+                to[R,l_=$R_f$]
+            (-2,0)
+            ;
+            \draw[white] (-5,-1) rectangle (5,5)
+            ;
+        \end{circuitikz}
+        }
+        \only<2>{
+            \begin{circuitikz}[scale=0.8]\draw
+            (0,2.5) node[spdt, rotate = 90, yscale = -1, anchor=in] (Sw) {}
+            (Sw.in) 
+                to [L, l=$L$]
+            (0,1) -- (0,0)
+            (Sw.out 2) |- (-1,4) to [short,o-] (-4,4)
+                to[I, l_=$I$]
+            (-4,0)
+            (Sw.out 1) |- (1.5,4) to[short,o-,i=$i$] (3,4)
+                to[R,l=$R$]
+            (3,0) to[short,-o] (1.5,0) to[short,-o] (-1,0) -- (-4,0)
+            (-2,4)
+                to[R,l_=$R_f$]
+            (-2,0)
+            ;
+            \draw[white] (-5,-1) rectangle (5,5)
+            ;
+        \end{circuitikz}
+        }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \only<1>{
+        Después de mucho tiempo...
+        \begin{equation*}
+            i = I
+        \end{equation*}
+        }
+        \only<2>{
+        Si se cambia la posición del interruptor en $t_0$
+        \begin{equation*}
+            i(t_0) = I
+        \end{equation*}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Circuito RL: respuesta natural}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \only<1-12>{
+            \begin{circuitikz}[scale=0.8]\draw
+            (0,4)
+                to [L, l=$L$, v_>=$v_L$]
+            (0,0)
+            (0,4) -- (2,4) to[short,o-,i=$i$] (4,4)
+                to[R,l=$R$, v=$v_R$]
+            (4,0) to[short,-o] (2,0) -- (0,0)
+            ;
+        \end{circuitikz}
+        }
+        \only<13-15>{
+            \begin{tikzpicture}
+            \begin{axis}[
+                %yshift=-1cm,
+                width= 0.8\linewidth,
+                height= 0.8\linewidth,
+                %grid=major, % Display a grid
+                %grid style={dashed,gray!30}, % Set the style
+                %every axis plot/.append style={thick},
+                ymin=0, ymax=1.1,
+                xmin=-0.5, xmax=5.5,
+                axis x line=bottom,
+                axis y line=left,
+                axis line style={-},
+                ytick={0,0.368,1},
+                % yticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+                xtick={0,1,2,3,4,5},
+                % yticklabels=\empty,
+                xlabel=$\frac{t-t_0}{\tau}$, % Set the labels
+                ylabel=$\frac{i(t)}{i(t_0)}$,
+                x unit=, 
+                y unit=,
+                yticklabel style={/pgf/number format/precision=3}
+                %legend pos=north east,
+                %legend style={cells={anchor=west}}
+                %legend style={at={(1,0.7)},anchor=west}, % Put the legend below the plot
+                %smooth,
+                ]
+                \addplot [mark=none, color=black,forget plot, thick]       
+                table[x=t,y=mag,col sep=comma] {python/resp_nat.csv};
+                \addplot[color=red,dashed,mark=none] coordinates {
+            		(-0.5,0.368)
+            		(1,0.368)
+            		(1,0)
+            	};
+            	\addplot[color=blue,dashed,mark=none] coordinates {
+            		(0,1)
+            		(1,0)
+            	};
+            \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \centering
+    \only<1-3>{
+        \onslide<1-3>{
+        aplicando LVK tenemos que:
+        \begin{equation*}
+            v_L + v_R = 0
+        \end{equation*}
+        }
+        \onslide<2-3>{
+        y sabemos que: 
+        \begin{equation*}
+            v_L = L\,\frac{di}{dt},\, v_R=iR
+        \end{equation*}
+        }
+        \onslide<3>{
+        entonces:
+        \begin{equation*}
+            L\,\frac{di}{dt} + iR = 0
+        \end{equation*}
+        }
+    }
+    \only<4-6>{
+        \onslide<4-6>{
+        dividiendo entre $L\,$ y reordenando:
+        \begin{equation*}
+            \frac{di}{dt} = -\frac{iR}{L}
+        \end{equation*}
+        }
+        \onslide<5-6>{
+        reordenando nuevamente:
+        \begin{equation*}
+            \frac{1}{i} di = -\frac{R}{L} dt
+        \end{equation*}
+        }
+        \onslide<6>{
+        integrando a ambos lados:
+        \begin{equation*}
+            \int\limits_{i(t_0)}^{i(t)}\frac{1}{i} di = \int\limits_{t_0}^{t}-\frac{R}{L} dt
+        \end{equation*}
+        }
+    }
+    \only<7-9>{
+        \onslide<7-9>{
+        tenemos que:
+        \begin{equation*}
+            \ln i\,\bigg|_{i(t_0)}^{i(t)} = -\frac{tR}{L}\,\bigg|_{t_0}^{t}
+        \end{equation*}
+        }
+        \onslide<8-9>{
+        evaluando:
+        \begin{equation*}
+            \ln i(t) - \ln i(t_0) = -\frac{R}{L}\left(t - t_0\right)
+        \end{equation*}
+        }
+        \onslide<9>{
+        entonces:
+        \begin{equation*}
+            \ln\frac{i(t)}{i(t_0)} = -\frac{R}{L}\left(t - t_0\right)
+        \end{equation*}
+        }
+    }
+    \only<10-12>{
+        \onslide<10-12>{
+        eliminamos el logaritmo natural:
+        \begin{equation*}
+            e\,^{\ln \left( i(t)/i(t_0)\right)} = e\,^{-(t-t_0)R/L}
+        \end{equation*}
+        }
+        \onslide<11-12>{
+        y obtenemos:
+        \begin{equation*}
+            \frac{i(t)}{i(t_0)} =  e\,^{-(t-t_0)R/L}
+        \end{equation*}
+        }
+        \onslide<12>{
+        pero la constante de tiempo es $\tau=L/R\,$, entonces:
+        \begin{equation*}
+            \frac{i(t)}{i(t_0)} = e\,^{-(t-t_0)/\tau}
+        \end{equation*}
+        }
+    }
+    \only<13-15>{
+        \onslide<13-15>{
+        $\tau \rightarrow$ es la pendiente en $t(0)$, ver linea azul\\
+        }
+        
+        \vspace{0.5cm}
+        
+        \onslide<14-15>{
+        $\tau \rightarrow$ es el tiempo que se requiere para que la corriente se reduzca a un $36.8\%$ de su valor original, ver linea roja\\
+        }
+        
+        \vspace{0.5cm}
+        
+        \onslide<15>{
+        En $5 \tau \rightarrow$ la corriente se reduce a un $0.67\%$ de su valor original\\
+        }
+    }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}
