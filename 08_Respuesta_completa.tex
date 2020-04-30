@@ -1,33 +1,17 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[american,RPvoltages]{circuitikz}
-\ctikzset{capacitors/scale=0.7}
-\usepackage{tabularx}
-\newcolumntype{C}{>{\centering\arraybackslash}X}
-\usepackage{tabu}
-\usepackage[spanish]{babel}
-\usepackage{booktabs}
-\usepackage{pgfplots}
-\usepgfplotslibrary{units, fillbetween} 
-\pgfplotsset{compat=1.16}
-\title{Electricidad I \\ \emph{Respuestas completas}}
-
-\usetikzlibrary{arrows, arrows.meta}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Respuestas completas}}
 \author{
     Juan J. Rojas
 }
-
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
 \background{fig/background.jpg}
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
 
 \begin{document}
-
+\input{postamble}
 \maketitle
-\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
 
 \begin{frame}{Resumen}
     \begin{center}
@@ -43,7 +27,7 @@
 \end{frame}
 
 \begin{frame}{Circuito RC: respuesta natural}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \centering
         \only<1>{

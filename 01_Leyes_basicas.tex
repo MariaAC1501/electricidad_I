@@ -1,35 +1,29 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[american,RPvoltages]{circuitikz}
-\usepackage{tabularx}
-\usepackage[spanish]{babel}
-\title{Electricidad I \\ \emph{Leyes básicas}}
-
+\input{preamble}
+\title{Electricidad I: \\ \emph{Leyes básicas}}
 \author{
     Juan J. Rojas
 }
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
 \background{fig/background.jpg}
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-
-
 \begin{document}
-
+\input{postamble}
 \maketitle
-\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+
 \begin{frame}{Corriente, Voltaje y Resistencia}
     \begin{center}
-        \begin{tabular}{c c c}
+        \begin{tabularx}{12cm}{C C C}
+        \toprule
         Variable & Derivación & Unidades \\
-        \hline\\[-5pt]
+        \midrule
         Corriente & $i = \frac{dq}{dt}$ & \si{\ampere} [\si{\coulomb \second^{-1}}] \\[5pt]
         Voltaje & $v = \frac{dw}{dq}$ & \si{\volt} [\si{\joule \coulomb^{-1}}] \\[5pt]
         Potencia & $p = v \cdot i =  \frac{dw}{dt}$ & \si{\watt} [\si{\joule \second^{-1}}] \\[5pt]
         Energía & $w = \int_{t_0}^{t_f}p\,dt$ & \si{\watt\hour} [\SI{3600}{\joule}] \\[5pt]
-        \end{tabular}    
+        \bottomrule
+        \end{tabularx}    
     \end{center}
 \end{frame}
 
@@ -175,16 +169,90 @@ Ley de Watt
 
 
 \begin{frame}{Ley de corriente de Kirchhoff (LCK)}
-\emph{La suma algebraica de las corrientes que entran y salen de un nodo es igual a cero}\\
+\emph{La suma algebraica de las corrientes que entran y salen de un nodo es igual a cero}
+\vfill
 \centering
-\includegraphics[width=0.8\linewidth]{fig/P2.13.PNG}\cite{charles2013fundamentos}
+        \begin{circuitikz} [scale=0.8,transform shape]\draw
+            (0,0)
+                to[generic,n=gen1]
+            (0,2.5) -- (0,5) -- (3,5)
+                to[generic,n=gen2]
+            (6,5) -- (9,5) -- (9,2.5)
+                to[generic,n=gen3]
+            (9,0) -- (0,0)
+            (0,2.5)
+                to[generic,n=gen4]
+            (3,2.5)
+                to[generic,n=gen5]
+            (6,2.5)
+                to[generic,n=gen6]
+            (9,2.5)
+            (3,2.5)
+                to[generic,n=gen7]
+            (3,0)
+            (6,2.5)
+                to[generic,n=gen8]
+            (6,0)
+            (gen1.north)node[above,xshift=-0.2cm,rotate=90]{$i_1$}
+            (gen2.north)node[above,yshift=+0.2cm]{$\SI{2}{\ampere}$}
+            (gen3.north)node[above,xshift=0.2cm,rotate=-90]{$\SI{4}{\ampere}$}
+            (gen4.north)node[above,yshift=+0.2cm]{$i_2$}
+            (gen5.north)node[above,yshift=+0.2cm]{$\SI{7}{\ampere}$}
+            (gen6.north)node[above,yshift=+0.2cm]{$i_4$}
+            (gen7.north)node[above,xshift=0.2cm,rotate=-90]{$\SI{3}{\ampere}$}
+            (gen8.north)node[above,xshift=0.2cm,rotate=-90]{$i_3$}
+            ;
+            \draw[-latex,thick] ($(gen1.north) + (-0.2,-0.5)$) -- ($(gen1.north) + (-0.2,0.5)$);
+            \draw[-latex,thick] ($(gen2.north) + (-0.5,0.2)$) -- ($(gen2.north) + (0.5,0.2)$);
+            \draw[-latex,thick] ($(gen3.north) + (0.2,0.5)$) -- ($(gen3.north) + (0.2,-0.5)$);
+            \draw[-latex,thick] ($(gen4.north) + (0.5,0.2)$) -- ($(gen4.north) + (-0.5,0.2)$);
+            \draw[-latex,thick] ($(gen5.north) + (-0.5,0.2)$) -- ($(gen5.north) + (0.5,0.2)$);
+            \draw[-latex,thick] ($(gen6.north) + (0.5,0.2)$) -- ($(gen6.north) + (-0.5,0.2)$);
+            \draw[-latex,thick] ($(gen7.north) + (0.2,0.5)$) -- ($(gen7.north) + (0.2,-0.5)$);
+            \draw[-latex,thick] ($(gen8.north) + (0.2,0.5)$) -- ($(gen8.north) + (0.2,-0.5)$);
+        \end{circuitikz}\cite{charles2013fundamentos}
 \end{frame}
 
+% \begin{frame}{Ley de corriente de Kirchhoff (LCK)}
+% \emph{La suma algebraica de las corrientes que entran y salen de un nodo es igual a cero}\\
+% \centering
+% \includegraphics[width=0.8\linewidth]{fig/P2.13.PNG}\cite{charles2013fundamentos}
+% \end{frame}
+
 \begin{frame}{Ley de voltaje de Kirchhoff (LVK)}
-\emph{La suma algebraica de todas los voltajes alrededor de un lazo es cero}\\
+\emph{La suma algebraica de todas los voltajes alrededor de un lazo es cero}
+\vfill
 \centering
-\includegraphics[width=0.8\linewidth]{fig/P2.14.PNG}\cite{charles2013fundamentos}
+        \begin{circuitikz} [scale=0.8,transform shape]\draw
+            (0,0)
+                to[generic, v^=$\SI{4}{\volt}$]
+            (0,2.5) 
+                to[generic, v^>=$\SI{3}{\volt}$]
+            (0,5) -- (8,5)
+                to[generic, v^>=$v_2$]
+            (8,2.5)
+                to[generic, v^=$\SI{5}{\volt}$]
+            (8,0) -- (0,0)
+            (0,2.5)--(0.75,2.5)
+                to[generic, v=$v_3$]
+            (3.25,2.5)--(4.75,2.5)
+                to[generic, v=$\SI{2}{\volt}$]
+            (7.25,2.5)--(8,2.5)
+            (4,5)
+                to[generic, v=$v_1$]
+            (4,2.5)
+                to[generic, v=$v_4$]
+            (4,0)
+            ;
+        \end{circuitikz}\cite{charles2013fundamentos}
 \end{frame}
+
+
+% \begin{frame}{Ley de voltaje de Kirchhoff (LVK)}
+% \emph{La suma algebraica de todas los voltajes alrededor de un lazo es cero}\\
+% \centering
+% \includegraphics[width=0.8\linewidth]{fig/P2.14.PNG}\cite{charles2013fundamentos}
+% \end{frame}
 
 \begin{frame}{Elementos en serie}
     \begin{tabularx}{\linewidth}{X X}
@@ -371,6 +439,5 @@ Ley de Watt
 \bibliography{referencias}
 
 \end{frame}
-
 
 \end{document}

@@ -1,34 +1,20 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[american,RPvoltages]{circuitikz}
-\ctikzset{capacitors/scale=0.7}
-\usepackage{tabularx}
-\newcolumntype{C}{>{\centering\arraybackslash}X}
-\usepackage{tabu}
-\usepackage[spanish]{babel}
-\usepackage{booktabs}
-\title{Electricidad I \\ \emph{Capacitores e Inductores}}
-
+\input{preamble}
+\title{Electricidad I: \\ \emph{Capacitores e Inductores}}
 \usetikzlibrary{arrows, arrows.meta}
 \author{
     Juan J. Rojas
 }
-
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
 \background{fig/background.jpg}
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-
-
 \begin{document}
-
+\input{postamble}
 \maketitle
-\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
 
 \begin{frame}{Capacitor}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
         \textbf{Construcción:}\\
         Dos placas de un material conductor, separadas por un material dieléctrico.\\[8pt]
@@ -58,7 +44,7 @@
 \end{frame}
 
 \begin{frame}{Capacitancia}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
         Es una medida de la oposición al cambio del voltaje en el capacitor.\\[6pt] 
         Unidad:\hspace{6pt}\emph{Farad},\hspace{6pt}$\si{\farad}\,[\si{\ampere\cdot\second\,\volt^{-1}}]$\\[6pt] 
@@ -78,7 +64,7 @@
 \end{frame}
 
 \begin{frame}{Capacitor}
-\begin{columns}
+\begin{columns}[onlytextwidth]
     \begin{column}{0.75\textwidth}
         \begin{itemize}
             \setlength\itemsep{1em}
@@ -105,7 +91,7 @@
 \end{frame}
 
 \begin{frame}{Capacitores en serie}
-\begin{columns}
+\begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
     \begin{center}
         \begin{circuitikz} [scale=1]\draw
@@ -136,7 +122,7 @@
 \end{frame}
 
 \begin{frame}{Capacitores en paralelo}
-\begin{columns}
+\begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
     \begin{center}
         \begin{circuitikz} [scale=1]\draw
@@ -171,7 +157,7 @@
 \end{frame}
 
 \begin{frame}{Inductor}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
         \textbf{Construcción:}\\
         Una bobina de alambre conductor, enrollada en un núcleo de un material ferromagnético.\\[8pt]
@@ -201,7 +187,7 @@
 \end{frame}
 
 \begin{frame}{Inductancia}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
         Es una medida de la oposición al cambio de la corriente en el inductor.\\[6pt]
         Unidad:\hspace{6pt}\emph{Henry},\hspace{6pt}\si{\henry}\,[\si{\volt\cdot \second\,\ampere^{-1}}]\\[6pt]
@@ -221,7 +207,7 @@
 \end{frame}
 
 \begin{frame}{Inductor}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.75\textwidth}
         \begin{itemize}
             \setlength\itemsep{1em}
@@ -248,7 +234,7 @@
 \end{frame}
 
 \begin{frame}{Inductores en serie}
-\begin{columns}
+\begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
     \begin{center}
         \begin{circuitikz} [scale=1]\draw
@@ -274,7 +260,7 @@
 \end{frame}
 
 \begin{frame}{Inductores en paralelo}
-\begin{columns}
+\begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
     \begin{center}
         \begin{circuitikz} [scale=1]\draw

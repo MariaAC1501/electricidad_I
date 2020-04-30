@@ -1,204 +1,16 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[american,RPvoltages]{circuitikz}
-\usepackage{tabularx}
-\usepackage{tabu}
-\usepackage[spanish]{babel}
-\title{Electricidad I \\ \emph{Teoremas de circuitos}}
-
-\usetikzlibrary{arrows, arrows.meta}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Teoremas de Thevenin, Norton y } \\ \emph{Máxima transferencia} \\ \emph{de potencia}}
 \author{
     Juan J. Rojas
 }
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
 \background{fig/background.jpg}
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-
-
 \begin{document}
-
+\input{postamble}
 \maketitle
-\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
-
-\begin{frame}{Superposición}
-    \begin{tabularx}{\linewidth}{X X}
-        Pasos:
-        \begin{enumerate}
-            \item Se deja solamente una fuente independiente encendida. 
-            \item Las otras fuentes independientes que no están siendo analizadas se apagan. Fuentes de voltaje se sustituyen por cortos; fuentes de corriente se sustituyen por abiertos.
-        \end{enumerate}
-        \vfill
-        &
-        \begin{enumerate}
-        \setcounter{enumi}{2}
-            \item Se calcula la contribución de la fuente analizada en el valor total de la corriente o el voltaje buscado.
-            \item Se repiten los pasos 1, 2 y 3 para cada una de las fuentes independientes.
-            \item Se suman las contribuciones de todas las fuentes independientes para determinar el valor total de la corriente o voltaje buscado. 
-        \end{enumerate}
-        \vfill
-    \end{tabularx}
-\end{frame}
-
-\begin{frame}{Superposición}
-        Solucionamos el ejemplo usado en supermallas. Buscamos $i_{R_6}$
-        \vfill
-        \centering
-        \begin{circuitikz} [scale=0.65]\draw
-            (0,0)
-                to[V,l=$v_1$]
-            (0,6)	
-                to[R, l=$R_1$]
-            (4,6)
-                to[R,l=$R_3$]
-            (8,6)
-                to[R,l=$R_4$]
-            (8,3)
-                to[I,l=$i_1$,invert]
-            (8,0)
-                --
-            (0,0)
-            (4,0)
-                to[R,l=$R_2$]
-            (4,6)
-            (8,6)
-                to[R,l=$R_5$]
-            (12,6)
-                to[R,l=$R_6$, i=$i_{R_6}$]
-            (12,0)
-                --
-            (8,0)
-            ;
-        \end{circuitikz}
-\end{frame}
-
-\begin{frame}{Superposición}
-        1. Se deja solamente una fuente independiente encendida. 2. Las demás se apagan. 3. Se calcula la contribución de la fuente analizada en el valor total de la corriente o el voltaje buscado
-        \vfill
-        \centering
-        \begin{circuitikz} [scale=0.65]\draw
-            (0,0)
-                to[V,l=$v_1$]
-            (0,6)	
-                to[R, l=$R_1$]
-            (4,6)
-                to[R,l=$R_3$]
-            (8,6)
-                to[open]
-            (8,3)
-                to[open]
-            (8,0)
-                --
-            (0,0)
-            (4,0)
-                to[R,l=$R_2$]
-            (4,6)
-            (8,6)
-                to[R,l=$R_5$]
-            (12,6)
-                to[R,l=$R_6$, i=$i_{R_{6v1}}$]
-            (12,0)
-                --
-            (8,0)
-            ;
-        \end{circuitikz}
-\end{frame}
-
-\begin{frame}{Superposición}
-        4. Se repiten los pasos 1, 2 y 3 para cada una de las fuentes independientes
-        \vfill
-        \centering
-        \begin{circuitikz} [scale=0.65]\draw
-            (0,0)
-                to[short]
-            (0,6)	
-                to[R, l=$R_1$]
-            (4,6)
-                to[R,l=$R_3$]
-            (8,6)
-                to[R,l=$R_4$]
-            (8,3)
-                to[I,l=$i_1$,invert]
-            (8,0)
-                --
-            (0,0)
-            (4,0)
-                to[R,l=$R_2$]
-            (4,6)
-            (8,6)
-                to[R,l=$R_5$]
-            (12,6)
-                to[R,l=$R_6$, i=$i_{R_{6i1}}$]
-            (12,0)
-                --
-            (8,0)
-            ;
-        \end{circuitikz}
-\end{frame}
-
-\begin{frame}{Superposición}
-        5. Se suman las contribuciones de todas las fuentes independientes para determinar el valor total de la corriente o voltaje buscado.
-        \vfill
-        \centering
-        \begin{circuitikz} [scale=0.65]\draw
-            (0,0)
-                to[V,l=$v_1$]
-            (0,6)	
-                to[R, l=$R_1$]
-            (4,6)
-                to[R,l=$R_3$]
-            (8,6)
-                to[R,l=$R_4$]
-            (8,3)
-                to[I,l=$i_1$,invert]
-            (8,0)
-                --
-            (0,0)
-            (4,0)
-                to[R,l=$R_2$]
-            (4,6)
-            (8,6)
-                to[R,l=$R_5$]
-            (12,6)
-                to[R,l=$R_6$, i=$i_{R_6}$]
-            (12,0)
-                --
-            (8,0)
-            ;
-            \draw
-            (-4,6) 
-                node[]{$i_{R_6} = i_{R_{6v1}} + i_{R_{6i1}}$}
-            ;
-        \end{circuitikz}
-\end{frame}
-
-\begin{frame}{Transformación de fuentes}
-        \vfill
-        \centering
-        \begin{circuitikz} [scale=0.8]\draw
-            (4,0)
-                to[short,o-]
-            (0,0)
-                to[V, v=$v_1$]
-            (0,4)	
-                to[R, l=$R_1$, -o]
-            (4,4)
-            (12,0)
-                to[short,o-]
-            (8,0)
-                to[I, l=$i_1$]
-            (8,4)
-                to[short, -o]
-            (12,4)
-            (10,0)
-                to[R, l_=$R_1$]
-            (10,4)
-            ;
-            \draw[thick, >=triangle 45, <->] (4.5,2) -- (6.5,2);
-        \end{circuitikz}
-\end{frame}
 
 \begin{frame}{Teorema de Thevenin}
         \vfill
@@ -538,5 +350,4 @@
         \vfill
         \end{tabularx}
 \end{frame}
-
 \end{document}

@@ -1,142 +1,316 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[american,RPvoltages]{circuitikz}
-\usepackage{tabularx}
-\usepackage{tabu}
-\usepackage[spanish]{babel}
-\title{Electricidad I \\ \emph{Métodos de análisis}}
-
-\usetikzlibrary{arrows, arrows.meta}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Métodos de análisis}}
 \author{
     Juan J. Rojas
 }
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
 \background{fig/background.jpg}
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-
-
 \begin{document}
-
+\input{postamble}
 \maketitle
-\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
+
+% \begin{frame}{Análisis de mallas}
+%     \begin{columns}[onlytextwidth]
+%         \begin{column}{0.5\textwidth}
+%             Pasos:
+%             \begin{enumerate}
+%                 \item<+-> Asigne las corrientes de malla en cualquier dirección
+%                 \item<+-> Aplique la LVK a cada una de las mallas
+%                 \item<+-> Reordene las ecuaciones 
+%                 \item<+-> Resuelva las ecuaciones simultáneas obtenidas
+%             \end{enumerate}
+%             \end{column}
+%             \begin{column}{0.5\textwidth}
+%             \centering
+%             \begin{circuitikz} [scale=0.8]
+%                 \draw
+%                 (0,0)
+%                     to[V,l=$v_1$]
+%                 (0,4)	
+%                     to[R, l=$R_1$]
+%                 (3,4)
+%                     to[R,l=$R_3$]
+%                 (6,4)
+%                     to[V,l=$v_2$,invert]
+%                 (6,0)
+%                     --
+%                 (0,0)
+%                 (3,0)
+%                     to[R,l_=$R_2$]
+%                 (3,4)
+%                 ;
+%                 \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+%                 \draw[thin, ->, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+%                 \draw[white] (-1.5,-1) rectangle (7.2,5.5);
+%             \end{circuitikz}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
 
 \begin{frame}{Análisis de mallas}
-    \begin{tabularx}{\linewidth}{X X}
-        Pasos:
-        \begin{enumerate}
-            \item Asigne las corrientes de malla
-            \item Aplique la LVK a cada una de las mallas
-            \item Resuelva las ecuaciones simultáneas obtenidas
-        \end{enumerate}
-        &
-        \centering
-        \begin{circuitikz} [scale=0.8]\draw
-            (0,0)
-                to[V,l=$v_1$]
-            (0,4)	
-                to[R, l=$R_1$]
-            (3,4)
-                to[R,l=$R_3$]
-            (6,4)
-                to[V,l=$v_2$,invert]
-            (6,0)
-                --
-            (0,0)
-            (3,0)
-                to[R,l_=$R_2$]
-            (3,4)
-            ;
-            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
-            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
-        \end{circuitikz}
-    \end{tabularx}
+    \vspace{0.5cm}
+    \only<2>{1. Asigne las corrientes de malla en cualquier dirección}
+    \only<3-4>{2. Aplique la LVK a cada una de las mallas}
+    \only<5-7>{3. Reordene las ecuaciones}
+    \only<8-10>{4. Resuelva el sistema de ecuaciones simultaneas obtenido.}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \only<3-4>{
+                \begin{gather*}
+                    \onslide<3-4>{-v_1+i_a \cdot R_1 + (i_a+i_b)\cdot R_2 = 0\\
+                    \\}
+                    \onslide<4>{-v_2 + i_b\cdot R_3 + (i_b+i_a)\cdot R_2 = 0\\}
+                \end{gather*}
+            }
+            \only<5-7>{
+                \begin{gather*}
+                    \onslide<5-7>{(R_1 + R_2) \cdot i_a + R_2 \cdot i_b  = v_1\\
+                    \\}
+                    \onslide<6-7>{R_2 \cdot i_a   + (R_2 + R_3) \cdot i_b  = v_2\\}
+                \end{gather*}
+                \onslide<7>{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        R_1 + R_2 & R_2 \\ 
+                        R_2 & R_2 + R_3\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      i_a \\ 
+                      i_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        v_1 \\
+                        v_2
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+            }
+            \only<8-10>{
+                \begin{align*}
+                    \onslide<8-10>{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                    v_1 &= 10 & & & v_2 &=20}
+                \end{align*}
+                \onslide<9-10>{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        3 & 2 \\ 
+                        2 & 5\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      i_a \\ 
+                      i_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        10 \\
+                        20
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<10>{i_a &= \SI{0.91}{\ampere} & i_b &= \SI{3.64}{\ampere}}
+                \end{align*}
+            }
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.8]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                (0,4)	
+                    to[R, l=$R_1$]
+                (3,4)
+                    to[R,l=$R_3$]
+                (6,4)
+                    to[V,l=$v_2$,invert]
+                (6,0)
+                    --
+                (3,0)
+                    to[short]
+                (0,0)
+                (3,0)
+                    to[R,l_=$R_2$]
+                (3,4)
+                ;
+                \draw<2->[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<2->[thin, ->, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \fill<3> (0,0) circle [radius=2pt];
+                \fill<4> (6,0) circle [radius=2pt];
+                \draw[white] (-1.5,-1) rectangle (7.2,5.5);
+                \draw<3> (0.1,4) to[open, v=$ $] (2.9,4);
+                \draw<3> (3,3.5) to[open, v=$ $] (3,0.5);
+                \draw<4> (5.9,4) to[open, v^=$ $] (3.1,4);
+                \draw<4> (3,3.5) to[open, v^=$ $] (3,0.5);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
 \end{frame}
 
-\begin{frame}{Análisis de mallas}
-    \begin{tabularx}{\linewidth}{X X}
-        \begin{gather*}
-            -v_1+i_a \cdot R_1 + (i_a-i_b)\cdot R_2 = 0\\
-            \\
-            (i_b-i_a)\cdot R_2 + i_b\cdot R_3 + v_2 = 0\\
-        \end{gather*}
-        &
-        \centering
-        \begin{circuitikz} [scale=0.8]\draw
-            (0,0)
-                node[below]{$a$}
-                to[V,l=$v_1$,*-]
-            (0,4)	
-                to[R, l=$R_1$]
-            (3,4)
-                to[R,l=$R_3$]
-            (6,4)
-                to[V,l=$v_2$,invert]
-            (6,0)
-                --
-            (3,0)
-                node[below]{$b$}
-                to[short,*-]
-            (0,0)
-            (3,0)
-                to[R,l_=$R_2$]
-            (3,4)
-            ;
-            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
-            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
-        \end{circuitikz}
-    \end{tabularx}
+\begin{frame}{Análisis de mallas por inspección}
+    \vspace{0.2cm}
+    \only<2>{1. Asigne las corrientes de mallas en la misma dirección}
+    \only<3>{2. Construya el sistema simultaneo de ecuaciones en el orden final pero sin coeficientes}
+    \only<4>{3. Sume las resistencias que son parte de la malla $a$}
+    \only<5>{4. Sume las resistencia que la malla $a$ comparte con la malla $b$ y agregue un negativo}
+    \only<6>{5. Sume las fuentes que son parte de la malla $a$, asigne los signos de forma opuesta a LVK}
+    \only<7>{6. Sume las resistencias que son parte de la malla $b$}
+    \only<8>{7. Sume las resistencia que la malla $b$ comparte con la malla $a$ y agregue un negativo}
+    \only<9>{8. Sume las fuentes que son parte de la malla $b$, asigne los signos de forma opuesta a LVK}
+    \only<10->{9. Solucionando con los valores usados anteriormente, tenemos}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            % \only<3-5>{
+            %     \begin{align*}
+            %         \onslide<4>{(R_1+R_2)}&i_a & &i_b= &\\
+            %         &i_a & \onslide<4>{(R_2+R_3)}&i_b= &
+            %     \end{align*}
+            % }
+            \centering
+            \begin{tikzpicture}
+                \draw (0,1) rectangle (6.5,5);
+                \draw<3-> (2,4) node[right]{$i_a$};
+                \draw<4>[red,thick]  (0,4.5) rectangle (2,3.5);
+                \draw<4-9> (2,4) node[left]{$(R_1+R_2)$}node{$\cdot$};
+                \draw<10> (2,4) node[left]{$3$}node{$\cdot$};
+                \draw<3-> (4.5,4) node[right]{$i_b=$};
+                \draw<5-9> (4.5,4) node[left]{$-R_2$}node{$\cdot$};
+                \draw<10> (4.5,4) node[left]{$-2$}node{$\cdot$};
+                \draw<5>[red,thick]  (2.5,4.5) rectangle (4.5,3.5);
+                \draw<6-9> (6.5,4) node[left]{$v_1$};
+                \draw<10> (6.5,4) node[left]{$10$};
+                \draw<6>[red,thick]  (5.5,4.5) rectangle (6.5,3.5);
+                \draw<3-> (2,2) node[right]{$i_a$};
+                \draw<7-9> (2,2) node[left]{$-R_2$}node{$\cdot$};
+                \draw<10> (2,2) node[left]{$-2$}node{$\cdot$};
+                \draw<7>[red,thick]  (0,2.5) rectangle (2,1.5);
+                \draw<3-> (4.5,2) node[right]{$i_b=$};
+                \draw<8-9> (4.5,2) node[left]{$(R_2+R_3)$}node{$\cdot$};
+                \draw<10> (4.5,2) node[left]{$5$}node{$\cdot$};
+                \draw<8>[red,thick]  (2.5,2.5) rectangle (4.5,1.5);
+                \draw<9> (6.5,2) node[left]{$-v_2$};
+                \draw<10-> (6.5,2) node[left]{$-20$};
+                \draw<9>[red,thick]  (5.5,2.5) rectangle (6.5,1.5);
+                \draw<11> (2,1) node[above] {$i_a =$\SI{0.91}{\ampere}};
+                \draw<11> (4.5,1) node[above] {$i_b =$\SI{-3.64}{\ampere}};
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.8]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                (0,4)	
+                    to[R, l=$R_1$]
+                (3,4)
+                    to[R,l=$R_3$]
+                (6,4)
+                    to[V,l=$v_2$,invert]
+                (6,0)
+                    --
+                (3,0)
+                    to[short]
+                (0,0)
+                (3,0)
+                    to[R,l_=$R_2$]
+                (3,4)
+                ;
+                \draw<2->[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<2->[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw[white] (-1.5,-1) rectangle (7.2,5.5);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
 \end{frame}
 
-\begin{frame}{Análisis de mallas - Inspección}
-    \begin{tabularx}{\linewidth}{X X}
-        \begin{gather*}
-            (R_1 + R_2) \cdot i_a - R_2 \cdot i_b  = v_1\\
-            \\
-            - R_2 \cdot i_a   + (R_2 + R_3) \cdot i_b  = -v_2\\
-        \end{gather*}
-        \begin{equation*}
-            \begin{bmatrix} 
-                R_1 + R_2 & -R_2 \\ 
-                -R_2 & R_2 + R_3\\
-            \end{bmatrix}
-            \begin{bmatrix} 
-              i_a \\ 
-              i_b 
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-                v_1 \\
-                -v_2
-            \end{bmatrix}
-        \end{equation*}
-        &
-        \centering
-        \begin{circuitikz} [scale=0.8]\draw
-            (0,0)
-                to[V,l=$v_1$,*-]
-            (0,4)	
-                to[R, l=$R_1$]
-            (3,4)
-                to[R,l=$R_3$]
-            (6,4)
-                to[V,l=$v_2$,invert]
-            (6,0)
-                --
-            (3,0)
-                to[short,*-]
-            (0,0)
-            (3,0)
-                to[R,l_=$R_2$]
-            (3,4)
-            ;
-            \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
-            \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
-        \end{circuitikz}
-    \end{tabularx}
-\end{frame}
+% \begin{frame}{Análisis de mallas por inspección}
+%     \begin{columns}[onlytextwidth]
+%         \begin{column}{0.5\textwidth}
+%             Pasos:
+%             \begin{enumerate}
+%                 \item<+-> Asigne las corrientes en la misma dirección
+%                 \item<+-> Aplique la LVK a cada una de las mallas
+%                 \item<+-> Resuelva las ecuaciones simultáneas obtenidas
+%             \end{enumerate}
+%             \end{column}
+%             \begin{column}{0.5\textwidth}
+%             \centering
+%             \begin{circuitikz} [scale=0.8]
+%                 \draw
+%                 (0,0)
+%                     to[V,l=$v_1$]
+%                 (0,4)	
+%                     to[R, l=$R_1$]
+%                 (3,4)
+%                     to[R,l=$R_3$]
+%                 (6,4)
+%                     to[V,l=$v_2$,invert]
+%                 (6,0)
+%                     --
+%                 (0,0)
+%                 (3,0)
+%                     to[R,l_=$R_2$]
+%                 (3,4)
+%                 ;
+%                 \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+%                 \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+%             \end{circuitikz}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+% \begin{frame}{Análisis de mallas por inspección}
+%     \begin{tabularx}{\linewidth}{X X}
+%         \begin{gather*}
+%             (R_1 + R_2) \cdot i_a - R_2 \cdot i_b  = v_1\\
+%             \\
+%             - R_2 \cdot i_a   + (R_2 + R_3) \cdot i_b  = -v_2\\
+%         \end{gather*}
+%         \begin{equation*}
+%             \begin{bmatrix} 
+%                 R_1 + R_2 & -R_2 \\ 
+%                 -R_2 & R_2 + R_3\\
+%             \end{bmatrix}
+%             \begin{bmatrix} 
+%               i_a \\ 
+%               i_b 
+%             \end{bmatrix}
+%             =
+%             \begin{bmatrix}
+%                 v_1 \\
+%                 -v_2
+%             \end{bmatrix}
+%         \end{equation*}
+%         &
+%         \centering
+%         \begin{circuitikz} [scale=0.8]\draw
+%             (0,0)
+%                 to[V,l=$v_1$]
+%             (0,4)	
+%                 to[R, l=$R_1$]
+%             (3,4)
+%                 to[R,l=$R_3$]
+%             (6,4)
+%                 to[V,l=$v_2$,invert]
+%             (6,0)
+%                 --
+%             (3,0)
+%                 to[short]
+%             (0,0)
+%             (3,0)
+%                 to[R,l_=$R_2$]
+%             (3,4)
+%             ;
+%             \draw[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+%             \draw[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+%         \end{circuitikz}
+%     \end{tabularx}
+% \end{frame}
 
 \begin{frame}{Análisis de mallas con fuentes de corriente}
     \begin{tabularx}{\linewidth}{X X}
@@ -559,10 +733,10 @@
         \end{tabularx}
 \end{frame}
 
-\begin{frame}{Delta-Estrella}
-    \centering
-    \includegraphics[width=0.4\linewidth]{fig/Delta-Wye-Calculator-with-Equations.png}
-\end{frame}
+% \begin{frame}{Delta-Estrella}
+%     \centering
+%     \includegraphics[width=0.4\linewidth]{fig/Delta-Wye-Calculator-with-Equations.png}
+% \end{frame}
 
 
 % \begin{frame}{Referencias}

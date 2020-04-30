@@ -1,44 +1,26 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[american,RPvoltages]{circuitikz}
-\ctikzset{capacitors/scale=0.7}
-\usepackage{tabularx}
-\newcolumntype{C}{>{\centering\arraybackslash}X}
-\usepackage{tabu}
-\usepackage[spanish]{babel}
-\usepackage{booktabs}
-\usepackage{pgfplots}
-\usepgfplotslibrary{units, fillbetween} 
-\pgfplotsset{compat=1.16}
-\title{Electricidad I \\ \emph{Funciones de singularidad}}
-
-\usetikzlibrary{arrows, arrows.meta}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Funciones de singularidad}}
 \author{
     Juan J. Rojas
 }
-
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
 \background{fig/background.jpg}
-\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
-
 \begin{document}
-
+\input{postamble}
 \maketitle
-\sisetup{unit-math-rm=\mathrm,math-rm=\mathrm} % change sinitx font
 
-
-\begin{frame}{Funciones singulares}
-    \begin{columns}
+\begin{frame}{Funciones de singularidad}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
     \begin{itemize}
-        \item La función, su derivada o ambas son discontinuas.
-        \item Permiten modelar matemáticamente operaciones de conmutación de interruptores, relés y fuentes.
+        \item La función, su derivada o ambas son discontinuas
+        \item Permiten modelar matemáticamente operaciones de conmutación
     \end{itemize}
     \footnotesize
-    \vspace{0.2cm}
+    \vspace{0.5cm}
     \begin{tabularx}{\textwidth}{X l}
         \toprule
         Función & Nombre\\
@@ -66,7 +48,6 @@
                 xticklabels={$t_0$},
                 xtick={2},
                 xmin=-1,
-                axis on top
                 ]
             \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (4,1)};
             \end{axis}
@@ -85,7 +66,6 @@
                 xticklabels={$t_0$},
                 xtick={2},
                 xmin=-1,
-                axis on top
                 ]
             \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (2,0) (4,0)};
             \draw[->,blue,thick](2,1)--(2,1.3);
@@ -106,7 +86,6 @@
                 xtick={1,3},
                 xmin=-1,
                 xmax=4,
-                axis on top
                 ]
             \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (3,1) (5,2)};
             \draw[dashed, gray] (0,1) -- (3,1) -- (3,0);
@@ -116,8 +95,8 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}{Función impulso unitario}
-    \begin{columns}
+\begin{frame}{Función escalón unitario}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \centering
         \begin{tikzpicture}[scale=1]
@@ -134,7 +113,6 @@
                 xticklabels={$t_0$},
                 xtick={2},
                 xmin=-1,
-                axis on top
                 ]
             \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (4,1)};
             \end{axis}
@@ -142,27 +120,33 @@
     \end{column}
     \centering
     \begin{column}{0.5\textwidth}
-        \begin{equation*}
-            u(t-t_0) =
-            \begin{cases}
-                0, & t > t_0\\
-                1, & t < t_0
-            \end{cases}
-        \end{equation*}
-        \vspace{0.5cm}
-        \begin{equation*}
-            \frac{d}{dt} u(t-t_0) = \delta(t-t_0)
-        \end{equation*}
-        \vspace{0.5cm}
-        \begin{equation*}
-            \int_{-\infty}^{t} u(t-t_0)dt = r(t-t_0)
-        \end{equation*}
+        \onslide<+->{
+            \begin{equation*}
+                u(t-t_0) =
+                \begin{cases}
+                    0, & t < t_0\\
+                    1, & t > t_0
+                \end{cases}
+            \end{equation*}
+            \vspace{0.5cm}
+        }
+        \onslide<+->{
+            \begin{equation*}
+                \frac{d}{dt} u(t-t_0) = \delta(t-t_0)
+            \end{equation*}
+            \vspace{0.5cm}
+        }
+        \onslide<+->{
+            \begin{equation*}
+                \int_{-\infty}^{t} u(t-t_0)dt = r(t-t_0)
+            \end{equation*}
+        }
     \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Función escalón unitario}
-    \begin{columns}
+\begin{frame}{Función impulso unitario}
+    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \centering
         \begin{tikzpicture}[scale=1]
@@ -179,7 +163,6 @@
                 xticklabels={$t_0$},
                 xtick={2},
                 xmin=-1,
-                axis on top
                 ]
             \addplot+[no marks, thick] coordinates {(-1,0) (2,0) (2,1) (2,0) (4,0)};
             \draw[->,thick,blue](2,1)--(2,1.3);
@@ -188,34 +171,385 @@
     \end{column}
     \centering
     \begin{column}{0.5\textwidth}
-        \begin{equation*}
-            \delta(t-t_0) =
-            \begin{cases}
-                0, & t \ne t_0\\
-                \infty, & t = t_0
-            \end{cases}
-        \end{equation*}
+        \onslide<+->{
+            \begin{equation*}
+                \delta(t-t_0) =
+                \begin{cases}
+                    0, & t \ne t_0\\
+                    \infty, & t = t_0
+                \end{cases}
+            \end{equation*}
         \vspace{0.5cm}
-        \begin{equation*}
-            \int_{t_0^-}^{t_0^+} \delta(t-t_0)dt = 1
-        \end{equation*}
+        }
+        \onslide<+->{
+            \begin{equation*}
+                \int_{t_0^-}^{t_0^+} \delta(t-t_0)dt = 1
+            \end{equation*}
+            \vspace{0.5cm}
+        }
+        \onslide<+->{
+            \begin{equation*}
+                \int_{-\infty}^{t} \delta(t-t_0)dt = u(t-t_0)
+            \end{equation*}
+        }
     \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Resumen}
-    \begin{center}
-        \begin{tabularx}{14cm}{C C C}
-        \toprule
-        Variable & Ecuación $v-i$ & Ecuación $i-v$ \\
-        \midrule
-       Capacitor & $v=\frac{1}{C}\int_{t_0}^{t} i(t)dt + v(t_0) $ & $i = C\,\frac{dv}{dt}$ \\[5pt]
-        Inductor & $v = L\,\frac{di}{dt}$ & $i=\frac{1}{L}\int_{t_0}^{t} v(t)dt + i(t_0) $\\[5pt]
-        \bottomrule
-        \end{tabularx}   
-    \end{center}
+\begin{frame}{Función rampa unitaria}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$r(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_0+1$},
+                xtick={1,3},
+                xmin=-1,
+                xmax=4,
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (3,1) (5,2)};
+            \draw[dashed, gray] (0,1) -- (3,1) -- (3,0);
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+    \centering
+    \begin{column}{0.5\textwidth}
+        \onslide<+->{
+        \begin{equation*}
+            r(t-t_0) =
+            \begin{cases}
+                0, & t \leq t_0\\
+                t-t_0, & t \geq t_0
+            \end{cases}
+        \end{equation*}
+        \vspace{0.5cm}
+        }
+        \onslide<+->{
+        \begin{equation*}
+            \frac{d}{dt} r(t-t_0) = u(t-t_0)
+        \end{equation*}
+        \vspace{0.5cm}
+        }
+    \end{column}
+\end{columns}
 \end{frame}
 
+
+\begin{frame}{Conmutación de fuente de voltaje}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+    \centering
+            \begin{circuitikz}[scale=0.8]
+            \draw[white](-3,-1) rectangle (3.5,5.5);
+            \draw
+            (0,3.6) node[cute spdt up arrow, anchor=out 1, rotate=180] (Sw) {}
+            (Sw.in) -| (2.5,3.5)
+            (Sw.out 2) -| (-2,3.5)
+                to[V, l_=$V$, invert]
+            (-2,0) -| (Sw.cout 1) |- (2.5,0)
+            (Sw.in)node[above, yshift=0.3cm]{$t = t_0$}
+            (2.5,3.5) to[R,l=$R$,v=$v_R$, voltage shift=3] (2.5,0)
+            ;
+            \end{circuitikz}
+    \end{column}
+    \centering
+    \begin{column}{0.5\textwidth}
+        \only<+>{
+            \begin{equation*}
+                v_R =
+                \begin{cases}
+                    0, & t < t_0\\
+                    V, & t > t_0
+                \end{cases}
+            \end{equation*}
+            \vspace{0.5cm}
+        }
+        \only<+>{
+            \begin{circuitikz}[scale=0.8]
+                \draw[white](-5,-1) rectangle (1,5);
+                \draw
+                (-2,4)
+                    to[V, l_=$V\cdot u(t-t_0)$, invert]
+                (-2,0)
+                (-2,4) -- (1,4)
+                to [R,l=$R$,v=$v_R$, voltage shift=3]
+                (1,0) -- (-2,0)
+                ;
+            \end{circuitikz}
+        }
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Conmutación de fuente de corriente}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+    \centering
+            \begin{circuitikz}[scale=0.8]
+            \draw[white](-3,-1) rectangle (3.5,5.5);
+            \draw
+            (0,3.6) node[cute spdt down arrow, anchor=out 2] (Sw) {}
+            (Sw.out 1) -| (2.5,3.5)
+            (Sw.in) -| (-2.5,3.5)
+                to[I, l_=$I$, invert]
+            (-2.5,0) -| (Sw.cout 2) |- (2.5,0)
+            (Sw.in)node[above, yshift=0.3cm]{$t = t_0$}
+            (2.5,3.5) to[R,l=$R$,i>^=$i_R$] (2.5,0)
+            ;
+            \end{circuitikz}
+    \end{column}
+    \centering
+    \begin{column}{0.5\textwidth}
+        \only<+>{
+            \begin{equation*}
+                i_R =
+                \begin{cases}
+                    0, & t < t_0\\
+                    I, & t > t_0
+                \end{cases}
+            \end{equation*}
+            \vspace{0.5cm}
+        }
+        \only<+>{
+            \begin{circuitikz}[scale=0.8]
+                \draw[white](-5,-1) rectangle (1,5);
+                \draw
+                (-2,4)
+                    to[I, l_=$I\cdot u(t-t_0)$, invert]
+                (-2,0)
+                (-2,4) -- (1,4)
+                to [R,l=$R$,i>^=$i_R$]
+                (1,0) -- (-2,0)
+                ;
+            \end{circuitikz}
+        }
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Ejemplos: compuerta}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$g(t)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,3},
+                xmin=-1,
+                xmax=4,
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (1,1) (3,1) (3,0) (4,0)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{equation*}
+            g(t) = u(t-t_0) - u(t-t_1)
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \centering
+        \begin{tikzpicture}[scale=0.9]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$u(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$, $t_1$},
+                xtick={1,3},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (1,1) (4,1)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.9]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$u(t-t_1)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$, $t_1$},
+                xtick={1,3},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {((-1,0) (3,0) (3,1) (4,1)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Ejemplos: triangulo}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$h(t)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,2},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (2,1) (2,0) (4,0)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{align*}
+            h(t) &= r(t-t_0) \cdot \left(1- u(t-t_1)\right)\\
+            & = r(t-t_0) - r(t-t_0)\cdot u(t-t_1)
+        \end{align*}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \centering
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.55\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$r(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1,2},
+                ymax=2.2, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,2},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (2,1) (3,2) (4,3)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.55\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$r(t-t_0)\cdot u(t-t_1)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1,2},
+                ymax=2.2, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,2},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (2,0) (2,1) (3,2) (4,3)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Ejemplos: triangulo (de nuevo) }
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$h(t)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,2},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (2,1) (2,0) (4,0)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{align*}
+            h(t) &= r(t-t_0) \cdot \left(1- u(t-t_1)\right)\\
+            & = r(t-t_0) \cdot u(-t+t_1)
+        \end{align*}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \centering
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.55\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$r(t-t_0)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1,2},
+                ymax=2.2, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,2},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0) (1,0) (2,1) (3,2) (4,3)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.55\linewidth,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$u(-t+t_1)$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={1,2},
+                ymax=2.2, % or enlarge y limits=upper
+                xticklabels={$t_0$,$t_1$},
+                xtick={1,2},
+                xmin=-1,
+                xmax=4
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,1) (1,1) (2,1) (2,0) (3,0) (4,0)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{column}
+\end{columns}
+\end{frame}
 
 % \begin{frame}{Referencias}
 

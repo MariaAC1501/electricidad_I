@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tecnologico de Costa Rica/Instructivo de Laboratorio de Electricidad I
+% LaTeX Template
+% Version 3.1 (25/3/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Linux and Unix Users Group at Virginia Tech Wiki 
+% (https://vtluug.org/wiki/Example_LaTeX_chem_lab_report)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt,letterpaper]{report}
+\usepackage{float}
+\usepackage[spanish,activeacute]{babel} %Permite la escritura intiutiva en español
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\sisetup{output-decimal-marker = {,}}
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage[siunitx,american,RPvoltages]{circuitikz} %Este se usa para hacer circuitos
+%\usepackage{natbib} % Required to change bibliography style to APA
+\usepackage{amsmath} % Required for some math elements 
+\usepackage{array}
+\usepackage{geometry}  
+\usepackage{booktabs}
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    citecolor=blue,
+}
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\lhead{Videos de apoyo: Electricidad I}
+\rhead{\begin{picture}(0,0) \put(-60,0){\includegraphics[width=20mm]{fig/logo.png}} \end{picture}}
+
+
+\begin{document}
+{\Huge Electricidad I: Videos de apoyo}
+
+\vspace{1cm}
+
+{\Large Leyes básicas}
+
+\vspace{0.5cm}
+
+{\Large Métodos de análisis}
+
+\vspace{0.5cm}
+
+{\Large Teoremas de circuitos}
+\begin{itemize}
+    \item \href{https://youtu.be/LQFKj_J37cA}{LTSpice: Máxima transferencia de potencia}
+    \item \href{https://youtu.be/kjDn_0aK00A}{Problema 4.69: Máxima transferencia de potencia}
+\end{itemize}
+
+{\Large Capacitores e Inductores}
+\begin{itemize}
+    \item \href{https://youtu.be/Icl9_5sV-6E}{Clase asincrónica}
+\end{itemize}
+
+{\Large Respuestas Naturales}
+\begin{itemize}
+    \item \href{https://youtu.be/bWRGyjY0niY}{Clase asincrónica}
+    \item \href{https://youtu.be/37KDKfhaRO8}{Problema 7.10: Respuesta Natural RC}
+\end{itemize}
+
+{\Large Funciones de singularidad}
+\begin{itemize}
+    \item \href{https://youtu.be/-DqJL51fJ6w}{Clase asincrónica}
+\end{itemize}
+
+\end{document}

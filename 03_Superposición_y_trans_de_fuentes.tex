@@ -1,0 +1,319 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Superposición y transformación} \\ \emph{de fuentes}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Superposición}
+\emph{El teorema de superposición establece que en cualquier circuito lineal con más de una fuente independiente, la respuesta a través de cualquier elemento es la suma de las respuestas obtenidas debido a cada fuente independiente considerada por separado y con todas las demás fuentes independientes apagadas.}
+    % \vspace{0.5cm}
+    % \begin{columns}
+    % \begin{column}{0.3\textwidth}
+    %     \begin{circuitikz} [scale=0.7,transform shape]\draw
+    %     (0,0)
+    %         to[V,l=$v_1$]
+    %     (0,3)	
+    %         to[R, l=$R_1$]
+    %     (2,3) -- (4,3)
+    %         to[R,l=$R_2$,v=$v_x$]
+    %     (4,0) -- (0,0)
+    %     (2,0)
+    %         to[I,l=$i_1$]
+    %     (2,3)
+    %     ;
+    %     \draw[white] (-1,-1) rectangle (5,4);
+    %     \draw (2,-1) node[above]{$v_x$};
+    %     \end{circuitikz}
+    % \end{column}
+    % \begin{column}{0.05\textwidth}
+    % {\huge$=$}
+    % \end{column}
+    % \begin{column}{0.3\textwidth}
+    %     \begin{circuitikz} [scale=0.7,transform shape]\draw
+    %     (0,0)
+    %         to[V,l=$v_1$]
+    %     (0,3)	
+    %         to[R, l=$R_1$]
+    %     (2,3) -- (4,3)
+    %         to[R,l=$R_2$,v=$v_{xv_1}$]
+    %     (4,0) -- (0,0)
+    %     ;
+    %     \draw[white] (-1,-1) rectangle (5,4);
+    %     \draw (2,-1) node[above]{$v_{xv_1} = v_1 \cdot \frac{R_2}{R_1+R_2}$};
+    %     \end{circuitikz}
+    % \end{column}
+    % \begin{column}{0.05\textwidth}
+    % {\huge$+$}
+    % \end{column}
+    % \begin{column}{0.3\textwidth}
+    %     \begin{circuitikz} [scale=0.7,transform shape]\draw
+    %     (0,0) -- (0,3)	
+    %         to[R, l=$R_1$]
+    %     (2,3) -- (4,3)
+    %         to[R,l=$R_2$,v=$v_{xi_1}$]
+    %     (4,0) -- (0,0)
+    %     (2,0)
+    %         to[I,l=$i_1$]
+    %     (2,3)
+    %     ;
+    %     \draw[white] (-1,-1) rectangle (5,4);
+    %     \draw (2,-1) node[above]{$v_{xi_1} = i_1 \cdot \frac{R_1\cdot R_2}{R_1+R_2}$};
+    %     \end{circuitikz}
+    % \end{column}
+    % \end{columns}
+\end{frame}
+
+\begin{frame}{Superposición: pasos}
+    \begin{columns}[onlytextwidth,T]
+    \begin{column}{0.5\textwidth}
+        \begin{enumerate}
+            \item<+-> Se deja solamente una fuente independiente encendida. Las fuentes dependientes se dejan intactas.
+            \item<+-> Se calcula la contribución de la fuente independiente analizada en el valor total de la corriente o el voltaje buscado.
+        \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{enumerate}
+        \setcounter{enumi}{2}
+            \item<+-> Se repiten los pasos 1 y 2 para cada una de las fuentes independientes.
+            \item<+-> Se suman las contribuciones de todas las fuentes independientes para determinar el valor total de la corriente o voltaje buscado. 
+        \end{enumerate}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Superposición}
+    \only<1>{Usando el teorema de superposición averigue $v_x$}
+    \only<2>{Primero averiguamos la respuesta usando nodos}
+    \only<3>{1. Se deja solamente la fuente de \SI{25}{\volt} encendida.}
+    \only<4>{2. Se deja solamente la fuente de \SI{5}{\ampere} encendida.}
+    \only<5>{3. Se suman las contribuciones de ambas fuentes.}
+    \vskip0pt plus 1filll
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{circuitikz} [scale=0.8,transform shape]
+        \draw<1-2,5>
+        (0,0)
+            to[V,l=\SI{25}{\volt}]
+        (0,3)	
+            to[R, l=\SI{20}{\ohm}]
+        (2,3) -- (4,3)node[above]{$v_x$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (0,0)
+        (2,0)
+            to[I,l=\SI{5}{\ampere}]
+        (2,3)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$0.1v_x$]
+        (6,3) -- (4,3)
+        ;
+        \draw<3>
+        (0,0)
+            to[V,l=\SI{25}{\volt}]
+        (0,3)	
+            to[R, l=\SI{20}{\ohm}]
+        (2,3) -- (4,3)node[above]{$v_{x_1}$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (0,0)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$0.1v_{x_1}$]
+        (6,3) -- (4,3)
+        ;
+        \draw<4>
+        (0,0) -- (0,3)	
+            to[R, l=\SI{20}{\ohm}]
+        (2,3) -- (4,3)node[above]{$v_{x_2}$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (0,0)
+        (2,0)
+            to[I,l=\SI{5}{\ampere}]
+        (2,3)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$0.1v_{x_2}$]
+        (6,3) -- (4,3)
+        ;
+        \draw<1-> [white](-1.5,-1.5) rectangle (7.7,4.5);
+        \end{circuitikz}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \only<2>{
+            \begin{gather*}
+            \left(\frac{1}{20}+\frac{1}{4}\right)v_x-\left(\frac{1}{20}\right)25 = 0.1v_x + 5\\[5pt]
+            0.2v_x = 6.25\\[5pt]
+            v_x = \SI{31.25}{\volt}
+            \end{gather*}
+        }
+        \only<3>{
+            \begin{gather*}
+            \left(\frac{1}{20}+\frac{1}{4}\right)v_{x_1}-\left(\frac{1}{20}\right)25 = 0.1v_{x_1}\\[5pt]
+            0.2v_{x_1} = 1.25\\[5pt]
+            v_{x_1} = \SI{6.25}{\volt}
+            \end{gather*}
+        }
+        \only<4>{
+            \begin{gather*}
+            \left(\frac{1}{20}+\frac{1}{4}\right)v_{x_2} = 0.1v_{x_2} + 5\\[5pt]
+            0.2v_{x_2} = 5\\[5pt]
+            v_{x_2} = \SI{25}{\volt}
+            \end{gather*}
+        }
+        \only<5>{
+            \begin{gather*}
+            v_x = v_{x_1} + v_{x_2}\\[5pt]
+            v_x = 6.25 + 25\\[5pt]
+            v_x = \SI{31.25}{\volt}
+            \end{gather*}
+        }
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Transformación de fuentes}
+        \vfill
+        \centering
+        \begin{circuitikz} [scale=0.8]
+            \draw<1>
+            (4,0)
+                to[short,o-]
+            (0,0)
+                to[V, v=$v_1$]
+            (0,4)	
+                to[R, l=$R_1$, -o]
+            (4,4)
+            (12,0)
+                to[short,o-]
+            (8,0)
+                to[I, l=$i_1$]
+            (8,4)
+                to[short, -o]
+            (12,4)
+            (10,0)
+                to[R, l_=$R_1$]
+            (10,4)
+            ;
+            \draw<2>
+            (4,0)
+                to[short,o-]
+            (0,0)
+                to[cV, v=$v_1$]
+            (0,4)	
+                to[R, l=$R_1$, -o]
+            (4,4)
+            (12,0)
+                to[short,o-]
+            (8,0)
+                to[cI, l=$i_1$]
+            (8,4)
+                to[short, -o]
+            (12,4)
+            (10,0)
+                to[R, l_=$R_1$]
+            (10,4)
+            ;
+            \draw[thick, >=triangle 45, <->] (4.5,2) -- (6.5,2);
+            \draw(2,-1)node{$v_1=i_1\cdot R_1$};
+            \draw(10,-1)node{$i_1=v_1 / R_1$};
+            \draw[white](-2,-2) rectangle (15,5);
+        \end{circuitikz}
+\end{frame}
+
+
+\begin{frame}{Transformación de fuentes}
+    \centering
+    \begin{tikzpicture}
+        \draw<1,3>[ultra thick,-{Latex[length=4mm,width=4mm]}] (0,0) arc (135:45:3);
+        \draw<2,4>[ultra thick,{Latex[length=4mm,width=4mm]}-] (0,0) arc (135:45:3);
+    \end{tikzpicture}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{circuitikz} [scale=0.65,transform shape]
+        \draw (1,-1) [white] rectangle (3,4);
+        \draw<1>
+        (0,0)
+            to[V,l=\SI{25}{\volt}]
+        (0,3)	
+            to[R, l=\SI{20}{\ohm}]
+        (2,3) -- (4,3)node[above]{$v_x$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (0,0)
+        (2,0)
+            to[I,l=\SI{5}{\ampere}]
+        (2,3)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$0.1v_x$]
+        (6,3) -- (4,3)
+        ;
+        \draw<2-3>
+        (0,3)	
+            to[R, l_=\SI{20}{\ohm}]
+        (0,0)
+        (0,3) -- (4,3)node[above]{$v_x$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (0,0)
+        (2,0)
+            to[I,l=\SI{6.25}{\ampere}]
+        (2,3)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$0.1v_x$]
+        (6,3) -- (4,3)
+        ;
+        \draw<4,5>
+        (2,3)	
+            to[R, l_=$\frac{10}{3}$\si{\ohm}]
+        (2,0)
+        (2,3) -- (4,3)node[above]{$v_x$} 
+        (4,0) -- (2,0)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$6.25 + 0.1v_x$]
+        (6,3) -- (4,3)
+        ;
+        \end{circuitikz}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \begin{circuitikz} [scale=0.65,transform shape]
+        \draw (1,-1) [white] rectangle (3,4);
+        \draw<1-2>
+        (-2,0)
+            to[I,l=\SI{1.25}{\ampere}]
+        (-2,3) -- (0,3)	
+            to[R, l_=\SI{20}{\ohm}]
+        (0,0) -- (-2,0)
+        (0,3) -- (4,3)node[above]{$v_x$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (0,0)
+        (2,0)
+            to[I,l=\SI{5}{\ampere}]
+        (2,3)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$0.1v_x$]
+        (6,3) -- (4,3)
+        ;
+        \draw<3,4>
+        (2,3)	
+            to[R, l_=\SI{20}{\ohm}]
+        (2,0)
+        (2,3) -- (4,3)node[above]{$v_x$} 
+            to[R,l=\SI{4}{\ohm}]
+        (4,0) -- (2,0)
+        (4,0)node[ground]{} -- (6,0)
+            to[cI,l_=$6.25 + 0.1v_x$]
+        (6,3) -- (4,3)
+        ;
+        \draw<5>
+        (3,3) node{\Large $v_x=\frac{10}{3} \left(6.25+0.1v_x\right)$}	
+        (3,1.5) node{\Large $v_x= 20.8333 + 0.333v_x$}
+        (3,0) node{\Large $v_x=$\SI{31.23}{\volt}}
+        ;
+        \end{circuitikz}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\end{document}
