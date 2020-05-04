@@ -1,0 +1,364 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Mallas y supermallas}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Análisis de mallas}
+    \vspace{0.5cm}
+    \only<2>{1. Asignar las corrientes de malla en cualquier dirección}
+    \only<3-4>{2. Aplicar la LVK a cada una de las mallas}
+    \only<5-7>{3. Reordenar las ecuaciones}
+    \only<8-10>{4. Resolver el sistema de ecuaciones simultaneas obtenido}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \only<3-4>{
+                \begin{gather*}
+                    \onslide<3-4>{-v_1+i_a \cdot R_1 + (i_a+i_b)\cdot R_2 = 0\\
+                    \\}
+                    \onslide<4>{-v_2 + i_b\cdot R_3 + (i_b+i_a)\cdot R_2 = 0\\}
+                \end{gather*}
+            }
+            \only<5-7>{
+                \begin{gather*}
+                    \onslide<5-7>{(R_1 + R_2) \cdot i_a + R_2 \cdot i_b  = v_1\\
+                    \\}
+                    \onslide<6-7>{R_2 \cdot i_a   + (R_2 + R_3) \cdot i_b  = v_2\\}
+                \end{gather*}
+                \onslide<7>{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        R_1 + R_2 & R_2 \\ 
+                        R_2 & R_2 + R_3\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      i_a \\ 
+                      i_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        v_1 \\
+                        v_2
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+            }
+            \only<8-10>{
+                \begin{align*}
+                    \onslide<8-10>{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                    v_1 &= \SI{10}{\volt} & & & v_2 &=\SI{20}{\volt}}
+                \end{align*}
+                \onslide<9-10>{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        3 & 2 \\ 
+                        2 & 5\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      i_a \\ 
+                      i_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        10 \\
+                        20
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<10>{i_a &= \SI{0.91}{\ampere} & i_b &= \SI{3.64}{\ampere}}
+                \end{align*}
+            }
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.8]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                (0,4)	
+                    to[R, l=$R_1$]
+                (3,4)
+                    to[R,l=$R_3$]
+                (6,4)
+                    to[V,l=$v_2$,invert]
+                (6,0)
+                    --
+                (3,0)
+                    to[short]
+                (0,0)
+                (3,0)
+                    to[R,l_=$R_2$]
+                (3,4)
+                ;
+                \draw [white](-1.2,-1) rectangle (7.2,5.5);
+                \draw<2,4,6->[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<3,5>[thin, <-, >=triangle 45,red] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<2-3,5,7->[thin, ->, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<4,6>[thin, ->, >=triangle 45,red] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \fill<3> (0,0) circle [radius=2pt];
+                \fill<4> (6,0) circle [radius=2pt];
+                \draw<3> (0.1,4) to[open, v=$ $] (2.9,4);
+                \draw<3> (3,3.5) to[open, v=$ $] (3,0.5);
+                \draw<4> (5.9,4) to[open, v^=$ $] (3.1,4);
+                \draw<4> (3,3.5) to[open, v^=$ $] (3,0.5);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Análisis de mallas por inspección}
+    \vspace{0.2cm}
+    \only<2>{1. Asignar las corrientes de mallas en la misma dirección}
+    \only<3>{2. Construir el sistema simultaneo de ecuaciones en el orden final pero sin coeficientes}
+    \only<4>{3. Sumar las resistencias que son parte de la malla $a$}
+    \only<5>{4. Sumar las resistencia que la malla $a$ comparte con la malla $b$ y agregar un negativo}
+    \only<6>{5. Sumar las fuentes de voltaje que son parte de la malla $a$, tomar como positivas las fuentes si la corriente de la malla $a$ \emph{sale} por el positivo}
+    \only<7>{6. Sumar las resistencias que son parte de la malla $b$}
+    \only<8>{7. Sumar las resistencia que la malla $b$ comparte con la malla $a$ y agregar un negativo}
+    \only<9>{8. Sumar las fuentes de voltaje que son parte de la malla $b$, tomar como positivas las fuentes si la corriente de la malla $b$ \emph{sale} por el positivo}
+    \only<10->{9. Resolver el sistema de ecuaciones simultaneas obtenido}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \only<1-9>{
+            \centering
+            \begin{tikzpicture}
+                \draw [white] (-0.6,1) rectangle (6.5,5);
+                \draw<3-> (1.5,4) node[right]{$i_a$};
+                \draw<4>[red,thick]  (-0.5,4.5) rectangle (1.5,3.5);
+                \draw<4-9> (1.5,4) node[left]{$(R_1+R_2)$}node{$\cdot$};
+                \draw<3-> (4.5,4) node[right]{$i_b=$};
+                \draw<5-9> (4.5,4) node[left]{$-R_2$}node{$\cdot$};
+                \draw<5>[red,thick]  (2.5,4.5) rectangle (4.5,3.5);
+                \draw<6-9> (6.5,4) node[left]{$v_1$};
+                \draw<6>[red,thick]  (5.5,4.5) rectangle (6.5,3.5);
+                \draw<3-> (1.5,2) node[right]{$i_a$};
+                \draw<7-9> (1.5,2) node[left]{$-R_2$}node{$\cdot$};
+                \draw<7>[red,thick]  (-0.5,2.5) rectangle (1.5,1.5);
+                \draw<3-> (4.5,2) node[right]{$i_b=$};
+                \draw<8-9> (4.5,2) node[left]{$+(R_2+R_3)$}node{$\cdot$};
+                \draw<8>[red,thick]  (2.5,2.5) rectangle (4.5,1.5);
+                \draw<9> (6.5,2) node[left]{$-v_2$};
+                \draw<9>[red,thick]  (5.5,2.5) rectangle (6.5,1.5);
+            \end{tikzpicture}
+            }
+            \only<10->{
+                \begin{align*}
+                    \onslide<10->{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                    v_1 &= \SI{10}{\volt} & & & v_2 &=\SI{20}{\volt}}
+                \end{align*}
+                \onslide<11->{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        3 & -2 \\ 
+                        -2 & 5\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      i_a \\ 
+                      i_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        10 \\
+                        -20
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<12>{i_a &= \SI{0.91}{\ampere} & i_b &= \SI{-3.64}{\ampere}}
+                \end{align*}
+            }
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.8]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                (0,4)	
+                    to[R, l=$R_1$]
+                (3,4)
+                    to[R,l=$R_3$]
+                (6,4)
+                    to[V,l=$v_2$,invert]
+                (6,0)
+                    --
+                (3,0)
+                    to[short]
+                (0,0)
+                (3,0)
+                    to[R,l_=$R_2$]
+                (3,4)
+                ;
+                \draw [white](-1.2,-1) rectangle (7.2,5.5);
+                \draw<2-3,7->[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<4-6>[thin, <-, >=triangle 45,red] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<2-6,10->[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<7-9>[thin, <-, >=triangle 45,red] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Análisis de mallas con fuentes de corriente}
+    \vspace{0.2cm}
+    \only<2>{Realizar inspección en la malla $a$}
+    \only<3>{La otra malla ya esta solucionada, incluir la solución en el sistema...}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \begin{gather*}
+                \onslide<2->{(R_1+R_2) \cdot i_a - R_2 \cdot i_b = v_1\\
+                \\}
+                \onslide<3>{0 \cdot i_a + i_b = -i_1}
+            \end{gather*}
+       \end{column}
+       \begin{column}{0.45\textwidth}
+            \begin{circuitikz} [scale=0.8]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                (0,4)	
+                    to[R, l=$R_1$]
+                (3,4)
+                    to[R,l=$R_3$]
+                (6,4)
+                    to[I,l=$i_1$,invert]
+                (6,0)
+                    --
+                (3,0)
+                    to[short]
+                (0,0)
+                (3,0)
+                    to[R,l_=$R_2$]
+                (3,4)
+                ;
+                \draw [white](-1.2,-1) rectangle (7.2,5.5);
+                \draw<1,3>[thin, <-, >=triangle 45,blue] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<2>[thin, <-, >=triangle 45,red] (1.5,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<1-2>[thin, <-, >=triangle 45,blue] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<3>[thin, <-, >=triangle 45,red] (4.5,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Supermallas}
+    \only<1-2>{Se da cuando dos mallas tienen una fuente de corriente en común}
+    \only<3>{1. Realizar inspección en la malla $a$}
+    \only<4>{2. Realizar inspección en la supermalla $b$-$c$}
+    \only<5>{3. Incluir la ecuación auxiliar que relaciona las corrientes de la supermalla con la fuente de corriente}
+    \only<6->{4. Resolver el sistema de ecuaciones simultaneas obtenido}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \only<2>{A la unión de ambas mallas se le llama supermalla, esta excluye a la fuente de corriente y cualquier elemento conectado en serie con ella}
+            \only<3-5>{
+                \onslide<3->{    
+                    \begin{equation*}
+                        (R_1+R_2) \cdot i_a - R_2 \cdot i_b + 0 \cdot i_c  = v_1
+                    \end{equation*}
+                }
+                \onslide<4->{
+                    \begin{multline*}
+                    -R_2 \cdot i_a + (R_2+R_3) \cdot i_b \\ + (R_5 + R_6) \cdot i_c = 0
+                    \end{multline*}  
+                }
+                \onslide<5->{
+                    \begin{equation*}
+                        0 \cdot i_a - i_b + i_c = i_1 
+                    \end{equation*}
+                }
+            }
+            \only<6->{
+                \vspace{-0.5cm}
+                \begin{align*}
+                    \onslide<6->{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                    R_4 &= \SI{4}{\ohm} & & & R_5 &= \SI{5}{\ohm}\\
+                    v_1 &= \SI{10}{\volt} & & & i_1 &=\SI{1}{\ampere}}
+                \end{align*}
+                \onslide<7->{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        3 & -2 & 0 \\ 
+                        -2 & 5 & 11\\
+                        0 & -1 & 1
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      i_a \\ 
+                      i_b \\
+                      i_c
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        10 \\
+                        0 \\
+                        1
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<8->{i_a &= \SI{3.14}{\ampere} & i_b &= \SI{-0.29}{\ampere} & i_c &= \SI{0.70}{\ampere}}
+                \end{align*}
+            }
+       \end{column}
+       \begin{column}{0.5\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.8, transform shape]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                (0,4)	
+                    to[R, l=$R_1$]
+                (2.5,4)
+                    to[R,l=$R_3$]
+                (5,4)
+                    to[R,l=$R_4$]
+                (5,2)
+                %     to[I,l=$i_1$,invert]
+                (5,0)
+                    --
+                (0,0)
+                (2.5,0)
+                    to[R,l=$R_2$]
+                (2.5,4)
+                (5,4)
+                    to[R,l=$R_5$]
+                (7.5,4)
+                    to[R,l=$R_6$]
+                (7.5,0)
+                    --
+                (5,0)
+                ;
+                \draw [white](-1,-1.2) rectangle (8.3,5.8);
+                \draw<1-2,4->[thin, <-, >=triangle 45,blue] (1.25,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<3>[thin, <-, >=triangle 45,red] (1.25,2)node{$i_a$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<1-3,5->[thin, <-, >=triangle 45,blue] (3.75,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<4>[thin, <-, >=triangle 45,red] (3.75,2)node{$i_b$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<1-3,5->[thin, <-, >=triangle 45,blue] (6.25,2)node{$i_c$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<4>[thin, <-, >=triangle 45,red] (6.25,2)node{$i_c$}  ++(-60:0.5) arc (-60:170:0.5);
+                \draw<2-3,5->[dashed, blue] (2.8,3.7) -- (7.2,3.7) -- (7.2,0.3) -- (2.8,0.3) -- (2.8,3.7);
+                \draw<4>[dashed, red] (2.8,3.7) -- (7.2,3.7) -- (7.2,0.3) -- (2.8,0.3) -- (2.8,3.7);
+                \draw<1-4,6-> (5,2) to[I,l=$i_1$,invert] (5,0);
+                \draw<5> (5,2) to[I,l=$i_1$,invert,color=red] (5,0);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+
+\end{document}

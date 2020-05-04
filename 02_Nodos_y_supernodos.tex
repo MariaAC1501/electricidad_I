@@ -1,0 +1,357 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Nodos y supernodos}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Análisis de nodos}
+    \vspace{0.1cm}
+    \only<2>{1. Seleccionar un nodo como referencia. Asignar voltajes a los demás nodos}
+    \only<3-7>{2. Aplique la LCK a cada uno de los nodos de  no referencia}
+    \only<8-9>{3. Reordene las ecuaciones}
+    \only<10->{4. Resuelva el sistema de ecuaciones simultaneas obtenido}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \only<3-4>{
+                \begin{gather*}
+                    \onslide<3->{i_1 - i_{R_1} - i_{R_2} - i_2 = 0\\
+                    \\}
+                    \onslide<4>{
+                        i_{R_1} = \frac{v_a - 0}{R_1}\\  
+                        i_{R_2} = \frac{v_a - v_b}{R_2}
+                    }
+                \end{gather*}
+            }
+            \only<5-6>{
+                \begin{gather*}
+                    \onslide<5->{i_2 + i_{R_2} - i_{R_3} = 0\\
+                    \\}
+                    \onslide<6>{
+                        i_{R_2} = \frac{v_a - v_b}{R_2}\\
+                        i_{R_3} = \frac{v_b - 0}{R_3}
+                    }
+                \end{gather*}
+            }
+            \only<7>{
+                \begin{gather*}
+                    -i_1 + \frac{v_a - 0}{R_1} + \frac{v_a - v_b}{R_2} + i_2 = 0\\
+                    \\
+                    -i_2 - \frac{v_a - v_b}{R_2} + \frac{v_b - 0}{R_3} = 0
+                \end{gather*}
+            }
+            \only<8-9>{
+                \begin{gather*}
+                     \left(\frac{1}{R_1}+\frac{1}{R_2}\right) \cdot v_a - \frac{1}{R_2} \cdot v_b = i_1 - i_2\\
+                    \\
+                    - \frac{1}{R_2} \cdot v_a + \left(\frac{1}{R_2} + \frac{1}{R_3}\right)  \cdot v_b = i_2
+                \end{gather*}
+                \vspace{0.2cm}
+                \onslide<9>{
+                \begin{equation*}
+                    \begin{bmatrix} 
+                        \frac{1}{R_1}+\frac{1}{R_2} & -\frac{1}{R_2} \\ 
+                        - \frac{1}{R_2} & \frac{1}{R_2} + \frac{1}{R_3}\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                        v_a \\ 
+                        v_b 
+                    \end{bmatrix}
+                        =
+                    \begin{bmatrix}
+                        i_1 - i_2\\
+                        i_2
+                    \end{bmatrix}
+                \end{equation*}
+                }
+            }
+            \only<10->{
+                \begin{align*}
+                    \onslide<10->{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                    i_1 &= \SI{1}{\ampere} & & & i_2 &=\SI{2}{\ampere}}
+                \end{align*}
+                \onslide<11->{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        \frac{3}{2} & -\frac{1}{2} \\ 
+                        -\frac{1}{2} & \frac{5}{6}\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      v_a \\ 
+                      v_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        -1 \\
+                        2
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<12>{v_a &= \SI{0.167}{\volt} & v_b &= \SI{2.5}{\volt}}
+                \end{align*}
+            }
+        \end{column}
+        \begin{column}{0.5\textwidth}
+        \centering
+        \begin{circuitikz} [scale=0.85,transform shape]\draw
+            (0,0)
+                to[I,l=$i_1$]
+            (0,3)
+                to[short]
+            (1.5,3)
+                to[R,l=$R_1$]
+            (1.5,0)
+                to[short]
+            (0,0)
+            (1.5,3)
+                to[R,l=$R_2$]
+            (4.5,3)
+                to[R,l=$R_3$]
+            (4.5,0)
+                --
+            (0,0)
+            (1.5,3) 
+                --
+            (1.5,4.5)
+                to[I,l=$i_2$]
+            (4.5,4.5)
+                --
+            (4.5,3)
+            ;
+            \draw [white](-1,-0.7) rectangle (5.7,5.5);
+            \draw<2-> (1.5,0) node[ground]{} (1.5,3) node[above left]{$v_a$} (4.5,3)                 node[above right]{$v_b$};
+            \draw<3-4> (1.5,3) to[open,i=$i_{R_1}$] (1.5,2.5);
+            \draw<3-4> (1.5,3) to[open,i=$i_{R_2}$] (2,3);
+            \fill<3-4> [red] (1.5,3) circle(3pt);
+            \draw<5-6> (4.5,3) to[open,i_<=$i_{R_2}$] (4,3);
+            \draw<5-6> (4.5,3) to[open,i=$i_{R_3}$] (4.5,2.5);
+            \fill<5-6> [red] (4.5,3) circle(3pt);
+        \end{circuitikz}
+        \end{column}
+        \end{columns}
+\end{frame}
+
+\begin{frame}{Análisis de nodos por inspección}
+    \vspace{0.1cm}
+    \only<2>{1. Seleccionar un nodo como referencia. Asignar voltajes a los demás nodos}
+    \only<3>{2. Construir el sistema simultaneo de ecuaciones en el orden final pero sin coeficientes}
+    \only<4>{3. Sumar los inversos de las resistencias que tocan al nodo $a$}
+    \only<5>{4. Sumar los inversos de las resistencias que el nodo $a$ comparte con el nodo $b$ y agregar un negativo}
+    \only<6>{5. Sumar las fuentes de corriente que se conectan al nodo $a$, tomar como positivas las fuentes cuya corriente entra al nodo}
+    \only<7>{6. Sumar los inversos de las resistencias que el nodo $b$ comparte con el nodo $a$ y agregar un negativo}
+    \only<8>{7. Sumar los inversos de las resistencias que tocan al nodo $b$}
+    \only<9>{8. Sumar las fuentes de corriente que se conectan al nodo $b$, tomar como positivas las fuentes cuya corriente entra al nodo}
+    \only<10->{9. Resolver el sistema de ecuaciones simultaneas obtenido}
+    \vskip0pt plus 1filll
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \only<1-9>{
+            \centering
+            \begin{tikzpicture}
+                \draw [white](-0.6,1) rectangle (7,5);
+                \draw<3-> (1.5,4) node[right]{$v_a$};
+                \draw<4>[red,thick]  (-0.5,4.5) rectangle (1.5,3.5);
+                \draw<4-9> (1.5,4) node[left]{$\left(\frac{1}{R_1}+\frac{1}{R_2}\right)$}node{$\cdot$};
+                \draw<3-> (4.5,4) node[right]{$v_b=$};
+                \draw<5-9> (4.5,4) node[left]{$-\frac{1}{R_2}$}node{$\cdot$};
+                \draw<5>[red,thick]  (2.5,4.5) rectangle (4.5,3.5);
+                \draw<6-9> (6.8,4) node[left]{$i_1-i_2$};
+                \draw<6>[red,thick]  (5.5,4.5) rectangle (6.8,3.5);
+                \draw<3-> (1.5,2) node[right]{$v_a$};
+                \draw<7-9> (1.5,2) node[left]{$-\frac{1}{R_2}$}node{$\cdot$};
+                \draw<7>[red,thick]  (-0.5,2.5) rectangle (1.5,1.5);
+                \draw<3-> (4.5,2) node[right]{$v_b=$};
+                \draw<8-9> (4.5,2) node[left]{$\left(\frac{1}{R_2}+\frac{1}{R_3}\right)$}node{$\cdot$};
+                \draw<8>[red,thick]  (2.5,2.5) rectangle (4.5,1.5);
+                \draw<9> (6.8,2) node[left]{$i_2$};
+                \draw<9>[red,thick]  (5.5,2.5) rectangle (6.8,1.5);
+            \end{tikzpicture}
+            }
+            \only<10->{
+                \begin{align*}
+                    \onslide<10->{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                    i_1 &= \SI{1}{\ampere} & & & i_2 &=\SI{2}{\ampere}}
+                \end{align*}
+                \onslide<11->{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        \frac{3}{2} & -\frac{1}{2} \\ 
+                        -\frac{1}{2} & \frac{5}{6}\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      v_a \\ 
+                      v_b 
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        -1 \\
+                        2
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<12>{v_a &= \SI{0.167}{\volt} & v_b &= \SI{2.5}{\volt}}
+                \end{align*}
+            }
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.85,transform shape]\draw
+                (0,0)
+                    to[I,l=$i_1$]
+                (0,3)
+                    to[short]
+                (1.5,3)
+                    to[R,l=$R_1$]
+                (1.5,0)
+                    to[short]
+                (0,0)
+                (1.5,3)
+                    to[R,l=$R_2$]
+                (4.5,3)
+                    to[R,l=$R_3$]
+                (4.5,0)
+                    --
+                (0,0)
+                (1.5,3) 
+                    --
+                (1.5,4.5)
+                    to[I,l=$i_2$]
+                (4.5,4.5)
+                    --
+                (4.5,3)
+                ;
+                \draw [white](-1,-0.7) rectangle (5.7,5.5);
+                \draw<2-> (1.5,0) node[ground]{} (1.5,3) node[above left]{$v_a$} (4.5,3)                 node[above right]{$v_b$};
+                \fill<4-6> [red] (1.5,3) circle(3pt);
+                \fill<7-9> [red] (4.5,3) circle(3pt);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}{Supernodos}
+    \only<1-2>{Se da cuando dos nodos de no referencia tienen una fuente de voltaje en común}
+    \only<3>{1. Realizar inspección en el nodo $a$}
+    \only<4>{2. Realizar inspección en el supernodo $b$-$c$}
+    \only<5>{3. Incluir la ecuación auxiliar que relaciona los voltajes del supernodo con la fuente de voltaje}
+    \only<6->{4. Resolver el sistema de ecuaciones simultaneas obtenido}
+    \vskip0pt plus 1filll 
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            \only<2>{A la unión de ambos nodos se le llama supernodo, este incluye a la fuente de voltaje y cualquier elemento conectado en paralelo}
+            \only<3-5>{
+                \onslide<3->{
+                \begin{equation*}
+                    v_a + 0\cdot v_b + 0\cdot v_c= v_1
+                \end{equation*}
+                }
+                \onslide<4->{
+                \begin{multline*}
+                     -\left(\frac{1}{R_1}+\frac{1}{R_2}\right) \cdot v_a + \left(\frac{1}{R_2} + \frac{1}{R_3}\right) \cdot v_b \\+ \left(\frac{1}{R_1} + \frac{1}{R_4}\right) \cdot v_c= 0
+                \end{multline*}
+                \vspace{0.2cm}
+                }
+                \onslide<5>{
+                \begin{equation*}
+                    0\cdot v_a + v_b - v_c = v_2
+                \end{equation*}
+                }
+            }
+            \only<6->{
+                \begin{align*}
+                    \onslide<6->{R_1 &= \SI{1}{\ohm} & R_2 &= \SI{2}{\ohm} & R_3 &= \SI{3}{\ohm}\\
+                     R_4 &= \SI{4}{\ohm} & v_1 &= \SI{10}{\volt} & v_2 &=\SI{20}{\volt}
+                    }
+                \end{align*}
+                \onslide<7->{
+                    \begin{equation*}
+                    \begin{bmatrix} 
+                        1 & 0 & 0\\
+                        -\frac{3}{2} & \frac{5}{6} & \frac{5}{4} \\ 
+                        0 & 1 & -1\\
+                    \end{bmatrix}
+                    \begin{bmatrix} 
+                      v_a \\ 
+                      v_b \\
+                      v_c
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        10 \\
+                        0 \\
+                        20
+                    \end{bmatrix}
+                    \end{equation*}
+                }
+                \begin{align*}
+                    \onslide<8>{v_a &= \SI{10}{\volt} & v_b &= \SI{19.2}{\volt} & v_c &= \SI{-0.8}{\volt}}
+                \end{align*}
+            }
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \centering
+            \begin{circuitikz} [scale=0.8, transform shape]\draw
+                (0,0)
+                    to[V,l=$v_1$]
+                    node[left]{$v_a$}
+                (0,3)
+                    to[short]
+                (0,5)
+                    to[R,l=$R_1$]
+                    %node[ground]{}
+                (5,5)
+                    to[short]
+                    node[right]{$v_c$}
+                (5,3)
+                    to[R,l=$R_4$]
+                (5,0)
+                    to[short]
+                    node[ground]{}
+                (2.5,0)
+                    to[short]
+                (0,0)
+                (0,3)
+                     to[R,l=$R_2$]
+                     node[above]{$v_b$}
+                (2.5,3)
+                    to[R,l=$R_3$]
+                (2.5,0)
+                % (5,3)
+                %     to[V,l_=$v_2$]
+                % (2.5,3)
+                ;
+                \draw [white](-1,-0.9) rectangle (6,6.1);
+                \draw<1-4,6-> (5,3) to[V,l_=$v_2$] (2.5,3);
+                \draw<5> (5,3) to[V,l_=$v_2$,color=red] (2.5,3);
+                \draw <2-3,5->[dashed, blue] (2.3,3.5) -- (5.2,3.5) -- (5.2,2.5) -- (2.3,2.5) -- cycle;
+                \draw<4> [dashed, red] (2.3,3.5) -- (5.2,3.5) -- (5.2,2.5) -- (2.3,2.5) -- cycle;
+                \fill<3> [red] (0,3) circle(3pt);
+                \fill<4> [red] (2.5,3) circle(3pt) (5,3) circle(3pt);
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+
+\end{document}
