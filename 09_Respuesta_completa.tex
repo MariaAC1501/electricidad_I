@@ -13,74 +13,126 @@
 \input{postamble}
 \maketitle
 
-\begin{frame}{Resumen}
-    \begin{center}
-        \begin{tabularx}{14cm}{C C C}
-        \toprule
-        Variable & Ecuación $v-i$ & Ecuación $i-v$ \\
-        \midrule
-       Capacitor & $v=\frac{1}{C}\int_{t_0}^{t} i(t)dt + v(t_0) $ & $i = C\,\frac{dv}{dt}$ \\[5pt]
-        Inductor & $v = L\,\frac{di}{dt}$ & $i=\frac{1}{L}\int_{t_0}^{t} v(t)dt + i(t_0) $\\[5pt]
-        \bottomrule
-        \end{tabularx}   
-    \end{center}
-\end{frame}
-
-\begin{frame}{Circuito RC: respuesta natural}
+\begin{frame}{Circuito RC: respuesta a un escalón}
     \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \centering
-        \only<1>{
-            \begin{circuitikz}[scale=0.8]\draw
-            (0,2.5) node[spdt, rotate = 90, anchor=in] (Sw) {}
-            (Sw.in) 
-                to [C, l=$C$, voltage shift=3]
-            (0,1) -- (0,0)
-            (Sw.out 1) |- (-1,4) to [R,l=$R_f$,o-] (-4,4)
-                to[V, l_=$V$, invert]
-            (-4,0)
-            (Sw.out 2) |- (1.5,4) to[short,o-] (3,4)
-                to[R,l=$R$]
-            (3,0) to[short,-o] (1.5,0) to[short,-o] (-1,0) -- (-4,0)
-            (-1,4)
-                to[open,v=$v$,voltage shift=-3]
-            (-1,0)
+        \only<1->{
+            \begin{circuitikz}[scale=0.8]
+            \draw
+            (0,0)
+                to [V, l=$Vu(t-t_0)$]
+            (0,4) 
+                to [R, l=$R$]
+            (4,4)
+                to[C,l=$C$, v=$v$,voltage shift=3]
+            (4,0) 
+                to[short]
+            (0,0)
             ;
-        \end{circuitikz}
-        }
-        \only<2>{
-            \begin{circuitikz}[scale=0.8]\draw
-            (0,2.5) node[spdt, rotate = 90, yscale = -1, anchor=in] (Sw) {}
-            (Sw.in) 
-                to [C, l=$C$, voltage shift=3]
-            (0,1) -- (0,0)
-            (Sw.out 2) |- (-1,4) to [R,l=$R_f$,o-] (-4,4)
-                to[V, l_=$V$, invert]
-            (-4,0)
-            (Sw.out 1) |- (1.5,4) to[short,o-] (3,4)
-                to[R,l=$R$]
-            (3,0) to[short,-o] (1.5,0) to[short,-o] (-1,0) -- (-4,0)
-            (1.5,4)
-                to[open,v=$v$,voltage shift=-3]
-            (1.5,0)
+            \draw<2-> 
+                (4,4)
+                    to[open,i=$i_R$]
+                (3,4)
+                (4,4)
+                    to[open,i=$i_C$]
+                (4,3)
             ;
         \end{circuitikz}
         }
     \end{column}
     \begin{column}{0.5\textwidth}
-        \only<1>{
-        Después de mucho tiempo...
+        \only<1>
+        {Se asume que el capacitor tiene un voltaje inicial
         \begin{equation*}
-            v = V
+            v(t_0) = V_0
         \end{equation*}
+        }\only<2-4>
+            {\onslide<2->
+            {aplicando LCK tenemos que:
+            \begin{equation*}
+                i_C + i_R = 0
+            \end{equation*}
+            }\onslide<3->
+            {y sabemos que para todo $t>t_0$: 
+            \begin{equation*}
+                i_C = C\,\dfrac{dv}{dt},\, i_R=\dfrac{v-V}{R}
+            \end{equation*}
+            }\onslide<4->
+            {entonces:
+            \begin{equation*}
+                C\,\dfrac{dv}{dt} + \dfrac{v-V}{R} = 0
+            \end{equation*}
+            }
+        }\only<5-7>
+            {\onslide<5->
+            {dividiendo entre $C\,$ y reordenando:
+            \begin{equation*}
+                \dfrac{dv}{dt} = -\dfrac{v-V}{RC}
+            \end{equation*}
+            }\onslide<6->{
+            reordenando nuevamente:
+            \begin{equation*}
+                \dfrac{dv}{v-V} = -\dfrac{dt}{RC}
+            \end{equation*}
+            }\onslide<7->{
+            integrando a ambos lados:
+            \begin{equation*}
+                \int\limits_{v(t_0)}^{v(t)}\dfrac{1}{v-V}\,dv = \int\limits_{t_0}^{t}-\frac{1}{RC}\,dt
+            \end{equation*}
+            }
+        }\only<8-10>
+            {\onslide<8->
+            {tenemos que:
+            \begin{equation*}
+                \ln(v-V)\,\bigg|_{v(t_0)}^{v(t)} = -\frac{t}{RC}\,\bigg|_{t_0}^{t}
+            \end{equation*}
+            }\onslide<9->
+            {evaluando:
+            \begin{equation*}
+                \ln(v(t)-V) - \ln (v(t_0)-V) = -\frac{1}{RC}(t - t_0)
+            \end{equation*}
+            }\onslide<10->
+            {osea:
+            \begin{equation*}
+                \dfrac{\ln(v(t)-V)}{\ln (v(t_0)-V)} = -\frac{(t - t_0)}{RC}
+            \end{equation*}
+            }
+        }\only<11-12>
+            {\onslide<11->
+            {aplicamos la función exponencial a ambos lados
+            \begin{equation*}
+                \dfrac{v(t)-V}{v(t_0)-V} = e\,^{(t - t_0)/RC}
+            \end{equation*}
+            }\onslide<12->
+            {sea $\tau=RC\,$ y $\,v(t_0) = V_0$, obtenemos:
+            \begin{equation*}
+                v(t)=V + (V_0-V)e\,^{(t - t_0)/ \tau}
+            \end{equation*}
+            }
+        }\only<13-15>
+            {\onslide<13->
+            {\begin{equation*}
+                v(t) =
+                \begin{cases}
+                    V_0, & t < t_0\\
+                    V + (V_0-V)e\,^{(t - t_0)/ \tau}, & t > t_0
+                \end{cases}
+            \end{equation*}
+            }\onslide<14->
+            {\begin{equation*}
+                i(t) = C\dfrac{dv}{dt} 
+            \end{equation*}
+            }\onslide<15->
+            {\begin{equation*}
+                i(t) = 
+                \begin{cases}
+                    0, & t < t_0\\
+                    \dfrac{C}{\tau}(V-V_0)e\,^{(t - t_0)/ \tau}, & t > t_0
+                \end{cases}
+            \end{equation*}
+            }
         }
-        \only<2>{
-        Si se cambia la posición del interruptor en $t_0$
-        \begin{equation*}
-            v(t_0) = V
-        \end{equation*}
-        }
-    
     \end{column}
 \end{columns}
 \end{frame}
@@ -89,7 +141,7 @@
     \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
         \centering
-        \only<1-12>{
+        \only<1->{
             \begin{circuitikz}[scale=0.8]\draw
             (0,4)
                 to [C, l=$C$, i>^=$i_C$]
@@ -100,6 +152,11 @@
             (2,4)
                 to[open,v=$v$,voltage shift=-3]
             (2,0)
+            ;
+            \draw<2> 
+                (0,4)
+                    to[open,-o]
+                (4,4)
             ;
         \end{circuitikz}
         }
@@ -167,8 +224,7 @@
             C\,\frac{dv}{dt} + \frac{v}{R} = 0
         \end{equation*}
         }
-    }
-    \only<4-6>{
+    }\only<4-6>{
         \onslide<4-6>{
         dividiendo entre $C\,$ y reordenando:
         \begin{equation*}
@@ -187,8 +243,7 @@
             \int\limits_{v(t_0)}^{v(t)}\frac{1}{v} dv = \int\limits_{t_0}^{t}-\frac{1}{RC} dt
         \end{equation*}
         }
-    }
-    \only<7-9>{
+    }\only<7-9>{
         \onslide<7-9>{
         tenemos que:
         \begin{equation*}
@@ -207,8 +262,7 @@
             \ln\frac{v(t)}{v(t_0)} = -\frac{1}{RC}\left(t - t_0\right)
         \end{equation*}
         }
-    }
-    \only<10-12>{
+    }\only<10-12>{
         \onslide<10-12>{
         eliminamos el logaritmo natural:
         \begin{equation*}
@@ -227,8 +281,7 @@
             \frac{v(t)}{v(t_0)} = e\,^{-(t-t_0)/\tau}
         \end{equation*}
         }
-    }
-    \only<13-15>{
+    }\only<13-15>{
         \onslide<13-15>{
         $\tau \rightarrow$ es la pendiente en $t(0)$, ver linea azul\\
         }
@@ -244,72 +297,22 @@
         \onslide<15>{
         En $5 \tau \rightarrow$ el voltaje se reduce a un $0.67\%$ de su valor original\\
         }
+    }\only<16-18>{
+        \onslide<16>{
+        }
     }
     \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Circuito RL: respuesta natural}
-    \begin{columns}
-    \begin{column}{0.5\textwidth}
-        \centering
-        \only<1>{
-            \begin{circuitikz}[scale=0.8]\draw
-            (0,2.5) node[spdt, rotate = 90, anchor=in] (Sw) {}
-            (Sw.in) 
-                to [L, l=$L$]
-            (0,1) -- (0,0)
-            (Sw.out 1) |- (-1,4) to [short,o-] (-4,4)
-                to[I, l_=$I$]
-            (-4,0)
-            (Sw.out 2) |- (1.5,4) to[short,o-] (3,4)
-                to[R,l=$R$]
-            (3,0) to[short,-o] (1.5,0) -- (0,0)
-            (-4,0) -- (-2,0) -- (-1,0) to[short,o-,i=$i$] (0,0)
-            (-2,4)
-                to[R,l_=$R_f$]
-            (-2,0)
-            ;
-            \draw[white] (-5,-1) rectangle (5,5)
-            ;
-        \end{circuitikz}
-        }
-        \only<2>{
-            \begin{circuitikz}[scale=0.8]\draw
-            (0,2.5) node[spdt, rotate = 90, yscale = -1, anchor=in] (Sw) {}
-            (Sw.in) 
-                to [L, l=$L$]
-            (0,1) -- (0,0)
-            (Sw.out 2) |- (-1,4) to [short,o-] (-4,4)
-                to[I, l_=$I$]
-            (-4,0)
-            (Sw.out 1) |- (1.5,4) to[short,o-,i=$i$] (3,4)
-                to[R,l=$R$]
-            (3,0) to[short,-o] (1.5,0) to[short,-o] (-1,0) -- (-4,0)
-            (-2,4)
-                to[R,l_=$R_f$]
-            (-2,0)
-            ;
-            \draw[white] (-5,-1) rectangle (5,5)
-            ;
-        \end{circuitikz}
-        }
-    \end{column}
-    \begin{column}{0.5\textwidth}
-        \only<1>{
-        Después de mucho tiempo...
-        \begin{equation*}
-            i = I
-        \end{equation*}
-        }
-        \only<2>{
-        Si se cambia la posición del interruptor en $t_0$
-        \begin{equation*}
-            i(t_0) = I
-        \end{equation*}
-        }
-    \end{column}
-\end{columns}
+\begin{frame}{Circuito RC: respuesta completa}
+    \begin{equation*}
+        u(t-t_0) =
+        \begin{cases}
+            0, & t < t_0\\
+            1, & t > t_0
+        \end{cases}
+    \end{equation*}
 \end{frame}
 
 \begin{frame}{Circuito RL: respuesta natural}
@@ -326,48 +329,6 @@
             (4,0) to[short,-o] (2,0) -- (0,0)
             ;
         \end{circuitikz}
-        }
-        \only<13-15>{
-            \begin{tikzpicture}
-            \begin{axis}[
-                %yshift=-1cm,
-                width= 0.8\linewidth,
-                height= 0.8\linewidth,
-                %grid=major, % Display a grid
-                %grid style={dashed,gray!30}, % Set the style
-                %every axis plot/.append style={thick},
-                ymin=0, ymax=1.1,
-                xmin=-0.5, xmax=5.5,
-                axis x line=bottom,
-                axis y line=left,
-                axis line style={-},
-                ytick={0,0.368,1},
-                % yticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
-                xtick={0,1,2,3,4,5},
-                % yticklabels=\empty,
-                xlabel=$\frac{t-t_0}{\tau}$, % Set the labels
-                ylabel=$\frac{i(t)}{i(t_0)}$,
-                x unit=, 
-                y unit=,
-                yticklabel style={/pgf/number format/precision=3}
-                %legend pos=north east,
-                %legend style={cells={anchor=west}}
-                %legend style={at={(1,0.7)},anchor=west}, % Put the legend below the plot
-                %smooth,
-                ]
-                \addplot [mark=none, color=black,forget plot, thick]       
-                table[x=t,y=mag,col sep=comma] {python/resp_nat.csv};
-                \addplot[color=red,dashed,mark=none] coordinates {
-            		(-0.5,0.368)
-            		(1,0.368)
-            		(1,0)
-            	};
-            	\addplot[color=blue,dashed,mark=none] coordinates {
-            		(0,1)
-            		(1,0)
-            	};
-            \end{axis}
-            \end{tikzpicture}
         }
     \end{column}
     \begin{column}{0.5\textwidth}
