@@ -1,0 +1,168 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Respuestas completa: RL}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Circuito RL: respuesta a un escalón}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \centering
+        \only<1->{
+            \begin{circuitikz}[scale=0.8]
+            \draw
+            (0,0)
+                to [I, l=$Iu(t-t_0)$]
+            (0,4)
+                to [short]
+            (2,4)
+                to [R, l=$R$]
+            (2,0)
+            (2,4)
+                to [short]
+            (4,4)
+                to[L,l=$L$,i^>=$i$]
+            (4,0) 
+                to[short]
+            (0,0)
+            ;
+            \draw<2-4> 
+                (2,4)
+                    to[open,v>=$v_R$,voltage shift=1]
+                (2,0)
+                (4,4)
+                    to[open,v=$v_L$,voltage shift=1]
+                (4,0)
+            ;
+        \end{circuitikz}
+        }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \only<1>
+        {Se asume que el inductor tiene una corriente inicial
+        \begin{equation*}
+            i(t_0) = I_0
+        \end{equation*}
+        }\only<2-4>
+            {\onslide<2->
+            {aplicando LVK tenemos que:
+            \begin{equation*}
+                v_L + v_R = 0
+            \end{equation*}
+            }\onslide<3->
+            {y sabemos que para todo $t>t_0$: 
+            \begin{equation*}
+                v_L = L\,\dfrac{di}{dt},\, v_R=(i-I)R
+            \end{equation*}
+            }\onslide<4->
+            {entonces:
+            \begin{equation*}
+                L\,\dfrac{di}{dt} + (i-I)R = 0
+            \end{equation*}
+            }
+        }\only<5-7>
+            {\onslide<5->
+            {dividiendo entre $L\,$ y reordenando:
+            \begin{equation*}
+                \dfrac{di}{dt} = -\dfrac{(i-I)R}{L}
+            \end{equation*}
+            }\onslide<6->{
+            reordenando nuevamente:
+            \begin{equation*}
+                \dfrac{di}{i-I} = -\dfrac{R}{L}dt
+            \end{equation*}
+            }\onslide<7->{
+            integrando a ambos lados:
+            \begin{equation*}
+                \int\limits_{i(t_0)}^{i(t)}\dfrac{1}{i-I}\,di = \int\limits_{t_0}^{t}-\frac{R}{L}\,dt
+            \end{equation*}
+            }
+        }\only<8-10>
+            {\onslide<8->
+            {tenemos que:
+            \begin{equation*}
+                \ln(i-I)\,\bigg|_{i(t_0)}^{i(t)} = -\frac{R}{L}t\,\bigg|_{t_0}^{t}
+            \end{equation*}
+            }\onslide<9->
+            {evaluando:
+            \begin{equation*}
+                \ln(i(t)-I) - \ln (i(t_0)-I) = -\frac{R}{L}(t - t_0)
+            \end{equation*}
+            }\onslide<10->
+            {osea:
+            \begin{equation*}
+                \dfrac{\ln(i(t)-I)}{\ln (i(t_0)-I)} = -\frac{R}{L}(t - t_0)
+            \end{equation*}
+            }
+        }\only<11-12>
+            {\onslide<11->
+            {aplicamos la función exponencial a ambos lados
+            \begin{equation*}
+                \dfrac{i(t)-I}{i(t_0)-I} = e\,^{(t - t_0)R/L}
+            \end{equation*}
+            }\onslide<12->
+            {sea $\tau=L/R\,$ y $\,i(t_0) = I_0$, obtenemos:
+            \begin{equation*}
+                i(t)=I + (I_0-I)e\,^{(t - t_0)/ \tau}
+            \end{equation*}
+            }
+        }\only<13-15>
+            {\onslide<13->
+            {\begin{equation*}
+                i(t) =
+                \begin{cases}
+                    I_0, & t < t_0\\
+                    I + (I_0-I)e\,^{(t - t_0)/ \tau}, & t > t_0
+                \end{cases}
+            \end{equation*}
+            }\onslide<14->
+            {\begin{equation*}
+                v(t) = L\dfrac{di}{dt} 
+            \end{equation*}
+            }\onslide<15->
+            {\begin{equation*}
+                v(t) = 
+                \begin{cases}
+                    0, & t < t_0\\
+                    (I-I_0)R e\,^{(t - t_0)/ \tau}, & t > t_0
+                \end{cases}
+            \end{equation*}
+            }
+        }\only<16-18>
+            {\onslide<16->
+            {Para $t>t_0$ y reordenando tenemos:\\[4pt]
+            \begin{tikzpicture}[scale=1]
+                \draw
+                (0,0) node[right]{$i(t) = I_0e\,^{(t - t_0)/ \tau} + I(1-e\,^{(t - t_0)/ \tau})$}
+                ;
+                \draw<17-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
+                (3,0) -- (1.2,0) node [black,midway,below,align=center,yshift=-0.1cm] {\footnotesize Respuesta \\ \footnotesize natural}
+                ;
+                \draw<18-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
+                (6,0) -- (3.3,0) node [black,midway,below,align=center,yshift=-0.1cm] {\footnotesize Respuesta \\ \footnotesize forzada}
+                ;
+            \end{tikzpicture} 
+            }
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}
