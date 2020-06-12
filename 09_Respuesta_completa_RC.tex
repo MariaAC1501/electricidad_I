@@ -1,7 +1,7 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
 \input{preamble}
-\title{Electricidad I: \\ \emph{Respuestas completa: RC}}
+\title{Electricidad I: \\ \emph{Respuesta completa: RC}}
 \author{
     Juan J. Rojas
 }
@@ -65,54 +65,44 @@
                 C\,\dfrac{dv}{dt} + \dfrac{v-V}{R} = 0
             \end{equation*}
             }
-        }\only<5-7>
+        }\only<5-6>
             {\onslide<5->
-            {dividiendo entre $C\,$ y reordenando:
+            {dividiendo entre $C\,$:
             \begin{equation*}
                 \dfrac{dv}{dt} = -\dfrac{v-V}{RC}
             \end{equation*}
-            }\onslide<6->{
-            reordenando nuevamente:
-            \begin{equation*}
-                \dfrac{dv}{v-V} = -\dfrac{1}{RC}dt
-            \end{equation*}
-            }\onslide<7->{
-            integrando a ambos lados:
+            }\onslide<6->
+            {reordenado e integrando a ambos lados:
             \begin{equation*}
                 \int\limits_{v(t_0)}^{v(t)}\dfrac{1}{v-V}\,dv = \int\limits_{t_0}^{t}-\frac{1}{RC}\,dt
             \end{equation*}
             }
-        }\only<8-10>
-            {\onslide<8->
+        }\only<7-8>
+            {\onslide<7->
             {tenemos que:
             \begin{equation*}
                 \ln(v-V)\,\bigg|_{v(t_0)}^{v(t)} = -\frac{1}{RC}t\,\bigg|_{t_0}^{t}
             \end{equation*}
-            }\onslide<9->
+            }\onslide<8->
             {evaluando:
-            \begin{equation*}
-                \ln(v(t)-V) - \ln (v(t_0)-V) = -\frac{1}{RC}(t - t_0)
-            \end{equation*}
-            }\onslide<10->
-            {osea:
             \begin{equation*}
                 \dfrac{\ln(v(t)-V)}{\ln (v(t_0)-V)} = -\frac{1}{RC}(t - t_0)
             \end{equation*}
             }
-        }\only<11-12>
-            {\onslide<11->
+        }\only<9-10>
+            {\onslide<9->
             {aplicamos la función exponencial a ambos lados
             \begin{equation*}
                 \dfrac{v(t)-V}{v(t_0)-V} = e\,^{-(t - t_0)/RC}
             \end{equation*}
-            }\onslide<12->
+            }\onslide<10->
             {sea $\tau=RC\,$ y $\,v(t_0) = V_0$, obtenemos:
             \begin{equation*}
                 v(t)=V + (V_0-V)e\,^{-(t - t_0)/ \tau}
             \end{equation*}
             }
-        }\only<13-15>
-            {\onslide<13->
+        }\only<11-13>
+            {\onslide<11->
             {\begin{equation*}
                 v(t) =
                 \begin{cases}
@@ -120,11 +110,11 @@
                     V + (V_0-V)e\,^{-(t - t_0)/ \tau}, & t > t_0
                 \end{cases}
             \end{equation*}
-            }\onslide<14->
+            }\onslide<12->
             {\begin{equation*}
                 i(t) = C\dfrac{dv}{dt} 
             \end{equation*}
-            }\onslide<15->
+            }\onslide<13->
             {\begin{equation*}
                 i(t) = 
                 \begin{cases}
@@ -133,23 +123,23 @@
                 \end{cases}
             \end{equation*}
             }
-        }\only<16-18>
-            {\onslide<16->
+        }\only<14-16>
+            {\onslide<14->
             {Para $t>t_0$ y reordenando tenemos:\\[2pt]
             \begin{tikzpicture}[scale=1]
                 \draw
                 (0,0) node[right]{$v(t) = V_0e\,^{-(t - t_0)/ \tau} + V(1-e\,^{-(t - t_0)/ \tau})$}
                 ;
-                \draw<17-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
+                \draw<15-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
                 (3.3,0) -- (1.3,0) node [black,midway,below,align=center,yshift=-0.1cm] {\footnotesize Respuesta \\ \footnotesize natural}
                 ;
-                \draw<18-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
+                \draw<16-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
                 (6.7,0) -- (3.8,0) node [black,midway,below,align=center,yshift=-0.1cm] {\footnotesize Respuesta \\ \footnotesize forzada}
                 ;
             \end{tikzpicture} 
             }
-        }\only<19->
-            {\onslide<19->
+        }\only<17->
+            {\onslide<17->
             {Esta respuesta completa puede expresarse como:\\[2pt]
             \begin{equation*}
                 v(t) = v(\infty) + [v(t_0)-v(\infty)]e\,^{-(t - t_0)/ \tau}
@@ -249,7 +239,7 @@
                 v(t)=8.647e\,^{-(t - 3)}        
             \end{equation*}
             }
-        }\only<12->
+        }\only<12-13>
             {\onslide<12->
             {Finalmente para todo $t\,$ tenemos que:
             \begin{equation*}
@@ -260,7 +250,9 @@
                     8.647e^{-(t-3)} &\si{\volt},\quad t \geq 3
                 \end{cases}
             \end{equation*}
-            \begin{equation*}
+            }
+            \onslide<13->
+            {\begin{equation*}
                 i(t) =
                 \begin{cases}
                     0 &\si{\milli\ampere},\quad t < 1\\
@@ -269,6 +261,42 @@
                 \end{cases}
             \end{equation*}
             }
+        }\only<14->
+        {\begin{tikzpicture}
+            \begin{axis}[
+                %yshift=-1cm,
+                width= \linewidth,
+                height= 0.8\linewidth,
+                %grid=major, % Display a grid
+                %grid style={dashed,gray!30}, % Set the style
+                %every axis plot/.append style={thick},
+                ymin=-11, ymax=11,
+                xmin=-1, xmax=8,
+                axis x line=bottom,
+                axis y line=left,
+                axis line style={-},
+                %ytick={0,0.368,1},
+                % yticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+                %xtick={0,1,2,3,4,5},
+                % yticklabels=\empty,
+                xlabel=$t$, % Set the labels
+                ylabel=\empty,
+                x unit=, 
+                y unit=,
+                yticklabel style={/pgf/number format/precision=3},
+                legend pos=north east,
+                %legend style={cells={anchor=west}}
+                %legend style={at={(1,0.7)},anchor=west}, % Put the legend below the plot
+                %smooth,
+                ]
+                \addplot [mark=none, color=blue, thick]       
+                table[x=t,y=vc,col sep=comma] {python/resp_comp.csv};\addlegendentry{$v(t)$}
+                \addplot [mark=none, color=red, thick]       
+                table[x=t,y=ic,col sep=comma] {python/resp_comp.csv};\addlegendentry{$i(t)$}
+                \addplot [mark=none, color=black, dashed]       
+                table[x=t,y=vf,col sep=comma] {python/resp_comp.csv};\addlegendentry{$v_f(t)$}
+            \end{axis}
+        \end{tikzpicture}
         }
     \end{column}
 \end{columns}
