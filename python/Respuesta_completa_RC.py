@@ -13,11 +13,11 @@ ic = (t<1)*0 + ((t>1)&(t<3))*10*np.exp(-(t-1)) + (t>3)*-(10*(1-np.exp(-2)))*np.e
 
 ### Remove the csv file if it exists
 try:
-    os.remove("resp_comp.csv")
+    os.remove("resp_comp_RC.csv")
 except:
     print("csv file does not exist")
 ### Open the file, append header, then append data
-with open("resp_comp.csv", "ab") as file:
+with open("resp_comp_RC.csv", "ab") as file:
     np.savetxt(file, np.column_stack(['t','vf','vc','ic']) , delimiter = ",", fmt='%s')
     np.savetxt(file, np.column_stack([t,vf,vc,ic]) , delimiter = "," , fmt='%1.4f' )
 
