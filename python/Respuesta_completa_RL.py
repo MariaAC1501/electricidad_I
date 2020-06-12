@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 t = np.arange(-1,9,0.01)
 ifu = (t<1)*5 + ((t>1)&(t<4))*10 + (t>4)*5
 il = (t<1)*5 + ((t>1)&(t<4))*10*(1-0.5*np.exp(-(t-1))) + (t>4)*(5 + ((10*(1-0.5*np.exp(-3))) - 5)*np.exp(-(t-4)))
-vl = (t<1)*0 + ((t>1)&(t<4))*5*np.exp(-(t-1)) + (t>4)*-(10*(1-0.5*np.exp(-3)))*np.exp(-(t-4))
+vl = (t<1)*0 + ((t>1)&(t<4))*5*np.exp(-(t-1)) + (t>4)*-((10*(1-0.5*np.exp(-3)))-5)*np.exp(-(t-4))
 
 ### Remove the csv file if it exists
 try:
