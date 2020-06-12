@@ -21,7 +21,7 @@
             \begin{circuitikz}[scale=0.8]
             \draw
             (0,0)
-                to [V, l=$Vu(t-t_0)$]
+                to [V, l=$v_f$]
             (0,4) 
                 to [R, l=$R$]
             (4,4)
@@ -38,13 +38,34 @@
                     to[open,i=$i_C$]
                 (4,3)
             ;
-            \draw [white] (-3,-2) rectangle (5,6.2);
+            \node [right] at (-1,-1) {$v_f(t)=V_0u(t_0-t)+Vu(t-t_0)$};
+            \draw [white] (-1.2,-2) rectangle (5.2,6.2);
         \end{circuitikz}
         }
     \end{column}
     \begin{column}{0.5\textwidth}
         \only<1>
-        {Se asume que el capacitor tiene un voltaje inicial
+        {\begin{tikzpicture}[scale=1]
+            \begin{axis}[%
+                width= 0.9\linewidth,
+                height= 0.5\linewidth,
+                ymin=0, ymax=1.5,
+                xmin=0, xmax=4,
+                axis lines=center,
+                xlabel=$t$,
+                ylabel=$v_f$,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ytick={0.5,1},
+                yticklabels={$V_o$,$V$},
+                ymax=1.5, % or enlarge y limits=upper
+                xticklabels={$t_0$},
+                xtick={1},
+                ]
+            \addplot+[no marks, thick] coordinates {(-1,0.5) (1,0.5) (1,1) (4,1)};
+            \end{axis}
+        \end{tikzpicture}\\
+        Se asume que ha pasado mucho tiempo y por lo tanto el capacitor tiene un voltaje inicial
         \begin{equation*}
             v(t_0) = V_0
         \end{equation*}
@@ -160,14 +181,14 @@
             (0,0)
                 to [V, l=$v_f$]
             (0,4) 
-                to [R, l=\SI{1}{\kilo\ohm}]
+                to [R, l=\SI{1}{\ohm}]
             (4,4)
-                to[C,l=\SI{1}{\milli\farad}, v=$v$,voltage shift=3,i>^=$i$]
+                to[C,l=\SI{1}{\farad}, v=$v$,voltage shift=3,i>^=$i$]
             (4,0) 
                 to[short]
             (0,0)
             ;
-            \node [right] at (-1.1,-1){$v_f(t) = 10\cdot [u(t-1) - u(t-3)]$};
+            \node [right] at (-1.1,-1){$v_f(t) = \SI{10}{\volt} [u(t-1) - u(t-3)]$};
             \draw [white] (-1.2,-2) rectangle (5.7,6.2);
         \end{circuitikz}
         }
@@ -177,18 +198,17 @@
         {Objetivo:\\[4pt]
         Averiguar $v(t)\,$ e $i(t)$  para todo $t$
         }\only<2,5,9>
-        {$v_f(t)=$\\
-        \begin{tikzpicture}[scale=1]
+        {\begin{tikzpicture}[scale=1]
             \begin{axis}[%
                 width= 0.9\linewidth,
                 height= 0.5\linewidth,
                 axis lines=center,
                 xlabel=$t$,
-                ylabel=\empty,
+                ylabel={$v_f$},
                 x label style={anchor=west},
                 y label style={anchor=south},
                 ytick={1},
-                yticklabels={$10$},
+                yticklabels={$\SI{10}{\volt}$},
                 ymax=1.5, % or enlarge y limits=upper
                 xticklabels={$1$,$3$},
                 xtick={1,3},
@@ -202,12 +222,12 @@
             {\onslide<3->
             {para $t<1$:
             \begin{equation*}
-                v(t)=0           
+                v(t)=\SI{0}{\volt}           
             \end{equation*}
             }\onslide<4->
             {por lo tanto
             \begin{equation*}
-                v(1)=0           
+                v(1)=\SI{0}{\volt}          
             \end{equation*}
             }
         }\only<6-8>
@@ -217,7 +237,7 @@
                 v(t)= v(\infty) + [v(t_0)-v(\infty)]e\,^{-(t - t_0)/ \tau}          
             \end{equation*}
             }\onslide<7->
-            {pero $v(\infty) = 10\,$, $\tau=1\,$, $t_0 = 1\,$ y $v(1)=0$, entonces: 
+            {pero $v(\infty) = \SI{10}{\volt}\,$, $\tau=\SI{1}{\second}\,$, $t_0 = \SI{1}{\second}\,$ y $v(1)=\SI{0}{\volt}$, entonces: 
             \begin{equation*}
                 v(t)=10\left(1-e\,^{-(t - 1)}\right)         
             \end{equation*}
@@ -234,7 +254,7 @@
                 v(t)= v(\infty) + [v(t_0)-v(\infty)]e\,^{-(t - t_0)/ \tau}          
             \end{equation*}
             }\onslide<11->
-            {pero $v(\infty) = 0\,$, $\tau=1\,$, $t_0 = 3\,$ y $v(3)=\SI{8.647}{\volt}$, entonces: 
+            {pero $v(\infty) = \SI{0}{\volt}\,$, $\tau=\SI{1}{\second}\,$, $t_0 = \SI{3}{\second}\,$ y $v(3)=\SI{8.647}{\volt}$, entonces: 
             \begin{equation*}
                 v(t)=8.647e\,^{-(t - 3)}        
             \end{equation*}
@@ -255,9 +275,9 @@
             {\begin{equation*}
                 i(t) =
                 \begin{cases}
-                    0 &\si{\milli\ampere},\quad t < 1\\
-                    10e\,^{-(t-1)} &\si{\milli\ampere},\quad 1 < t < 3\\
-                    -8.647e^{-(t-3)} &\si{\milli\ampere},\quad t > 3
+                    0 &\si{\ampere},\quad t < 1\\
+                    10e\,^{-(t-1)} &\si{\ampere},\quad 1 < t < 3\\
+                    -8.647e^{-(t-3)} &\si{\ampere},\quad t > 3
                 \end{cases}
             \end{equation*}
             }
@@ -271,7 +291,7 @@
                 %grid style={dashed,gray!30}, % Set the style
                 %every axis plot/.append style={thick},
                 ymin=-11, ymax=11,
-                xmin=-1, xmax=8,
+                xmin=-1, xmax=8.5,
                 axis x line=bottom,
                 axis y line=left,
                 axis line style={-},
@@ -279,7 +299,7 @@
                 % yticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
                 %xtick={0,1,2,3,4,5},
                 % yticklabels=\empty,
-                xlabel=$t$, % Set the labels
+                xlabel={$t[s]$}, % Set the labels
                 ylabel=\empty,
                 x unit=, 
                 y unit=,
@@ -290,11 +310,11 @@
                 %smooth,
                 ]
                 \addplot [mark=none, color=blue, thick]       
-                table[x=t,y=vc,col sep=comma] {python/resp_comp.csv};\addlegendentry{$v(t)$}
+                table[x=t,y=vc,col sep=comma] {python/resp_comp_RC.csv};\addlegendentry{$v[\si{\volt}]$}
                 \addplot [mark=none, color=red, thick]       
-                table[x=t,y=ic,col sep=comma] {python/resp_comp.csv};\addlegendentry{$i(t)$}
+                table[x=t,y=ic,col sep=comma] {python/resp_comp_RC.csv};\addlegendentry{$i[\si{\ampere}]$}
                 \addplot [mark=none, color=black, dashed]       
-                table[x=t,y=vf,col sep=comma] {python/resp_comp.csv};\addlegendentry{$v_f(t)$}
+                table[x=t,y=vf,col sep=comma] {python/resp_comp_RC.csv};\addlegendentry{$v_f[\si{\volt}]$}
             \end{axis}
         \end{tikzpicture}
         }
