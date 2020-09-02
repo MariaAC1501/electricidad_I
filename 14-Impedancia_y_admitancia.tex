@@ -1,0 +1,426 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Impedancia y admitancia}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Impendacia}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \begin{center}
+        Impedancia
+        \begin{gather*}
+            \bm{Z} = \frac{\bm{v}}{\bm{i}}\\[2pt]
+            \bm{Z} = R+jX = |\bm{Z}\,|\angle\theta
+        \end{gather*}
+        \begin{align*}
+            |\bm{Z}\,|&=\sqrt{R^2+X^2} & \theta &=\arctan\left(\frac{X}{R}\right)\\
+            R &= |\bm{Z}\,|\cos\theta & X &= |\bm{Z}\,|\sin\theta
+        \end{align*}
+        \end{center}
+        donde $R$ es la resistencia y $X$ es la reactancia, ambas en ohms ($\Omega$)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{center}
+        \begin{tikzpicture}[scale=1]
+        \draw [white](-1,-0.5) rectangle (3.5,3.5);
+        \draw [-latex] (0,0) -- (3,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,2.5)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,1.5)node[midway,above]{$Z$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,0)node[midway,below]{$R$};
+        \draw [-latex,thick,black] (2.2,0) -- (2.2,1.5)node[midway, right]{$X$};
+        \draw [-latex] (0.8,0) arc (0:30:0.8)node[midway, right, yshift=0.1cm]{$\theta$};
+        \end{tikzpicture}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Admitancia}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.5\textwidth}
+        \begin{center}
+        Admitancia
+        \begin{gather*}
+            \bm{Y} = \frac{\bm{i}}{\bm{v}}\\[2pt]
+            \bm{Y} = G+jB = \frac{1}{|\bm{Z}\,|}\angle-\theta
+        \end{gather*}
+        \end{center}
+        donde $G$ es la conductancia y $B$ es la susceptancia, ambas en siemens (S)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{center}
+        \begin{tikzpicture}[scale=1]
+        \draw [white](-1,-2) rectangle (3.5,2);
+        \draw [-latex] (0,0) -- (3,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,1)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,-1.5)node[midway,below, yshift=-0.1cm]{$Y$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,0)node[midway,above]{$G$};
+        \draw [-latex,thick,black] (2.2,0) -- (2.2,-1.5)node[midway, right]{$B$};
+        \draw [-latex] (0.8,0) arc (0:-30:0.8)node[midway, right, yshift=-0.1cm]{$\theta$};
+        \end{tikzpicture}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Circuito resistivo}
+    \vspace{0.2cm}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.2\textwidth}
+        \centering
+        \begin{circuitikz}[scale=0.8]
+        \draw
+            (0,3)
+                to[short, o-, i=$i$]
+            (1.5,3)
+                to[R,l=$R$,v=$v$, voltage shift=3]
+            (1.5,0) 
+                to[short, -o]    
+            (0,0)
+        ;
+        \draw[white](-0.5,-0.5) rectangle (3,3.5);
+        \end{circuitikz}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{gather*}
+            i = I \sin{(\omega t+\phi)}\\[2pt]
+            v = iR = RI \sin{(\omega t+\phi)}\\[4pt]
+            \bm{i} = I \angle \phi\\[2pt]
+            \bm{v} = R\bm{i} = RI \angle \phi
+        \end{gather*}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{gather*}
+            \bm{Z} = \frac{\bm{v}}{\bm{i}}\\[2pt]
+            \bm{Z} = R+j0 = R\angle\SI{0}{\degree}
+        \end{gather*}
+    \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.7\linewidth,
+        height= 0.3\linewidth,
+        domain=0:2*pi,
+        samples=100,
+        ymin=-1.1, ymax=1.1,
+        xmin=0, xmax=2*pi+0.2,
+        axis x line=center,
+        axis y line=left,
+        ytick=\empty,
+        yticklabels=\empty,
+        xtick={pi/2,pi,1.5*pi,2*pi},
+        xticklabels={\SI{90}{\degree},\SI{180}{\degree},\SI{270}{\degree},\SI{360}{\degree}},
+        ticklabel style={below},
+        %xlabel=$t$, % Set the labels
+        %ylabel=amplitud,
+        x unit=, 
+        y unit=,
+        % axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none] {sin(deg(x+pi/6))};
+        \addplot[color=red,mark=none] {0.7*sin(deg(x+pi/6))};
+        \coordinate (vC) at (pi/3,1);
+        \coordinate (iC) at (pi/3,0.7);
+    \end{axis}
+    \draw [blue](vC) node[above]{$v$};
+    \draw [red](iC) node[below]{$i$};
+    \draw [white](-0.2,-0.2) rectangle (8.5,3);
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=1]
+        \draw [white](-2,-0.5) rectangle (3,2.7);
+        \draw [-latex] (0,0) -- (2.5,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,2.5)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,red] (0,0) -- (30:1.5cm)node[above]{$\bm{i}$};
+        \draw [-latex,thick,blue] (0,0) -- (30:2.5cm)node[above]{$\bm{v}$};
+        \draw [-latex] (0.8,0) arc (0:30:0.8)node[midway, right, yshift=0.1cm]{$\phi$};
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Circuito inductivo}
+    \vspace{0.2cm}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.2\textwidth}
+        \centering
+        \begin{circuitikz}[scale=0.8]
+        \draw
+            (0,3)
+                to[short, o-, i=$i$]
+            (1.5,3)
+                to[L,l=$L$,v=$v$, voltage shift=3]
+            (1.5,0) 
+                to[short, -o]    
+            (0,0)
+        ;
+        \draw[white](-0.5,-0.5) rectangle (3,3.5);
+        \end{circuitikz}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{gather*}
+            i = I \sin{(\omega t+\phi)}\\
+            v = L\frac{di}{dt} = \omega L I \sin{(\omega t+\phi+\SI{90}{\degree})}\\[4pt]
+            \bm{i} = I \angle \phi\\[2pt]
+            \bm{v} = j\omega L \bm{i} = \omega LI \angle \phi + \SI{90}{\degree}
+        \end{gather*}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{gather*}
+            \bm{Z} = \frac{\bm{v}}{\bm{i}}\\[2pt]
+            \bm{Z} = 0+j\omega L = \omega L \angle\SI{90}{\degree}\\[2pt]
+            X_L = \omega L
+        \end{gather*}
+    \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.7\linewidth,
+        height= 0.3\linewidth,
+        domain=0:2*pi,
+        samples=100,
+        ymin=-1.1, ymax=1.1,
+        xmin=0, xmax=2*pi+0.2,
+        axis x line=center,
+        axis y line=left,
+        ytick=\empty,
+        yticklabels=\empty,
+        xtick={pi/2,pi,1.5*pi,2*pi},
+        xticklabels={\SI{90}{\degree},\SI{180}{\degree},\SI{270}{\degree},\SI{360}{\degree}},
+        ticklabel style={below},
+        %xlabel=$t$, % Set the labels
+        %ylabel=amplitud,
+        x unit=, 
+        y unit=,
+        % axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none] {sin(deg(x+pi/6+pi/2))};
+        \addplot[color=red,mark=none] {0.7*sin(deg(x+pi/6))};
+        \coordinate (vC) at (pi/3,0);
+        \coordinate (iC) at (pi/3,0.7);
+    \end{axis}
+    \draw [blue](vC) node[below]{$v$};
+    \draw [red](iC) node[below]{$i$};
+    \draw [white](-0.2,-0.2) rectangle (8.5,3);
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=1]
+        \draw [white](-2,-0.5) rectangle (3,2.7);
+        \draw [-latex] (0,0) -- (2.5,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,2.5)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,red] (0,0) -- (30:1.5cm)node[above]{$\bm{i}$};
+        \draw [-latex,thick,blue] (0,0) -- (120:2.5cm)node[above]{$\bm{v}$};
+        \draw [-latex] (0.8,0) arc (0:30:0.8)node[midway, right, yshift=0.1cm]{$\phi$};
+        \draw [-latex] (0,0)+(30:0.8) arc (30:120:0.8)node[midway, above, xshift=0.1cm]{\SI{90}{\degree}};
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Circuito capacitivo}
+    \vspace{0.2cm}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.2\textwidth}
+        \centering
+        \begin{circuitikz}[scale=0.8]
+        \draw
+            (0,3)
+                to[short, o-, i=$i$]
+            (1.5,3)
+                to[C,l=$C$,v=$v$, voltage shift=3]
+            (1.5,0) 
+                to[short, -o]    
+            (0,0)
+        ;
+        \draw[white](-0.5,-0.5) rectangle (3,3.5);
+        \end{circuitikz}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{gather*}
+            v = V \sin{(\omega t+\phi)}\\
+            i = C\frac{dv}{dt} = \omega C V\sin{(\omega t+\phi+\SI{90}{\degree})}\\[4pt]
+            \bm{v} = V \angle \phi\\[2pt]
+            \bm{i} = j\omega C \bm{v} = \omega CV \angle \phi + \SI{90}{\degree}
+        \end{gather*}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{gather*}
+            \bm{Z} = \frac{\bm{v}}{\bm{i}}\\[2pt]
+            \bm{Z} = 0+\frac{1}{j\omega C} = \frac{1}{\omega C} \angle\SI{-90}{\degree}\\[2pt]
+            X_C = \frac{1}{\omega C}
+        \end{gather*}
+    \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.7\linewidth,
+        height= 0.3\linewidth,
+        domain=0:2*pi,
+        samples=100,
+        ymin=-1.1, ymax=1.1,
+        xmin=0, xmax=2*pi+0.2,
+        axis x line=center,
+        axis y line=left,
+        ytick=\empty,
+        yticklabels=\empty,
+        xtick={pi/2,pi,1.5*pi,2*pi},
+        xticklabels={\SI{90}{\degree},\SI{180}{\degree},\SI{270}{\degree},\SI{360}{\degree}},
+        ticklabel style={below},
+        %xlabel=$t$, % Set the labels
+        %ylabel=amplitud,
+        x unit=, 
+        y unit=,
+        % axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none] {sin(deg(x+pi/6))};
+        \addplot[color=red,mark=none] {0.7*sin(deg(x+pi/6+pi/2))};
+        \coordinate (vC) at (pi/3,1);
+        \coordinate (iC) at (pi/3,0);
+    \end{axis}
+    \draw [blue](vC) node[below]{$v$};
+    \draw [red](iC) node[above]{$i$};
+    \draw [white](-0.2,-0.2) rectangle (8.5,3);
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=1]
+        \draw [white](-2,-0.5) rectangle (3,2.7);
+        \draw [-latex] (0,0) -- (2.5,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,2.5)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,red] (0,0) -- (120:1.5cm)node[above]{$\bm{i}$};
+        \draw [-latex,thick,blue] (0,0) -- (30:2.5cm)node[above]{$\bm{v}$};
+        \draw [-latex] (0.8,0) arc (0:30:0.8)node[midway, right, yshift=0.1cm]{$\phi$};
+        \draw [-latex] (0,0)+(30:0.8) arc (30:120:0.8)node[midway, above, xshift=0.1cm]{\SI{90}{\degree}};
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Impedancias en serie}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+        Impedancia equivalente
+            \begin{equation*}
+                Z_{eq}=Z_1+Z_2+Z_3
+            \end{equation*}
+        Divisor de voltaje
+            \begin{gather*}
+                \bm{v_n} = \bm{v_T}\cdot \frac{Z_n}{Z_1+Z_2+\cdot\cdot\cdot+Z_n}\\[4pt]
+                \bm{v_3} = \bm{v_T}\cdot \frac{Z_3}{Z_1+Z_2+Z_3}
+            \end{gather*}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+        \centering
+            \begin{circuitikz} [scale=1]\draw
+                (3,0)
+                    to[generic,l=$Z_3$,v>=$\bm{v_3}$,o-]
+                (0,0)	
+                    to[generic,l=$Z_2$]
+                (0,3)
+                    to[generic,l=$Z_1$,i^<=$\bm{i}$,-o]
+                (3,3)
+                    to[open,v^=$\bm{v_T}$]
+                (3,0)
+                ;
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Impedancias en paralelo}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+        Impedancia equivalente
+            \begin{equation*}
+                \frac{1}{Z_{eq}}=\frac{1}{Z_1}+\frac{1}{Z_2}+\frac{1}{Z_3}
+            \end{equation*}
+        Divisor de corriente
+            \begin{gather*}
+                \bm{i_n} = \bm{i_T}\cdot \frac{\frac{1}{Z_n}}{\frac{1}{Z_1}+\frac{1}{Z_2}+\cdot\cdot\cdot+\frac{1}{Z_n}}\\[4pt]
+                \bm{i_1} = \bm{i_T}\cdot \frac{\frac{1}{Z_1}}{\frac{1}{Z_1}+\frac{1}{Z_2}+\frac{1}{Z_3}}
+            \end{gather*}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{circuitikz} [scale=1]\draw
+                (1,3)
+                    to[short,i=$\bm{i_T}$,o-]
+                (0,3)	
+                    to[generic,l_=$Z_3$]
+                (0,0)
+                    to[short,-o]
+                (1,0)
+                (0,3) -- (-1.5,3)
+                    to[generic,l_=$Z_2$]
+                (-1.5,0) -- (0,0)
+                (-1.5,3) -- (-3,3)
+                    to[generic,l_=$Z_1$,i>^=$\bm{i_1}$]
+                (-3,0) -- (-1.5,0)
+                (1,3)
+                    to[open,v^=$\bm{v}$]
+                (1,0)
+                ;
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Impedancias en paralelo: dos impedancias}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.6\textwidth}
+        Impedancia equivalente
+            \begin{equation*}
+                Z_{eq}=\frac{Z_1 \cdot Z_2}{Z_1+Z_2}
+            \end{equation*}
+        Divisor de corriente
+            \begin{equation*}
+            i_1 = i_T\cdot \frac{Z_2}{Z_1+Z_2}
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{circuitikz} [scale=1]\draw
+                (1,3)
+                    to[short,i=$\bm{i_T}$,o-]
+                (0,3)	
+                    to[generic,l_=$Z_2$]
+                (0,0)
+                    to[short,-o]
+                (1,0)
+                (0,3) -- (-1.5,3)
+                    to[generic,l_=$Z_1$,i>^=$\bm{i_1}$]
+                (-1.5,0) -- (0,0)
+                (1,3)
+                    to[open,v^=$\bm{v}$]
+                (1,0)
+                ;
+            \end{circuitikz}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}

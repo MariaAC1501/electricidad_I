@@ -1,0 +1,376 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Senoides y fasores}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+
+\begin{document}
+\input{postamble}
+\maketitle
+
+
+\begin{frame}{Senoides}
+    \vspace{0.1cm}
+    \begin{columns}[onlytextwidth, T]
+    \begin{column}{0.4\textwidth}
+    Un voltaje senoidal esta definido por:
+        \begin{equation*}
+            v(t) = V_p\sin{(\omega t)}
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+        donde:\\[4pt]
+        \begin{tabularx}{\linewidth}{c X}
+            $V_p$ & es la amplitud en [\si{\volt}]\\
+            $\omega$ & es la velocidad angular en [\si{\radian/\second}]\\
+            $t$ & es el tiempo en [\si{\second}]
+        \end{tabularx}
+    \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.8\linewidth,
+        height= 0.3\linewidth,
+        domain=0:4*pi,
+        samples=100,
+        ymin=-1.2, ymax=1.2,
+        xmin=0, xmax=4*pi+0.5,
+        axis x line=center,
+        axis y line=left,
+        ytick={-1,0,1},
+        yticklabels={$-V_p$,$0$,$V_p$},
+        xtick={pi,2*pi,3*pi,4*pi},
+        xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$},
+        xlabel=$\omega t$, % Set the labels
+        ylabel=$v(t)$,
+        x unit=, 
+        y unit=,
+        axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none,thick] {sin(deg(x))}
+    	;
+    \end{axis}
+    \draw[white] (-1,-0.5) rectangle (11,4);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Senoides}
+    \vspace{0.1cm}
+    Un ciclo de un senoide corresponde a $2\pi\,$ radianes, se da cuando:
+    \begin{equation*}
+        wt=2\pi
+    \end{equation*}
+    \vskip0pt plus 1filll
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.8\linewidth,
+        height= 0.3\linewidth,
+        domain=0:4*pi,
+        samples=100,
+        ymin=-1.2, ymax=1.2,
+        xmin=0, xmax=4*pi+0.5,
+        axis x line=center,
+        axis y line=left,
+        ytick={-1,0,1},
+        yticklabels={$-V_p$,$0$,$V_p$},
+        xtick={pi,2*pi,3*pi,4*pi},
+        xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$},
+        xlabel=$\omega t$, % Set the labels
+        ylabel=$v(t)$,
+        x unit=, 
+        y unit=,
+        axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none,thick] {sin(deg(x))}
+    	;
+    \end{axis}
+    \draw[white] (-1,-0.5) rectangle (11,4);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Periodo y frecuencia}
+    \vspace{0.1cm}
+        \begin{columns}[onlytextwidth, T]
+        \begin{column}{0.48\textwidth}
+        La senoide realiza un ciclo cada $T\,$ segundos. $T$ es el periodo y es:
+            \begin{equation*}
+                T=2\pi/\omega
+            \end{equation*}
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+        La cantidad de ciclos que se dan en un segundo es la frecuencia y es:
+            \begin{equation*}
+                f=1/T=\omega/2\pi
+            \end{equation*}
+        \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.8\linewidth,
+        height= 0.3\linewidth,
+        domain=0:4*pi,
+        samples=100,
+        ymin=-1.2, ymax=1.2,
+        xmin=0, xmax=4*pi+0.5,
+        axis x line=center,
+        axis y line=left,
+        ytick={-1,0,1},
+        yticklabels={$-V_p$,$0$,$V_p$},
+        xtick={pi,2*pi,3*pi,4*pi},
+        xticklabels={$\frac{T}{2}$,$T$,$\frac{3T}{2}$,$2T$},
+        xlabel=$t$, % Set the labels
+        ylabel=$v(t)$,
+        x unit=, 
+        y unit=,
+        axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none,thick] {sin(deg(x))}
+    	;
+    \end{axis}
+    \draw[white] (-1,-0.5) rectangle (11,4);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Fase}
+    \vspace{0.1cm}
+        \begin{columns}[onlytextwidth, T]
+        \begin{column}{0.4\textwidth}
+        Una expresión mas general del senoide sería:  
+            \begin{equation*}
+                v(t) = V_p\sin{(\omega t+\phi)}
+            \end{equation*}
+        \end{column}
+        \hfill
+        \begin{column}{0.55\textwidth}
+            donde:\\[4pt]
+            \begin{tabularx}{\linewidth}{c X}
+                $\phi$ & es el ángulo de  fase
+            \end{tabularx}
+            \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.8\linewidth,
+        height= 0.3\linewidth,
+        domain=-pi:3*pi,
+        samples=100,
+        ymin=-1.2, ymax=1.2,
+        xmin=-pi-0.5, xmax=3*pi+0.5,
+        axis x line=center,
+        axis y line=left,
+        %y tick label style={align=right,xshift=-0.2cm},
+        ytick={-1,0,1},
+        yticklabels={\empty},
+        %yticklabels={$-V_p$,$0$,$V_p$},
+        xtick={-pi,pi,2*pi,3*pi},
+        xticklabels={$-\pi$,$\pi$,$2\pi$,$3\pi$},
+        xlabel=$wt$, % Set the labels
+        ylabel=$v(t)$,
+        x unit=, 
+        y unit=,
+        axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none,thick] {sin(deg(x+pi/2))};
+        \draw[thin]  (-pi/2,0) -- (-pi/2,-0.25);
+        \draw[thin, latex-latex] (-pi/2,-0.2) -- (0,-0.2)node[midway,below]{$\phi$}; 
+    \end{axis}
+    \draw[white] (-1,-0.5) rectangle (11,4);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Relaciones de fase}
+    \vspace{0.1cm}
+        \begin{tabularx}{\linewidth}{C C}
+            $\color{blue} a(t) = A_p\sin{(\omega t+\SI{90}{\degree})}$ & $\color{red} b(t) = B_p\sin{(\omega t-\SI{60}{\degree})}$
+        \end{tabularx}
+        \vspace{0.1cm}\\
+        \only<2-5>
+        {
+            \begin{tabularx}{\linewidth}{C C}
+            \onslide<2-5>{$\color{blue} a$ se adelanta \SI{90}{\degree} al origen} &  \onslide<3-5>{$\color{red} b$ se atrasa \SI{60}{\degree} al origen}\\[2pt]
+            \onslide<4-5>{$\color{blue} a$ se adelanta \SI{150}{\degree} a $\color{red} b$}  & \onslide<5>{$\color{red} b$ se atrasa \SI{150}{\degree} a $\color{blue} a$}
+        \end{tabularx}  
+        }
+    \vskip0pt plus 1filll
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.8\linewidth,
+        height= 0.4\linewidth,
+        domain=-pi:pi,
+        samples=100,
+        ymin=-1.2, ymax=1.2,
+        xmin=-pi-0.5, xmax=pi+0.5,
+        axis x line=center,
+        axis y line=left,
+        %y tick label style={align=right,xshift=-0.2cm},
+        ytick={\empty},
+        yticklabels={\empty},
+        %yticklabels={$-V_p$,$0$,$V_p$},
+        xtick={-pi,pi},
+        xticklabels={$-\SI{180}{\degree}$,$\SI{180}{\degree}$},
+        xlabel=$wt$, % Set the labels
+        ylabel={\empty},
+        x unit=, 
+        y unit=,
+        axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none,thick] {sin(deg(x+pi/2))};
+        \addplot[color=red,mark=none,thick] {0.667*sin(deg(x-pi/3))};
+        \draw[thin]  (-pi/2,0) -- (-pi/2,-0.25);
+        \draw[thin, latex-latex] (-pi/2,-0.2) -- (0,-0.2)node[midway,below]{$\SI{90}{\degree}$}; 
+        \draw[thin]  (pi/3,0) -- (pi/3,0.25);
+        \draw[thin, latex-latex] (pi/3,0.2) -- (0,0.2)node[midway,above]{$\SI{60}{\degree}$}; 
+    \end{axis}
+    \draw[white] (-1,-0.2) rectangle (11,4);
+    \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Fasores}
+        \vspace{0.1cm}
+        Un fasor es un numero complejo que representa la amplitud y la fase de un senoide\\[4pt]
+        \begin{tabularx}{\linewidth}{C C}
+            \onslide<2->{$\color{blue} a(t) = A_p\cdot \sin(\omega t+\SI{90}{\degree})$} & \onslide<4->{$\color{red} b(t) = B_p\cdot \sin(\omega t-\SI{60}{\degree})$}\\[2pt]
+            \onslide<3->{$\color{blue} \bm{a} = A_p\angle \SI{90}{\degree}$} & \onslide<5->{$\color{red} \bm{b} = B_p\angle \SI{-60}{\degree}$}
+        \end{tabularx}\\[15pt]
+        \begin{tikzpicture}
+            \draw[white] (-7.2,-2) rectangle (7,2);
+            \def \A {1.5};
+            \def \B {1};
+            \def \alpha {pi/2};
+            \def \beta {pi/3};
+            \def \O {-5.5};
+            \draw<2->[thin] (\O-\A,0) -- (-pi-0.5,0);
+            \draw<3-> [thin,dashed,blue] (\O,0) circle (\A);
+            \draw<3-> [thin,dashed,blue] (\O,\A) -- (0,\A);
+            \draw<3->[-latex,thick,blue] (\O,0) -- (\O,\A)node[midway,left]{$\bm{a}$};
+            \draw<3-> [-latex] (\O+0.5,0) arc (0:90:0.5)node[midway, right, yshift=0.1cm]{\tiny\SI{90}{\degree}};
+            \draw<5-> [thin,dashed,red] (\O,0) circle (\B);
+            \draw<5->[-latex,thick,red] (\O,0) -- +(-60:\B)node[midway,left]{$\bm{b}$};
+            \draw<5->[thin,dashed,red] (\O+\B*0.5,-\B*0.866) -- (0,-\B*0.866);
+            \draw<5-> [-latex] (\O+0.5,0) arc (0:-60:0.5)node[midway, right, yshift=-0.1cm]{\tiny\SI{60}{\degree}};
+            \draw<2->[-latex] (-pi-0.5,0) -- (2*pi+0.5,0);
+            \draw<2->[-latex] (0,-\A-0.5) -- (0,\A+0.5);
+            \draw<2->[color=blue,thick,smooth,samples=100,domain=-pi:2*pi] plot(\x,{\A * sin(deg(\x+\alpha))}); % Phase A
+            \draw<4->[color=red,thick,smooth,samples=100,domain=-pi:2*pi] plot(\x,{\B * sin(deg(\x-\beta))}); % Phase B
+            \draw<2->[thin]  (-\alpha,0) -- (-\alpha,-0.25);
+            \draw<2->[thin, latex-latex] (-\alpha,-0.2) -- (0,-0.2)node[midway,below]{$\SI{90}{\degree}$}; 
+            \draw<4->[thin]  (\beta,0) -- (\beta,0.25);
+            \draw<4->[thin, latex-latex] (\beta,0.2) -- (0,0.2)node[midway,above]{$\SI{60}{\degree}$}; 
+            \draw<2-> [thin]  (-pi,0.1) -- (-pi,-0.1);
+            \draw<2-> node at (-pi,0)[below]{$-\SI{180}{\degree}$};
+            \draw<2-> [thin]  (pi,0.1) -- (pi,-0.1);
+            \draw<2-> node at (pi,0)[below]{$\SI{180}{\degree}$};
+            \draw<2-> [thin]  (2*pi,0.1) -- (2*pi,-0.1);
+            \draw<2-> node at (2*pi,0)[below]{$\SI{360}{\degree}$};
+        \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Notación fasorial}
+        \begin{columns}[onlytextwidth]
+        \begin{column}{0.4\textwidth}
+            \begin{tikzpicture}
+            \def \A {2};
+            \draw[white] (-2.8,-2.8) rectangle (2.8,2.8);
+            \draw [-latex] (0,0) -- (0,2) node[above]{\footnotesize $\mathrm{Im}$};
+            \draw [-latex] (0,0) -- (2,0) node[right]{\footnotesize $\mathrm{Re}$};
+            \draw<1->[-latex,thick,blue] (0,0) -- +(50:\A)node[midway,xshift=-3pt,yshift=3pt]{\footnotesize\color{black}$r$}node[above]{$\bm{z}$};
+            \draw<1->[-latex] (0.7,0) arc (0:50:0.7)node[midway, right, yshift=0.1cm]{\footnotesize $\theta$};
+            \draw<2->[thin,dashed,blue] (0.643*\A,0.766*\A) -- (0.643*\A,0);
+            \draw<2-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-3pt]
+            (0.643*\A,0) -- (0,0) node [black,midway,below,yshift=-0.2cm] {\footnotesize $x$};
+            \draw<3->[thin,dashed,blue] (0,0.766*\A) -- (0.643*\A,0.766*\A);
+            \draw<3-> [decorate,decoration={brace,amplitude=5pt},xshift=-3pt,yshift=0pt]
+            (0,0) -- (0,0.766*\A) node [black,midway,left,xshift=-0.2cm] {\footnotesize $y$};
+        \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \begin{gather*}
+                \onslide<1->{\bm{z}=r\,\angle\theta}\\[4pt]
+                \onslide<2->{x = r\,\cos\theta}\\[4pt]
+                \onslide<3->{y = r\,\sin\theta}\\[4pt]
+                \onslide<4->{\bm{z} = x + \mathrm{j}y}\\[4pt]
+                \onslide<5->{r = \sqrt{x^2 + y^2}}\\[4pt]
+                \onslide<6->{\theta = \arctan\dfrac{y}{x}}
+            \end{gather*}
+        \end{column}
+        \end{columns} 
+\end{frame}
+
+\begin{frame}{Operaciones con fasores}
+    \begin{tabularx}{\linewidth}{C C}
+        $\bm{z_1}=r_1\angle\theta_1=x_1+\mathrm{j}y_1$ & $\bm{z_2}=r_2\angle\theta_2=x_2+\mathrm{j}y_2$
+    \end{tabularx}
+    \vskip0pt plus 1filll
+    \only<1-5>{
+    \onslide<2->{
+        Suma:
+        \begin{equation*}
+            \bm{z_1}+\bm{z_2} = (x_1 + x_2) + \mathrm{j}(y_1+y_2)
+        \end{equation*}
+    }\onslide<3->
+    {Resta:
+        \begin{equation*}
+            \bm{z_1}+\bm{z_2} = (x_1 - x_2) + \mathrm{j}(y_1-y_2)
+        \end{equation*}
+    }\onslide<4->
+    {Multiplicación:
+        \begin{equation*}
+            \bm{z_1}\bm{z_2} = r_1 r_2\angle\theta_1+\theta_2
+        \end{equation*}
+    }\onslide<5->
+    {División:
+        \begin{equation*}
+            \dfrac{\bm{z_1}}{\bm{z_2}} = \dfrac{r_1}{r_2}\angle\theta_1-\theta_2
+        \end{equation*}
+    }
+    }
+    \only<6->{
+    \onslide<6->
+    {Inverso:
+        \begin{equation*}
+            \dfrac{1}{\bm{z_1}} = \dfrac{1}{r_1}\angle-\theta_1
+        \end{equation*}
+    }\onslide<7->
+    {Raíz cuadrada:
+        \begin{equation*}
+            \sqrt{\bm{z_1}} = \sqrt{r_1} \angle\dfrac{\theta_1}{2}
+        \end{equation*}
+    }\onslide<8->
+    {Conjugado complejo:
+        \begin{equation*}
+            \bm{z_1}^* = x_1 - \mathrm{j}y_1 = r_1 \angle -\theta_1
+        \end{equation*}
+    }
+    }
+\end{frame}
+
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}

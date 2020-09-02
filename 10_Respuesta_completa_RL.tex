@@ -62,7 +62,7 @@
                 x label style={anchor=west},
                 y label style={anchor=south},
                 ytick={0.5,1},
-                yticklabels={$I_o$,$I$},
+                yticklabels={$I_0$,$I$},
                 ymax=1.5, % or enlarge y limits=upper
                 xticklabels={$t_0$},
                 xtick={1},
@@ -133,7 +133,7 @@
                 i(t) =
                 \begin{cases}
                     I_0, & t < t_0\\
-                    I + (I_0-I)e\,^{-(t - t_0)/ \tau}, & t > t_0
+                    I + (I_0-I)e\,^{-(t - t_0)/ \tau}, & t \geq t_0
                 \end{cases}
             \end{equation*}
             }\onslide<12->
@@ -149,7 +149,7 @@
                 \end{cases}
             \end{equation*}
             }
-        }\only<14-18>
+        }\only<14-16>
             {\onslide<14->
             {Para $t>t_0$ y reordenando tenemos:\\[4pt]
             \begin{tikzpicture}[scale=1]
@@ -162,7 +162,15 @@
                 \draw<16-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
                 (6.4,0) -- (3.5,0) node [black,midway,below,align=center,yshift=-0.1cm] {\footnotesize Respuesta \\ \footnotesize forzada}
                 ;
+                \draw [white](0,-2) rectangle (7,0.5);
             \end{tikzpicture} 
+            }
+        }\only<17->
+            {\onslide<17->
+            {Esta respuesta completa puede expresarse como:\\[2pt]
+            \begin{equation*}
+                i(t) = i(\infty) + [i(t_0)-i(\infty)]e\,^{-(t - t_0)/ \tau}
+            \end{equation*}
             }
         }
     \end{column}
@@ -230,7 +238,7 @@
             }\onslide<4->
             {por lo tanto
             \begin{equation*}
-                v(1)=\SI{5}{\ampere}           
+                i(1)=\SI{5}{\ampere}           
             \end{equation*}
             }
         }\only<6-8>
@@ -240,14 +248,14 @@
                 i(t)= i(\infty) + [i(t_0)-i(\infty)]e\,^{-(t - t_0)/ \tau}          
             \end{equation*}
             }\onslide<7->
-            {pero $i(\infty) = \SI{10}{\ampere}\,$, $\tau=\SI{1}{\second}\,$, $t_0 = \SI{1}{\second}\,$ y $v(1)=\SI{5}{\ampere}$, entonces: 
+            {pero $i(\infty) = \SI{10}{\ampere}\,$, $\tau=\SI{1}{\second}\,$, $t_0 = \SI{1}{\second}\,$ y $i(1)=\SI{5}{\ampere}$, entonces: 
             \begin{equation*}
-                v(t)=10\left(1-0.5e\,^{-(t - 1)}\right)         
+                i(t)=10\left(1-0.5e\,^{-(t - 1)}\right)         
             \end{equation*}
             }\onslide<8->
             {entonces: 
             \begin{equation*}
-                v(4)=10\left(1-0.5e\,^{-3}\right)=\SI{9.751}{\ampere}      
+                i(4)=10\left(1-0.5e\,^{-3}\right)=\SI{9.751}{\ampere}      
             \end{equation*}
             }
         }\only<10-11>

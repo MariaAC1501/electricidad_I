@@ -57,7 +57,7 @@
                 x label style={anchor=west},
                 y label style={anchor=south},
                 ytick={0.5,1},
-                yticklabels={$V_o$,$V$},
+                yticklabels={$V_0$,$V$},
                 ymax=1.5, % or enlarge y limits=upper
                 xticklabels={$t_0$},
                 xtick={1},
@@ -157,6 +157,7 @@
                 \draw<16-> [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-7pt]
                 (6.7,0) -- (3.8,0) node [black,midway,below,align=center,yshift=-0.1cm] {\footnotesize Respuesta \\ \footnotesize forzada}
                 ;
+                \draw [white](0,-2) rectangle (7,0.5);
             \end{tikzpicture} 
             }
         }\only<17->

@@ -1,0 +1,143 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Estructura atómica,}\\ \emph{carga eléctrica y}\\ \emph{campo eléctrico}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Estructura atómica}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        \textbf{\elementname{H}}\\[8pt]
+        Número atómico: \atomicnumber{H}\\[8pt]
+        Configuración electrónica:\\[8pt] 
+        \elconf{H}\\[8pt]  
+        \end{column}
+    \begin{column}{0.4\textwidth}
+    \begin{center}
+        Modelo de Bohr:\\[8pt]
+        \bohr{}{H}
+    \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Estructura atómica}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        \textbf{\elementname{Cu}}\\[8pt]
+        Número atómico: \atomicnumber{Cu}\\[8pt]
+        Configuración electrónica:\\[8pt] 
+        \elconf{Cu}\\[8pt]  
+        \end{column}
+    \begin{column}{0.4\textwidth}
+    \begin{center}
+        Modelo de Bohr:\\[8pt]
+        \bohr{}{Cu}
+    \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Estructura atómica}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        \textbf{\elementname{Si}}\\[8pt]
+        Número atómico: \atomicnumber{Si}\\[8pt]
+        Configuración electrónica:\\[8pt] 
+        \elconf{Si}\\[8pt]  
+        \end{column}
+    \begin{column}{0.4\textwidth}
+    \begin{center}
+        Modelo de Bohr:\\[8pt]
+        \bohr{}{Si}
+    \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Teoría de bandas}
+    \begin{center}
+        \includegraphics[width=0.80\linewidth]{fig/band.jpg}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Densidad de estados}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{fig/band_structure.png}
+    \end{center}
+\end{frame}
+
+
+
+\begin{frame}{Fuerza eléctrica} 
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        La fuerza eléctrica es la fuerza de atracción o repulsión entre dos cuerpos o partículas cargadas 
+        \begin{equation*}
+            F = k\dfrac{q_1q_2}{r^2}
+        \end{equation*}
+        donde $F$ es la fuerza eléctrica en newtons (\si{\newton}), $k$ es la constante de Coulomb ($\SI{9e9}{\newton \meter\squared / \coulomb \squared}$), $q_1$ y $q_2$ son dos cargas en Coulombs (\si{\coulomb}), y $r$ es la distancia que separa a las cargas en metros (\si{\meter})   
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=1]
+                \shade[ball color=gray!10!] (0,0) coordinate(q1) circle (.4) node{$+q_1$};
+                \shade[ball color=gray!10!] (2.5,0) coordinate(q2) circle (.4) node{$+q_2$};
+                \draw[-latex,thick] (q1)++(-0.4,0)--+(-0.5,0);
+                \draw[-latex,thick] (q2)++(0.4,0)--++(0.5,0);
+                \draw[latex-,thick] (q1)++(0,1)--++(1,0);
+                \draw[latex-,thick] (q2)++(0,1)--++(-1,0);
+                \draw (q1)++(0,1)++(1.25,0)node{$r$};
+            \end{tikzpicture}\\[4pt]
+            \begin{tikzpicture}[scale=1]
+                \shade[ball color=gray!10!] (0,0) coordinate(q1) circle (.4) node{$+q_1$};
+                \shade[ball color=gray!10!] (2.5,0) coordinate(q2) circle (.4) node{$-q_2$};
+                \draw[-latex,thick] (q1)++(0.4,0)--+(0.5,0);
+                \draw[-latex,thick] (q2)++(-0.4,0)--++(-0.5,0);
+            \end{tikzpicture}\\[4pt]
+            \begin{tikzpicture}[scale=1]
+                \shade[ball color=gray!10!] (0,0) coordinate(q1) circle (.4) node{$-q_1$};
+                \shade[ball color=gray!10!] (2.5,0) coordinate(q2) circle (.4) node{$-q_2$};
+                \draw[-latex,thick] (q1)++(-0.4,0)--+(-0.5,0);
+                \draw[-latex,thick] (q2)++(0.4,0)--++(0.5,0);
+            \end{tikzpicture}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Campo eléctrico} 
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.55\textwidth}
+        El campo eléctrico es la región alrededor de un cuerpo o partícula cargada dentro de la cual se ejercería una fuerza sobre otros cuerpos o partículas cargadas.  
+        \begin{equation*}
+            E = k\dfrac{q}{r^2}
+        \end{equation*}
+        donde $E$ es el campo eléctrico en newtons por Coulomb (\si{\newton/\coulomb}) o voltios por metro (\si{\volt/\meter}), $k$ es la constante de Coulomb ($\SI{9e9}{\newton \meter\squared / \coulomb \squared}$), $q$ es la carga en Coulombs (\si{\coulomb}), y $r$ es la distancia entre el punto en el que se mide el campo y la carga en (\si{\meter})   
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{center}
+            \includegraphics[scale=0.55]{fig/campo_unados.png}
+            \includegraphics[scale=0.55]{fig/campo_iguales.png}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}
