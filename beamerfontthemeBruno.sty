@@ -19,7 +19,8 @@
     BoldFont={* Medium},
 ]{Fira Sans}
 
-\usefonttheme[onlymath]{serif}
+%\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts} %%cambio JRojas
 % Title page
 \setbeamerfont{title}{
     size=\LARGE,
@@ -42,7 +43,10 @@
 }
 
 % Slide title
-\setbeamerfont{frametitle}{size=\LARGE}
+\setbeamerfont{frametitle}{
+    size=\Large,
+    shape=\bfseries
+}  %%JRojas changed to \Large
 \setbeamerfont{framesubtitle}{
     size=\normalsize,
     shape=\normalfont\scshape

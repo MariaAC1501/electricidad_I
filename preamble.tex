@@ -2,6 +2,7 @@
 \usepackage{amssymb}
 \usepackage{siunitx}
 \usepackage{float}
+\usepackage{tikz}
 \usepackage[american,RPvoltages]{circuitikz}
 \ctikzset{capacitors/scale=0.7}
 \usepackage{tabularx}
@@ -18,11 +19,10 @@
             urlcolor  = blue,
             citecolor = blue,
             anchorcolor = blue}
-            
 \usepgfplotslibrary{units, fillbetween} 
 \pgfplotsset{compat=1.16}
 \usepackage{bm}
-\usetikzlibrary{arrows, arrows.meta}
+\usetikzlibrary{arrows, arrows.meta, shapes, 3d}
 \renewcommand{\sin}{\sen} %change from sin to sen
 \usepackage{bohr}
 \setbohr{distribution-method = quantum,insert-missing = true}
