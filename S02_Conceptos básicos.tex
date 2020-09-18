@@ -1,0 +1,499 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Conceptos básicos}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Corriente}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            En un material conductor los electrones libres se mueven en todas direcciones, el efecto neto es cero\\[8pt]
+            No existe una fuerza externa que los obligue a moverse en una dirección particular y por lo tanto no hay corriente
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{center}
+                \begin{tikzpicture}
+                    \def \yaw {30}
+                    \def \pitch {50};
+                    \begin{scope}[3d view={\yaw}{\pitch}]
+                        \draw[canvas is zy plane at x=-2](0,0) ++ (\pitch:1cm) arc (\pitch:\pitch-180:1cm);
+                        \draw[canvas is zy plane at x=-2,dashed](0,0) ++ (\pitch:1cm) arc (\pitch:\pitch+180:1cm);
+                        %\draw[canvas is zy plane at x=-2](0,0) circle (1cm);
+                        \path[canvas is zy plane at x=-2](0,0) ++ (\pitch:1cm) coordinate (tl);
+                        \path[canvas is zy plane at x=-2](0,0) ++ (\pitch:-1cm) coordinate (bl);
+                        \draw[canvas is zy plane at x=2](0,0) circle (1cm);
+                        \fill[canvas is zy plane at x=2,color = gray!10, opacity = 0.8](0,0) circle (1cm);
+                        \path[canvas is zy plane at x=2](0,0) ++ (\pitch:1cm) coordinate (tr);
+                        \path[canvas is zy plane at x=2](0,0) ++ (\pitch:-1cm) coordinate (br);
+                        \draw (tl) -- (tr);
+                        \draw (bl) -- (br);
+                        \coordinate (e1) at (1,0.5,0.5);
+                        \coordinate (e2) at (1,-0.5,-0.5);
+                        \coordinate (e3) at (-1,0.5,-0.5);
+                        \coordinate (e4) at (-1,-0.5,0.5);
+                        \draw[canvas is zy plane at x=0, dashed](0,0) circle (1cm) ;
+                        \fill[canvas is zy plane at x=0, dashed, color = gray!40, opacity = 0.8](0,0) circle (1cm);
+                        \draw[-latex] (e1)  --++ (-1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e1) circle (4pt) node{-};
+                        \draw[-latex] (e2)  --++ (-1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e2) circle (4pt) node{-};
+                        \draw[-latex] (e3)  --++ (1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e3) circle (4pt) node{-};
+                        \draw[-latex] (e4)  --++ (1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e4) circle (4pt) node{-};
+                    \end{scope}
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Corriente}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            La corriente eléctrica es la taza de flujo de carga eléctrica a través de un punto o una región.
+            \begin{equation*}
+                i = \frac{dq}{dt} 
+            \end{equation*}
+            donde $i$ es la corriente en amperes (\si{\ampere}), $q$ es la carga en coulombs (\si{\coulomb}), y $t$ es el tiempo en segundos (\si{\second})
+            \begin{equation*}
+                \SI{1}{\ampere} = \SI{1}{\coulomb \second^{-1}} 
+            \end{equation*}
+            Por convención, la dirección de la corriente es opuesta a la dirección en la que fluyen los electrones
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{center}
+                \begin{circuitikz}
+                    \def \yaw {30}
+                    \def \pitch {50};
+                    \begin{scope}[3d view={\yaw}{\pitch}]
+                        \draw[canvas is zy plane at x=-2](0,0) ++ (\pitch:1cm) arc (\pitch:\pitch-180:1cm);
+                        \draw[canvas is zy plane at x=-2,dashed](0,0) ++ (\pitch:1cm) arc (\pitch:\pitch+180:1cm);
+                        %\draw[canvas is zy plane at x=-2](0,0) circle (1cm);
+                        \path[canvas is zy plane at x=-2](0,0) ++ (\pitch:1cm) coordinate (tl);
+                        \path[canvas is zy plane at x=-2](0,0) ++ (\pitch:-1cm) coordinate (bl);
+                        \draw[canvas is zy plane at x=2](0,0) circle (1cm);
+                        \fill[canvas is zy plane at x=2,color = gray!10, opacity = 0.8](0,0) circle (1cm);
+                        \path[canvas is zy plane at x=2](0,0) ++ (\pitch:1cm) coordinate (tr);
+                        \path[canvas is zy plane at x=2](0,0) ++ (\pitch:-1cm) coordinate (br);
+                        \draw (tl) -- (tr);
+                        \draw (bl) -- (br);
+                        \coordinate (e1) at (-1,0.5,0.5);
+                        \coordinate (e2) at (-1,-0.5,-0.5);
+                        \coordinate (e3) at (-1,0.5,-0.5);
+                        \coordinate (e4) at (-1,-0.5,0.5);
+                        \draw[canvas is zy plane at x=0, dashed](0,0) circle (1cm) ;
+                        \fill[canvas is zy plane at x=0, dashed, color = gray!40, opacity = 0.8](0,0) circle (1cm);
+                        \draw[-latex] (e1)  --++ (1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e1) circle (4pt) node{-};
+                        \draw[-latex] (e2)  --++ (1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e2) circle (4pt) node{-};
+                        \draw[-latex] (e3)  --++ (1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e3) circle (4pt) node{-};
+                        \draw[-latex] (e4)  --++ (1.5,0,0);
+                        \shade[ball color = gray!40, opacity = 0.8] (e4) circle (4pt) node{-};
+                        \draw[canvas is xz plane at y=0,transform shape](0,0) ++ (-2,0) --++ (-1,0) to [V,i={\Large$i$},v=$V$] ++ (0,3) --++ (6,0) --++ (0,-3) --++ (-1,0)
+                        ; 
+                    \end{scope}
+                \end{circuitikz}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Corriente directa y alterna}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        \begin{itemize}
+            \item La corriente directa permanece constante en el tiempo\\[8pt]
+            \item La corriente alterna invierte periódicamente su dirección y cambia su magnitud continuamente a lo largo del tiempo
+        \end{itemize}
+        \end{column}
+    \begin{column}{0.4\textwidth}
+    \begin{center}
+    \vskip0pt plus 1filll
+        \begin{tikzpicture}
+            \begin{axis}[
+                width= \linewidth,
+                height= 0.7\linewidth,
+                domain=0:4*pi,
+                samples=100,
+                ymin=-1.2, ymax=1.2,
+                xmin=0, xmax=4*pi+0.5,
+                axis x line=center,
+                axis y line=left,
+                ytick=\empty,
+                %yticklabels={$-V_p$,$0$,$V_p$},
+                xtick=\empty,
+                %xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$},
+                xlabel=$t$, % Set the labels
+                ylabel=$i(t)$,
+                x unit=, 
+                y unit=,
+                axis lines=center,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ]
+                \addplot[color=blue,mark=none,thick] {1}
+            	;
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width= \linewidth,
+                height= 0.7\linewidth,
+                domain=0:4*pi,
+                samples=100,
+                ymin=-1.2, ymax=1.2,
+                xmin=0, xmax=4*pi+0.5,
+                axis x line=center,
+                axis y line=left,
+                ytick=\empty,
+                %yticklabels={$-V_p$,$0$,$V_p$},
+                xtick=\empty,
+                %xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$},
+                xlabel=$t$, % Set the labels
+                ylabel=$i(t)$,
+                x unit=, 
+                y unit=,
+                axis lines=center,
+                x label style={anchor=west},
+                y label style={anchor=south},
+                ]
+                \addplot[color=blue,mark=none,thick] {sin(deg(x))}
+            	;
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Voltaje}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            Voltaje es la diferencia de potencial eléctrico entre dos puntos $a$ y $b$. Físicamente, es la energía que se requiere para mover una carga unitaria desde $a$ hasta $b$
+            \begin{equation*}
+                v = \dfrac{dw}{dq}
+            \end{equation*}            
+            donde $v$ es el voltaje en voltios (\si{\volt}), $w$ es la energía en joules (\si{\joule}) y $q$ es la carga en coulombs (\si{\coulomb})\\[4pt]
+            \begin{equation*}
+                \SI{1}{\volt} = \SI{1}{\joule\coulomb^{-1}}
+            \end{equation*} 
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{center}
+                    \begin{circuitikz} [scale=1]\draw
+                    (1,0)
+                        to[short,o-]
+                    (0,0)	
+                        to[generic]
+                    (0,3)
+                        to[short,-o]
+                    (1,3)
+                        to[open,v^=$v$]
+                    (1,0)
+                    ;
+                    \end{circuitikz}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Representaciones del voltaje}
+    \begin{center}
+            \begin{circuitikz} [scale=1]
+                \begin{scope}
+                    \draw
+                    (1,0)
+                        to[short,o-]
+                    (0,0)	
+                        to[generic]
+                    (0,3)
+                        to[short,-o]
+                    (1,3)
+                        to[open,v^=$v_x$]
+                    (1,0)
+                    ;
+                    \draw (0.5,-1.5)node[above] {$v_x=v_+-v_-$};
+                \end{scope}
+                \begin{scope}[xshift=4cm]
+                    \draw
+                    (1,0)
+                        to[short,o-]
+                    (0,0)	
+                        to[generic]
+                    (0,3)
+                        to[short,-o]
+                    (1,3)node[below right]{$a$}
+                    (1,0)node[above right]{$b$}
+                    ;
+                    \draw (0.5,-1.5)node[above] {$v_{ab}=v_a-v_b$};
+                \end{scope}
+                \begin{scope}[xshift=8cm]
+                    \draw
+                    (0,0)node[ground]{}
+                        to[generic,v>=$v_x$]
+                    (0,3)
+                        to[short,-o]
+                    (1,3)node[below right]{$a$}
+                    ;
+                    \draw (0.5,-1.5)node[above] {$v_x=v_a-0$};
+                \end{scope}
+            \end{circuitikz}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Potencia} 
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        La potencia es la taza de transferencia de energía eléctrica en un circuito. Se obtiene al multiplicar la corriente por el voltaje
+        \begin{equation*}
+            p = \dfrac{dw}{dt} = \dfrac{dw}{dq} \cdot \dfrac{dq}{dt} =  v\cdot i
+        \end{equation*}
+        donde $p$ es la potencia en watts (\si{\watt})
+        \begin{equation*}
+            \SI{1}{\watt} = \SI{1}{\joule\second^{-1}}
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{circuitikz} [scale=1]\draw
+                (1,0)
+                    to[short,o-]
+                (0,0)	
+                    to[generic]
+                (0,3)
+                    to[short,-o,i<=$i$]
+                (1,3)
+                    to[open,v^=$v$]
+                (1,0)
+                ;
+            \draw (0.5,-1)node[above] {$p=v\cdot i$};
+            \end{circuitikz}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Convención pasiva de potencia}
+    \begin{tabularx}{\linewidth}{X X}
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[generic]
+            (0,3)
+                to[short,-o,i<=$i$]
+            (1,3)
+                to[open,v^=$v$]
+            (1,0)
+            ;
+        \draw (0.5,4)node[above] {Pasivos};
+        \draw (0.5,-1)node[above] {$p=v\cdot i$};
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (1,0)
+                to[short,o-]
+            (0,0)	
+                to[generic]
+            (0,3)
+                to[short,-o,i=$i$]
+            (1,3)
+                to[open,v^=$v$]
+            (1,0)
+            ;
+        \draw (0.5,4)node[above] {Activos};
+        \draw (0.5,-1)node[above] {$p=-v\cdot i$};
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Energía} 
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        La energía es la capacidad para realizar trabajo
+        \begin{equation*}
+            w = \int_{t_0}^{t}p\,dt = \int_{t_0}^{t}v\cdot i\,dt
+        \end{equation*}
+        donde $w$ es la energía en joules (\si{\joule}), $p$ es la potencia en watts (\si{\watt}) y $t$ es el tiempo de segundos (\si{\second})
+        \begin{equation*}
+            \SI{3600}{\joule} = \SI{1}{\watt\hour}
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{circuitikz} [scale=1]\draw
+                (1,0)
+                    to[short,o-]
+                (0,0)	
+                    to[generic]
+                (0,3)
+                    to[short,-o,i<=$i$]
+                (1,3)
+                    to[open,v^=$v$]
+                (1,0)
+                ;
+            \draw (0.5,-1)node[above] {$p=v\cdot i$};
+            \end{circuitikz}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Resistencia y resistividad} 
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        La resistencia es una medida de la oposición al flujo de la corriente que exhibe un material 
+        \begin{equation*}
+            R = \rho \dfrac{l}{A}
+        \end{equation*}
+        donde $R$ es la resistencia en ohms (\si{\ohm}), $\rho$ es la resistividad en ohm-metro (\si{\ohm\meter}), $l$ es la longitud en metros (\si{\meter}) y $A$ es el area en metros cuadrados (\si{\meter\squared})
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{circuitikz}
+                \def \yaw {30}
+                \def \pitch {50};
+                \def \radio {0.7cm};
+                \begin{scope}[3d view={\yaw}{\pitch}]
+                    \draw[canvas is zy plane at x=-2](0,0) ++ (\pitch:\radio) arc (\pitch:\pitch-180:\radio);
+                    \draw[canvas is zy plane at x=-2,dashed](0,0) ++ (\pitch:\radio) arc (\pitch:\pitch+180:\radio);
+                    \path[canvas is zy plane at x=-2](0,0) ++ (\pitch:\radio) coordinate (tl);
+                    \path[canvas is zy plane at x=-2](0,0) ++ (\pitch:-\radio) coordinate (bl);
+                    \draw[canvas is zy plane at x=2](0,0) circle (\radio);
+                    \fill[canvas is zy plane at x=2,color = gray!10, opacity = 0.8](0,0) circle (\radio);
+                    \path[canvas is zy plane at x=2](0,0) ++ (\pitch:\radio) coordinate (tr);
+                    \path[canvas is zy plane at x=2](0,0) ++ (\pitch:-\radio) coordinate (br);
+                    \draw (tl) -- (tr);
+                    \draw (bl) -- (br);
+                    %\draw[canvas is zy plane at x=0, dashed](0,0) circle (\radio) ;
+                    %\fill[canvas is zy plane at x=0, dashed, color = gray!40, opacity = 0.8](0,0) circle (\radio);
+                    \draw[canvas is xz plane at y=0,dashed](-2,0) --++ (0,2)(2,0) --++ (0,2);
+                    \draw[canvas is xz plane at y=0,latex-latex] (-2,2) --++ (4,0)node[midway, above]{$l$}; 
+                    \draw[canvas is yz plane at x=2, latex-]plot [smooth] coordinates {(0.2,0.2) (0.7,0.9) (1.5,0.5)};
+                    \draw[canvas is yz plane at x=2] (1.8,0.5)node{$A$};
+                    \draw[canvas is yz plane at x=1.5, latex-]plot [smooth] coordinates {(-0.2,-0.2) (-0.7,-0.9) (-1.5,-0.5)};
+                    \draw[canvas is yz plane at x=2] (-2.5,0.5)node[align=right,left]{$\rho$ \\ {\scriptsize (del material)}};
+                \end{scope}
+            \end{circuitikz}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Ley de Ohm}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        Existe una relación de proporcionalidad directa entre el voltaje y la corriente en un resistor ideal.
+        
+        La constante de proporcionalidad es la resistencia y la relación matemática se conoce como la ley de Ohm
+        \begin{equation*}
+            v = i\cdot R
+        \end{equation*}
+        
+        \begin{equation*}
+            \SI{1}{\ohm} = \SI{1}{\volt\ampere^{-1}}
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{circuitikz} [scale=1]\draw
+                (1,0)
+                    to[short,o-]
+                (0,0)	
+                    to[R,l=$R$]
+                (0,3)
+                    to[short,-o,i<=$i$]
+                (1,3)
+                    to[open,v=$v$]
+                (1,0)
+                ;
+            \draw (0.5,-1)node[above] {$v=i\cdot R$};
+            \end{circuitikz}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Corto circuito}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        Un cortocircuito es un elemento que tiene una resistencia cero, por lo tanto el voltaje entre sus terminales es también igual a cero
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{circuitikz} [scale=1]\draw
+                (1,0)
+                    to[short,o-]
+                (0,0)	
+                    to[short,-o]
+                (0,0.5)
+                    to[short]
+                (0,2.5)
+                    to[short,o-]
+                (0,3)
+                    to[short,-o,i<=$i$]
+                (1,3)
+                    to[open,v^=$v$]
+                (1,0)
+                ;
+            \draw (0.5,-1)node[above] {$v=0$};
+            \end{circuitikz}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Circuito abierto}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        Un circuito abierto es un elemento que tiene una resistencia infinita, por lo tanto la corriente no fluye a traves de él
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{circuitikz} [scale=1]\draw
+                (1,0)
+                    to[short,o-]
+                (0,0)
+                    to[short,-o]
+                (0,0.5)
+                    to[open]
+                (0,2.5)
+                    to[short,o-]
+                (0,3)
+                    to[short,-o,i<=$i$]
+                (1,3)
+                    to[open,v^=$v$]
+                (1,0)
+                ;
+            \draw (0.5,-1)node[above] {$i=0$};
+            \end{circuitikz}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}

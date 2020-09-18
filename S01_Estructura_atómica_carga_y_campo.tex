@@ -63,9 +63,34 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}{Teoría de bandas}
+\begin{frame}{Materiales aislantes, semiconductores y conductores}
     \begin{center}
-        \includegraphics[width=0.80\linewidth]{fig/band.jpg}
+        \begin{tikzpicture}[scale=0.9, transform shape]
+            \begin{scope}
+                \fill[green!30] (0,3) rectangle +(4,1) node[black,midway]{Banda de conducción}; 
+                \fill[red!30] (0,0) rectangle +(4,1) node[black,midway]{Banda de valencia}; 
+                \draw[dashed,thick,red] (0,2)node[above]{\scriptsize$E_f$} --++ (4,0);
+                \draw[latex-latex] (4.2,1) --++ (0,2) node[midway,right]{$E_g$};
+                \fill[blue!30] (0,-1.5) rectangle +(4,1) node[black,midway]{Bandas llenas};
+                \fill[white] (0,-2.5) rectangle +(4,1) node[black,midway]{\textbf{Aislante}};
+            \end{scope}
+            \begin{scope}[xshift=5.2cm]
+                \fill[green!30] (0,2) rectangle +(4,1) node[black,midway]{Banda de conducción}; 
+                \fill[red!30] (0,0) rectangle +(4,1) node[black,midway]{Banda de valencia};
+                \draw[dashed,thick,red] (0,1.5)node[above]{\scriptsize$E_f$} --++ (4,0);
+                \draw[latex-latex] (4.2,1) --++ (0,1) node[midway,right]{$E_g$};
+                \fill[blue!30] (0,-1.5) rectangle +(4,1) node[black,midway]{Bandas llenas};
+                \fill[white] (0,-2.5) rectangle +(4,1) node[black,midway]{\textbf{Semiconductor}};
+            \end{scope}
+            \begin{scope}[xshift=10.4cm]
+                \shade[top color=green!30,bottom color=red!30] (0,0) rectangle +(4,1.8);
+                \draw (2,1.35) node[black]{Banda de conducción};
+                \draw (2,0.45) node[black]{Banda de valencia};
+                %\fill[red!30] (0,0) rectangle +(4,1) node[black,midway]{Banda de valencia};
+                \fill[blue!30] (0,-1.5) rectangle +(4,1) node[black,midway]{Bandas llenas};
+                \fill[white] (0,-2.5) rectangle +(4,1) node[black,midway]{\textbf{Conductor}};
+            \end{scope}
+        \end{tikzpicture}
     \end{center}
 \end{frame}
 
@@ -75,7 +100,25 @@
     \end{center}
 \end{frame}
 
-
+\begin{frame}{Carga eléctrica} 
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+        La carga eléctrica es una propiedad de las particulas atómicas de las que se compone la materia, se mide en coulombs (\si{\coulomb})\\[4pt]
+        La carga elemental es la que presenta un solo electrón y equivale a \SI{-1.602e-19}{C}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=1]
+                \clip (-2.5,-3) rectangle (2.5,3);
+                \coordinate (e) at (-2,0);
+                \coordinate (p) at (2,0);
+                \shade[ball color=gray!10!] (e) circle (.35) node{\Large$-$};
+                \shade[ball color=gray!10!] (p) circle (3) node{\Large$+$};
+            \end{tikzpicture}
+        \end{center}
+    \end{column}
+    \end{columns}
+\end{frame}
 
 \begin{frame}{Fuerza eléctrica} 
     \begin{columns}[onlytextwidth]

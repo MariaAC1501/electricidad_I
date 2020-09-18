@@ -30,11 +30,11 @@
 \begin{frame}{Ley de Ohm y Ley de Watt}
 Ley de Ohm
     \begin{align*}
-         V&=I \cdot R & I&=\frac{V}{R} & R&=\frac{V}{I}\\    
+         v&=i \cdot R & i&=\frac{v}{R} & R&=\frac{v}{i}\\    
     \end{align*} 
 Ley de Watt
     \begin{align*}
-         P&=V \cdot I & P&=\frac{V^2}{R} & P&=I^2 \cdot R\\    
+         p&=v \cdot i & p&=\frac{v^2}{R} & p&=i^2 \cdot R\\    
     \end{align*} 
 \end{frame}
 
@@ -81,7 +81,7 @@ Ley de Watt
             (1,0)
                 to[short,o-]
             (0,0)	
-                to[V]
+                to[V, l=$v$]
             (0,3)
                 to[short,-o]
             (1,3)
@@ -94,7 +94,7 @@ Ley de Watt
             (1,0)
                 to[short,o-]
             (0,0)	
-                to[I]
+                to[I, l=$i$]
             (0,3)
                 to[short,-o]
             (1,3)
@@ -111,7 +111,7 @@ Ley de Watt
             (1,0)
                 to[short,o-]
             (0,0)	
-                to[cV]
+                to[cV, l=$v(x)$]
             (0,3)
                 to[short,-o]
             (1,3)
@@ -124,7 +124,7 @@ Ley de Watt
             (1,0)
                 to[short,o-]
             (0,0)	
-                to[cI]
+                to[cI, l=$i(x)$]
             (0,3)
                 to[short,-o]
             (1,3)
@@ -164,7 +164,6 @@ Ley de Watt
             ;
         \end{circuitikz}
     \end{tabularx}
-%\let\thefootnote\relax\footnote{Tomado de \cite{charles2013fundamentos}}
 \end{frame}
 
 
@@ -210,14 +209,8 @@ Ley de Watt
             \draw[-latex,thick] ($(gen6.north) + (0.5,0.2)$) -- ($(gen6.north) + (-0.5,0.2)$);
             \draw[-latex,thick] ($(gen7.north) + (0.2,0.5)$) -- ($(gen7.north) + (0.2,-0.5)$);
             \draw[-latex,thick] ($(gen8.north) + (0.2,0.5)$) -- ($(gen8.north) + (0.2,-0.5)$);
-        \end{circuitikz}\cite{charles2013fundamentos}
+        \end{circuitikz}
 \end{frame}
-
-% \begin{frame}{Ley de corriente de Kirchhoff (LCK)}
-% \emph{La suma algebraica de las corrientes que entran y salen de un nodo es igual a cero}\\
-% \centering
-% \includegraphics[width=0.8\linewidth]{fig/P2.13.PNG}\cite{charles2013fundamentos}
-% \end{frame}
 
 \begin{frame}{Ley de voltaje de Kirchhoff (LVK)}
 \emph{La suma algebraica de todas los voltajes alrededor de un lazo es cero}
@@ -244,7 +237,7 @@ Ley de Watt
                 to[generic, v=$v_4$]
             (4,0)
             ;
-        \end{circuitikz}\cite{charles2013fundamentos}
+        \end{circuitikz}
 \end{frame}
 
 
@@ -432,12 +425,12 @@ Ley de Watt
     \end{equation*}
 \end{frame}
 
-\begin{frame}{Referencias}
+% \begin{frame}{Referencias}
 
-\bibliographystyle{ieeetr}
+% \bibliographystyle{ieeetr}
 
-\bibliography{referencias}
+% \bibliography{referencias}
 
-\end{frame}
+% \end{frame}
 
 \end{document}
