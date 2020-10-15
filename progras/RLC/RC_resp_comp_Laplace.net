@@ -1,0 +1,7 @@
+* C:\Repositories\electricidad_I\python\RLC\RC_resp_comp_Laplace.asc
+V1 N001 0 PULSE(10 20 1 1n 1n 10 10 1)
+R1 N001 N002 1
+C1 N002 0 1
+.tran 0 8 0 1e-5
+.backanno
+.end

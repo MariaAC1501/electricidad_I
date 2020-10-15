@@ -1,0 +1,21 @@
+Circuit: * C:\Repositories\electricidad_I\python\RLC\RC_resp_comp_Laplace.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Tue Oct 06 09:54:56 2020
+Total elapsed time: 3.542 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 1600079
+traniter = 1600076
+tranpoints = 800039
+accept = 800038
+rejected = 1
+matrix size = 3
+fillins = 0
+solver = Normal
+Matrix Compiler1:       3 opcodes  0.0/[0.0]/0.0
+Matrix Compiler2:      15 opcodes  0.0/[0.0]/0.0
+
