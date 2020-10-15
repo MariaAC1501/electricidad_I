@@ -1,0 +1,75 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Potencia y}\\ \emph{factor de potencia}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+
+\begin{document}
+\input{postamble}
+\maketitle
+
+
+\begin{frame}{Senoides}
+    \vspace{0.1cm}
+    \begin{columns}[onlytextwidth, T]
+    \begin{column}{0.4\textwidth}
+    Un voltaje senoidal esta definido por:
+        \begin{equation*}
+            v(t) = V_p\sin{(\omega t)}
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+        donde:\\[4pt]
+        \begin{tabularx}{\linewidth}{c X}
+            $V_p$ & es la amplitud en [\si{\volt}]\\
+            $\omega$ & es la velocidad angular en [\si{\radian/\second}]\\
+            $t$ & es el tiempo en [\si{\second}]
+        \end{tabularx}
+    \end{column}
+    \end{columns}
+    \vskip0pt plus 1filll
+    \begin{tikzpicture}
+    \begin{axis}[
+        width= 0.8\linewidth,
+        height= 0.3\linewidth,
+        domain=0:4*pi,
+        samples=100,
+        ymin=-1.2, ymax=1.2,
+        xmin=0, xmax=4*pi+0.5,
+        axis x line=center,
+        axis y line=left,
+        ytick={-1,0,1},
+        yticklabels={$-V_p$,$0$,$V_p$},
+        xtick={pi,2*pi,3*pi,4*pi},
+        xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$},
+        xlabel=$\omega t$, % Set the labels
+        ylabel=$v(t)$,
+        x unit=, 
+        y unit=,
+        axis lines=center,
+        x label style={anchor=west},
+        y label style={anchor=south},
+        ]
+        \addplot[color=blue,mark=none,thick] {sin(deg(x))}
+    	;
+    \end{axis}
+    \draw[white] (-1,-0.5) rectangle (11,4);
+    \end{tikzpicture}
+\end{frame}
+
+
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}

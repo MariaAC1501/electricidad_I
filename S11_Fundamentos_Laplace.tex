@@ -1,0 +1,93 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Bruno}
+\input{preamble}
+\title{Electricidad I: \\ \emph{Fundamentos de la}\\ \emph{transformada de Laplace}}
+\author{
+    Juan J. Rojas
+}
+\institute{Instituto Tecnológico de Costa Rica}
+\date{\today}
+\background{fig/background.jpg}
+
+\begin{document}
+\input{postamble}
+\maketitle
+
+\begin{frame}{Operadores y transformadas}
+        \begin{itemize}
+            \item<1-> Un operador toma una función como entrada y de salida da otra función.
+            \item<2> Una transformada toma una función como entrada y de salida da otra función pero con una variable independiente diferente.
+        \end{itemize}
+       \begin{tikzpicture}
+            \draw[white] (0,-2) rectangle (14,2);
+            \draw<1->[thick, -latex] (0.5,0) -- (2,0)node[midway,above]{$f(t)$};
+            \draw<1->[thick] (2,1) rectangle (5,-1)node[midway]{Operador};
+            \draw<1->[thick, -latex] (5,0) -- (6.5,0)node[midway,above]{$g(t)$};
+            \draw<2->[thick, -latex] (7.5,0) -- (9,0)node[midway,above]{$f(t)$};
+            \draw<2->[thick] (9,1) rectangle (12,-1)node[midway]{Transformada};
+            \draw<2->[thick, -latex] (12,0) -- (13.5,0)node[midway,above]{$F(s)$};
+        \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Transformada de Laplace}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \emph{La transformada de Laplace es una transformación integral de una función en el dominio del tiempo $f(t)$ a una función en el dominio de la frequencia compleja $F(s)$}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            La transformada de Laplace se define como:
+            \begin{equation*}
+                \mathcal{L}[f(t)] = F(s) = \int_{0^{-}}^\infty f(t)e^{-st}\,dt
+            \end{equation*}
+            donde $s$ es la frecuencia compleja $s = \sigma + j\omega$\\[8pt]
+            $\sigma$ es el coeficiente de amortiguamiento\\[8pt]
+            $\omega$ es la frecuencia angular\\[8pt]
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Propiedades útiles para este tema}
+    \begin{tabularx}{\textwidth}{p{3cm}XX}
+        \toprule
+        Propiedad & Función & Transformada\\
+        \midrule
+        Definición & $f(t)$ & $F(s)$\\[12pt]
+        Linealidad & $af(t)+bg(t)$ & $aF(s)+bG(s)$\\[12pt]
+        Escalamiento & $f(at)$ & $\dfrac{1}{a}F\left(\dfrac{s}{a}\right)$\\[12pt]
+        Desplazamiento & $f(t-a)u(t-a)$ & $e^{-as}F(s)$ \\[12pt]
+        Diferenciación & $f'(t)$ & $sF(s)-f(0^-)$\\[12pt]
+        & $f''(t)$ & $s^2F(s)-sf(0^-)-f'(0^-)$\\[12pt]
+        \bottomrule
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Tabla de transformadas útiles para este tema}
+    \centering
+    \begin{tabularx}{0.6\textwidth}{XX}
+        \toprule
+        Función & Transformada\\
+        \midrule
+        $u(t)$ & $\dfrac{1}{s}$\\[12pt]
+        $u(t-a)$ & $\dfrac{e^{-as}}{s}$\\[12pt]
+        $e^{-at}$ & $\dfrac{1}{s+a}$\\[12pt]
+        \bottomrule
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}{Ventajas de usar la transformada de Laplace}
+\begin{itemize}
+    \item Se puede obtener la respuesta completa del sistema en un solo paso
+    \item No hay necesidad de integrar o derivar
+\end{itemize}
+
+\end{frame}
+
+% \begin{frame}{Referencias}
+
+% \bibliographystyle{ieeetr}
+
+% \bibliography{referencias}
+
+% \end{frame}
+
+\end{document}
