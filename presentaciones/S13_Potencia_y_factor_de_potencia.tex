@@ -1,7 +1,7 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
 \input{preamble}
-\title{Electricidad I: \\ \emph{Potencia y}\\ \emph{factor de potencia}}
+\title{Electricidad I: \\ \emph{Potencia y factor}\\ \emph{de potencia}}
 \author{
     Juan J. Rojas
 }
@@ -13,55 +13,89 @@
 \input{postamble}
 \maketitle
 
-
-\begin{frame}{Senoides}
-    \vspace{0.1cm}
-    \begin{columns}[onlytextwidth, T]
-    \begin{column}{0.4\textwidth}
-    Un voltaje senoidal esta definido por:
-        \begin{equation*}
-            v(t) = V_p\sin{(\omega t)}
-        \end{equation*}
-    \end{column}
-    \begin{column}{0.55\textwidth}
-        donde:\\[4pt]
-        \begin{tabularx}{\linewidth}{c X}
-            $V_p$ & es la amplitud en [\si{\volt}]\\
-            $\omega$ & es la velocidad angular en [\si{\radian/\second}]\\
-            $t$ & es el tiempo en [\si{\second}]
-        \end{tabularx}
-    \end{column}
-    \end{columns}
-    \vskip0pt plus 1filll
-    \begin{tikzpicture}
-    \begin{axis}[
-        width= 0.8\linewidth,
-        height= 0.3\linewidth,
-        domain=0:4*pi,
-        samples=100,
-        ymin=-1.2, ymax=1.2,
-        xmin=0, xmax=4*pi+0.5,
-        axis x line=center,
-        axis y line=left,
-        ytick={-1,0,1},
-        yticklabels={$-V_p$,$0$,$V_p$},
-        xtick={pi,2*pi,3*pi,4*pi},
-        xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$},
-        xlabel=$\omega t$, % Set the labels
-        ylabel=$v(t)$,
-        x unit=, 
-        y unit=,
-        axis lines=center,
-        x label style={anchor=west},
-        y label style={anchor=south},
-        ]
-        \addplot[color=blue,mark=none,thick] {sin(deg(x))}
-    	;
-    \end{axis}
-    \draw[white] (-1,-0.5) rectangle (11,4);
-    \end{tikzpicture}
+\begin{frame}{Valor rms de una onda senoidal}
+El valor rms de una onda periodica esta definido por:\\[4pt]
+    \begin{equation*}
+        X_{rms} = \sqrt{\dfrac{1}{T}\int^T_0 x(t)^2dt}
+    \end{equation*}
+En el caso de las ondas senoidales periodicas sin componente de DC, su valor rms es igual al valor pico dividido entre la raiz cuadrada de dos\\[4pt]
+Es común representar el voltaje y la corriente como fasores cuya magnitud es el valor rms en lugar del valor pico, de ahora en adelante se usarán de esta manera
+    \begin{align*}
+        \bm{v} &= \dfrac{Vp}{\sqrt{2}}\angle \theta_v & \bm{i} &= \dfrac{Ip}{\sqrt{2}}\angle \theta_i
+    \end{align*}
 \end{frame}
 
+\begin{frame}{Potencias}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.55\textwidth}
+    Potencia compleja
+        \begin{equation*}
+            \bm{S} = \bm{v}\bm{i^*} = P + jQ = |\bm{v}||\bm{i}|\angle\theta_v - \theta_i\,\,[\mathrm{VA}]
+        \end{equation*}
+     Potencia aparente
+        \begin{equation*}
+            S = |\bm{S}| = |\bm{v}||\bm{i}| = \sqrt{P^2+Q^2}\,\,[\mathrm{VA}]
+        \end{equation*}
+    Potencia real
+        \begin{equation*}
+            P = \mathrm{Re}(S) = S\cos{(\theta_v - \theta_i)}\,\,[\mathrm{W}]
+        \end{equation*}
+    Potencia reactiva
+        \begin{equation*}
+            Q = \mathrm{Im}(S) = S\sin{(\theta_v - \theta_i)}\,\,[\mathrm{VAR}]
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{center}
+        \begin{tikzpicture}[scale=1.3]
+        %\draw [white](-1,-0.5) rectangle (3.5,3.5);
+        \draw [-latex] (0,0) -- (3,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,2.5)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,1.5)node[midway,above]{$\bm{S}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,-1.5)node[midway,below]{$\bm{S}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,0)node[below, xshift=-0.2cm]{$P$};
+        \draw [-latex,thick,black] (2.2,0) -- (2.2,1.5)node[midway, right]{$+Q$}node[midway, right, yshift=-0.3cm]{\tiny fp en atraso};;
+        \draw [-latex,thick,black] (2.2,0) -- (2.2,-1.5)node[midway, right]{$-Q$}node[midway, right, yshift=-0.3cm]{\tiny fp en adelanto};         ;
+        \draw [-latex] (0.8,0) arc (0:30:0.8)node[midway, right, yshift=0.1cm]{$\theta_v-\theta_i$};
+        \draw [-latex] (0.8,0) arc (0:-30:0.8)node[midway, right, yshift=-0.1cm]{$\theta_v-\theta_i$};
+        \end{tikzpicture}
+        \end{center}
+        \begin{equation*}
+            \mathrm{fp} = \dfrac{P}{S} = \cos{(\theta_v - \theta_i)}
+        \end{equation*}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Corrección del factor de potencia}
+    \begin{columns}[onlytextwidth]
+    \begin{column}{0.55\textwidth}
+    Las compañías de distribución y generación de energía eléctrica usualmente cobran una multa cuando el factor de potencia es bajo
+        \begin{equation*}
+            \bm{S} = \bm{v}\bm{i^*} = P + jQ = |\bm{v}||\bm{i}|\angle\theta_v - \theta_i\,\,[\mathrm{VA}]
+        \end{equation*}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{center}
+        \begin{tikzpicture}[scale=1.3]
+        %\draw [white](-1,-0.5) rectangle (3.5,3.5);
+        \draw [-latex] (0,0) -- (3,0)node[below]{\small $\mathrm{Re}$};
+        \draw [-latex] (0,0) -- (0,2.5)node[left]{\small $\mathrm{Im}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,1.5)node[midway,above]{$\bm{S}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,-1.5)node[midway,below]{$\bm{S}$};
+        \draw [-latex,thick,black] (0,0) -- (2.2,0)node[below, xshift=-0.2cm]{$P$};
+        \draw [-latex,thick,black] (2.2,0) -- (2.2,1.5)node[midway, right]{$+Q$}node[midway, right, yshift=-0.3cm]{\tiny fp en atraso};;
+        \draw [-latex,thick,black] (2.2,0) -- (2.2,-1.5)node[midway, right]{$-Q$}node[midway, right, yshift=-0.3cm]{\tiny fp en adelanto};         ;
+        \draw [-latex] (0.8,0) arc (0:30:0.8)node[midway, right, yshift=0.1cm]{$\theta_v-\theta_i$};
+        \draw [-latex] (0.8,0) arc (0:-30:0.8)node[midway, right, yshift=-0.1cm]{$\theta_v-\theta_i$};
+        \end{tikzpicture}
+        \end{center}
+        \begin{equation*}
+            \mathrm{fp} = \dfrac{P}{S} = \cos{(\theta_v - \theta_i)}
+        \end{equation*}
+    \end{column}
+    \end{columns}
+\end{frame}
 
 
 % \begin{frame}{Referencias}

@@ -1,6 +1,6 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\input{preamble}
+\input{comunes/preamble}
 \title{Electricidad I: \\ \emph{Nodos y supernodos}}
 \author{
     Juan J. Rojas
@@ -9,7 +9,7 @@
 \date{\today}
 \background{fig/background.jpg}
 \begin{document}
-\input{postamble}
+\input{comunes/postamble}
 \maketitle
 
 \begin{frame}{Análisis de nodos}
@@ -163,15 +163,15 @@
                 \draw<4-9> (1.5,4) node[left]{$\left(\frac{1}{R_1}+\frac{1}{R_2}\right)$}node{$\cdot$};
                 \draw<3-> (4.5,4) node[right]{$v_b=$};
                 \draw<5-9> (4.5,4) node[left]{$-\frac{1}{R_2}$}node{$\cdot$};
-                \draw<5>[red,thick]  (2.5,4.5) rectangle (4.5,3.5);
+                \draw<5>[red,thick]  (2.2,4.5) rectangle (4.5,3.5);
                 \draw<6-9> (6.8,4) node[left]{$i_1-i_2$};
                 \draw<6>[red,thick]  (5.5,4.5) rectangle (6.8,3.5);
                 \draw<3-> (1.5,2) node[right]{$v_a$};
                 \draw<7-9> (1.5,2) node[left]{$-\frac{1}{R_2}$}node{$\cdot$};
                 \draw<7>[red,thick]  (-0.5,2.5) rectangle (1.5,1.5);
                 \draw<3-> (4.5,2) node[right]{$v_b=$};
-                \draw<8-9> (4.5,2) node[left]{$\left(\frac{1}{R_2}+\frac{1}{R_3}\right)$}node{$\cdot$};
-                \draw<8>[red,thick]  (2.5,2.5) rectangle (4.5,1.5);
+                \draw<8-9> (4.5,2) node[left]{$+\left(\frac{1}{R_2}+\frac{1}{R_3}\right)$}node{$\cdot$};
+                \draw<8>[red,thick]  (2.2,2.5) rectangle (4.5,1.5);
                 \draw<9> (6.8,2) node[left]{$i_2$};
                 \draw<9>[red,thick]  (5.5,2.5) rectangle (6.8,1.5);
             \end{tikzpicture}
