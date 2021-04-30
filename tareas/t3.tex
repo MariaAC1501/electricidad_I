@@ -85,6 +85,67 @@ En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroq
     \label{fig:18650}
 \end{figure}
 
+\tikzstyle{line} = [draw, very thick, {Circle[length=4pt]}-latex',shorten <=-2pt]
+    \begin{tikzpicture}
+        \begin{axis}[
+            %yshift=-1cm,
+            width=10cm, % Scale the plot to \linewidth
+            height=6cm,
+            %grid=major, % Display a grid
+            %grid style={dashed,gray!30}, % Set the style
+            every axis plot/.append style={thick},
+            ymin=0, ymax=2,
+            xmin=0, xmax=6,
+            axis x line=bottom,
+            axis y line=left,
+            axis line style={-},
+            xtick align=inside,
+            ytick align=inside,
+            xlabel=Voltage, % Set the labels
+            ylabel=Current,
+            x unit=V, 
+            y unit=A,
+            legend pos=north east,
+            legend cell align={left},
+            %legend style={cells={anchor=west}}
+            legend style={at={(1.4,0.5)},anchor=east}, % Put the legend below the plot
+            smooth,
+            ]
+            \addplot [mark=none, color=red!0!blue]       
+            table[x=V0,y=I0,col sep=comma] {../data/cycle.csv};
+            \addlegendentry{Begining of life};
+        \end{axis}
+        \begin{axis}[
+            yshift=-6cm,
+            width=10cm, % Scale the plot to \linewidth
+            height=6cm,
+            %grid=major, % Display a grid
+            %grid style={dashed,gray!30}, % Set the style
+            every axis plot/.append style={thick},
+            ymin=0, ymax=8,
+            xmin=0, xmax=6,
+            axis x line=bottom,
+            axis y line=left,
+            axis line style={-},
+            xtick align=inside,
+            ytick align=inside,
+            xlabel=Voltage, % Set the labels
+            ylabel=Power,
+            x unit=V, 
+            y unit=W,
+            legend pos=north east,
+            %legend style={cells={anchor=west}}
+            legend cell align={left},
+            legend style={at={(1.4,0.5)},anchor=east}, % Put the legend below the plot
+            %x tick label style={rotate=90,anchor=east}, % Display labels sideways
+            ]
+            \addplot [mark max, mark size=2pt, color=red!0!blue]       
+            table[x=VBOL,y=PBOL,col sep=comma] {../data/cycle.csv};
+            \addlegendentry{Begining of life};
+            %%%%%%%%%%%%%%%%%
+        \end{axis}
+    \end{tikzpicture}
+
 % \bibliographystyle{IEEEtran}
 % \bibliography{ref_tareas}
 
