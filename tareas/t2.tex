@@ -10,7 +10,7 @@
 \begin{document}
 \input{comunes/postamble}
 \lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica} 
-\rhead{Electricidad I \\ Tarea \#2  \\ Entrega: Semana 7} 
+\rhead{Electricidad I \\ Tarea \#2  \\ Entrega: Semana 8} 
 \cfoot{\thepage\ de \pageref{LastPage}}
 Antes de continuar leyendo este documento, conteste las siguientes preguntas:
 \begin{itemize}
@@ -60,21 +60,21 @@ En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroq
 \textbf{Instrucciones}
 \begin{enumerate}
     \item Se le facilita un archivo de valores separados por comas (csv) llamado ``OCV(z).csv'' que incluye los valores del voltaje de circuito abierto para los estados de carga comprendidos entre $0.2$ y $1$. Estos valores fueron obtenidos por medio de pruebas de laboratorio realizadas en el \href{https://www.tec.ac.cr/unidades/laboratorio-delta}{DeltaLab} a una celda tipo NCR18650B de Panasonic (Ver Figura \ref{fig:18650}). Puede descargarlo \href{https://estudianteccr-my.sharepoint.com/:x:/g/personal/prof_juan_rojas_estudiantec_cr/EaWEaD9eY35Clh4iO77cZ5YBe0Tf2joTGQHzCdW8IVIatA?e=91HoDB}{acá}
-    \item Asuma que $Q = \SI{3250}{\milli\ampere\hour}$, $z(t_0) = 0.2$, $R_0 = \SI{100}{\milli\ohm}$, $\eta = 1$ para los procesos de descarga y $\eta = 0.99$ para los procesos de carga. Considere un proceso de carga/descarga en el que la celda se carga en CC a $0.5$C hasta que $v(t)=\SI{4.2}{\volt}$ y luego de eso se carga en CV a \SI{4.2}{\volt} hasta que la corriente es sea igual a \SI{500}{\milli\ampere}, luego de esto la celda se descarga a $1$C hasta que $v(t)=\SI{3.2}{\volt}$.
-    \item Usando Python, Scilab, MATLAB cree un \emph{script} llamado ``calculos'' que le permita realizar lo siguiente:
+    \item Asuma que $Q = \SI{3250}{\milli\ampere\hour}$, $z(t_0) = 0.25$, $R_0 = \SI{85}{\milli\ohm}$, $\eta = 1$ para los procesos de descarga y $\eta = 0.98$ para los procesos de carga. Considere un proceso de carga/descarga en el que la celda se carga en CC a $1$C hasta que $v(t)=\SI{4.2}{\volt}$ y luego de eso se carga en CV a \SI{4.2}{\volt} hasta que la corriente es sea igual a \SI{300}{\milli\ampere}, luego de esto la celda se descarga a $1$C hasta que $v(t)=\SI{3.2}{\volt}$.
+    \item Usando Python cree un \emph{script} llamado ``calculos'' que le permita realizar lo siguiente:
     \begin{itemize}
         \item leer los datos del archivo ``OCV(z).csv'', guardarlos en una o varias matrices y crear una función que permita ingresar cualquier valor de $z$ y recibir el valor correspondiente de OCV($z$) usando interpolación lineal (la interpolación lineal debe ser implementada por el estudiante desde cero) 
-        \item programar el proceso de carga-descarga descrito en el punto 2 usando los conceptos y leyes básicas vistos en el curso, aproximando la integral que describe $z(t)$ por medio de una discretización con un intervalo de \SI{0.5}{\second}, esto es: 
+        \item programar el proceso de carga-descarga descrito en el punto 2 usando los conceptos y leyes básicas vistos en el curso, aproximando la integral que describe $z(t)$ por medio de una discretización con un intervalo de \SI{0.25}{\second}, esto es: 
         \begin{equation*}
             z[k+1] = z[k] - \dfrac{\eta \Delta t}{Q}i[k]
         \end{equation*}
-        donde $\Delta t$ es el intervalo de integración discreta, en este caso \SI{0.5/3600}{\hour}; $z[k]$ e $i[k]$ son los valores actuales del SOC y la corriente respectivamente; y $z[k+1]$ es el valor siguiente del SOC
+        donde $\Delta t$ es el intervalo de integración discreta, en este caso \SI{0.25/3600}{\hour}; $z[k]$ e $i[k]$ son los valores actuales del SOC y la corriente respectivamente; y $z[k+1]$ es el valor siguiente del SOC
         \item generar una gráfica que en las abscisas tenga los valores del tiempo $t$ y en las ordenadas tenga el valor del voltaje $v(t)$
         \item generar una gráfica que en las abscisas tenga los valores del tiempo $t$ y en las ordenadas tenga el valor de la corriente $i(t)$. 
         \item generar una gráfica que en las abscisas tenga los valores del tiempo $t$ y en las ordenadas tenga el valor del SOC $z(t)$.
         \item imprimir en la terminal el valor del SOC inicial, SOC al final de la carga, SOC al final de la descarga, la capacidad cargada y la capacidad descargada.
     \end{itemize}
-    \item Realice un informe de su tarea llamado ``Informe\_t2.tex'' usando \LaTeX. Incluya todos los cálculos y las gráficas solicitadas y algún texto complementario que permita al cliente entender lo que se realizó. Un machote se puede encontrar \href{https://www.overleaf.com/read/phnwtckqwqwc}{acá}
+    \item Realice un informe de su tarea llamado ``Informe\_t2.tex'' usando \LaTeX. Incluya todos los cálculos y las gráficas solicitadas y algún texto complementario que permita entender la solución realizada. Un machote se puede encontrar \href{https://www.overleaf.com/read/phnwtckqwqwc}{acá}
     \item Comprima todo en un solo archivo .zip y suba al TecDigital. Cualquier entrega tardía se califica con base en 70. 
 \end{enumerate}
 
