@@ -112,8 +112,8 @@ En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroq
             smooth,
             ]
             \addplot [mark=none, color=red!0!blue]       
-            table[x=V0,y=I0,col sep=comma] {../data/cycle.csv};
-            \addlegendentry{Begining of life};
+            table[x=V,y=I,col sep=comma] {../data/real_solar_panel.csv};
+            %\addlegendentry{Begining of life};
         \end{axis}
         \begin{axis}[
             yshift=-6cm,
@@ -139,10 +139,9 @@ En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroq
             legend style={at={(1.4,0.5)},anchor=east}, % Put the legend below the plot
             %x tick label style={rotate=90,anchor=east}, % Display labels sideways
             ]
-            \addplot [mark max, mark size=2pt, color=red!0!blue]       
-            table[x=VBOL,y=PBOL,col sep=comma] {../data/cycle.csv};
-            \addlegendentry{Begining of life};
-            %%%%%%%%%%%%%%%%%
+            \addplot [mark size=2pt, color=red!0!blue]       
+            table[x=V,y=P,col sep=comma] {../data/real_solar_panel.csv};
+            %\addlegendentry{Begining of life};
         \end{axis}
     \end{tikzpicture}
 
