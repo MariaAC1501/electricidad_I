@@ -11,7 +11,7 @@
 \lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica} 
 \rhead{Electricidad I \\ Tarea \#1  \\ Entrega: Semana 4} 
 \cfoot{\thepage\ de \pageref{LastPage}}
-\noindent En la Tabla \ref{tab:houses} se muestra la potencia promedio por hora de un hogar Australiano según \cite{houses}, la primera columna es un usuario promedio y la segunda es un usuario atípico por su alto consumo.  
+\noindent En la Tabla \ref{tab:houses} se muestra la potencia promedio por hora de un hogar Australiano según \cite{houses}, la primera columna es un usuario promedio y la segunda es un usuario atípico por su alto consumo. La potencia promedio corresponde a la última hora, por ejemplo, en la hora 14 el usuario normal reporta un promedio de \SI{0.654}{\kilo\watt}, esto corresponde a la potencia promedio registrada en el periodo comprendido entre las 13 y las 14 horas de ese día.
 \begin{table}[H]
     \centering
     \caption{Potencia promedio diaria de un hogar Australiano}
@@ -54,25 +54,25 @@
 \noindent\textbf{Instrucciones}
 \begin{itemize}
     \item Cree un archivo de valores separados por comas (csv) llamado ``casa.csv'' que contenga las tres columnas de la Tabla \ref{tab:houses}.
-    \item Usando Python, Scilab, MATLAB cree un \emph{script} llamado ``calculos'' que le permita realizar lo siguiente:
+    \item Usando Python cree un \emph{script} llamado ``calculos'' que le permita realizar lo siguiente:
     \begin{itemize}
-        \item leer los datos del archivo ``casa.csv'' y generar una gráfica que en las abscisas tenga los valores horarios, y en las ordenadas tenga dos series, una para representar el usuario normal y otra para el usuario atípico. Se debe incluir una leyenda que le permita al cliente la fácil identificación de las curvas.
+        \item leer los datos del archivo ``casa.csv'' y generar una gráfica que en las abscisas tenga los valores horarios, y en las ordenadas tenga dos series, una para representar el usuario normal y otra para el usuario atípico. Se debe incluir una leyenda que permita identificar las curvas.
         \item asumiendo un mes de 30 días y tarifa \textbf{residencial} del ICE, calcule el costo mensual para ambos usuarios.
         \item asumiendo un mes de 30 días y tarifa \textbf{residencial} de la CNFL, calcule el costo mensual para ambos usuarios.
         \item asumiendo un mes de 30 días y tarifa \textbf{residencial horaria} de la CNFL, calcule el costo mensual para ambos usuarios.
-        \item para todos los costos las tarifas deben ser las publicadas el 1ero de julio de 2020 y se debe incluir el IVA según corresponda (Ley 9635).
-        \item imprima todos los datos en la terminal del programa con descripciones adecuadas de forma que el cliente pueda ver los resultados de los cálculos anteriores.
+        \item para todos los costos las tarifas deben ser las vigentes a partir del 1ero de enero de 2021 y se debe incluir el IVA según corresponda (Ley 9635).
+        \item imprima todos los datos en la terminal del programa con descripciones adecuadas de forma que se puedan ver los resultados de los cálculos anteriores.
     \end{itemize}
-    \item Si un usuario normal en la zona de la CNFL decide comprar un BEV (Battery electric vehicle), asumiendo que por el uso que le dará al vehículo debe realizar una carga semanal por 12 horas (no necesariamente consecutivas) conectado a un receptáculo de \SI{240}{\volt} y con una corriente promedio de \SI{24}{\ampere}. Asuma que el usuario gastaba 42000 CRC semanales en gasolina antes de adquirir el BEV. Usando Python, Scilab, MATLAB cree un \emph{script} llamado ``BEV'' que le permita realizar lo siguiente:
+    \item Si un usuario normal en la zona de la CNFL decide comprar un BEV (Battery electric vehicle), asumiendo que por el uso que le dará al vehículo debe realizar una carga semanal por 12 horas (no necesariamente consecutivas) conectado a un receptáculo de \SI{240}{\volt} y con una corriente promedio de \SI{24}{\ampere}. Asuma que el usuario gastaba 42000 CRC semanales en gasolina antes de adquirir el BEV. Usando Python cree un \emph{script} llamado ``BEV'' que le permita realizar lo siguiente:
     \begin{itemize}
         \item leer los datos del archivo ``casa.csv''
         \item asumiendo un mes de 30 días y tarifa \textbf{residencial} de la CNFL, calcule el costo mensual antes y después de usar el BEV.
         \item asumiendo un mes de 30 días y tarifa \textbf{residencial horaria} de la CNFL, distribuya la carga del BEV de manera que pueda obtener el menor costo posible y calcule el costo mensual antes y después de usar el BEV.
         \item compare el aumento en el recibo eléctrico con el costo de la gasolina y calcule el monto del ahorro para cada tarifa. 
-        \item para todos los costos las tarifas deben ser las publicadas el 1ero de julio de 2020 y se debe incluir el IVA según corresponda (Ley 9635).
-        \item imprima todos los datos en la terminal del programa con descripciones adecuadas de forma que el cliente pueda ver los resultados de los cálculos anteriores.
+        \item para todos los costos las tarifas deben ser las vigentes a partir del 1ero de enero de 2021 y se debe incluir el IVA según corresponda (Ley 9635).
+        \item imprima todos los datos en la terminal del programa con descripciones adecuadas de forma que se puedan ver los resultados de los cálculos anteriores.
     \end{itemize}
-    \item Realice un resumen llamado ``Resumen.tex'' usando \LaTeX e incluya todos los cálculos y las gráficas solicitadas y algún texto complementario que permita al cliente entender su propuesta. Un machote se puede encontrar \href{https://www.overleaf.com/read/phnwtckqwqwc}{acá}
+    \item Realice un resumen llamado ``Resumen.tex'' usando \LaTeX e incluya todos los cálculos y las gráficas solicitadas y algún texto complementario que ayude a entender el procedimiento realizado. Un machote se puede encontrar \href{https://www.overleaf.com/read/phnwtckqwqwc}{acá}
     \item Comprima todo en un solo archivo .zip y suba al TecDigital. Cualquier entrega tardía se califica con base en 70. 
 \end{itemize}
 
