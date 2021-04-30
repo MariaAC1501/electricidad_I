@@ -1,0 +1,315 @@
+\documentclass[12pt,letterpaper]{article}
+\input{comunes/preamble}
+\usepackage{geometry}  
+\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Problemas de apoyo: Electricidad I}
+\rhead{\begin{picture}(0,0) \put(-110,0){\includegraphics[width=40mm]{fig/logo.png}} \end{picture}}
+\usepackage{titlesec}
+
+\titleformat{\section}{\normalfont \Large \bfseries}
+{Semana\ \thesection}{2.3ex plus .2ex}{} %% Text "Semana" is what you would like the section number to display with.
+%\titlespacing{\subsection}{2em}{*1}{*1}
+
+\titleformat{\subsection}[runin]{\normalfont \large \bfseries}
+{Problema\ \thesubsection}{0pt}{} %% Text "Problema" is what you would like the section number to display with.
+
+\newcommand{\asection}[2]{
+\setcounter{section}{#1}
+\addtocounter{section}{-1}
+\section{#2}
+}
+
+
+\begin{document}
+\input{comunes/postamble}
+
+\asection{6}{Thevenin, Norton y Máxima transferencia de potencia}
+
+1. Determine i mediante el Teorema de Thevenin.
+
+
+\begin{center}
+    \begin{circuitikz}
+        \draw
+        (0,0)
+            to[V,l=\SI{50}{\volt}]
+        (0,1.5)
+            to[R,l=\SI{10}{\ohm}]
+        (0,3)
+            to[short]
+        (3,3)
+            to[short]
+        (6,3)
+            to[R,l=\SI{40}{\ohm}]
+        (6,0)
+            to[short]
+        (0,0)
+        (3,3)
+        to[short,i=$i$]
+        (3,2.7)
+        (3,2.7)
+            to[R,l=\SI{12}{\ohm}]
+        (3,1.5)
+            to[V,l=\SI{30}{\volt},invert]
+        (3,0)
+        ;
+    \end{circuitikz}
+\end{center}
+R/ $i=\SI{500}{\milli\ampere}$ \\[16pt]
+
+2. Determine el equivalente de Thevenin en las terminales a-b.
+ 
+\begin{center}
+    \begin{circuitikz}
+        \draw
+        (0,0)
+            to[V,l=\SI{70}{\volt}]
+        (0,3)
+            to[R,l=\SI{10}{\kilo\ohm},v=$V_o$]
+        (3,3)
+            to[R,l=\SI{20}{\kilo\ohm}]
+        (6,3)
+            to[cV,l=$4V_o$, invert]
+        (6,0)
+            to[short]
+        (0,0)
+        (3,3)
+            to[short, -o]
+        (3,2)node[left]{$a$}    
+        (3,1)node[left]{$b$}
+            to[short, o-]
+        (3,0)
+        ;
+        
+    \end{circuitikz}
+\end{center}
+
+R/ $R_Th=\SI{2,857}{\kilo\ohm}$ \\[16pt]
+
+3.Determine los equivalentes de Thevenin y Norton en las terminales a-b.
+
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to[R,l=\SI{6}{\ohm}]
+         (0,3.5)
+             to[short]
+         (-3.5,3.5)
+            to[I,l=\SI{1}{\ampere},invert]
+         (-3.5,0)
+             to[short]
+         (0,0)
+         
+         (4,3.5) 
+            to[R,l=\SI{20}{\ohm}]
+         (7,3.5)
+           to[R,l=\SI{5}{\ohm}]
+         (7,0)
+            to[short,-o]
+         (7.5,0)node[above]{$b$}
+         (7,3.5)
+            to[short,-o]
+         (7.5,3.5)node[above]{$a$}
+         (7,0)
+            to[short]
+         (4,0)
+             to[short]
+         (0,0)
+         
+         (0,3.5)
+            to[V,l=\SI{14}{\volt}] 
+         (2,3.5)
+            to[R,l=\SI{14}{\ohm}]
+         (4,3.5)
+            to[I,l=\SI{1}{\ampere}]
+         (4,0)
+         ;
+     \end{circuitikz}
+ \end{center}
+R/ $R_Th=\SI{4}{\ohm}$,
+y $R_N=\SI{4}{\ohm}$, $V_Th=\SI{-8}{\volt}$ e $I_N=\SI{-2}{\ampere}$
+\\[16pt]
+ 4.Determine el equivalente de
+Norton visto desde las terminales:
+a) a-b, b) c-d
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to[R,l=\SI{3}{\ohm}]
+         (0,3.5)
+             to[R,l=\SI{6}{\ohm}]
+         (-3.5,3.5)
+             to[V,l=\SI{120}{\volt},invert]
+         (-3.5,0)
+             to[short]
+         (0,0)
+         
+         (4,3.5) 
+            to[short]
+         (7,3.5)
+           to[R,l=\SI{2}{\ohm}]
+         (7,0)
+            to[short,-o]
+         (7.5,0)node[above]{$d$}
+         (7,3.5)
+            to[short,-o]
+         (7.5,3.5)node[above]{$c$}
+         (7,0)
+            to[short]
+         (4,0)
+             to[short]
+         (0,0)
+         (4,3.5)
+             to[short,-o]
+         (4,4)node[above]{$b$}
+         (0,3.5)
+            to[short,-o]
+         (0,4)node[above]{$a$}
+         
+         (0,3.5)
+            to[R,l=\SI{4}{\ohm}]
+         (4,3.5)
+            to[I,l=\SI{6}{\ampere},invert]
+         (4,0)
+         ;
+     \end{circuitikz}
+ \end{center}
+ 
+ R/
+ a) 
+  $R_N=\SI{2}{\ohm}$, $V_Th=\SI{14}{\volt}$ e $I_N=\SI{7}{\ampere}$\\[8pt]
+b) 
+  $R_N=\SI{1,5}{\ohm}$, $V_Th=\SI{19}{\volt}$ e $I_N=\SI{12,667}{\ampere}$\\[16pt]
+5. Encuentre el equivalente de Norton en las terminales a-b.
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to[R,l=\SI{3}{\ohm},v=$V_o$]
+         (0,3.5)
+             to[short]
+         (0,6)
+         (0,3.5)
+             to[R,l=\SI{6}{\ohm}]
+         (-3.5,3.5)
+             to[V,l=\SI{18}{\volt},invert]
+         (-3.5,0)
+             to[short]
+         (0,0)
+         (0,6)
+           to[cI,l=$0.25V_o$, invert]
+         (4,6)
+             to[short]
+         (4,3.5) 
+        
+         (4,0)
+            to[short, -o]
+         (4.5,0)node[above]{$b$}
+            to[short]
+         (0,0)
+    
+         (0,3.5)
+             to[R,l=\SI{2}{\ohm}]
+         (4,3.5)
+             to[short, -o]
+         (4.5,3.5)node[above]{$a$}
+         ;
+     \end{circuitikz}
+ \end{center}
+R/
+  
+  $R_N=\SI{3}{\ohm}$ e $I_N=\SI{1}{\ampere}$\\[16pt]
+
+
+
+6. Determine los equivalentes de Thevenin y Norton en las terminales a-b.
+
+\begin{center}
+    \begin{circuitikz}
+        \draw
+        (3,4)   
+            to[short]
+        (0,4)
+            to[I,l=\SI{8}{\ampere}, invert]
+        (0,0)
+            to[short]
+        (6,0)
+        (3,4)
+            to[short]
+        (6,4)
+            to[R,l=\SI{20}{\ohm}]
+        (6,2)
+        (3,4)
+            to[R,l=\SI{10}{\ohm}]
+        (3,2)
+            to[R,l=\SI{50}{\ohm}]
+        (3,0)
+            
+        (3,2)
+            to[short,-o]
+        (4,2)node[above]{$a$}
+            
+        (5,2)node[above]{$b$}
+            to[short,-o]
+        (6,2)
+            to[R,l=\SI{40}{\ohm}]
+        (6,0)
+
+        ;
+    \end{circuitikz}
+\end{center}
+R/
+$R_Th=\SI{22,5}{\ohm}$, $V_Th=\SI{40}{\volt}$ e $I_N=\SI{1,7778}{\ampere}$\\[16pt]
+
+7.Determine la máxima potencia suministrada al resistor variable R.
+
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to[R,l=\SI{15}{\ohm}]
+         (0,3.5)
+             to[short]
+         (0,6)
+         
+         (0,3.5)
+             to[R,l=\SI{5}{\ohm}]
+         (-3.5,3.5)
+             to[V,l=\SI{4}{\volt},invert]
+         (-3.5,0)
+             to[short]
+         (0,0)
+         (0,6)
+           to[cI,l=$3V_x$]
+         (4,6)
+             to[short]
+         (4,3.5) 
+        
+         (4,0)
+            to[R,l=\SI{6}{\ohm},v=$V_x$]
+         (0,0)
+    
+         (0,3.5)
+             to[R,l=\SI{5}{\ohm}]
+         (4,3.5)
+         
+         (4,3.5)
+            to[R,l=$R$]
+         (4,0)
+         
+         ;
+     \end{circuitikz}
+ \end{center}
+ R/
+ $Pmax=\SI{21.48}mW$ \\[8pt]
+
+
+
+
+
+\end{document}
