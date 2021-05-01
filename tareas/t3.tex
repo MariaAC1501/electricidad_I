@@ -12,50 +12,151 @@
 \lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica} 
 \rhead{Electricidad I \\ Tarea \#2  \\ Entrega: Semana 8} 
 \cfoot{\thepage\ de \pageref{LastPage}}
-Antes de continuar leyendo este documento, conteste las siguientes preguntas:
+
+Definiciones para paneles solares:
 \begin{itemize}
-    \item ¿Que es un modelo de un sistema? 
-    \item ¿Que es un experimento?   
-    \item ¿Que es una simulación? ¿Es toda simulación un experimento?
+    \item Celda fotovoltaica o celda solar: es un dispositivo capaz de convertir la energía solar en energía eléctrica por medio del efecto fotoeléctrico. 
+    \item Panel fotovoltaico o panel solar: es la interconexión de dos o mas celdas solares montadas en una estructura que les da soporte mecánico. 
+    \item Irradiancia solar (\si{\watt\meter^{-2}}): es la potencia por unidad de superficie que se recibe del sol en forma de radiación electromagnética.
+    \item Constante solar (\si{\watt\meter^{-2}}): es la irradiancia medida en la parte externa de la atmósfera terrestre y en una superficie perpendicular a los rayos del sol.
+    \item Ángulo de incidencia (\si{\degree}): es el ángulo entre los rayos del sol y la normal de una superficie en el punto de incidencia. 
 \end{itemize}
 
-Definiciones y ecuaciones para celdas y baterías:
-\begin{itemize}
-    \item Celda electroquímica recargable: es un dispositivo capaz de convertir energía química en energía electrica y viceversa. 
-    \item Batería: es la interconexión de dos o mas celdas electroquímicas.
-    \item Capacidad nominal [$Q$]: es la cantidad de carga que una celda o batería puede entregar en amperios-hora (\si{\ampere\hour})
-    \item Eficiencia de Coulumb [$\eta$]: es la eficiencia con la que se transfiere la carga a una batería, tipicamente se asume que $\eta = 1$ durante la descarga y que $\eta < 1$ durante la carga. 
-    \item SOC [$z(t)$]: \emph{state of charge}, estado de carga de una celda o batería, para una celda o batería descargada $z(t) = 0$, mientras que para una celda o batería cargada $z(t) = 1$. El estado de carga se puede relacionar con la corriente por medio de la siguiente ecuación:
-    \begin{equation*}
-        z(t) = z(t_0) - \dfrac{1}{Q}\int_{t_0}^t \eta i(\tau) d\tau
-    \end{equation*}
-    \item Tasa C: \emph{C Rate}, es una medida relativa de la corriente en una celda o batería usando como base la capacidad, por ejemplo si una celda tiene una capacidad de \SI{3}{\ampere\hour} y se descarga a corriente constante con una taza de $0.5$C entonces la corriente debe ser $i=0.5\cdot 3 = \SI{1.5}{\ampere}$
-    \item OCV: \emph{open circuit voltage}, voltaje de circuito abierto es el voltaje que la celda o batería tendría si se desconecta de la carga y se deja descansar hasta que el valor del voltaje sea constante. 
-    \item CC: se refiere a un proceso de carga o descarga que se realiza con corriente constante
-    \item CV: se refiere a un proceso de carga o descarga que se realiza con voltaje constante
-\end{itemize}
-
-Existe gran diversidad de modelos para celdas electroquímicas de iones de Litio (Li-Ion), el modelo mas sencillo es una simple fuente independiente que representa el voltaje en los terminales de la celda, los modelos mas complejos incluyen la resistencia interna del electrolito y las interfaces entre el electrolito y el electrodo, el efecto de la eficiencia de Coulomb y los efectos de la difusión de los iones.\\[8pt]
-En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroquímica, este tipo de modelo se conoce como \emph{Rint}
+Existe gran diversidad de modelos para paneles solares, uno de los modelos mas comunes es el de \emph{un diodo}, también conocido como el de \emph{5 parámetros}. En la Figura \ref{fig:OneDiode} se muestra este modelo. 
 
 \begin{figure}[H]
     \centering
     \begin{circuitikz}
         \draw 
         (0,0)
-            to[cV, l=OCV$(z)$]
+            to[cI, l=$I_L$]
         (0,3)
-            to[R, l=$R_0$,i=$i(t)$,-o]
+            to[short]
         (3,3)
-            to[open,v^=$v(t)$]
-        (3,0)
-            to[short,o-]
+            to[R,l=$R_s$, i=$I$, -o]
+        (6,3)
+            to[open, v=$v$, voltage shift = -0.1cm]
+        (6,0)
+            to[short, o-]
         (0,0)
+        (1.5,3)
+            to[D,i=$I_{D}$]
+        (1.5,0)
+        (3,3)
+            to[R,l=$R_{sh}$, i=$I_{sh}$]
+        (3,0)
         ;
     \end{circuitikz}
-    \caption{Circuito Rint}
-    \label{fig:Rint}
+    \caption{Modelo de un diodo para celda fotovoltaica}
+    \label{fig:OneDiode}
 \end{figure}
+
+\tikzstyle{line} = [draw, very thick, {Circle[length=4pt]}-latex',shorten <=-2pt]
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            %yshift=-1cm,
+            width=8cm, % Scale the plot to \linewidth
+            height=6cm,
+            %grid=major, % Display a grid
+            %grid style={dashed,gray!30}, % Set the style
+            every axis plot/.append style={thick},
+            ymin=0, ymax=2,
+            xmin=0, xmax=6,
+            axis x line=bottom,
+            axis y line=left,
+            axis line style={-},
+            xtick align=inside,
+            ytick align=inside,
+            xlabel=Voltage, % Set the labels
+            ylabel=Current,
+            x unit=V, 
+            y unit=A,
+            legend pos=north east,
+            legend cell align={left},
+            %legend style={cells={anchor=west}}
+            legend style={at={(1.4,0.5)},anchor=east}, % Put the legend below the plot
+            smooth,
+            ]
+            \addplot [mark=none,color=red!0!blue]       
+            table[x=V,y=I,col sep=comma] {../data/real_solar_panel.csv};
+            %\addlegendentry{Begining of life};
+            \addplot [mark=none, color=red!100!blue, sharp plot]       
+            table[x=V,y=I,col sep=comma] {../data/flat_solar_panel.csv};
+            %\addlegendentry{Begining of life};
+        \end{axis}
+        \begin{axis}[
+            xshift=8cm,
+            width=8cm, % Scale the plot to \linewidth
+            height=6cm,
+            %grid=major, % Display a grid
+            %grid style={dashed,gray!30}, % Set the style
+            every axis plot/.append style={thick},
+            ymin=0, ymax=8,
+            xmin=0, xmax=6,
+            axis x line=bottom,
+            axis y line=left,
+            axis line style={-},
+            xtick align=inside,
+            ytick align=inside,
+            xlabel=Voltage, % Set the labels
+            ylabel=Power,
+            x unit=V, 
+            y unit=W,
+            legend pos=north east,
+            %legend style={cells={anchor=west}}
+            legend cell align={left},
+            legend style={at={(1.4,0.5)},anchor=east}, % Put the legend below the plot
+            %x tick label style={rotate=90,anchor=east}, % Display labels sideways
+            ]
+            \addplot [mark size=2pt, color=red!0!blue]       
+            table[x=V,y=P,col sep=comma] {../data/real_solar_panel.csv};
+            %\addlegendentry{Begining of life};
+            \addplot [mark size=2pt, color=red!100!blue, sharp plot]       
+            table[x=V,y=P,col sep=comma] {../data/flat_solar_panel.csv};
+            %\addlegendentry{Begining of life};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Curvas I-V y P-V de la celda 3G30A usando el método de Villalva}
+    \label{fig:real_plots}
+\end{figure}
+
+Existen gran cantidad de métodos para determinar los cinco parámetros y con ellos darle valores a los elementos del circuito mostrado en la Figura \ref{fig:OneDiode}; sin embargo, todos ellos están fuera del alcance de este curso. El método de Villava \cite{villalva2009modeling} permite construir el modelo usando la información que se puede encontrar en la hoja de datos de la celda. Si usamos este método con un arreglo de 2 celdas en serie y 3 en paralelo (2s3p), usando la celda modelo 3G30A de Azurspace (ver Figura \ref{fig:3G30A}), obtendríamos una curva similar a la de la Figura \ref{fig:real_plots}. Esto es a una temperatura de $\SI{28}{\celsius}$, una irradiación igual a la constante solar, osea $\SI{1367}{\watt\meter^{-2}}$ y al inicio de su vida útil (BOL, beginning of life) 
+
+Los datos importantes para poder construir el modelo de un arreglo 2s3p son los siguientes: 
+
+\begin{table}[H]
+	\footnotesize
+	\centering
+	\caption{Arreglo 2s3p con Azurspace 3G30A}
+	\vspace{0.2cm}
+	\begin{tabular}{ccc} 
+		\toprule
+		\textbf{Configuración ->} & \textbf{1 celda} & \textbf{2s3p (6 celdas)} \\
+		\midrule
+		$V_{oc}$ (V) & 2.69 & 5.38 \\
+		$I_{sc}$ (A) & 0.52 & 1.56 \\
+		$V_{mp}$ (V) & 2.41 & 4.82 \\
+		$I_{mp}$ (A) & 0.50 & 1.51 \\ 
+		$\eta_{sc}$ (\,\%) & 29.3 & 29.3\\
+		$A_{sc}$ (\si{\square \centi \meter}) & 30.18 & 181.08\\
+		\bottomrule
+		\multicolumn{3}{l}{\scriptsize \textsuperscript{1}All electrical data at BOL and \SI{1367}{\watt \meter^{-2}}}    \end{tabular}
+	\label{t:cell}
+\end{table}
+
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{fig/3G30A.JPG}
+    \caption{Extracto de la hoja de datos del fabricante para celda 3G30A de Azurspace, tomado de \url{http://www.azurspace.com/images/products/0003401-01-01_DB_3G30A.pdf}}
+    \label{fig:3G30A}
+\end{figure}
+
 
 \textbf{Instrucciones}
 \begin{enumerate}
@@ -111,12 +212,15 @@ En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroq
             legend style={at={(1.4,0.5)},anchor=east}, % Put the legend below the plot
             smooth,
             ]
-            \addplot [mark=none, color=red!0!blue]       
+            \addplot [mark=none,color=red!0!blue]       
             table[x=V,y=I,col sep=comma] {../data/real_solar_panel.csv};
+            %\addlegendentry{Begining of life};
+            \addplot [mark=none, color=red!100!blue, sharp plot]       
+            table[x=V,y=I,col sep=comma] {../data/flat_solar_panel.csv};
             %\addlegendentry{Begining of life};
         \end{axis}
         \begin{axis}[
-            yshift=-6cm,
+            xshift=-6cm,
             width=10cm, % Scale the plot to \linewidth
             height=6cm,
             %grid=major, % Display a grid
@@ -142,10 +246,13 @@ En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroq
             \addplot [mark size=2pt, color=red!0!blue]       
             table[x=V,y=P,col sep=comma] {../data/real_solar_panel.csv};
             %\addlegendentry{Begining of life};
+            \addplot [mark size=2pt, color=red!100!blue, sharp plot]       
+            table[x=V,y=P,col sep=comma] {../data/flat_solar_panel.csv};
+            %\addlegendentry{Begining of life};
         \end{axis}
     \end{tikzpicture}
 
-% \bibliographystyle{IEEEtran}
-% \bibliography{ref_tareas}
+\bibliographystyle{IEEEtran}
+\bibliography{ref_tareas}
 
 \end{document}
