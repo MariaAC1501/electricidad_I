@@ -66,9 +66,15 @@ def ips_value(v_value, isc, imp, vmp, voc):
 
 ## Aqui empieza el proceso carga-descarga
 
+Q = 3.250
+R_0 = 0.1
+index = 0
+eta_char = 0.99
+Dt = 0.1/3600
+
 z_0 = 0.2
-v_0 = ocv_value(soc,ocv,z_0)
-i_0 = -isc
+i_0 = -1.0037935526315789
+v_0 = ocv_value(soc,ocv,z_0) - i_0*R_0
 t_0 = 0
 
 z = np.array([z_0])
@@ -76,11 +82,7 @@ v = np.array([v_0])
 i = np.array([i_0])
 t = np.array([t_0])
 
-Q = 3.250
-R_0 = 0.1
-index = 0
-eta_char = 0.99
-Dt = 0.1/3600
+
 
 ## Charging with panel
 while i[index] < -0.1:
@@ -91,7 +93,8 @@ while i[index] < -0.1:
     v = np.append(v,ocv_value(soc,ocv,z[index]) - i[index]*R_0) 
     t = np.append(t,t[index]+Dt)
     index += 1
-    
+
+print(i[1])    
 print(index)
 plt.plot(t,v)
 plt.show()
