@@ -2,7 +2,7 @@ import csv
 import os
 import numpy as np
 import matplotlib
-matplotlib.rcParams['text.usetex'] = True
+# matplotlib.rcParams['text.usetex'] = True
 import matplotlib.pyplot as plt
 
 title = np.array(['',''])
@@ -70,7 +70,7 @@ Q = 3.250
 R_0 = 0.1
 index = 0
 eta_char = 0.99
-Dt = 0.1/3600
+Dt = 1/3600
 
 z_0 = 0.2
 i_0 = -1.0037935526315789
@@ -94,14 +94,15 @@ while i[index] < -0.1:
     t = np.append(t,t[index]+Dt)
     index += 1
 
-print(i[1])    
-print(index)
+
 plt.plot(t,v)
 plt.show()
 plt.plot(t,i)
 plt.show()
 plt.plot(t,z)
 plt.show()
+print(i[1])    
+print(index)
 
 # ### Remove the csv file if it exists
 # try:

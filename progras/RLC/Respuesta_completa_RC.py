@@ -2,7 +2,7 @@ import csv
 import os
 import numpy as np
 import matplotlib
-matplotlib.rcParams['text.usetex'] = True
+##matplotlib.rcParams['text.usetex'] = True
 import matplotlib.pyplot as plt
 
 
