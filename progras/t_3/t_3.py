@@ -1,5 +1,4 @@
 import csv
-import os
 import numpy as np
 import matplotlib
 matplotlib.rcParams['text.usetex'] = True
@@ -34,8 +33,6 @@ voc = 4
 v_plot = np.arange(0,voc,1e-3)
 ips_plot = (v_plot<=vmp)*((imp-isc)*(v_plot/vmp)+isc) + ((v_plot>vmp)&(v_plot<=voc))*(imp*((v_plot-vmp)/(vmp-voc))+imp)
 plt.plot(v_plot,ips_plot,label=r'$v_f(t)$')
-# # plt.plot(t,vc,label=r'$v_c(t)$')
-# # plt.plot(t,ic,label=r'$i_c(t)$')
 plt.xlim([0,5])
 plt.ylim([0,1.5])
 plt.legend()
@@ -83,7 +80,6 @@ i = np.array([i_0])
 t = np.array([t_0])
 
 
-
 ## Charging with panel
 while i[index] < -0.1:
     eta = eta_char
@@ -102,14 +98,4 @@ plt.plot(t,i)
 plt.show()
 plt.plot(t,z)
 plt.show()
-
-# ### Remove the csv file if it exists
-# try:
-#     os.remove("resp_comp_RC.csv")
-# except:
-#     print("csv file does not exist")
-# ### Open the file, append header, then append data
-# with open("resp_comp_RC.csv", "ab") as file:
-#     np.savetxt(file, np.column_stack(['t','vf','vc','ic']) , delimiter = ",", fmt='%s')
-#     np.savetxt(file, np.column_stack([t,vf,vc,ic]) , delimiter = "," , fmt='%1.4f' )
 
