@@ -1,0 +1,275 @@
+\documentclass[12pt,letterpaper]{article}
+\input{comunes/preamble}
+\usepackage{geometry}  
+\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Problemas de apoyo: Electricidad I}
+\rhead{\begin{picture}(0,0) \put(-110,0){\includegraphics[width=40mm]{fig/logo.png}} \end{picture}}
+\usepackage{titlesec}
+
+\titleformat{\section}{\normalfont \Large \bfseries}
+{Semana\ \thesection}{2.3ex plus .2ex}{} %% Text "Semana" is what you would like the section number to display with.
+%\titlespacing{\subsection}{2em}{*1}{*1}
+
+\titleformat{\subsection}[runin]{\normalfont \large \bfseries}
+{Problema\ \thesubsection}{0pt}{} %% Text "Problema" is what you would like the section number to display with.
+
+\newcommand{\asection}[2]{
+\setcounter{section}{#1}
+\addtocounter{section}{-1}
+\section{#2}
+}
+
+
+\begin{document}
+\input{comunes/postamble}
+
+\asection{13}{Senoides y Fasores}
+
+1. Obtenga las senoides correspondientes a cada uno de los siguientes fasores.:\\
+a)$V_1$= 60\angle\SI{15}{\degree} V, w = 1\\
+b)$V_2$= 6 + j8 V, w = 40\\
+c)$I_1$= 2.8e$^-j\pi/3$ A, w= 377\\
+d)$I_2$= -0.5 -j1.2 A, w = 10$^3$\\\\
+2. Usando fasores, halle:\\
+a) 3 cos(20t +\SI{10}{\degree}) - 5 cos(20t -\SI{30}{\degree})\\
+b) 40 sen 50t + 30 cos(50t -\SI{45}{\degree}) )\\
+c) 20 sen 400t 10 cos(400t +\SI{60}{\degree} ) -5 sen(400t \SI{20}{\degree} )\\
+3. Usando fasores, determine i(t) en las siguientes ecuaciones:\\
+a)
+            \begin{equation*}
+               2\dfrac{di(t)}{dt}+3I(t) = 4 cos(2t -\SI{45}{\degree})
+            \end{equation*}\\
+b)
+\begin{equation}
+    10\int_{} i \cdot di+\dfrac{di(t)}{dt} +6i(t)= 5 cos (5t +\SI{22}{\degree})A
+\end{equation}\\
+
+4. Halle la corriente $I_0$ en el circuito.
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to[L,l=\SI{j80}{\ohm}]
+         (0,0)
+             
+         (-3.5,3.5)
+            to[R, l=\SI{50}{\ohm}]
+         (0,3.5)   
+         (-3.5,0)
+             to [short]
+         (0,0)
+         ( 
+         (0,3.5)
+             to[R, l=\SI{100}{\ohm}]
+         (4,3.5)
+             to [C,l=\SI{-40j}{\ohm}] 
+         (4,0)
+            to[short]
+        (0,0)
+        (-3.5,3.5)
+            to[V, l=\SI{6}\angle\SI{0}\degree V,  invert, i<^=$I_0$]
+        (-3.5,0)
+
+         ;
+     \end{circuitikz}
+ \end{center}
+\\
+R/
+\\
+5. Halle la corriente $I_0$ en el circuito.
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to [C,l=\SI{-2j}{\ohm}] 
+         (0,3.5)
+             to[R,l=\SI{2}{\ohm}]
+         (-3.5,3.5)
+            to[I,l=\SI{5}\angle\SI{0}\degree A, invert] 
+         (-3.5,0)
+             to[short]
+         (0,0)
+            
+         (4,3.5) 
+            to [short, i=$I_0$]
+         (7,3.5)
+           to[R,l=\SI{2}{\ohm}]
+         (7,0)
+            to[short]
+         (4,0)
+             to[short]
+         (0,0)
+         
+         (0,3.5)
+             to[L,l=\SI{j4}{\ohm}]
+         (4,3.5)
+           to [C,l=\SI{-2j}{\ohm}] 
+         (4,0)
+         ;
+     \end{circuitikz}
+ \end{center}
+ \\
+6. Halle Z en la red del circuito, dado que $V_0$=4\angle\SI{0}{\degree}
+\begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to [C,l=\SI{-4j}{\ohm}] 
+         (0,0)
+             
+         (-3.5,3.5)
+            to[R, l=\SI{12}{\ohm}]
+         (0,3.5)   
+         (-3.5,0)
+             to [short]
+         (0,0)
+         ( 
+         (0,3.5)
+            to [generic,l_=$Z$]
+         (4,3.5)
+             to[R, l=\SI{j80}{\ohm}, v=$V_0$] 
+         (4,0)
+            to[short]
+        (0,0)
+        (-3.5,3.5)
+            to[V, l=\SI{20}\angle\SI{-90}\degree V,  invert]
+        (-3.5,0)
+
+         ;
+     \end{circuitikz}
+\end{center}
+ \\
+7. En referencia al circuito, calcule $Z_T$ y $V_{ab}$.\\
+\begin{center}
+    \begin{circuitikz}
+        \draw
+        (3,4)   
+            to[short]
+        (0,4)
+            to[V,l=\SI{60}\angle\SI{\pi} V,  invert] %es 90 grados
+        (0,0)
+            to[short]
+        (6,0)
+        (3,4)
+            to[short]
+        (6,4)
+           to[L,l=\SI{j4}{\ohm}]
+        (6,2)
+        (3,4)
+            to[R,l=\SI{20}{\ohm}]
+        (3,2)
+            to [C,l=\SI{-5j}{\ohm}]
+        (3,0)
+            
+        (3,2)
+            to[short,-o]
+        (4,2)node[above]{$a$}
+            to[open,v=$V_{ab}$]
+        (5,2)node[above]{$b$}
+            to[short,-o]
+        (6,2)
+            to[R,l=\SI{40}{\ohm}]
+        (6,0)
+        
+      \draw[thick] (0.5,-1)node[right]{$Z_{T}$}-- (0.5,1);
+        \draw[thick,-latex] (0.5,1) -- (2,1);   
+
+        ;
+    \end{circuitikz}
+\end{center}
+R/
+\\
+8. Halle la admitancia equivalente $Y_{eq}$ en el circuito.\\
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to [C,l=\SI{5j}{\ohm}]
+         (0,3.5)
+       
+         (0,3.5)
+             
+         (-3.5,3.5)node[left]{$a$}
+            to[R,l=\SI{2}{\ohm},o-]
+         (0,3.5)   
+         (-3.5,0)node[left]{$b$}
+             to[short,o-]
+         (0,0)
+         
+         (4,3.5) 
+         
+         (8,3.5)
+           to[R,l=\SI{4}{\ohm}]
+         (8,0)
+            to [short]
+         (4,0)
+             to[short]
+         (0,0)
+        
+         (0,3.5)
+             to[R,l=\SI{1}{\ohm}]
+         (2,3.5)
+            to[L,l=\SI{-3j}{\ohm}]
+         (4,3.5)
+             to [C,l=\SI{1j}{\ohm}]
+         (4,0)
+         (4,3.5)
+             to[L,l=\SI{-2j}{\ohm}]
+         (8,3.5)
+         ;
+     \end{circuitikz}
+\end{center}
+ R/  \\[16pt]
+9. Determine la impedancia equivalente del circuito.\\
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to[L,l=\SI{-8j}{\ohm}]
+         (0,3.5)
+       
+         (0,3.5)
+             
+         (-3.5,3.5)node[left]{$a$}
+            to[R,l=\SI{2}{\ohm},o-]
+         (0,3.5)   
+         (-3.5,0)node[left]{$b$}
+             to[short,o-]
+         (0,0)
+         (-3,0)
+            to[L,l=\SI{6j}{\ohm}]
+         (-3,3.5)
+            to [short]
+         (-3,6)
+            to [C,l=\SI{-4j}{\ohm}]
+         (8,6)
+            to [short]
+         (8,3.5)
+         
+         (4,3.5) 
+         
+         (8,3.5)
+           to[L,l=\SI{12j}{\ohm}]
+         (8,0)
+            to [short]
+         (4,0)
+             to[short]
+         (0,0)
+         (0,3.5)
+             to [C,l=\SI{-6j}{\ohm}]
+         (4,3.5)
+             to [C,l=\SI{8j}{\ohm}]
+         (4,0)
+         (4,3.5)
+             to[R,l=\SI{4}{\ohm}]
+         (8,3.5)
+         ;
+     \end{circuitikz}
+\end{center}
+
+\end{document}

@@ -1,0 +1,193 @@
+\documentclass[12pt,letterpaper]{article}
+\input{comunes/preamble}
+\usepackage{geometry}  
+\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Problemas de apoyo: Electricidad I}
+\rhead{\begin{picture}(0,0) \put(-110,0){\includegraphics[width=40mm]{fig/logo.png}} \end{picture}}
+\usepackage{titlesec}
+
+\titleformat{\section}{\normalfont \Large \bfseries}
+{Semana\ \thesection}{2.3ex plus .2ex}{} %% Text "Semana" is what you would like the section number to display with.
+%\titlespacing{\subsection}{2em}{*1}{*1}
+
+\titleformat{\subsection}[runin]{\normalfont \large \bfseries}
+{Problema\ \thesubsection}{0pt}{} %% Text "Problema" is what you would like the section number to display with.
+
+\newcommand{\asection}[2]{
+\setcounter{section}{#1}
+\addtocounter{section}{-1}
+\section{#2}
+}
+
+
+\begin{document}
+\input{comunes/postamble}
+
+\asection{15}{Thevenin y Norton en CA y Potencia compleja }
+
+1. En terminales a-b obtenga los circuitos equivalentes de Thevenin y Norton de la red que se presenta en el circuito. Adopte w= 10 rad/s.(Donde $X_V$=12cos(wt) V y $X_A$=2sen(wt)A)\\
+\begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+            to[L,l=\SI{1/2}{\henry}]
+         (0,3.5)
+         (-4,3.5)node[left]{$a$}
+            to[short,o-]
+         (0,3.5)   
+         (-4,0)node[left]{$b$}
+             to[short,o-]
+         (0,0)
+         (-3,0)
+            to[cI,l=$2V_0$]
+         (-3,3.5)
+         
+         (8,3.5)
+           to[I,l= $X_A$, invert]
+         (8,0)
+            to [short]
+         (4,0)
+             to[short]
+         (0,0)
+         (0,3.5)
+            to[V, v_=$X_V$, invert] 
+         (2,3.5)
+            to [C,l=\SI{10}{\milli\farad}]
+         (4,3.5)
+            to[R,l=\SI{10}{\ohm}, v=$V_0$] 
+         (4,0)
+         (4,3.5)
+             to[short]
+         (8,3.5)
+         ;
+     \end{circuitikz}
+\end{center}
+
+2. Aplicando el teorema de Thevenin halle $V_0$ en el  circuito.(Donde X= 12cos(t) V)\\
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to[C,l=\SI{1/4}{\farad}]
+         (0,0)  
+         (0,3.5)
+             to[short]
+         (0,6)
+         (0,3.5)
+             to[R,l=\SI{4}{\ohm}, invert]
+         (-3.5,3.5)
+            to[V,l=$X$, i<^=$i_o$, invert]
+         (-3.5,0)
+             to[short]
+         (0,0)
+         (0,6)
+           to[cI,l=$3i_o$]
+         (4,6)
+             to[short]
+         (4,3.5) 
+        
+         (7,3.5)
+           to[R,l=\SI{2}{\ohm}, v=$V_o$]
+         (7,0)
+             to[short]
+         (0,0)
+         (0,3.5)
+             to[L,l=\SI{2}{\henry}]
+         (4,3.5)
+        
+         (4,3.5)
+             to[C,l=\SI{1/8}{\farad}]
+         (4,0)
+         (4,3.5)
+             to[short] 
+         (7,3.5)
+         ;
+     \end{circuitikz}
+ \end{center}
+ 
+3. Obtenga el equivalente de Norton del circuito que se presenta en las terminales a-b.(Donde X=4 cos(200t+\SI{30}{\degree})) 
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         (0,0)
+           to[R,l=\SI{2}{\kilo\ohm}]
+         (0,3.5)
+         (-3.5,3.5)node[left]{$a$}
+            to[C,l=\SI{5}{\mu\farad},o-]
+         (0,3.5)   
+         (-3.5,0)node[left]{$b$}
+             to[short,o-]
+         (0,0)
+         (8,3.5)
+           to[I,l=$X$, invert]
+         (8,0)
+            to [short]
+         (4,0)
+             to[short]
+         (0,0)
+        
+         (0,3.5)
+             to[short]
+         (4,3.5)
+             to [L,l=\SI{10}{\henry}]
+         (4,0)
+         (4,3.5)
+             to[short]
+         (8,3.5)
+         ;
+     \end{circuitikz}
+\end{center}
+ R/  \\[16pt]
+4.Halle la potencia compleja provista por $V_s$ a la red del circuito. Sea $V_s$= 100 cos(200t) V.\\
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to[L,l=\SI{60}{\milli\henry}, i=$i_x$]
+         (0,0)
+             
+         (-3.5,3.5)
+            to[R, l=\SI{30}{\ohm}]
+         (-1.5,3.5)
+            to[C,l=\SI{40}{\mu\farad}]
+         (0,3.5)   
+         (-3.5,0)
+             to [short]
+         (0,0)
+         ( 
+         (0,3.5)
+             to[R, l=\SI{20}{\ohm}]
+         (4,3.5)
+             to [cV,l=$4i_x$,invert] 
+         (4,0)
+            to[short]
+        (0,0)
+        (-3.5,3.5)
+            to[V, l=$V_s$,  invert]
+        (-3.5,0)
+
+         ;
+     \end{circuitikz}
+ \end{center}
+5. En cada uno de los siguientes casos halle la potencia compleja, la potencia promedio y la potencia reactiva. \\
+a)V(t)= 112 cos(wt+\SI{10}{\degree}) V\\
+i(t)= 4 cos(wt-\SI{50}{\degree})A \\
+b) V(t) = 160cos 377t V\\
+i(t)= 4 cos (377t + \SI{45}{\degree}) A
+c) V= 80\angle\SI{60}{\degree} V rms, Z= 50\angle\SI{30}{\degree} ohm\\
+d) I= 10\angle\SI{60}{\degree} A rms, Z= 100\angle\SI{45}{\degree} ohm\\
+
+
+6. Determine la potencia compleja en los siguientes casos:\\
+
+a) p=269 W, Q= 150 VAR (Capacitiva)\\
+b) Q= 2000 VAR, fp= 0.9 (adelantado)\\
+c) S= 600 VA. Q= 450 VAR (inductiva)\\
+d) $V_{rms}$= 220 V, P= 1kW. |Z|= \SI{40}{\ohm} 
+
+\end{document}

@@ -20,6 +20,15 @@ Definiciones:
     \item Irradiancia solar (\si{\watt\meter^{-2}}): es la potencia por unidad de superficie que se recibe del sol en forma de radiación electromagnética.
     \item Constante solar (\si{\watt\meter^{-2}}): es la irradiancia medida en la parte externa de la atmósfera terrestre y en una superficie perpendicular a los rayos del sol.
     \item Ángulo de incidencia (\si{\degree}): es el ángulo entre los rayos del sol y la normal de una superficie en el punto de incidencia. 
+    \item Celda electroquímica recargable: es un dispositivo capaz de convertir energía química en energía eléctrica y viceversa. 
+    \item Batería: es la interconexión de dos o mas celdas electroquímicas.
+    \item Capacidad nominal [$Q$]: es la cantidad de carga que una celda o batería puede entregar en amperios-hora (\si{\ampere\hour})
+    \item Eficiencia de Coulumb [$\eta$]: es la eficiencia con la que se transfiere la carga a una batería, tipicamente se asume que $\eta = 1$ durante la descarga y que $\eta < 1$ durante la carga. 
+    \item SOC [$z(t)$]: \emph{state of charge}, estado de carga de una celda o batería, para una celda o batería descargada $z(t) = 0$, mientras que para una celda o batería cargada $z(t) = 1$. El estado de carga se puede relacionar con la corriente por medio de la siguiente ecuación:
+    \begin{equation*}
+        z(t) = z(t_0) - \dfrac{1}{Q}\int_{t_0}^t \eta i(\tau) d\tau
+    \end{equation*}
+    \item OCV: \emph{open circuit voltage}, voltaje de circuito abierto es el voltaje que la celda o batería tendría si se desconecta de la carga y se deja descansar hasta que el valor del voltaje sea constante.
 \end{itemize}
 
 Existe gran diversidad de modelos para paneles solares, uno de los modelos mas comunes es el de \emph{un diodo}, también conocido como el de \emph{5 parámetros}. En la Figura \ref{fig:OneDiode} se muestra este modelo. 
@@ -70,7 +79,7 @@ Existe gran diversidad de modelos para paneles solares, uno de los modelos mas c
             xtick align=inside,
             ytick align=inside,
             xlabel=Voltaje, % Set the labels
-            ylabel=Potencia,
+            ylabel=Corriente,
             x unit=V, 
             y unit=A,
             legend pos=north east,
@@ -116,7 +125,15 @@ Existe gran diversidad de modelos para paneles solares, uno de los modelos mas c
     \label{fig:real_plots}
 \end{figure}
 
-Existen gran cantidad de métodos para determinar los cinco parámetros y con ellos darle valores a los elementos del circuito mostrado en la Figura \ref{fig:OneDiode}; sin embargo, todos ellos están fuera del alcance de este curso. El método desarrollado por Villava \cite{villalva2009modeling} permite construir el modelo usando la información que se puede encontrar en la hoja de datos de la celda. Si usamos este método con un arreglo de 2 celdas en serie y 3 en paralelo (2s3p), usando la celda modelo 3G30A de Azurspace (ver Figura \ref{fig:3G30A}), obtendríamos una curva similar a la de la Figura \ref{fig:real_plots}. Esto es a una temperatura de $\SI{28}{\celsius}$, una irradiación igual a la constante solar, osea $\SI{1367}{\watt\meter^{-2}}$ y al inicio de su vida útil (BOL, beginning of life). Los datos importantes para poder construir el modelo de un arreglo 2s3p están en la Tabla \ref{t:cell}
+Existen gran cantidad de métodos para determinar los cinco parámetros y con ellos darle valores a los elementos del circuito mostrado en la Figura \ref{fig:OneDiode}; sin embargo, todos ellos están fuera del alcance de este curso. El método desarrollado por Villava \cite{villalva2009modeling} permite construir el modelo usando la información que encuentra en la hoja de datos de la celda, esa información incluye los siguientes valores: 
+\begin{itemize}
+    \item $V_{oc}$: \emph{open circuit voltage}, voltaje de circuito abierto. Es el voltaje que tiene el panel cuando no tiene carga conectada en sus terminales, o sea, cuando la corriente es igual a cero.
+    \item $I_{sc}$ \emph{short circuit current}, corriente de corto circuito. En la corriente que se obtendría si la terminales se ponen en cortocircuito, o sea, cuando el voltaje es cero. 
+    \item $V_{mp}$ \emph{maximum power voltage}, voltaje en el punto de máxima potencia, o sea, el voltaje al que se alcanza el punto máximo en la curva P-V de la Figura \ref{fig:real_plots}
+    \item $I_{mp}$ \emph{maximum power current}, corriente en el punto de máxima potencia, o sea, la corriente correspondiente a el punto máximo en la curva P-V de la Figura \ref{fig:real_plots}
+\end{itemize}
+
+Si usamos el método de Villalva con un arreglo de 2 celdas en serie y 3 en paralelo (2s3p), usando la celda modelo 3G30A de Azurspace (ver Figura \ref{fig:3G30A}), obtendríamos una curva similar a la de la Figura \ref{fig:real_plots}. Esto es a una temperatura de $\SI{28}{\celsius}$, una irradiación igual a la constante solar, o sea $\SI{1367}{\watt\meter^{-2}}$ y al inicio de su vida útil (BOL, beginning of life). Los datos importantes para poder construir el modelo de un arreglo 2s3p están en la Tabla \ref{t:cell}
 
 \begin{figure}[H]
     \centering
