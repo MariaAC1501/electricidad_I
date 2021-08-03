@@ -1,0 +1,409 @@
+\documentclass[12pt,letterpaper]{article}
+\input{comunes/preamble}
+\usepackage{geometry}  
+\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Problemas de apoyo: Electricidad I}
+\rhead{\begin{picture}(0,0) \put(-110,0){\includegraphics[width=40mm]{fig/logo.png}} \end{picture}}
+\usepackage{titlesec}
+
+\titleformat{\section}{\normalfont \Large \bfseries}
+{Semana\ \thesection}{2.3ex plus .2ex}{} %% Text "Semana" is what you would like the section number to display with.
+%\titlespacing{\subsection}{2em}{*1}{*1}
+
+\titleformat{\subsection}[runin]{\normalfont \large \bfseries}
+{Problema\ \thesubsection}{0pt}{} %% Text "Problema" is what you would like the section number to display with.
+
+\newcommand{\asection}[2]{
+\setcounter{section}{#1}
+\addtocounter{section}{-1}
+\section{#2}
+}
+
+
+\begin{document}
+\input{comunes/postamble}
+
+\asection{10}{Funciones de Singularidad: Respuesta completa RC y RL}
+
+1.Determine v(t) para t>0 en el circuito, si v(0)=0.\\
+\begin{center}
+    \begin{circuitikz}[scale=0.8]
+    \draw
+            (0,4)
+                to [R,l=\SI{4}{\ohm}] 
+            (0,0)
+    
+            (-4,4)
+                to[short]
+            (0,4)
+    
+            (-4,4)
+                to[I, v=$3u(t-1) A$, invert]
+            (-4,0)
+           
+            (0,4)
+                to[C,l=\SI{0.1}{\farad}, v=$V$]
+            (3,4)
+            (1.8,4)
+                to [short]
+            (3,4)
+                to [short]
+            (3,4)
+                to [R,l=\SI{8}{\ohm}]
+            (3,0) 
+                to[short] 
+            (1.5,0) 
+                to[short] 
+            (-1,0) 
+            -- (-4,0)
+           
+            (3,4)
+                to [short]
+            (6,4)
+            (6,0)
+                to[I, v=$3u(t) A$, invert]
+            (6,4)
+            (6,0)
+                to [short]
+            (3,0)
+           
+            ;
+        \end{circuitikz}
+\end{center}
+R/
+\\[16pt]
+\\
+
+2. Calcule la tensión del capacitor para t<0 y t>0 de cada uno de los circuitos.
+\\
+a)
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to[C,l=\SI{2}{\farad}, v=$V$]
+         (0,0)
+             
+         (-3.5,3.5)
+            to[R, l=\SI{4}{\ohm}]
+         (0,3.5)   
+         (-3.5,0)
+             to [short]
+         (0,0)
+            
+         (0,3.5)
+             to[short]
+         (4.3,3.5)
+             to[R, l=\SI{1}{\ohm}]
+         (4.3,1.8)node[left]{$t=0$}   
+            
+         (4,1.3)
+            to[short]
+        (4,0)
+            to[short]
+        (0,0)
+        (-3.5,3.5)
+            to[V, l=\SI{10}{\volt}, invert]
+        (-3.5,0)
+        \draw
+            (4.3,1.9) node[cute spdt up arrow, rotate = 270, yscale = -1, anchor=in] (Sw) {}
+         ;
+     \end{circuitikz}
+ \end{center}
+ 
+ R/
+ \\[16pt]
+\\
+b)
+\begin{center}
+    \begin{circuitikz}[scale=0.8]
+    \draw
+            (0,4)
+                 to [short]
+            (0,3) node[cute spdt up arrow, rotate = 270, yscale = 1, anchor=in] (Sw) {}
+            (-0.5,2.2)node[left]{$t=0$}   
+                to [short]
+            (-0.5,0)
+            (-0,4) 
+                to [C,l=\SI{2}{\farad}] 
+            (-4,4)
+                to[V, v_=\SI{12}{\volt}, invert]
+            (-4,0)
+            (0,4)
+                to[short]
+            (3,4)
+                to[R,R=\SI{5}{\ohm}]
+            (3,0) 
+                to[short] 
+            (1.5,0) 
+                to[short] 
+            (-1,0) 
+            -- (-4,0)
+           
+            (3,4)
+                to[short]
+            (6,4)
+            (6,0)
+                to[I, l=\SI{6}{\ampere}, invert]
+            (6,4)
+            (6,0)
+                to [short]
+            (3,0)
+           
+            ;
+        \end{circuitikz}
+\end{center}\\[16pt]
+\\
+
+3.Considere el circuito. Halle i(t) para t<0 y t>0.\\
+\begin{center}
+    \begin{circuitikz}[scale=0.8]
+    \draw
+            (0,4.5)
+                to [C,l=\SI{3}{\farad}] 
+            (0,0)
+            
+            (-4,5)
+                to [R,l=\SI{40}{\ohm}] 
+            (-2,5)node[cute spdt up arrow, rotate = 360, yscale = -1, anchor=in] (Sw) {}
+            (0,5)
+            (0,4.5)
+                to[short]
+            (-1.1,4.5)
+            (-1,5)node[right]{$t=0$}   
+            (-4,5)
+                to[V, v_=\SI{80}{\volt}, invert]
+            (-4,0)
+            (0,4)
+                to[short]
+            (3,4)
+                to[cI,l=$0.5i$, invert]
+            (3,0) 
+                to[short] 
+            (1.5,0) 
+                to[short] 
+            (-1,0) 
+            -- (-4,0)
+           
+            (3,4)
+                to [R,l=\SI{30}{\ohm}, i=$i$]
+            (6,4)
+            (6,0)
+                to[R, l=\SI{50}{\ohm}]
+            (6,4)
+            (6,0)
+                to [short]
+            (3,0)
+           
+            ;
+        \end{circuitikz}
+\end{center}
+R/
+\\[16pt]
+
+4.Determine la corriente en el inductor i(t) tanto para t>0 como para t>0 de cada uno de los circuitos.
+\\
+a)
+\begin{center}
+    \begin{circuitikz}[scale=0.8]
+    \draw
+            (0,4)
+                 to [short]
+            (0,3) node[cute spdt up arrow, rotate = 270, yscale = 1, anchor=in] (Sw) {}
+            (-0.5,2.2)node[left]{$t=0$}   
+                to [short]
+            (-0.5,0)
+            (-4,4)
+                to [R,l=\SI{3}{\ohm}] 
+            (-0,4) 
+                
+            (-4,4)
+                to[V, v_=\SI{25}{\volt}, invert]
+            (-4,0)
+            (0,4)
+                to [R,l=\SI{2}{\ohm}, i=$i$]
+            (3,4)
+                to[L,l=\SI{4}{\henry}]
+            (3,0) 
+                to[short] 
+            (1.5,0) 
+                to[short] 
+            (-1,0) 
+            -- (-4,0)
+           
+            ;
+        \end{circuitikz}
+\end{center}\\[16pt]
+\\
+\\
+b)
+\begin{center}
+    \begin{circuitikz}[scale=0.8]
+    \draw
+            (0,5)
+                to [R,l=\SI{4}{\ohm}] 
+            (0,0)
+    
+            (-4,5)
+                to[short]
+            (0,5)
+    
+            (-4,5)
+                to[V, v_=\SI{80}{\volt}, invert]
+            (-4,0)
+            (0,5)
+                to [short]
+            (1,5)node[cute spdt up arrow, rotate = 360, yscale = -1, anchor=in] (Sw) {}
+            (2,6)node[left]{$t=0$}
+            (1.8,4.4)
+                to [short]
+            (3,4.4)
+                to [short]
+            (3,4.4)
+                to [R,l=\SI{2 }{\ohm}]
+            (3,0) 
+                to[short] 
+            (1.5,0) 
+                to[short] 
+            (-1,0) 
+            -- (-4,0)
+           
+            (3,4.4)
+                to [short, i=$i$]
+            (6,4.4)
+                to[L,l=\SI{3}{\henry}]
+            (6,0)
+                to [short]
+            (3,0)
+           
+            ;
+        \end{circuitikz}
+\end{center}
+R/
+\\[16pt]
+\\
+5.Determine la respuesta de escalón $V_0$(t) a $V_s$ = 18u(t) en el circuito.\\
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to[R, l=\SI{3}{\ohm}]
+         (0,0)
+             
+         (-3.5,3.5)
+            to[R, l=\SI{6}{\ohm}]
+         (0,3.5)   
+         (-3.5,0)
+             to [short]
+         (0,0)
+         ( 
+         (0,3.5)
+             to[short]
+         (4,3.5)
+             to[R, l=\SI{4}{\ohm}]
+         (4,1.8)   
+            to[L,l=\SI{1.5}{\henry}, v=$V_o$]
+         (4,0)
+            to[short]
+        (0,0)
+        (-3.5,3.5)
+            to[V, l=$V_s$, invert]
+        (-3.5,0)
+
+         ;
+     \end{circuitikz}
+ \end{center}
+
+6. En referencia a la red que aparece en el circuito, halle v(t) para t>0.\\
+\begin{center}
+    \begin{circuitikz}[scale=0.8]
+    \draw
+            (0,5)
+                to [R,l=\SI{12}{\ohm}] 
+            (0,0)
+    
+            (-4,5)
+                to[short]
+            (0,5)
+    
+            (-4,5)
+                to[I, l=\SI{2}{\ampere}, invert]
+            (-4,0)
+            (0,5)
+                to [short]
+            (1,5)node[cute spdt up arrow, rotate = 360, yscale = -1, anchor=in] (Sw) {}
+            (2,6)node[left]{$t=0$}
+            (1.8,4.4)
+                to [short]
+            (3,4.4)
+                to [short]
+            (3,4.4)
+                to [R,l=\SI{20}{\ohm}]
+            (3,0) 
+                to[short] 
+            (1.5,0) 
+                to[short] 
+            (-1,0) 
+            -- (-4,0)
+           
+            (3,4.4)
+                to [R,l=\SI{6}{\ohm}] 
+            (6,4.4)
+                to[L,l=\SI{0.5}{\henry}]
+            (6,0)
+                to [short]
+            (3,0)
+            (3,4)
+                to [short]
+            (3,7)
+                 to [R,l=\SI{5}{\ohm}] 
+            (9,7)
+                 to[V, v_=\SI{20}{\volt}, invert]
+            (9,0)
+                to [short]
+            (6,0)
+            ;
+        \end{circuitikz}
+\end{center}
+R/
+\\[16pt]
+\\
+
+7. Determine el valor de $i_L$(t) y la energía total disipada por el circuito desde t=0 s hasta t=$\infty$ s. El valor de $V_in$(t) es igual a [40-40u(t)] volts.\\
+ \begin{center}
+     \begin{circuitikz}
+         \draw
+         
+         (0,3.5)
+           to[R, l=\SI{40}{\ohm}]
+         (0,0)
+             
+         (-3.5,3.5)
+            to[R, l=\SI{40}{\ohm}]
+         (0,3.5)   
+         (-3.5,0)
+             to [short]
+         (0,0)
+         ( 
+         (0,3.5)
+             to[short, i=$i_L$(t)]
+         (4,3.5)
+              to[L,l=\SI{10}{\henry}]
+         (4,0)
+            to[short]
+        (0,0)
+        (-3.5,3.5)
+            to[V, l=$V_in$(t), invert]
+        (-3.5,0)
+
+         ;
+     \end{circuitikz}
+ \end{center}
+\\
+
+\end{document}
