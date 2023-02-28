@@ -1,0 +1,229 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.1in]{geometry} 
+\input{comunes/preamble}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{57pt}
+\setlength{\parindent}{0cm}
+
+ 
+\begin{document}
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos en formato \textbf{pdf}.} 
+\rhead{Electricidad I \\ Tarea \#2  \\ Entrega: Semana 4 \\ } 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+\textbf{Elementos de un circuito}
+
+\begin{enumerate}
+    \item Cuente el número de ramas y nodos que hay en el siguiente circuito. Si la fuente de $18 V$ entrega $8 A$ de corriente, ¿Cuál es el valor de $R_A$? 
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[V,l=\SI{18}{\volt}]
+            (0,3)
+                to[short]
+            (3,3)
+                to[R,l=$R_A$]
+            (3,0)
+                to[short]
+            (0,0)
+            ;
+            \draw
+            (3,3)
+            to[short]
+            (6,3)
+            to[R,l=\SI{6}{\ohm},i^=\SI{3}{\ampere}]
+            (6,0)
+            to[short]
+            (3,0)
+            ;
+            \draw
+            (6,3)
+            to[R,l=\SI{5}{\ohm},i<_=\SI{13}{\ampere}]
+            (9,3)
+            to[V,invert,l=$v_x$]
+            (9,0)
+            to [short]
+            (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\end{enumerate}
+
+\textbf{Ley de voltaje de Kirchhoff, simplificación de elementos en serie}
+
+\begin{enumerate}[resume]
+   \item Determine $i_x$ y $v_x$ en el siguiente circuito.
+   \item Simplifique el siguiente circuito de forma que conste de una fuente y una resistencia
+   \begin{center}
+       \begin{circuitikz}[scale = 1]
+           \draw
+           (0,0)
+           to[V,invert,l=\SI{3}{\volt}]
+           (0,3)
+           to[V,invert,l=\SI{1}{\volt},i=$i_x$]
+           (4,3)
+           to[R,l=\SI{10}{\ohm},v=$v_x$]
+           (4,0)
+           to[short]
+           (0,0)
+           ;
+       \end{circuitikz}
+    \end{center}
+
+\item Determine i en el siguiente circuito.
+   \begin{center}
+        \begin{circuitikz}[scale=0.75]
+            \draw
+           (0,0)
+           to[V,l=\SI{5}{\volt}]
+           (0,3)
+           to[V,l=\SI{5}{\volt}]
+           (8/3,3)
+           to[R,l=\SI{15}{\ohm}]
+            (16/3,3)
+           to[R,l=\SI{25}{\ohm},f<^=$i$]
+           (32/3,3)
+           to[V,l=\SI{5}{\volt}]
+           (32/3,0)
+           to[R,l=\SI{5}{\ohm}]
+           (0,0)
+           ;
+     \end{circuitikz}
+ \end{center}
+\end{enumerate}
+
+\newpage
+
+\textbf{Simplificación de elementos en serie o paralelo, divisor de corriente, divisor de voltaje}
+
+\begin{enumerate}[resume]
+    \item Determine los valores de $i_1$, $i_2$ y $v_3$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.4]
+            \draw
+            (0,0)
+                to[I,l=\SI{15}{\ampere}]
+            (0,3)
+                to[short]
+            (3,3)
+                to[short,i=$i_1$] 
+            (4,3)
+                to[R,l=\SI{5}{\ohm},i=$i_2$]
+            (7,3)
+                to[R,l=\SI{6}{\ohm}]
+            (9,3)
+               to[R,l=\SI{3}{\ohm},v=$v_3$]
+            (9,0)
+                to[short]
+            (0,0)
+            (2,3)
+               to[R,l=\SI{10}{\ohm}]
+            (2,0)
+            (4,3)
+                to[I,l=\SI{7}{\ampere}]
+            (4,0)
+            (7,3)
+                to[R,l=\SI{4}{\ohm}]
+            (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\end{enumerate}
+
+\textbf{Simplificación de elementos en serie o paralelo, fuentes dependientes}
+
+\begin{enumerate}[resume]
+\item Calcule la potencia y la tensión de la fuente dependiente del siguiente circuito.
+\begin{center}
+    \begin{circuitikz}[scale=1]
+    \draw
+    (0,0)
+    to[I,l=\SI{6}{\ampere},v=$v_x$]
+    (0,6)
+    to[short]
+    (2,6)
+    to [short]
+    (4,6)
+    to [short]
+    (7,6)
+    to[short]
+    (10,6)
+    to[short]
+    (13,6)
+    to [I,l=\SI{4}{\ampere}]
+    (13,0)
+    to [short]
+    (0,0)
+    ;
+    \draw
+    (2,6)
+    to [R,l=\SI{3}{\ohm},f>^=$i_3$]
+    (2,0)
+    ;
+    \draw
+    (4,6)
+    to [R,l=\SI{9}{\ohm}]
+    (4,0)
+    ;
+    \draw
+    (7,6)
+    to [cI,l=$0.9i_3$]
+    (7,0)
+    ;
+     \draw
+    (10,6)
+    to [R,l=\SI{15}{\ohm}]
+    (10,3)
+    ;
+     \draw
+    (10,3)
+    to[short]
+    (9,3)
+    to [R,l=\SI{6}{\ohm}]
+    (9,0)
+    ;
+     \draw
+    (10,3)
+    to[short]
+    (11,3)
+    to [R,l=\SI{6}{\ohm}]
+    (11,0)
+    ;
+    \end{circuitikz}
+\end{center}
+\end{enumerate}
+
+\newpage
+
+\textbf{Simulación de fuentes dependientes}
+
+\begin{enumerate}[resume]
+\item Simule el siguiente circuito usando LTSpice, utilice la directiva \verb!.op!
+\item Incluya un pantallazo de los resultados
+\begin{center}
+    \begin{circuitikz}
+        \draw
+        (0,0)
+            to[V,l=\SI{10}{\volt}]
+        (0,3)
+            to[R, l=\SI{10}{\ohm}]
+        (3,3)
+            to[cI,l=$2i_x$]
+        (3,0)
+        (3,3)
+            to[short]
+        (6,3)
+            to[R, l=\SI{10}{\ohm}, i=$i_x$]
+        (6,0)
+            to[short]
+        (0,0)
+        ;
+    \end{circuitikz}
+\end{center}
+\end{enumerate}
+   
+\end{document}

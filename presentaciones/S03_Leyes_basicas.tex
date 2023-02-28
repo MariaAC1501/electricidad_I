@@ -134,6 +134,45 @@ Ley de Watt
     \end{tabularx}
 \end{frame}
 
+\begin{frame}{Fuentes reales}
+    \begin{tabularx}{\linewidth}{X X}
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (2.5,0)
+                to[short,o-]
+            (0,0)	
+                to[V, l=$v_F$]
+            (0,3)
+                to[R,v=$v_R$,-o]
+            (2.5,3)
+                to[open,v=$v$,xshift=0.3cm]
+            (2.5,0)
+            ;
+        \draw (1,3.5)node[above, align=center]{Fuente \\de voltaje \\real};
+        \draw (1,-1)node[above, align=center]{$v = v_F - v_R$};
+        \end{circuitikz}
+        &
+        \centering
+        \begin{circuitikz} [scale=1]\draw
+            (2.5,0)
+                to[short,o-]
+            (0,0)	
+                to[I, l=$i_F$]
+            (0,3)
+                to[short]
+            (1.5,3)
+                to[short, -o, i=$i$]
+            (2.5,3)
+            (1.5,3)
+                to[R, v=$i_R$]
+            (1.5,0)
+            ;
+        \draw (1,3.5)node[above, align=center]{Fuente \\ de corriente \\real};
+        \draw (1,-1)node[above, align=center]{$i = i_F - i_R$};
+        \end{circuitikz}
+    \end{tabularx}
+\end{frame}
+
 \begin{frame}{Elementos de un circuito}
     \begin{tabularx}{\linewidth}{X X}
         \begin{itemize}

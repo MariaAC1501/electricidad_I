@@ -32,7 +32,7 @@
 
 
 \begin{center}
-    \begin{circuitikz}
+    \begin{circuitikz}[scale=1.5]
         \draw
         (0,0)
             to[V,l=\SI{50}{\volt}]
@@ -40,21 +40,21 @@
             to[R,l=\SI{10}{\ohm}]
         (0,3)
             to[short]
-        (3,3)
+        (2,3)
             to[short]
-        (6,3)
+        (4,3)
             to[R,l=\SI{40}{\ohm}]
-        (6,0)
+        (4,0)
             to[short]
         (0,0)
-        (3,3)
+        (2,3)
         to[short,i=$i$]
-        (3,2.7)
-        (3,2.7)
+        (2,2.7)
+        (2,2.7)
             to[R,l=\SI{12}{\ohm}]
-        (3,1.5)
+        (2,1.5)
             to[V,l=\SI{30}{\volt},invert]
-        (3,0)
+        (2,0)
         ;
     \end{circuitikz}
 \end{center}
@@ -87,7 +87,7 @@ R/ $i=\SI{500}{\milli\ampere}$ \\[16pt]
     \end{circuitikz}
 \end{center}
 
-R/ $R_Th=\SI{2,857}{\kilo\ohm}$ \\[16pt]
+R/ $R_{Th}=\SI{2,857}{\kilo\ohm}$ \\[16pt]
 
 3.Determine los equivalentes de Thevenin y Norton en las terminales a-b.
 
@@ -130,9 +130,7 @@ R/ $R_Th=\SI{2,857}{\kilo\ohm}$ \\[16pt]
          ;
      \end{circuitikz}
  \end{center}
-R/ $R_Th=\SI{4}{\ohm}$,
-y $R_N=\SI{4}{\ohm}$, $V_Th=\SI{-8}{\volt}$ e $I_N=\SI{-2}{\ampere}$
-\\[16pt]
+R/ $R_{Th}=\SI{4}{\ohm}$, y $R_N=\SI{4}{\ohm}$, $V_{Th}=\SI{-8}{\volt}$ e $I_N=\SI{-2}{\ampere}$ \\[16pt]
  4.Determine el equivalente de
 Norton visto desde las terminales:
 a) a-b, b) c-d
@@ -180,11 +178,9 @@ a) a-b, b) c-d
      \end{circuitikz}
  \end{center}
  
- R/
- a) 
-  $R_N=\SI{2}{\ohm}$, $V_Th=\SI{14}{\volt}$ e $I_N=\SI{7}{\ampere}$\\[8pt]
-b) 
-  $R_N=\SI{1,5}{\ohm}$, $V_Th=\SI{19}{\volt}$ e $I_N=\SI{12,667}{\ampere}$\\[16pt]
+R/ a) $R_N=\SI{2}{\ohm}$, $V_{Th}=\SI{14}{\volt}$ e $I_N=\SI{7}{\ampere}$\\[8pt]
+b) $R_N=\SI{1,5}{\ohm}$, $V_{Th}=\SI{19}{\volt}$ e $I_N=\SI{12,667}{\ampere}$\\[16pt]
+
 5. Encuentre el equivalente de Norton en las terminales a-b.
  \begin{center}
      \begin{circuitikz}
@@ -221,11 +217,7 @@ b)
          ;
      \end{circuitikz}
  \end{center}
-R/
-  
-  $R_N=\SI{3}{\ohm}$ e $I_N=\SI{1}{\ampere}$\\[16pt]
-
-
+R/ $R_N=\SI{3}{\ohm}$ e $I_N=\SI{1}{\ampere}$\\[16pt]
 
 6. Determine los equivalentes de Thevenin y Norton en las terminales a-b.
 
@@ -255,7 +247,7 @@ R/
         (4,2)node[above]{$a$}
             
         (5,2)node[above]{$b$}
-            to[short,-o]
+            to[short,o-]
         (6,2)
             to[R,l=\SI{40}{\ohm}]
         (6,0)
@@ -263,8 +255,7 @@ R/
         ;
     \end{circuitikz}
 \end{center}
-R/
-$R_Th=\SI{22,5}{\ohm}$, $V_Th=\SI{40}{\volt}$ e $I_N=\SI{1,7778}{\ampere}$\\[16pt]
+R/ $R_{Th}=\SI{22,5}{\ohm}$, $V_{Th}=\SI{40}{\volt}$ e $I_N=\SI{1,7778}{\ampere}$\\[16pt]
 
 7.Determine la máxima potencia suministrada al resistor variable R.
 
@@ -305,11 +296,6 @@ $R_Th=\SI{22,5}{\ohm}$, $V_Th=\SI{40}{\volt}$ e $I_N=\SI{1,7778}{\ampere}$\\[16p
          ;
      \end{circuitikz}
  \end{center}
- R/
- $Pmax=\SI{21.48}mW$ \\[8pt]
-
-
-
-
+ R/  $P_{max}=\SI{21.48}{\milli\watt}$ \\[8pt]
 
 \end{document}

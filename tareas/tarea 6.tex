@@ -1,0 +1,374 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.4in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{60 pt}
+
+
+
+ 
+\begin{document}
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos a mano.} 
+\rhead{Electricidad I \\ Tarea \#6\\  Cualquier tardía se califica en base 70 \\ Entrega: Semana 9 } 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+\noindent Resuelva los siguientes ejercicios.
+\begin{enumerate}
+
+\item ¿Cuál es la energía de un capacitor de 3 $\mu$F si la carga en una de sus placas es de 0.12mC ? ¿Cuánta energía almacena? 
+\item Halle la energía almacenada en los capacitores del siguiente circuito.
+  \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+            (7,6)
+              to[short]
+            (7,3.5)
+            (7,6)
+              to[R,l=\SI{3}{\kilo\ohm}]
+            (4,6)
+              to[short]
+            (4,3.5) 
+              to[C, C=\SI{20}{\micro\farad}]
+            (7,3.5)
+              to[R,l=\SI{6}{\kilo\ohm}]
+            (7,0)
+              to[short]
+            (4,0)
+              to[short]
+            (0,0)
+              to[V,l=\SI{10}{\volt}]
+            (0,3.5)
+              to[R,l=\SI{1}{\kilo\ohm}]
+            (4,3.5)
+              to[C, C=\SI{10}{\micro\farad}]
+            (4,0)
+         ;
+        \end{circuitikz}
+    \end{center}
+    
+\item Determine $V_c$, $i_L$ y la energía almacenada en el capacitor y el inductor del siguiente circuito.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short]
+             (4,3)
+                to[L, L=\SI{0.25}{\henry}, i=$i_L$]
+            (7,3)
+                to[short]
+             (9,3)
+               to[C, C=\SI{2}{\farad}, v=$v_C$]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[I,l=\SI{4}{\ampere}, invert]
+             (2,0)
+             (4,3)
+                to[R,l=\SI{3}{\ohm}]
+             (4,0)
+             (7,3)
+               to[R,l=\SI{1}{\ohm}]
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\newpage    
+\item Para el siguiente circuito, $V_C$(0) = 30 V. Determine $V_C$, $V_x$ e $i_0$, para $t$  $\geq$ 0
+    \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+             (2,3)
+                to[short]
+             (6,3)
+                to[R,l=\SI{8}{\ohm}, i=$i_0$]
+             (9,3)
+               to[C, C=\SI{0.33}{\farad}, v=$V_C$]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+               to[R,l=\SI{12}{\ohm}]
+             (2,0)
+             (6,3)
+               to[R,l=\SI{6}{\ohm}, v=$V_x$] 
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\item Para el siguiente circuito, que se abre en $t=0$, halle $i(t)$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+            (1,6)
+               to[I,l=\SI{5}{\ampere}, invert]
+            (1,0)
+            (1,6)
+               to[ospst, l=$t\text{$=$}0$]
+            (4,6)  
+               to[short]
+            (8,6)
+               to[R,l=\SI{8}{\ohm}]
+            (8,3)
+               to[short]
+            (8,0) 
+               to[short]
+            (1,0)
+            (4,3.5) 
+               to[L, L=\SI{2}{\henry}, i=$i_{(t)}$]
+            (4,0)
+            (4,6)
+               to[R,l=\SI{12}{\ohm}]
+            (4,3.5)
+            (4,3.5)
+               to[R,l=\SI{5}{\ohm}] 
+            (8,3.5)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+\item Halle $v_{(t)}$ para $t$ = 0 en el circuito, , suponga que el interruptor ha estado abierto mucho tiempo y se cierra en $t$ = 0. Calcule $v_{(t)}$ en $t$ = 0.5.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+             (2,3)
+                to[R,l=\SI{2}{\ohm}]
+             (6,3)
+                to[spst, l=$t\text{$=$}0$]
+             (7,3)
+                to[R,l=\SI{6}{\ohm}]
+             (9,3)
+               to[V,l=\SI{5}{\volt}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+               to[V,l=\SI{10}{\volt}, invert]
+             (2,0)
+             (6,3)
+               to[C, C=\SI{0.33}{\farad}, v=$v$]
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+\item Calcule la tensión del capacitor y la corriente del inductor antes de $t$=0, para los siguientes circuitos.   
+
+   \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=\SI{3}{\ohm}]
+             (6,3)
+                to[short]
+             (9,3)
+                to[R,l=\SI{2}{\ohm}]
+             (9,1)
+               to[ospst, l=$t\text{$=$}0$] 
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+               to[V,l=\SI{10}{\volt}, invert]
+             (2,0)
+             (6,3)
+               to[C, C=\SI{7}{\farad}, v=$V_t$] 
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}    
+
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short]
+             (9,3)
+               to[L, L=\SI{5}{\henry}, i=$i_t$]
+             (9,1.5)
+               to[R,l=\SI{3}{\ohm}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[I,l=\SI{10}{\ampere}, invert]
+             (2,0)
+             (4,3)
+                to[R,l=\SI{2}{\ohm}]
+             (4,0)
+             (7,3)
+               to[spst, l=$t\text{$=$}0$] 
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center} 
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\begin{comment}
+\begin{enumerate}
+
+\item ¿Cuál es la tensión de un capacitor de 4.5 \si{\mu}F si la carga en una de sus placas es de 0.12 mC? ¿Cuánta energía se almacena?
+   
+ \item Halle la tensión en cada uno de los capacitores del siguiente circuito.
+   \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[C, C=\SI{40}{\mu\farad}, v= $v_1$]
+             (6,3)
+                to[C, C=\SI{60}{\mu\farad},v= $v_3$]
+             (9,3)
+               to[C, C=\SI{30}{\mu\farad},v= $v_4$]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+               to[V,l=\SI{90}{\volt}, invert]
+             (2,0)
+             (6,3)
+               to[C, C=\SI{20}{\mu\farad},v= $v_2$,]
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+ \item El interruptor del siguiente circuito ha estado cerrado mucho tiempo. Si el interruptor se abre en $t$ = 0.
+   \begin{itemize} 
+   \item Determinar en valor de $i_L(0)$
+   \item Determinar $v$ en el instante posterior al cambio del interruptor.
+   \end{itemize}
+   \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short]
+             (6,3)
+                to[ospst, l=$t\text{$=$}0$] 
+             (9,3)
+                to[short]
+             (9,0)
+                to[L, L=\SI{4}{\milli\henry},i=$i_L$]
+             (4,0)
+                to[short]
+             (2,0)    
+             (2,3)
+                to[I,l=\SI{2}{\ampere}, invert]
+             (2,0)
+             (4,3)
+                to[R,l=\SI{30}{\ohm}]
+             (4,0)
+             (9,0)
+                to[short]
+             (9,-2)
+                to[R,l=\SI{20}{\ohm}, v=$v$]
+             (4,-2)
+                to[short]
+             (4,0)   
+            ;
+    \end{circuitikz}
+        \end{center}
+
+
+\newpage
+\item El interruptor del siguiente circuito se abre en $t = 0$. Halle $v_0$ para todo $t>0$
+   \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=\SI{2}{\kilo\ohm}]
+             (4,3)
+                to[ospst, l=$t\text{$=$}0$] 
+             (7,3) 
+                to[short]
+             (9,3)
+                to[C,C=\SI{3}{\mu\farad}]
+             (9,0) 
+                to[short]
+             (4,0)
+                to[short] 
+             (2,0)    
+             (2,3)
+                to[V,l=\SI{6}{\volt}, invert]
+             (2,0)
+             (7,3)
+                to[R,l=\SI{4}{\kilo\ohm}, v=$v_0$]
+             (7,0)
+            ;
+    \end{circuitikz}
+        \end{center}
+
+\item Después de permanecer por horas en la configuración indicada, el interruptor del circuito se cierra en $t$ = 0. \\
+En $t$ = 5 \si{\mu}s , Calcular:
+   \begin{itemize} 
+   \item  $i_L$.
+   \item  $i_S$.
+   \end{itemize}
+   \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=\SI{1}{\kilo\ohm}]
+             (6,3)
+                to[R,l=\SI{1}{\kilo\ohm}]
+             (9,3)
+               to[L, L=\SI{4}{\milli\henry},i=$i_L$]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+               to[V,l=\SI{9}{\volt}, invert]
+             (2,0)
+             (6,3)
+               to[spst, l=$t\text{$=$}0$, ,i=$i_S$] 
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\newpage    
+\item Para el siguiente circuito, si \\
+$i= 0.4e^{-4t}$ A  \hspace{1cm} y  \hspace{1cm} $v= 20e^{-4t}$ V para todo \hspace{1cm} $t > 0$
+\begin{itemize} 
+   \item Halle $R$ y $C$
+   \item Determine la constante de tiempo, $\tau$
+   \item Calcule la energía inicial en el capacitor
+   \item Obtenga el tiempo en que tarda en disiparse 50\% de la energía inicial.
+\end{itemize}
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=$R$]
+             (2,0)
+                to[short]
+             (6,0)
+             (2,3)
+                to[short,i=$i$] 
+             (6,3)
+               to[C, C=$C$, v=$v$]
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+\end{enumerate}
+\end{comment}
+
+\end{document}

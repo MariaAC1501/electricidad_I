@@ -1,91 +1,359 @@
 \documentclass[12pt]{article}
-\usepackage[margin=1in]{geometry} 
+\usepackage[margin=1.1in]{geometry} 
 \input{comunes/preamble}
 \usepackage{lastpage}
 \usepackage{fancyhdr}
+\usepackage{comment}
 \pagestyle{fancy}
-\setlength{\headheight}{42pt}
+\setlength{\headheight}{57pt}
 \setlength{\parindent}{0cm}
+
  
 \begin{document}
-\input{comunes/postamble}
-\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica} 
-\rhead{Electricidad I \\ Tarea \#2  \\ Entrega: Semana 8} 
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos en formato \textbf{pdf}.} 
+\rhead{Electricidad I \\ Tarea \#2  \\ Entrega: Semana 4 \\ } 
 \cfoot{\thepage\ de \pageref{LastPage}}
-Antes de continuar leyendo este documento, conteste las siguientes preguntas:
-\begin{itemize}
-    \item ¿Que es un modelo de un sistema? 
-    \item ¿Que es un experimento?   
-    \item ¿Que es una simulación? ¿Es toda simulación un experimento?
-\end{itemize}
 
-Definiciones y ecuaciones para celdas y baterías:
-\begin{itemize}
-    \item Celda electroquímica recargable: es un dispositivo capaz de convertir energía química en energía eléctrica y viceversa. 
-    \item Batería: es la interconexión de dos o mas celdas electroquímicas.
-    \item Capacidad nominal [$Q$]: es la cantidad de carga que una celda o batería puede entregar en amperios-hora (\si{\ampere\hour})
-    \item Eficiencia de Coulumb [$\eta$]: es la eficiencia con la que se transfiere la carga a una batería, tipicamente se asume que $\eta = 1$ durante la descarga y que $\eta < 1$ durante la carga. 
-    \item SOC [$z(t)$]: \emph{state of charge}, estado de carga de una celda o batería, para una celda o batería descargada $z(t) = 0$, mientras que para una celda o batería cargada $z(t) = 1$. El estado de carga se puede relacionar con la corriente por medio de la siguiente ecuación:
-    \begin{equation*}
-        z(t) = z(t_0) - \dfrac{1}{Q}\int_{t_0}^t \eta i(\tau) d\tau
-    \end{equation*}
-    \item Tasa C: \emph{C Rate}, es una medida relativa de la corriente en una celda o batería usando como base la capacidad, por ejemplo si una celda tiene una capacidad de \SI{3}{\ampere\hour} y se descarga a corriente constante con una taza de $0.5$C entonces la corriente debe ser $i=0.5\cdot 3 = \SI{1.5}{\ampere}$
-    \item OCV: \emph{open circuit voltage}, voltaje de circuito abierto es el voltaje que la celda o batería tendría si se desconecta de la carga y se deja descansar hasta que el valor del voltaje sea constante. 
-    \item CC: se refiere a un proceso de carga o descarga que se realiza con corriente constante
-    \item CV: se refiere a un proceso de carga o descarga que se realiza con voltaje constante
-\end{itemize}
-
-Existe gran diversidad de modelos para celdas electroquímicas de iones de Litio (Li-Ion), el modelo mas sencillo es una simple fuente independiente que representa el voltaje en los terminales de la celda, los modelos mas complejos incluyen la resistencia interna del electrolito y las interfaces entre el electrolito y el electrodo, el efecto de la eficiencia de Coulomb y los efectos de la difusión de los iones.\\[8pt]
-En la Figura \ref{fig:Rint} se muestra un modelo sencillo para un celda electroquímica, este tipo de modelo se conoce como \emph{Rint}
-
-\begin{figure}[H]
-    \centering
-    \begin{circuitikz}
-        \draw 
-        (0,0)
-            to[cV, l=OCV$(z)$]
-        (0,3)
-            to[R, l=$R_0$,i=$i(t)$,-o]
-        (3,3)
-            to[open,v^=$v(t)$]
-        (3,0)
-            to[short,o-]
-        (0,0)
-        ;
-    \end{circuitikz}
-    \caption{Circuito Rint}
-    \label{fig:Rint}
-\end{figure}
-
-\textbf{Instrucciones}
+Resuelva los siguientes ejercicios.
 \begin{enumerate}
-    \item Se le facilita un archivo de valores separados por comas (csv) llamado ``OCV(z).csv'' que incluye los valores del voltaje de circuito abierto para los estados de carga comprendidos entre $0.2$ y $1$. Estos valores fueron obtenidos por medio de pruebas de laboratorio realizadas en el \href{https://www.tec.ac.cr/unidades/laboratorio-delta}{DeltaLab} a una celda tipo NCR18650B de Panasonic (Ver Figura \ref{fig:18650}). Puede descargarlo \href{https://estudianteccr-my.sharepoint.com/:x:/g/personal/prof_juan_rojas_estudiantec_cr/EaWEaD9eY35Clh4iO77cZ5YBe0Tf2joTGQHzCdW8IVIatA?e=91HoDB}{acá}
-    \item Asuma que $Q = \SI{3250}{\milli\ampere\hour}$, $z(t_0) = 0.25$, $R_0 = \SI{85}{\milli\ohm}$, $\eta = 1$ para los procesos de descarga y $\eta = 0.98$ para los procesos de carga. Considere un proceso de carga/descarga en el que la celda se carga en CC a $1$C hasta que $v(t)=\SI{4.2}{\volt}$ y luego de eso se carga en CV a \SI{4.2}{\volt} hasta que la corriente es sea igual a \SI{300}{\milli\ampere}, luego de esto la celda se descarga a $1$C hasta que $v(t)=\SI{3.2}{\volt}$.
-    \item Usando Python cree un \emph{script} llamado ``calculos'' que le permita realizar lo siguiente:
-    \begin{itemize}
-        \item leer los datos del archivo ``OCV(z).csv'', guardarlos en una o varias matrices y crear una función que permita ingresar cualquier valor de $z$ y recibir el valor correspondiente de OCV($z$) usando interpolación lineal (la interpolación lineal debe ser implementada por el estudiante desde cero) 
-        \item programar el proceso de carga-descarga descrito en el punto 2 usando los conceptos y leyes básicas vistos en el curso, aproximando la integral que describe $z(t)$ por medio de una discretización con un intervalo de \SI{0.25}{\second}, esto es: 
-        \begin{equation*}
-            z[k+1] = z[k] - \dfrac{\eta \Delta t}{Q}i[k]
-        \end{equation*}
-        donde $\Delta t$ es el intervalo de integración discreta, en este caso \SI{0.25/3600}{\hour}; $z[k]$ e $i[k]$ son los valores actuales del SOC y la corriente respectivamente; y $z[k+1]$ es el valor siguiente del SOC
-        \item generar una gráfica que en las abscisas tenga los valores del tiempo $t$ y en las ordenadas tenga el valor del voltaje $v(t)$
-        \item generar una gráfica que en las abscisas tenga los valores del tiempo $t$ y en las ordenadas tenga el valor de la corriente $i(t)$. 
-        \item generar una gráfica que en las abscisas tenga los valores del tiempo $t$ y en las ordenadas tenga el valor del SOC $z(t)$.
-        \item imprimir en la terminal el valor del SOC inicial, SOC al final de la carga, SOC al final de la descarga, la capacidad cargada y la capacidad descargada.
-    \end{itemize}
-    \item Realice un informe de su tarea llamado ``Informe\_t2.tex'' usando \LaTeX. Incluya todos los cálculos y las gráficas solicitadas y algún texto complementario que permita entender la solución realizada. Un machote se puede encontrar \href{https://www.overleaf.com/read/phnwtckqwqwc}{acá}
-    \item Comprima todo en un solo archivo .zip y suba al TecDigital. Cualquier entrega tardía se califica con base en 70. 
+
+    \item Para los siguientes circuitos, encuentre  $v_1$ y $v_2$. 
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[V,l=\SI{17}{\volt}]
+            (0,3)
+                to[R,l=\SI{3}{\ohm},v=$v_1$]
+            (5,3)
+                to[V,l=\SI{4}{\volt}]
+            (5,0)
+                to[R,l=\SI{9}{\ohm}, v=$v_2$]
+            (0,0)
+            (3,3)
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[V,l=\SI{45}{\volt}]
+            (0,3)
+                to[R,l=\SI{3}{\ohm},v=$v_1$]
+            (5,3)
+                to[cV,l=$2v_1$, invert]
+            (5,0)
+                to[R,l=\SI{10}{\ohm}, v=$v_2$]
+            (0,0)
+            (3,3)
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    \item Determine los valores de $i_1$, $i_2$ y $v_3$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.4]
+            \draw
+            (0,0)
+                to[I,l=\SI{15}{\ampere}]
+            (0,3)
+                to[short]
+            (3,3)
+                to[short,i=$i_1$] 
+            (4,3)
+                to[R,l=\SI{5}{\ohm},i=$i_2$]
+            (7,3)
+                to[R,l=\SI{6}{\ohm}]
+            (9,3)
+               to[R,l=\SI{3}{\ohm},v=$v_3$]
+            (9,0)
+                to[short]
+            (0,0)
+            (2,3)
+               to[R,l=\SI{10}{\ohm}]
+            (2,0)
+            (4,3)
+                to[I,l=\SI{7}{\ampere}]
+            (4,0)
+            (7,3)
+                to[R,l=\SI{4}{\ohm}]
+            (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\newpage
+
+   \item Determine la resistencia equivalente $R_{ab}$ en el siguiente circuito
+   \begin{center}
+       \begin{circuitikz}[scale = 1.4]
+           \draw
+            (3,4)   
+              to[short]
+            (0,4)
+              to[short]
+            (0,0)
+              to[short]
+            (4.5,0)
+            (3,4)
+              to[short]
+            (4.5,4)
+              to[R,l=\SI{12}{\ohm}]
+            (8,2)
+            (4.5,4)
+              to[R,l=\SI{10}{\ohm}]
+            (1,2)
+            (1,2)
+              to[R,l=\SI{40}{\ohm}]
+            (4.5,0)
+            (1,2)
+              to[R,l=\SI{20}{\ohm}]
+            (3.5,2)
+              to[short,-o]
+            (4,2)node[above]{$a$}
+            (5,2)node[above]{$b$}
+              to[short,o-]
+            (5.5,2)
+              to[R,l=\SI{19}{\ohm}]
+            (8,2)   
+              to[R,l=\SI{9}{\ohm}]
+            (4.5,0)
+            ;
+       \end{circuitikz}
+    \end{center}
+   
+   \item Determine $V_1$ y $I_1$
+   \begin{center}
+        \begin{circuitikz}
+            \draw
+            (1,6)
+               to[V,l=\SI{50}{\volt}, invert]
+            (1,3)
+            (1,6)
+               to[short]
+            (8,6)
+               to[R,l=\SI{30}{\ohm}]
+            (8,3)
+               to[R,l=\SI{5}{\ohm}, v=$V_1$]
+            (8,0) 
+               to[short]
+            (1,0)
+            (1,3)
+               to[V,l=\SI{15}{\volt}]
+            (1,0)
+            (4,3.5) 
+               to[R,l=\SI{20}{\ohm}]
+            (4,0)
+            (4,6)
+               to[R,l=\SI{70}{\ohm}]
+            (4,3.5)
+            (6,3.5)node[above]{{\si {\leftarrow} $I_1$}}
+            (4,3.5)
+               to[short] 
+            (8,3.5)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+\item Determine el voltaje en las terminales $a$, $b$, $c$, $d$
+   \begin{center}
+        \begin{circuitikz}
+            \draw
+            (1,6)
+               to[V,l=\SI{120}{\volt}, invert]
+            (1,0)
+            (1,6)
+               to[short,-o]
+            (10,6)
+            (10.5,6)node[left]{$a$}
+            (10,0) 
+               to[short, o-]
+            (1,0)
+            (9.5,6)
+               to[R,l=\SI{20}{\ohm}]
+            (9.5,0)   
+            (10.5,0) node[left]{$d$}
+            (4,4)
+               to[R,l=\SI{20}{\ohm}]
+            (4,2) 
+               to[short, -o]
+            (7,2)  
+            (6,2)
+               to[R,l=\SI{20}{\ohm}]
+            (6,0)   
+            (7.5,2)node[left]{$c$}
+            (4,2)
+               to[R,l=\SI{30}{\ohm}]
+            (4,0)
+            (4,6)
+               to[R,l=\SI{10}{\ohm}]
+            (4,4)
+            (9,4)node[left]{$b$}
+            (8,4)
+               to[R,l=\SI{20}{\ohm}]
+            (8,0)   
+            (4,4)
+               to[short, -o] 
+            (8.5,4)
+            ;
+     \end{circuitikz}
+ \end{center}
+
+
+
 \end{enumerate}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\linewidth]{fig/NCR18650.jpeg}
-    \caption{Celda NCR18650B de Panasonic}
-    \label{fig:18650}
-\end{figure}
+   
 
-% \bibliographystyle{IEEEtran}
-% \bibliography{ref_tareas}
 
+
+
+
+
+
+
+
+%Aquí inicia la tarea del segundo semestre 2021
+
+
+\begin{enumerate}
+
+    \item Para el siguiente circuito, encuentre $i$, $v_0$ e $i_0$. 
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[V,l=\SI{20}{\volt}]
+            (0,3)
+                to[R,l=\SI{7}{\ohm},i=$i$]
+            (3,3)
+                to[short]
+            (5,3)
+                to[R,l=\SI{1.5}{\ohm},i=$i_0$,v=$v_0$]
+            (5,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[R,l=\SI{2}{\ohm}]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    
+    \item Para el siguiente circuito, encuentre $R_{eq}$, $i_1$, $i_2$, $i_3$ y $v_0$
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[I,l=\SI{6}{\ampere}]
+            (0,3)
+                to[short]
+            (4,3)
+                to[R,l=\SI{18}{\ohm},v=$v_0$]
+            (7,3)
+                to[short]
+            (9,3)
+                to[R,l=\SI{150}{\ohm},i=$i_3$]
+            (9,0)
+               to[short]
+            (0,0)
+            (2,3)
+               to[R,l=\SI{20}{\ohm},i=$i_1$]
+            (2,0)
+            (4,3)
+               to[R,l=\SI{14}{\ohm},i=$i_2$]
+            (4,0)
+            (7,3)
+               to[R,l=\SI{30}{\ohm}]
+            (7,0)
+            ;
+            \draw[thick] (4.6,-0.5)node[right]{$R_{eq}$}-- (4.6,0.5);
+            \draw[thick,-latex] (4.6,0.5) -- (5.2,0.5);
+        \end{circuitikz}
+    \end{center}
+    
+    \item Para el siguiente circuito, encuentre $v_0$. 
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (3,4)   
+                to[short]
+            (0,4)
+                to[V,l=\SI{20}{\volt}]
+            (0,0)node[ground]{}
+            (3,4)
+                to[R,l=\SI{2}{\kilo\ohm}]
+            (3,2)node[left]{$v_0$}
+                to[R,l=\SI{1}{\kilo\ohm}]
+            (3,0)node[ground]{}
+            (3,2)
+                to[short]
+            (6,2)
+                to[R,l=\SI{10}{\kilo\ohm}]
+            (6,0)node[ground]{}
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    
+    \item Obtenga $v_1$ , $v_2$ y $v_3$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[V,l=\SI{24}{\volt}]
+            (0,3)
+                to[R,l=\SI{7}{\ohm},v=$v_1$]
+            (3,3)
+                to[short]
+            (5,3)
+                to[V,l=\SI{10}{\volt}]
+            (5,0)
+                to[short]
+            (0,0)
+                to[R,l=\SI{12}{\ohm}, v=$v_2$]
+            (3,3)
+                to[R,l=\SI{2}{\ohm}, v=$v_3$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    \item Determine los valores de $i_1$, $i_2$ y $v_3$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.4]
+            \draw
+            (0,0)
+                to[I,l=\SI{30}{\ampere}]
+            (0,3)
+                to[short]
+            (3,3)
+                to[short,i=$i_1$] 
+            (4,3)
+                to[R,l=\SI{5}{\ohm},i=$i_2$]
+            (7,3)
+                to[R,l=\SI{4}{\ohm}]
+            (9,3)
+               to[R,l=\SI{4}{\ohm},v=$v_3$]
+            (9,0)
+                to[short]
+            (0,0)
+            (2,3)
+               to[R,l=\SI{10}{\ohm}]
+            (2,0)
+            (4,3)
+                to[R,l=\SI{7}{\ohm}]
+            (4,0)
+            (7,3)
+                to[R,l=\SI{4}{\ohm}]
+            (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+\end{enumerate}
+   
 \end{document}

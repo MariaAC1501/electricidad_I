@@ -1,0 +1,167 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.2in]{geometry} 
+\input{comunes/preamble}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{57pt}
+\setlength{\parindent}{0cm}
+
+ 
+\begin{document}
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos a mano.} 
+\rhead{Electricidad I \\ Tarea \#4\\  Cualquier tardía se califica en base 70 \\ Entrega: Semana 6 } 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+Resuelva los siguientes ejercicios.
+
+\begin{enumerate} 
+\item Aplique la técnica de superposición y determine el aporte de voltaje por cada fuente sobre la resistencia de 2 \si{\Omega}.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+             (2,3)
+                to[short] 
+            (4,3)
+                to[R,l=\SI{2}{\ohm},v=$v_0$]
+            (7,3)
+                to[R,l=\SI{3}{\ohm}]
+            (9,3)
+               to[V,l=\SI{12}{\volt}, invert]
+            (9,0)
+                to[short]
+            (2,0)
+            (2,3)
+               to[R,l=\SI{4}{\ohm}]
+            (2,0)
+            (4,3)
+                to[I,l=\SI{3}{\ampere}]
+            (4,0)
+            (7,3)
+                to[R,l=\SI{8}{\ohm}]
+            (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+\item Para el siguiente ejercicio determine la tensión $v_0$ en los extremos de la resistencia\\ 20 \si{\Omega} mediante transformación de fuente.
+     \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+            (0,0)
+                to[I,l=\SI{37}{\ampere}]
+            (0,3)
+                to[short]
+            (2,3)    
+                to[R,l=\SI{9}{\ohm}]
+            (4,3)
+                to[I,l=\SI{20}{\ampere}]
+            (7,3)
+                to[R,l=\SI{10}{\ohm}, v=$v_0$]
+            (9,3)
+                to[V,l=\SI{6}{\volt},invert]
+            (9,0)
+                to[short]
+            (0,0)
+            (2,3)
+                to[R,l=\SI{20}{\ohm}]
+            (2,0)
+            (7,3)
+                to[short]
+            (7,2)
+                to[R,l=\SI{15}{\ohm}]
+            (4,2)
+                to[short]
+            (4,3)   
+            ;
+        \end{circuitikz}
+    \end{center}
+\item Aplique superposición para hallar $v_x$ en el siguiente circuito.
+      \begin{center}
+         \begin{circuitikz}[scale = 1.2]
+            \draw
+             (0,0)
+               to[I,l=\SI{10}{\ampere}]
+             (0,3.5) node[above]{$v_x$} 
+               to[R,l=\SI{15}{\ohm}]
+             (-3.5,3.5)
+               to[V,l=\SI{20}{\volt}, invert]
+             (-3.5,0)
+               to[short]
+             (0,0)
+             (4,3.5) 
+               to[short]
+             (7,3.5)
+               to[cI,l=$0.2 v_x$, invert]
+             (7,0) 
+               to[short]
+             (4,0)
+               to[short]
+             (0,0)
+             (0,3.5)
+               to[short]
+             (4,3.5)
+               to[R,l=\SI{8}{\ohm}]
+             (4,0)
+           ;
+        \end{circuitikz}
+       \end{center}
+\newpage       
+\item Utilice transformación de fuente, para reducir el siguiente circuito, a un circuito con una sola fuente y una resistencia en serie.\textbf{(No importa si la fuente final es de tensión o de corriente)}
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short] 
+             (4,3)
+                to[short]
+             (7,3)
+                to[short]
+             (9,3)
+                to[R,l=\SI{40}{\ohm}]
+             (9,1)
+               to[V,l=\SI{16}{\volt}, invert]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[I,l=\SI{6}{\ampere}, invert]
+             (2,0)
+             (4,3)
+                to[R,l=\SI{20}{\ohm}]
+             (4,0)
+             (7,3)
+                to[R,l=\SI{40}{\ohm}]
+             (7,1)
+                to[V,l=\SI{24}{\volt}, invert]
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    \item Aplique la técnica de superposición y determine el valor de $v_0$ en el circuito.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                 to[R,l=\SI{3}{\ohm}]
+             (5,3)    
+                to[short]
+             (6,3)
+                to[R,l=\SI{5}{\ohm}]
+             (9,3)
+                to[V,l=\SI{20}{\volt}, invert]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[R,l=\SI{2}{\ohm},v=$v_0$]
+             (2,0)
+             (5.5,3)
+                to[I,l=\SI{8}{\ampere}, invert]
+             (5.5,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.4in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\pagestyle{fancy}
+\setlength{\headheight}{71 pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniaría Electromecánica \\ Tecnológico de Costa Rica\\  NOTA: Entregar los trabajos a mano.}
+\rhead{Electricidad I \\ Tarea \#8 \\Cualquier tardía se califica en base 70 \\ Entrega: Semana 12 } 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+\noindent Resuelva los siguientes ejercicios, según lo que corresponda. 
+\begin{enumerate}
+\item Dado el senoide 60 sen (4 \si{\pi}t - 75), calcule:
+\begin{itemize} 
+    \item  ángulo
+    \item  amplitud
+    \item  fase
+    \item  frecuencia angular
+    \item  frecuencia
+    \item  periodo
+    \end{itemize}
+    
+\item Halle el ángulo de fase entre $i_1$ = -4 sen (377t + 55) y  $i_2$ = 5 cos (377t - 65). Indique si $i_1$ se adelanta o se atrasa de $i_2$.
+
+\item Si $v_1$ = -10sen (\si{\omega}t - 30) V y $v_2$ = 20 cos (\si{\omega}t + 45) V, halle $v_1$ + $v_2$.
+
+\item Si la tensión $v$= 10sen (100t + 30) se aplica a un capacitor de 50\si{\mu}F. Calcule la corriente que circula en el capacitor.
+
+\item Para el siguiente circuito, encuentre  $v_t$ e $i_t$. 
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[V,l= $20sen(10t+30)V$]
+            (0,3)
+                to[R,l=\SI{4}{\ohm}, i>^=$i$]
+            (3,3) 
+            (3,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[L, L=\SI{0.4}{\henry},v=$v$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\newpage    
+\item Para el siguiente circuito, encuentre $I_0$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[I,l=$3\angle{0}A$]
+            (0,3)
+                to[short]
+            (3,3)
+                to[short]
+            (5,3)
+                to[C, l= $-j2\si{\ohm}$ ,i=$I_0$]
+            (5,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[L,l=$j8\si{\ohm}$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+      
+\item Para el siguiente circuito, encuentre $V_0$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[L,l=$j6\si{\ohm}$]
+            (0,3)
+                to[short]
+            (3,3) node[above]{$V_0$}
+                to[short] 
+            (5,3)
+                to[C, l= $-j3\si{\ohm}$]
+            (5,0)
+                to[short] 
+            (0,0)
+            (3,3)
+                to[I,l=$4\angle{90}A$, invert] 
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+       
+\end{enumerate}
+\end{document}

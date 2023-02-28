@@ -1,0 +1,400 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{42pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniaría Electromecánica \\NOTA: Entregar los trabajos solo en formato \textbf{PDF}.} 
+\rhead{Electricidad I \\ Tarea \#9  \\ Entrega: Semana 15} 
+\cfoot{\thepage\ de \pageref{LastPage}}
+\noindent Realice los siguientes ejercicios.
+
+
+\begin{enumerate}
+    \item Aplicando el análisis nodal, halle $v_1$ y $v_2$ del siguiente circuito.
+       \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short]
+             (4,3)
+                to[C,C=\SI{0.2}{\farad}]
+             (7,3)
+                to[R,l=\SI{4}{\ohm}]
+             (9,3)
+               to[cV,l=$3v_x$, invert]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,0)
+                to[I,l= $10sen(2t)A$]
+             (2,3)
+             (4,3)node[above]{$v_1$}
+                to[R,l=\SI{2}{\ohm}, v=$v_x$]
+             (4,0)
+             (7,3)node[above]{$v_2$}
+               to[L, L=\SI{2}{\henry}]
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    \item Calcule $V_1$ y $V_2$ usando el análisis de nodo el siguiente circuito.
+       \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                 to[R,l=\SI{4}{\ohm}]
+             (4,3)
+                to[V,l= $20\angle{60} V$, invert]
+             (7,3)
+                to[short]
+             (9,3)
+               to[R,l=\SI{2}{\ohm}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,0)
+                to[V,l= $15\angle{0} V$]
+             (2,3)
+             (4,3)node[above]{$V_1$}
+                to[L, L= $j4\si{\ohm}$]
+             (4,0)
+             (7,3)node[above]{$V_2$}
+                to[C,C= $-j1\si{\ohm}$]
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}  
+  
+ 
+\newpage
+
+    \item Aplicando el análisis de mallas, halle $I_0$ en el siguiente circuito.
+        \begin{center}
+        \begin{circuitikz}[scale = 1.2]
+            \draw
+             (0,3.5)
+               to[R,l=\SI{8}{\ohm}, i= $I_0$]
+             (0,0) 
+             (4,3.5)
+               to[short]
+             (4,6)
+               to[I,l= $2\angle{0} A$, invert]
+             (8,6) 
+               to[short]
+             (8,3.5) 
+               to[V,l= $10\angle{30}V$, invert]
+             (8,0)
+               to[short]
+             (0,0)
+             (0,3.5)
+                to[C,C= $-j2\si{\ohm}$]
+             (4,3.5)
+             (4,3.7)
+             (4,3.5) 
+               to[L, L= $j4\si{\ohm}$]
+             (4,0)
+             (4,3.5)
+               to[R,l=\SI{6}{\ohm}] 
+             (8,3.5)
+            ;
+        \end{circuitikz}
+        \end{center} 
+   
+   \item  Calcule la corriente $I_0$ en el siguiente circuito
+   \begin{center}
+       \begin{circuitikz}[scale = 1.4]
+           \draw
+             (0,4)   
+               to[R,l=\SI{10}{\ohm}, i=$I_0$]
+             (3,4)
+             (0,0)
+               to[V,l= $50\angle{0}V$]
+             (0,4)
+             (0,0)
+               to[short]
+             (4.5,0)
+             (3,4)
+               to[short]
+             (4.5,4)
+               to[L, L= $j8\si{\ohm}$]
+             (8,2)
+             (4.5,4)
+               to[C,C= $-j4\si{\ohm}$]
+             (1,2)
+             (1,2)
+               to[R,l=\SI{5}{\ohm}]
+             (4.5,0)
+             (3.5,2)
+               to[short]
+             (4,2)
+             (8,2)
+               to[I,l= $2\angle{0} A$, invert]
+             (1,2)  
+             (8,2)   
+               to[C,C= $-j6\si{\ohm}$]
+             (4.5,0)
+            ;
+       \end{circuitikz}
+    \end{center}  
+    
+\newpage    
+
+   \item Aplicando transformación de fuentes halle $i$ en el circuito.
+    \begin{center}
+        \begin{circuitikz} [scale = 1.5]
+            \draw
+            (0,0)
+                to[R,l=\SI{5}{\ohm}]
+            (0,3)
+                to[R,l=\SI{3}{\ohm}, i=$i$]
+            (5,3)
+                to[L, L=\SI{5}{\milli\henry}]
+            (5,1.5)
+                to[C, C=\SI{1}{\milli\farad}]
+            (5,0)
+                to[short]
+            (0,0)
+            (1,3)
+               to[I,l= $8sin{(200t+30)}A$, invert]
+            (1,0)
+            ;
+        \end{circuitikz}
+    \end{center}  
+    
+   \item Halle el valor de $V_0$ con el método de transformación de fuentes.
+       \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=\SI{4}{\ohm}]
+             (4,3)
+                to[C,C= $-j3\si{\ohm}$]
+             (7,3)
+                 to[L, L= $j4\si{\ohm}$]
+             (9,3)
+                to[C,C= $-j2\si{\ohm}$, v=$V_0$]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,0)
+                to[V,l= $20\angle{0} A$]
+             (2,3)
+             (4,3)
+                to[L, L= $j2\si{\ohm}$]
+             (4,0)
+             (7,3)
+                to[R,l=\SI{2}{\ohm}]
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}  
+      
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
+\begin{enumerate}
+\item Aplicando el análisis nodal,halle $v_1$ y $v_2$ en el siguiente circuito.
+     \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short] 
+             (4,3)
+               to[C,C=\SI{0.2}{\farad}]
+             (7,3)
+                 to[R,l=\SI{4}{\ohm}]
+             (9,3)
+               to[cV,l=$3V_x$, invert]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[I,l=$10\cos(2t)A$, invert]
+             (2,0)
+             (4.5,3) node[above]{$V_1$}
+                to[R,l=\SI{2}{\ohm}, v=$V_x$ ]
+             (4.5,0)
+             (7,3)node[above]{$V_2$}
+                to[L, L=\SI{2}{\henry}]
+             (7,0)
+             ;
+        \end{circuitikz}
+    \end{center} 
+     
+\item Calcule $V_1$ y $V_2$ en el siguiente circuito.
+     \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                 to[R,l=\SI{4}{\ohm}] 
+             (4,3)
+               to[V,l=$100\angle{60}V$, invert]
+             (7,3)
+                to[short]
+             (9,3)
+                to[R,l=\SI{2}{\ohm}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[V,l=$75\angle{0}V$, invert]
+             (2,0)
+             (4,3) node[above]{$V_1$}
+                to[L, L=$j4\si{\ohm}$]
+             (4,0)
+             (7,3)node[above]{$V_2$}
+                 to[C,C=$-j1\si{\ohm}$]
+             (7,0)
+             ;
+        \end{circuitikz}
+    \end{center} 
+     
+    \item Utilice el análisis de malla para determinar $I_0$ en el siguiente circuito.
+      \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+             (0,3.5)
+               to[R,l=\SI{8}{\ohm}, i>^= $I_0$]
+             (0,0)  
+             (7,6)
+               to[short]
+             (7,3.5)
+             (7,6)
+               to[I,l=$10\angle{0}A$]
+             (4,6)
+               to[short]
+             (4,3.5) 
+               to[R,l=\SI{6}{\ohm}]
+             (7,3.5)
+               to[V,l={$50t$ $V$} , invert]
+             (7,0)
+               to[short]
+             (4,0)
+               to[short]
+             (0,0)
+             (0,3.5)
+               to[C,C=$-j2\si{\ohm}$]
+             (4,3.5)
+               to[L, L=$j4\si{\ohm}$]
+             (4,0)
+         ;
+        \end{circuitikz}
+    \end{center}
+    
+\item Halle $i_0$ utilizando mallas en el siguiente circuito.
+   \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R, l=\SI{20}{\ohm}]
+             (6,3)
+                to[C, C=\SI{1}{\mu\farad}]
+             (9,3)
+               to[V, l=$10\sen(10^3t)V$, invert]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+               to[V, l=$20\cos(10^3t)V$, invert]
+             (2,0)
+             (6,3)
+               to[L, L=\SI{0.4}{\henry},i>^=$i_0$]
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\item Halle $I_0$ en el siguiente circuito, utilizando transformación de fuentes.
+     \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                 to[short] 
+             (4,3)
+                 to[R,l=\SI{2}{\ohm}]
+             (5.5,3)
+                 to[L, L=$j1\si{\ohm}$]
+             (7,3)  
+                 to[short]
+             (9,3)
+                 to[R,l=\SI{1}{\ohm}, i>^=$I_0$]
+             (9,1)
+                 to[C, C=$-j2\si{\ohm}$]
+             (9,0)
+                 to[short]
+             (2,0)
+             (4,3)
+                 to[R,l=\SI{4}{\ohm}]
+             (4,1.5)
+             (2,3)
+                 to[I,l=$12\angle{90}A$, invert]
+             (2,0)
+             (4,1.5) 
+                 to[C, C=$-j3\si{\ohm}$]
+             (4,0)
+             (7,3)
+                 to[L, L=$j5\si{\ohm}$]
+             (7,0)
+             ;
+        \end{circuitikz}
+    \end{center} 
+\item Halle $i_0$ en el siguiente circuito, utilizando transformación de fuentes.
+     \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                 to[short] 
+             (4,3)
+               to[R,l=\SI{3}{\ohm},i=$i_0$]
+             (7,3)
+                to[short]
+             (9,3)
+                to[L, L=\SI{5}{\milli\henry}]
+             (9,1)
+                to[C, C=\SI{1}{\milli\farad}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[R,l=\SI{5}{\ohm}]
+             (2,0)
+             (4,3) 
+                to[I,l=$8\sen(200t+30)A$, invert]
+             (4,0)
+             ;
+        \end{circuitikz}
+    \end{center} 
+     
+\end{enumerate}
+\end{comment}
+
+\end{document}

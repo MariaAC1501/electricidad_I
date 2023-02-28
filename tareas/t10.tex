@@ -1,0 +1,379 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.4in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\NOTA: Entregar los trabajos solo en formato \textbf{PDF}.}  
+\rhead{Electricidad I \\ Tarea \#10  \\ Entrega: Semana 16} 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+\vspace{0.5cm}
+\noindent Resuelva los siguientes problemas.
+\begin{enumerate}
+\item Halle el equivalente de Thevenin en las terminales $a$-$b$ en el siguiente circuito.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=\SI{6}{\ohm}]
+             (4,3)
+                to[L, L= $j2\si{\ohm}$]
+             (6,3)
+                to[short, -o]
+             (6.5,3)node[above]{$a$}   
+             (9,3)
+                to[short, -o]
+             (8,3)node[above]{$b$}
+             (9,3)
+               to[R,l=\SI{10}{\ohm}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,0)
+                to[V,l= $30\angle{20} V$]
+             (2,3)
+             (6,3)
+               to[C,C= $-j4\si{\ohm}$]
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+\item Determine el equivalente de Thevenin del siguiente circuito visto desde las terminales $c$ - $d$.
+    \begin{center}
+       \begin{circuitikz}[scale = 1.2]
+           \draw
+              (0,3.5)
+                to[I,l= $5\angle{0} A$, invert]
+              (-1, 3.5)  
+                to[short]
+              (-3.5,3.5)
+                to[C,C= $-j2\si{\ohm}$]
+              (-3.5,2)
+                to[short] 
+              (-3.5,6)  
+                 to[R,l=\SI{8}{\ohm}] 
+              (0,6)node[below]{$V_0$} 
+                 to[L, L= $j4\si{\ohm}$] 
+              (3,6)    
+              (-3.5,2)
+                 to[R,l=\SI{4}{\ohm}]
+              (-3.5,0)
+                to[short]
+              (0,0)
+              (3,3.5)
+                to[short,-o]
+              (5,3.5)node[above]{$c$}
+              (0,0)
+                to[short]
+              (4,0)
+                to[short,-o]
+              (5,0)node[below]{$d$}
+              (0,3.5)
+                to[short]
+              (3,3.5)
+                to[short]
+              (3,6)
+              (3,3.5)
+                to[cI,l=$0.2v_o$, invert]
+              (3,0)
+              (-3,5.7) node[right]{$+$}
+              (2.5,5.7) node[left]{$-$}
+              ;
+       \end{circuitikz}
+   \end{center}  
+ \newpage
+ 
+ \item Determine el equivalente de Norton del siguiente circuito, visto desde las terminales $e$-$f$. Use el equivalente para hallar $I_0$    
+    \begin{center}
+       \begin{circuitikz}[scale = 1.2]
+           \draw
+              (-1,3.5)
+                to[I,l= $4\angle{-90} A$, invert]
+              (-1,0)    
+              (-1, 3.5)  
+                to[R,l=\SI{8}{\ohm}]
+              (-3.5,3.5)
+                to[short] 
+              (-3.5,6)  
+                 to[R,l=\SI{4}{\ohm}] 
+              (0,6)
+                 to[L, L= $j2\si{\ohm}$] 
+              (3,6)    
+              (-3.5,3.5)
+                 to[V,l= $20\angle{0} V$, invert]
+              (-3.5,0)
+                to[short]
+              (0,0)
+              (3,3.5)
+                to[short,-o]
+              (4,3.5)node[above]{$e$}
+                to[short]
+              (5,3.5) 
+                to[R,l=\SI{10}{\ohm}] 
+              (5,2)    
+                to[C,C= $-j5\si{\ohm}$]
+              (5,0)    
+              (0,0)
+                to[short]
+              (3,0)
+                to[short,-o]
+              (4,0)node[below]{$f$}
+                to[short]
+              (5,0)   
+              (-1,3.5)
+                to[R,l=\SI{1}{\ohm}]
+              (1,3.5) 
+                to[C,C= $-j3\si{\ohm}$]
+              (3,3.5)node[below]{\si {\rightarrow} $I_0$}
+                to[short]
+              (3,6)
+              (3,0)
+              ;
+       \end{circuitikz}
+   \end{center}     
+ \item Obtenga el equivalente de Norton visto desde las terminales $a$-$b$, del siguiente circuito.
+    \begin{center}
+       \begin{circuitikz}[scale = 1.2]
+           \draw
+              (0,3.5)  
+                 to[R,l=\SI{30}{\ohm}] 
+              (-3.5,3.5)
+                 to[V,l= $120\angle{45} V$, invert]
+              (-3.5,0)
+                to[short]
+              (0,0)
+              (0,3.5)
+                to[R,l=\SI{60}{\ohm}] 
+              (0,0) 
+              (3,1.5)
+                to[short,-o]
+              (5,1.5)node[above]{$a$}
+              (0,0)
+                to[short]
+              (4,0)
+                to[short,-o]
+              (5,0)node[below]{$b$}
+              (0,3.5)
+                to[short]
+              (3,3.5)
+                to[L, L= $j10\si{\ohm}$]
+              (3,1.5)
+                 to[C,C= $-j5\si{\ohm}$]
+              (3,0)
+              ;
+       \end{circuitikz}
+   \end{center}  
+\newpage
+\item Calcule la potencia promedio absorbida por cada elemento del circuito. Son cinco en total.
+   \begin{center}
+     \begin{circuitikz}[scale = 1.2]
+        \draw
+        (0,0)
+           to[C,C= $-j2\si{\ohm}$]
+        (0,3.5)
+            to[R,l=\SI{8}{\ohm}]
+        (-3.5,3.5)
+            to[V,l= $40\angle{0} V$, invert]
+        (-3.5,0)
+            to[short]
+        (4,0)
+        (0,3.5)
+            to[L, L= $j4\si{\ohm}$]
+        (4,3.5)
+            to[V,l= $20\angle{90} V$, invert]
+        (4,0)
+        ;
+     \end{circuitikz}
+\end{center}   
+    
+\item Una fuente de 110 $V$ (rms) a 60 Hz se aplica a una impedancia de carga de $Z$. La potencia aparente que entra a la carga es de 120 VA con factor de potencia atrasado de 0.707.
+    \begin{enumerate}
+       \item Calcule la potencia compleja.
+       \item Encuentre las corrientes $rms$  suministradas a la carga.
+       \item Determine $Z$
+       \item Suponiendo que $Z$ = $R$ + $jwL$, halle los valores de $R$ y $L$.
+    \end{enumerate}  
+
+    
+    
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\begin{comment}
+\begin{enumerate}
+    \item Una corriente $I$= 33 $\angle{30}$ fluye a través de una impedancia $Z$= 40 $-j70$ \si{\ohm}. Halle la potencia promedio suministrada a la impedancia.
+    
+    \item Para el siguiente circuito calcule la potencia promedio absorbida por resistor y el inductor, además halle la potencia promedio suministrada por la fuente.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[V,l= $320\angle{45}V$]
+            (0,3)
+                to[R,l=\SI{3}{\ohm}]
+            (3,3) 
+            (3,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[C,C=$j1\si{\ohm}$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+    \item Para una carga, $V_{rms}$= $110\angle{85}V$, $I_{rms}$= $0,4\angle{15}A$. Determine:
+    \begin{enumerate}
+       \item Las potencias complejas y aparente.
+       \item Las potencias real y reactiva.
+       \item El factor de potencia.
+       \item La impedancia de la carga.
+    \end{enumerate}  
+    
+    \item Halle el equivalente de Thevenin en las terminales a-b del siguiente circuito.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                 to[short] 
+             (3,3)
+                 to[R,l=\SI{6}{\ohm}]
+             (5,3)
+                 to[L, L=$j2\si{\ohm}$]
+             (7.5,3)  
+                 to[short,-o] node[above]{$a$}
+             (7.5,3)
+             (8.5,3)
+                 to[short,o-] 
+             (9,3)   
+             (8.5,3) node[above]{$b$}
+             (9,3)
+                 to[R,l=\SI{10}{\ohm}]
+             (9,0)
+                 to[short]
+             (2,0)    
+             (2,3)
+                 to[V,l=$100\angle{20}V$, invert]    
+             (2,0)
+             (7,3)
+                 to[C, C=$-j4\si{\ohm}$]
+             (7,0)
+             ;
+        \end{circuitikz}
+    \end{center} 
+ \newpage    
+    \item Determine el equivalente de Thevenin del siguiente circuito, visto desde las terminales a-b.
+     \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+               to[R,l=\SI{4}{\ohm}]
+            (0,2) 
+               to[C, C=$-j2\si{\ohm}$]
+            (0,4)
+               to[short] node[right]{$+$}
+            (0,6) 
+               to[R,l=\SI{8}{\ohm}] 
+            (4,6)   node[below]{$V_x$}
+               to[L, L=$j4\si{\ohm}$]  node[below]{$-$}
+            (8,6)  
+               to[short]  
+            (8,3) 
+               to[cI,l=$0.2V_x$, invert]
+            (8,0)
+               to[short,-o]
+            (8.7,0)  node[above]{$b$} 
+            (0,0)
+               to[short]
+            (8,0)   
+            (8,4) 
+               to[short,-o] 
+            (8.7,4)  node[above]{$a$}
+            (0,4)
+              to[I,l=$5\angle{0}A$] 
+            (8,4) 
+            ;
+        \end{circuitikz}
+     \end{center}
+    
+    \item Obtenga el equivalente de Norton para los siguientes circuitos en las terminales a-b.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short] 
+             (4,3)
+               to[short]
+             (7,3)
+                to[C,C=\SI{5}{\mu\farad},-o] 
+             (9,3)node[above]{$a$}
+             (9,0)node[above]{$b$}
+                to[short,o-] 
+             (2,0)
+             (2,3)
+                to[I,l=$4\cos{(200t+30\si{\degree})}A$, invert]
+             (2,0)
+             (5,3) 
+                to[L, L=\SI{10}{\henry}]
+             (5,0)
+             (7,3)
+                to[R,l=\SI{2}{\kilo\ohm}] 
+             (7,0)
+             ;
+        \end{circuitikz}
+    \end{center} 
+   \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+               to[I,l=$3\angle{60}A$]
+            (0,5) 
+               to[short]
+            (0,6)
+               to[short]
+            (8,6)
+               to[R,l=\SI{40}{\ohm}]
+            (8,3)
+               to[C,C=$-j30\si{\ohm}$]
+            (8,0)
+               to[short]
+            (0,0)
+            (0,3.5)
+            (4,6)
+               to[R,l=\SI{60}{\ohm}]
+            (4,3.5) 
+               to[L, L=$j80\si{\ohm}$]
+            (4,0)
+            (7,3) node[above]{$b$}
+               to[short,o-]
+            (8,3)
+            (4,3)
+               to[short,-o]
+            (5,3)  node[above]{$a$}
+            ;
+        \end{circuitikz}
+   \end{center}
+   
+\end{enumerate} 
+\end{comment}
+\end{document} 

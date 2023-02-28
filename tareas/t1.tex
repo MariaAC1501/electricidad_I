@@ -1,82 +1,234 @@
 \documentclass[12pt]{article}
-\usepackage[margin=1in]{geometry} 
+\usepackage[margin=1.1in]{geometry} 
 \input{comunes/preamble}
 \usepackage{lastpage}
 \usepackage{fancyhdr}
+\usepackage{comment}
 \pagestyle{fancy}
-\setlength{\headheight}{42pt}
+\setlength{\headheight}{57pt}
+\setlength{\parindent}{0cm}
 
- 
 \begin{document}
-\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica} 
-\rhead{Electricidad I \\ Tarea \#1  \\ Entrega: Semana 4} 
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos solo en formato \textbf{pdf}. }
+\rhead{Electricidad I \\ Tarea \#1  \\ Entrega: Semana 3 \\ } 
 \cfoot{\thepage\ de \pageref{LastPage}}
-\noindent En la Tabla \ref{tab:houses} se muestra la potencia promedio por hora de un hogar Australiano según \cite{houses}, la primera columna es un usuario promedio y la segunda es un usuario atípico por su alto consumo. La potencia promedio corresponde a la última hora, por ejemplo, en la hora 14 el usuario normal reporta un promedio de \SI{0.654}{\kilo\watt}, esto corresponde a la potencia promedio registrada en el periodo comprendido entre las 13 y las 14 horas de ese día.
-\begin{table}[H]
-    \centering
-    \caption{Potencia promedio diaria de un hogar Australiano}
-    \vspace{0.3cm}
-    \begin{tabularx}{10cm}{C C C}
-        \toprule
-        & Normal  & Atípico\\
-        Hora & (\si{\kilo\watt}) & (\si{\kilo\watt})\\
-        \midrule
-        0 & 0.775 & 1.960\\
-        1 & 0.459 & 0.834\\
-        2 & 0.421 & 0.732\\
-        3 & 0.368 & 0.587\\
-        4 & 0.359 & 0.557\\
-        5 & 0.392 & 0.590\\
-        6 & 0.490 & 0.960\\
-        7 & 0.573 & 1.152\\
-        8 & 0.600 & 1.245\\
-        9 & 0.571 & 1.185\\
-        10 & 0.575 & 1.194\\
-        11 & 0.702 & 1.504\\
-        12 & 0.695 & 1.430\\
-        13 & 0.647 & 1.308\\
-        14 & 0.654 & 1.308\\
-        15 & 0.690 & 1.320\\
-        16 & 0.785 & 1.504\\
-        17 & 0.919 & 1.748\\
-        18 & 1.028 & 2.131\\
-        19 & 1.107 & 2.308\\
-        20 & 1.068 & 2.152\\
-        21 & 0.947 & 1.870\\
-        22 & 0.770 & 1.554\\
-        23 & 0.877 & 2.230\\
-        \bottomrule
-    \end{tabularx}  
-    \label{tab:houses}
-\end{table}
+
+\textbf{Resuelva los siguientes ejercicios:}\\ 
+\\
+Objetivo de los ejercicios 1, 2 y 3: Evaluar la compresión de los conceptos básicos de electricidad aprendidos durante la clase.
+\\
+
+\begin{enumerate}
+    \item En el siguiente conductor la corriente $i_1$ tiene un valor de \SI{5}{\milli\ampere}. Determine $i_2$
+    \begin{center}
+        \begin{circuitikz} [scale = 1]
+            \draw
+            (0,3)node[above right]{\si {\rightarrow} $i_1$}
+               to[short,o-] 
+            (4,3)node[below left]{\si {\leftarrow} $i_2$}
+               to[short,o-]
+            (4,3)   
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    \item Una cocina eléctrica, requiere \SI{10}{\ampere} cuanto esta conectado a una linea de \SI{120}{\volt}. ¿Cuanto tiempo tarda en consumir \SI{15}{\kilo\joule}? Además, ¿cuántos coulombs y electrones fluyen durante ese tiempo?
+
+    \item Una barra de silicio tiene \SI{10}{\centi\meter} de largo como sección transversal circular. Si su resistencia es de \SI{420}{\ohm}, a temperatura ambiente, ¿cuál es el radio de su sección transversal?
+\end{enumerate}
+
+Objetivo de los ejercicios 4, 5 y 6  
+
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item Calcule la potencia absorbida o suministrada por cada componente en el siguiente circuito. $i_1$= 9A, $i_2$= 5A, $i_3$ = $i$ = 4A.
+    \begin{center}
+        \begin{circuitikz} [scale = 1.5]
+            \draw
+            (0,0)
+                to[V,l=\SI{5}{\volt}, i= $i_1$]
+            (0,3)
+                to[V,l=\SI{2}{\volt}, invert]
+            (3,3)
+                to[short]
+            (5,3)
+                to[V,l=\SI{3}{\volt}, invert, i=$i_3$]
+            (5,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[cV,l=$0.6i$, invert, i=$i_2$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+   
+   
+
+   \item Determine para el siguiente circuito:
+       \begin{enumerate}
+           \item La tensión $v$
+           \item La conductancia $G$
+           \item La potencia $p$
+       \end{enumerate}
+   \begin{center}
+        \begin{circuitikz} [scale = 1.5]
+            \draw
+            (0,0)
+                to[I,l=\SI{5}{\ampere}]
+            (0,3)
+            (0,3)
+                to[short]
+            (3,3)
+            (3,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[R,l=\SI{10}{\ohm}, v= $v$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+\end{enumerate}
+    
+    
+   
 
 
-\noindent\textbf{Instrucciones}
-\begin{itemize}
-    \item Cree un archivo de valores separados por comas (csv) llamado ``casa.csv'' que contenga las tres columnas de la Tabla \ref{tab:houses}.
-    \item Usando Python cree un \emph{script} llamado ``calculos'' que le permita realizar lo siguiente:
-    \begin{itemize}
-        \item leer los datos del archivo ``casa.csv'' y generar una gráfica que en las abscisas tenga los valores horarios, y en las ordenadas tenga dos series, una para representar el usuario normal y otra para el usuario atípico. Se debe incluir una leyenda que permita identificar las curvas.
-        \item asumiendo un mes de 30 días y tarifa \textbf{residencial} del ICE, calcule el costo mensual para ambos usuarios.
-        \item asumiendo un mes de 30 días y tarifa \textbf{residencial} de la CNFL, calcule el costo mensual para ambos usuarios.
-        \item asumiendo un mes de 30 días y tarifa \textbf{residencial horaria} de la CNFL, calcule el costo mensual para ambos usuarios.
-        \item para todos los costos las tarifas deben ser las vigentes a partir del 1ero de enero de 2021 y se debe incluir el IVA según corresponda (Ley 9635).
-        \item imprima todos los datos en la terminal del programa con descripciones adecuadas de forma que se puedan ver los resultados de los cálculos anteriores.
-    \end{itemize}
-    \item Si un usuario normal en la zona de la CNFL decide comprar un BEV (Battery electric vehicle), asumiendo que por el uso que le dará al vehículo debe realizar una carga semanal por 12 horas (no necesariamente consecutivas) conectado a un receptáculo de \SI{240}{\volt} y con una corriente promedio de \SI{24}{\ampere}. Asuma que el usuario gastaba 42000 CRC semanales en gasolina antes de adquirir el BEV. Usando Python cree un \emph{script} llamado ``BEV'' que le permita realizar lo siguiente:
-    \begin{itemize}
-        \item leer los datos del archivo ``casa.csv''
-        \item asumiendo un mes de 30 días y tarifa \textbf{residencial} de la CNFL, calcule el costo mensual antes y después de usar el BEV.
-        \item asumiendo un mes de 30 días y tarifa \textbf{residencial horaria} de la CNFL, distribuya la carga del BEV de manera que pueda obtener el menor costo posible y calcule el costo mensual antes y después de usar el BEV.
-        \item compare el aumento en el recibo eléctrico con el costo de la gasolina y calcule el monto del ahorro para cada tarifa. 
-        \item para todos los costos las tarifas deben ser las vigentes a partir del 1ero de enero de 2021 y se debe incluir el IVA según corresponda (Ley 9635).
-        \item imprima todos los datos en la terminal del programa con descripciones adecuadas de forma que se puedan ver los resultados de los cálculos anteriores.
-    \end{itemize}
-    \item Realice un resumen llamado ``Resumen.tex'' usando \LaTeX e incluya todos los cálculos y las gráficas solicitadas y algún texto complementario que ayude a entender el procedimiento realizado. Un machote se puede encontrar \href{https://www.overleaf.com/read/phnwtckqwqwc}{acá}
-    \item Comprima todo en un solo archivo .zip y suba al TecDigital. Cualquier entrega tardía se califica con base en 70. 
-\end{itemize}
 
-\bibliographystyle{IEEEtran}
-\bibliography{ref_tareas}
+
+
+
+
+
+
+
+
+%Aquí empieza la tarea del semestre pasado (II 2021)
+
+\begin{enumerate}
+
+\item Para el circuito que aparece en la figura, calcule $i$, la conductancia $G$ y la potencia $p$.
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[V,l=\SI{30}{\volt}]
+            (0,3)
+               to[short,i=$i$]
+            (3,3)
+                to[R,l=\SI{5}{\ohm}, v=$v$]
+            (3,0)
+               to[short]
+            (0,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    \item Para el siguiente circuito, encuentre $i$, $v_0$ e $i_0$. 
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[V,l=\SI{10}{\volt}]
+            (0,3)
+                to[R,l=\SI{7}{\ohm},i=$i$]
+            (3,3)
+                to[short]
+            (5,3)
+                to[R,l=\SI{1.5}{\ohm},i=$i_0$,v=$v_0$]
+            (5,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[R,l=\SI{2}{\ohm}]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    
+    \item Para el siguiente circuito, encuentre $R_{eq}$, $i_1$, $i_2$, $i_3$ y $v_0$
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (0,0)
+                to[I,l=\SI{3}{\ampere}]
+            (0,3)
+                to[short]
+            (4,3)
+                to[R,l=\SI{9}{\ohm},v=$v_0$]
+            (7,3)
+                to[short]
+            (9,3)
+               to[R,l=\SI{75}{\ohm},i=$i_3$]
+            (9,0)
+                to[short]
+            (0,0)
+            (2,3)
+               to[R,l=\SI{10}{\ohm},i=$i_1$]
+            (2,0)
+            (4,3)
+                to[R,l=\SI{7}{\ohm},i=$i_2$]
+            (4,0)
+            (7,3)
+                to[R,l=\SI{15}{\ohm}]
+            (7,0)
+            ;
+            \draw[thick] (4.6,-0.5)node[right]{$R_{eq}$}-- (4.6,0.5);
+            \draw[thick,-latex] (4.6,0.5) -- (5.2,0.5);
+        \end{circuitikz}
+    \end{center}
+    
+    \item Para el siguiente circuito, encuentre $v_0$. 
+    \begin{center}
+        \begin{circuitikz}
+            \draw
+            (3,4)   
+                to[short]
+            (0,4)
+                to[V,l=\SI{10}{\volt}]
+            (0,0)node[ground]{}
+            (3,4)
+                to[R,l=\SI{1}{\kilo\ohm}]
+            (3,2)node[left]{$v_0$}
+                to[R,l=\SI{1}{\kilo\ohm}]
+            (3,0)node[ground]{}
+            (3,2)
+                to[short]
+            (6,2)
+                to[R,l=\SI{10}{\kilo\ohm}]
+            (6,0)node[ground]{}
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+    
+    \item Obtenga $v1$ , $v2$ y $v3$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[V,l=\SI{24}{\volt}]
+            (0,3)
+                to[R,l=\SI{7}{\ohm},v=$v1$]
+            (3,3)
+                to[short]
+            (5,3)
+                to[V,l=\SI{10}{\volt}]
+            (5,0)
+                to[short]
+            (0,0)
+                to[R,l=\SI{12}{\ohm}, v=$v2$]
+            (3,3)
+                to[R,l=\SI{2}{\ohm}, v=$v3$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+\end{enumerate}
 
 \end{document}
+ 
