@@ -1,0 +1,285 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.4in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniaría Electromecánica \\ Tecnológico de Costa Rica\\  NOTA: Entregar los trabajos a mano.}
+\rhead{Electricidad I \\ Tarea \#7 \\Cualquier tardía se califica en base 70 \\ Entrega: Semana 10 } 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+\noindent Resuelva los siguientes ejercicios.
+
+\textbf{Funciones de singularidad}
+\begin{enumerate}
+    \item Exprese $h(t)$ en términos de las funciones de singularidad. Presente todo el desarrollo.\\ 
+     \begin{equation}
+      h(t) = \left\lbrace
+      \begin{array}{ll}
+      0, & t<0 \\
+      4, & 0<t<2 \\
+      6-t, & 2<t<6\\
+      0, & t>6 \\
+      \end{array}
+      \right.
+      \end{equation}
+      \begin{equation}
+      i(t) = \left\lbrace
+      \begin{array}{ll}
+      0, & t<1 \\
+      -10, & 1<t<3 \\
+      10, & 3<t<5\\
+      0, & t>5 \\
+      \end{array}
+      \right.
+      \end{equation}
+
+\end{enumerate}
+
+\textbf{Graficación}
+
+
+\begin{enumerate}[resume]
+   
+
+    \item Grafique las siguientes formas de onda.
+    \begin{itemize} 
+        \item $i(t) = u(t-2) + u(t+2)$
+        \item  $v(t) = r(t) - r(t-3)+ 4u(t-5) - 8u(t-8)$
+    \end{itemize}
+        
+\end{enumerate}
+
+\textbf{Respuesta Completa RC}
+
+\begin{enumerate}[resume]
+
+
+    \item Para el siguiente circuito encuentre las expresiones matematicas para $i_c (t)$ y $V_c (t)$ en el intervalo $0s \leq t \leq 2s$ y grafíquelas. Puede hacerlo a mano o usar un script de Python, MATLAB o Scilab.
+
+\begin{center}
+    \begin{circuitikz}
+	\draw
+	(0,0) 
+	    to[I,l=$10u(t-0.5)\,$\si{\milli\ampere}]
+    (0,3)
+        to[short]
+    (2,3)
+        to[R,l=\SI{10}{\kilo\ohm}]
+    (2,0)
+    (2,3)
+        to[R,l=\SI{5}{\kilo\ohm}]
+    (5,3)
+        to[C,l=\SI{0.1}{\milli\farad},i>^=$i_C$,v=$v_C$,voltage shift=3]
+    (5,0)
+    (5,3) 
+        to[R,l=\SI{15}{\kilo\ohm}]
+    (8,3)
+        to[V,l=$100u(t-1.5)\,$\si{\volt},invert]
+    (8,0)--(0,0)
+    (2,3)--(2,5)
+        to[R,l=\SI{10}{\kilo\ohm}]
+    (8,5)--(8,3)
+    ;
+    \end{circuitikz}
+\end{center}
+    
+    
+\newpage
+   \item En el caso del siguiente circuito determine $V_c (t)$ en t igual a: 
+   \begin{enumerate}
+       \item $0^-$
+       \item $0^+$
+       \item $\infty$
+       \item $0.008 s$ 
+   \end{enumerate}
+
+   \begin{center}
+
+       \begin{circuitikz}
+           \draw
+           (0,0)
+           to[V,l=$10u(t) V$]
+           (0,3)
+           to[R,l=\SI{25}{\kilo \ohm}]
+           (3,3)
+           to[short]
+           (8,3)
+           to[R,l=\SI{20}{\kilo \ohm}]
+           (11,3)
+           to[R,l=\SI{80}{\kilo \ohm}]
+           (11,0)
+           to[short]
+           (0,0)
+           ;
+           \draw 
+           (3,3)
+           to[C,C=\SI{5}{\micro \farad},v=$v_c (t)$]
+           (3,0)
+           ;
+           \draw
+           (8,0)
+           to[I,l=\SI{0.001}{\ampere}]
+           (8,3)
+           ;
+           
+       \end{circuitikz}
+   \end{center}
+   
+   
+    
+
+
+
+
+   
+\end{enumerate}
+
+\textbf{Respuesta Completa RL}
+
+\begin{enumerate}[resume]
+
+    \item Determine la corriente en el inductor $i(t)$ tanto para $t<0$ como para $t>0$ en el siguiente circuito.
+
+    \begin{center}
+    \begin{circuitikz}
+
+    \draw 
+    (0,0)
+    to[V,l=\SI{25}{\volt}]
+    (0,3)
+    to[R,l=\SI{3}{\ohm}]
+    (3,3)
+    to[R,l=\SI{2}{\ohm}]
+    (6,3)
+    to[L,L=\SI{4}{\henry}]
+    (6,0)
+    to[short]
+    (0,0)
+    ;
+    \draw 
+    (3,3)
+    to[spst,l=$t\text{$=$}0$ ]
+    (3,1)
+    to[short]
+    (3,0)
+    ;
+
+        
+    \end{circuitikz}
+
+
+        
+    \end{center}
+
+\newpage
+    
+    \item En el siguiente circuito, el interruptor $S_1$,se cierra en $t = 0$ y el interruptor $S_2$, se cierra en $t = 2$. Calcule $i(t)$ para cualquier $t$. Grafique usando Python e incluya una captura de la gráfica obtenida.
+    \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+            (-1,3.5)
+               to[spst, l=$t\text{$=$}0$]node[above]{\si {\textup{$S_1$}}}
+            (1,3.5) 
+            (-1,3.5)
+               to[R,l=\SI{15}{\ohm}]
+            (-1,0)
+            (-1,3.5)
+               to[short]
+            (-3,3.5)   
+            (-3,3.5)
+               to[I,l=\SI{6}{\ampere}, invert]
+            (-3,0)
+               to[short]
+            (0,0)
+            (7,6)
+              to[short]
+            (7,3.5)
+            (4,6)
+              to[spst, l=$t\text{$=$}2$]node[above]{\si {\textup{$S_2$}}}
+            (7,6)
+            (4,6)
+              to[short]
+            (4,3.5) 
+              to[R,l=\SI{20}{\ohm}]
+            (7,3.5)
+               to[L, L=\SI{5}{\henry}, i=$i(t)$]
+            (7,0)
+              to[short]
+            (4,0)
+              to[short]
+            (0,0)
+            (1,3.5)
+              to[R,l=\SI{10}{\ohm}]
+            (4,3.5)
+         ;
+        \end{circuitikz}
+    \end{center}
+\end{enumerate}
+
+
+\textbf{Ejercicio extra:}
+\\
+*Nota*: El ejercicio a continuación \textbf{NO} tiene valor porcentual en la tarea, sin embargo se les recomienda resolverlo ya que tiene como objetivo que practiquen para el II Parcial.
+\\
+\\
+Para el siguiente circuito sabiendo que $v_C(0)=\SI{10}{\volt}$. Encuentre las expresiones matemáticas para $v_C(t)$ e $i_C(t)$ para todo $t > 0$.
+
+\begin{center}
+  \begin{circuitikz}
+    \draw
+        (0,0) 
+            to[cV, l=$v_C\cdot u(1-t)$]
+        (0,3)
+            to[R ,l=\SI{50}{\kilo\ohm}]
+        (3,3)
+            to[C, v=$v_C$, i=$i_C$, l=\SI{20}{\micro\farad}, voltage shift=0.1cm]
+        (3,0)
+            to[short]
+        (0,0)
+        (3,3)
+            to[R, l=\SI{25}{\kilo\ohm}]
+        (6,3)
+            to[cV, l=$v_C\cdot u(2-t)$, invert]
+        (6,0)
+            to[short]
+        (3,0)
+    ;
+    \end{circuitikz}   
+    
+\end{center}
+  
+    
+    
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

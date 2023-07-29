@@ -1,0 +1,251 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.4in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{60 pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniaría Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos solo en formato \textbf{PDF}.} 
+\rhead{Electricidad I \\ Tarea \#6  \\ Entrega: Semana 10\\} 
+\cfoot{\thepage\ de \pageref{LastPage}}
+\noindent Resuelva los siguientes ejercicios.
+
+\textbf{Condensadores e Inductores}
+
+\begin{enumerate}
+\item Halle la energía almacenada en los capacitores del siguiente circuito.
+  \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+            (7,6)
+              to[short]
+            (7,3)
+            (7,6)
+              to[R,l=\SI{6}{\kilo\ohm}]
+            (4,6)
+              to[short]
+            (4,3) 
+              to[C, C=\SI{40}{\micro\farad}]
+            (7,3)
+              to[R,l=\SI{3}{\kilo\ohm}]
+            (7,0)
+              to[short]
+            (4,0)
+              to[short]
+            (1,0)
+              to[V,l=\SI{20}{\volt}]
+            (1,3)
+              to[R,l=\SI{2}{\kilo\ohm}]
+            (4,3)
+              to[C, C=\SI{10}{\micro\farad}]
+            (4,0)
+         ;
+        \end{circuitikz}
+    \end{center}
+    
+\item Para el siguiente circuito en estado estable, determine $v_c$, $i_L$ y la energía almacenada en el capacitor y el inductor.
+    \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+             (2,3)
+                to[short]
+             (4,3)
+                to[L, L=\SI{0.50}{\henry}, i=$i_L$]
+            (7,3)
+                to[short]
+             (9,3)
+               to[C, C=\SI{4}{\farad}, v=$v_C$]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[I,l=\SI{8}{\ampere}, invert]
+             (2,0)
+             (4,3)
+                to[R,l=\SI{3}{\ohm}]
+             (4,0)
+             (7,3)
+               to[R,l=\SI{1}{\ohm}]
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\newpage
+
+
+
+\end{enumerate}
+
+\textbf{Circuito RC: Respuesta Natural}
+
+\begin{enumerate}[resume]
+\item Para el siguiente circuito, calcule el valor de $v_C$ e $i_x$ para todo $t\geq0$.   
+
+\begin{center}
+    \begin{circuitikz}
+    \draw
+        (0,0) 
+            to[V,l=\SI{10}{\volt}]
+        (0,3) 
+            to[R, l=\SI{10}{\ohm}]
+        (2,3)
+            to[ospst, l=$t\text{$=$}1$] 
+        (4,3)
+            to[short]
+        (6,3)
+        (4,3)
+            to[C,l=\SI{0.1}{\farad},v=$v_C$,voltage shift=2]
+        (4,0) 
+        (6,3)
+            to[R,l=\SI{10}{\ohm},i=$i_x$]
+        (6,0)
+            to[short]
+        (0,0)
+    ;
+    \end{circuitikz}
+\end{center}
+
+
+\item Para el siguiente circuito, $v_C(0) = \SI{30}{\volt}$. Determine $v_C$, $v_x$ e $i_0$, para todo $t\geq0$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+             (0,3)
+                to[short]
+             (3,3)
+                to[R,l=\SI{10}{\ohm}, i=$i_0$]
+             (6,3)
+               to[C, C=\SI{1}{\farad}, v=$v_C$]
+             (6,0)
+                to[short]
+             (0,0)
+             (0,3)
+               to[R,l=\SI{20}{\ohm}]
+             (0,0)
+             (3,3)
+               to[R,l=\SI{30}{\ohm}, v=$v_x$] 
+             (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+
+    \item Para el siguiente circuito, calcule el valor de $v$ en $t=\SI{200}{\micro \second}$.
+
+    \begin{center}
+        \begin{circuitikz}
+        \draw
+        (0,0)
+        to[R,l=\SI{2}{\ohm}]
+        (0,4)
+        to[short]
+        (3,4)
+        to[ospst, l=$t\text{$=$}0$ ]
+        (3,2)
+        to[V,l=\SI{9}{\volt},invert]
+        (3,0)
+        to [short]
+        (0,0)
+        ;
+        \draw
+        (3,4)
+        to[R,l=\SI{4}{\ohm}]
+        (6,4)
+        to[C,C=\SI{10}{\micro \farad},v=$v$]
+        (6,0)
+        to[short]
+        (3,0)
+        ;
+
+        \end{circuitikz}
+    \end{center}
+
+
+\end{enumerate}
+
+\newpage
+
+\textbf{Circuito RL: Respuesta Natural}
+
+\begin{enumerate}[resume]
+
+\item Para el siguiente circuito, determine $i_L$ para todo $t\geq0$.
+
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short]
+             (9,3)
+               to[L, L=\SI{5}{\henry}, i=$i_L$]
+             (9,1.5)
+               to[R,l=\SI{3}{\ohm}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,3)
+                to[I,l=\SI{20}{\ampere}, invert]
+             (2,0)
+             (4,3)
+                to[R,l=\SI{2}{\ohm}]
+             (4,0)
+             (7,3)
+               to[spst, l=$t\text{$=$}0$] 
+             (7,0)
+            ;
+        \end{circuitikz}
+    \end{center} 
+
+
+\item Para el siguiente circuito, calcule $i_L$ para todo $t\geq0$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+            (1,6)
+               to[I,l=\SI{5}{\ampere}, invert]
+            (1,0)
+            (1,6)
+               to[ospst, l=$t\text{$=$}0$]
+            (4,6)  
+               to[short]
+            (7,6)
+               to[R,l=\SI{2}{\ohm}]
+            (7,3)
+               to[short]
+            (7,0) 
+               to[short]
+            (1,0)
+            (4,3) 
+               to[L, L=\SI{2}{\henry}, i=$i_L$]
+            (4,0)
+            (4,6)
+               to[R,l=\SI{8}{\ohm}]
+            (4,3)
+            (4,3)
+               to[R,l=\SI{15}{\ohm}] 
+            (7,3)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+
+
+\end{enumerate}
+
+\textbf{Simulacion LTspice}
+
+\begin{enumerate}[resume]
+    \item Grafique las respuestas de los ejercicios 3,4,5,6 y 7 usando LTSPice    
+\end{enumerate}
+
+\end{document}
