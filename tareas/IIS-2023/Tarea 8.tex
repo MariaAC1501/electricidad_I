@@ -1,0 +1,161 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniaría Electromecánica \\ Tecnológico de Costa Rica\\ NOTA: Entregar los trabajos solo en formato \textbf{PDF}.} 
+\rhead{Electricidad I \\ Tarea \#8  \\ Entrega: Semana 12 \\ } 
+\cfoot{\thepage\ de \pageref{LastPage}}
+\noindent
+
+\vspace{0.5cm}
+\noindent Resuelva los siguientes ejercicios, según lo que corresponda. 
+
+\textbf{Senoides y Fasores}
+
+\begin{enumerate}
+\item Dado el senoide 80 sen (4 \si{\pi}t - 75), calcule:
+\begin{itemize} 
+    \item  ángulo
+    \item  amplitud
+    \item  fase
+    \item  frecuencia angular
+    \item  frecuencia
+    \item  periodo
+    \end{itemize}
+    
+\item Halle el ángulo de fase entre $i_1$ = -4 sen (377t + 55) y  $i_2$ = 5 cos (377t - 65). Indique si $i_1$ se adelanta o se atrasa de $i_2$.
+
+\item Si $v_1$ = -10sen (\si{\omega}t - 30) V y $v_2$ = 20 cos (\si{\omega}t + 45) V, halle $v_1$ + $v_2$.
+
+
+
+
+\item Si la tensión $v$= 10sen (100t + 30) se aplica a un capacitor de 50\si{\mu}F. Calcule la corriente que circula en el capacitor.
+
+\item Exprese estas senoides en fasores.
+    \begin{itemize}
+        \item $v = 7 cos(2t + 40^o)$
+        \item $i = -4 sen(10t + 10^o)$
+    \end{itemize}
+  
+
+\item Halle las senoides correspondientes a estos fasores:
+
+    \begin{itemize}
+        \item \textbf{V} = -25 $\angle 40^o$ V
+        \item \textbf{I} = j(12 - j5) A
+        
+    \end{itemize}
+
+
+\end{enumerate}
+
+\newpage 
+\textbf{Impedancia y Admitancia}
+
+
+\begin{enumerate}[resume]
+
+    
+
+\item Para el siguiente circuito, encuentre  $v_t$ e $i_t$. 
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[V,l= $20sen(10t+30)V$]
+            (0,3)
+                to[R,l=\SI{4}{\ohm}, i>^=$i$]
+            (3,3) 
+            (3,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[L, L=\SI{0.4}{\henry},v=$v$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+\item Para el siguiente circuito, encuentre $I_0$.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+            (0,0)
+                to[I,l=$3\angle{0}A$]
+            (0,3)
+                to[short]
+            (3,3)
+                to[short]
+            (5,3)
+                to[C, l= $-j2\si{\ohm}$ ,i=$I_0$]
+            (5,0)
+                to[short]
+            (0,0)
+            (3,3)
+                to[L,l=$j8\si{\ohm}$]
+            (3,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+    
+\item  En relacion con el siguiente circuito halle $Z_{eq}$ y usela para hallar la corriente \textbf{I}. Sea 
+\\
+$\omega$ = 10rad/s. 
+
+\begin{center}
+    \begin{circuitikz}
+    \draw
+    (0,0)
+    to[V,l=$12\angle{0} V$]
+    (0,3)
+    to[R,l=\SI{4}{\ohm},i=$\textbf{I}$]
+    (3,3)
+    to[L,l=$j20 \si{\ohm}$]
+    (6,3)
+    to[R,l=\SI{16}{\ohm}]
+    (6,0)
+    to[short]
+    (0,0)
+    ;
+    \draw
+    (6,3)
+    to[C,l=$-j14 \si{\ohm}$]
+    (8,3)
+    to[L,l=$j25 \si{\ohm}$]
+    (8,0)
+    to[short]
+    (6,0)
+    ;
+    \end{circuitikz}
+
+\end{center}
+
+
+
+\end{enumerate}
+
+\textbf{Simulación en LTSpice}
+
+\begin{enumerate}[resume]
+    \item Simule el circuito del ejercicio 9 utilizando la directiva .ac y obtenga el valor de la Impedancia equivalente. Muestre la gráfica correspondiente con el resultado obtenido. 
+
+
+\end{enumerate}
+
+
+
+
+
+\end{document}

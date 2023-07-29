@@ -1,0 +1,208 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.4in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniería Electromecánica \\ Tecnológico de Costa Rica\\NOTA: Entregar los trabajos solo en formato \textbf{PDF}.}  
+\rhead{Electricidad I \\ Tarea \#10  \\ Entrega: Semana 14} 
+\cfoot{\thepage\ de \pageref{LastPage}}
+
+\vspace{0.5cm}
+\noindent Resuelva los siguientes problemas.
+
+\textbf{Transformación de Fuentes en CA}
+\begin{enumerate}
+
+\item Utilice transformación de fuentes para hallar \textbf{Vo} en el siguiente circuito.
+    
+\begin{center}
+    \begin{circuitikz}
+    \draw
+    (0,0)
+    to[V,l=$20\angle0 V$]
+    (0,3)
+    to[R,l=\SI{4}{\ohm}]
+    (3,3)
+    to[L,l=$j2\si{\ohm}$]
+    (3,0)
+    to[short]
+    (0,0)
+    ;
+    \draw
+    (3,3)
+    to[C,l=$-j3\si{\ohm}$]
+    (6,3)
+    to[L,l=$j4\si{\ohm}$]
+    (9,3)
+    to[C,l=$-j2\si{\ohm}$,v=\textbf{Vo}]
+    (9,0)
+    to[short]
+    (3,0)
+    ;
+    \draw 
+    (6,3)
+    to[R,l=\SI{2}{\ohm}]
+    (6,0)
+    ;
+
+  
+    \end{circuitikz}
+
+\end{center}
+
+\end{enumerate}
+
+\textbf{Equivalente de Thévenin y Norton en CA}
+\begin{enumerate}[resume]
+
+
+\item Halle el equivalente de Thevenin en las terminales $a$-$b$ en el siguiente circuito.
+    \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[R,l=\SI{6}{\ohm}]
+             (4,3)
+                to[L, L= $j2\si{\ohm}$]
+             (6,3)
+                to[short, -o]
+             (6.5,3)node[above]{$a$}   
+             (9,3)
+                to[short, -o]
+             (8,3)node[above]{$b$}
+             (9,3)
+               to[R,l=\SI{10}{\ohm}]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,0)
+                to[V,l= $100\angle{20} V$]
+             (2,3)
+             (6,3)
+               to[C,C= $-j4\si{\ohm}$]
+             (6,0)
+            ;
+        \end{circuitikz}
+    \end{center}
+
+\newpage
+
+ \item Obtenga el equivalente de Norton en las terminales a-b.
+    \begin{center}
+       \begin{circuitikz}[scale = 1]
+           \draw
+           (0,0)
+           to[I,l=$3\angle60 A$]
+           (0,6)
+           to[short]
+           (3,6)
+           to[R,l=\SI{60}{\ohm}]
+           (3,3)
+           to[L,l=$j80\si{\ohm}$]
+           (3,0)
+           to[short]
+           (0,0)
+              ;
+            \draw 
+            (3,6)
+            to[short]
+            (6,6)
+            to[R,l=\SI{40}{\ohm}]
+            (6,3)
+            to[C,l=$-j30\si{\ohm}$]
+            (6,0)
+            to[short]
+            (3,0)
+            ;
+            \draw
+            (3,3)
+            to[short,-o]
+            (3.8,3) node [right]{$a$}
+            ;
+            \draw 
+            (6,3)
+            to[short,-o]
+            (5.2,3) node[left]{$b$}
+            ;
+
+
+
+
+            
+       \end{circuitikz}
+   \end{center}  
+
+\item Obtener el circuito equivalente de Thévenin y Norton entre las terminales a y b. 
+    \begin{center}
+        \begin{circuitikz}[scale = 1]
+        \draw
+        (0,0)
+        to[V,l=$20\angle0 V$]
+        (0,3)
+        to[R,l=\SI{10}{\ohm}]
+        (3,3)
+        to[C,l=$-j4\si{\ohm}$]
+        (6,3)
+        to[short]
+        (8,3)
+        to[R,l=\SI{4}{\ohm}]
+        (8,0)
+        to[short]
+        (0,0)
+        ;
+        \draw
+        (3,3)
+        to[L,l=$j5\si{\ohm}$]
+        (3,0)
+        ;
+        \draw
+        (6,0)
+        to[short,-o]
+        (6,0.8) node [above]{$b$}
+        ;
+        \draw
+        (6,3)
+        to[short,-o]
+        (6,2.2) node [below]{$a$}
+        ;
+        \draw
+        (8,3)
+        to[short]
+        (10,3)
+        to[I,l=$4\angle0 A$,invert]
+        (10,0)
+        to[short]
+        (8,0)
+        ;
+        \draw
+        (4,0) node [ground]{}
+        ;
+            
+        \end{circuitikz}
+    \end{center}
+
+\end{enumerate}
+
+\newpage
+\textbf{Simulación LTSpice}
+
+\begin{enumerate}[resume]
+    \item Simule el ejercicio 4 y obtenga corrobore los datos obtenidos en la solución a mano. Además, al final se debe agregar una captura del circuito equivalente de Thevenin y Norton en LTSpice.
+    
+\end{enumerate}
+
+
+
+\end{document} 

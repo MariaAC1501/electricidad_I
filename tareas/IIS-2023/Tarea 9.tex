@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\input{comunes/preamble}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{siunitx}
+\usepackage{comment}
+\pagestyle{fancy}
+\setlength{\headheight}{42pt}
+
+\begin{document}
+
+\lhead{Ingeniería en Mantenimiento Industrial \\ Escuela de Ingeniaría Electromecánica \\NOTA: Entregar los trabajos solo en formato \textbf{PDF}.} 
+\rhead{Electricidad I \\ Tarea \#9  \\ Entrega: Semana 14} 
+\cfoot{\thepage\ de \pageref{LastPage}}
+\noindent Realice los siguientes ejercicios.
+\\
+\textbf{*Nota*:} Resuelva las matrices o sistemas de ecuaciones apoyándose en algún tipo de herramienta que le permita solucionar sistemas de ecuaciones y matrices con números complejos, ya sea Python, Matlab, Scylab, etc. Además, es necesario añadir una captura en donde se muestre el resultado brindado por la herramienta que hayan seleccionado.
+
+\textbf{Análisis Nodal en CA:}
+\begin{enumerate}
+    \item Aplicando el análisis nodal, halle $v_1$ y $v_2$ del siguiente circuito.
+       \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (2,3)
+                to[short]
+             (4,3)
+                to[C,C=\SI{0.2}{\farad}]
+             (7,3)
+                to[R,l=\SI{4}{\ohm}]
+             (9,3)
+               to[cV,l=$3v_x$, invert]
+             (9,0)
+                to[short]
+             (2,0)
+             (2,0)
+                to[I,l= $\mathrm{25cos(2tA)}$]
+             (2,3)
+             (4,3)node[above]{$v_1$}
+                to[R,l=\SI{2}{\ohm}, v=$v_x$]
+             (4,0)
+             (7,3)node[above]{$v_2$}
+               to[L, L=\SI{2}{\henry}]
+             (7,0)
+            ;
+            \draw
+            (5,0) node [ground] {}
+            ;
+            
+
+            
+        \end{circuitikz}
+    \end{center}
+    
+    \item Calcule $V_0$ en el siguiente circuito aplicando el análisis nodal.
+       \begin{center}
+        \begin{circuitikz}[scale = 1.5]
+            \draw
+             (0,3)
+             to[R,l=\SI{2}{\ohm},v=$V_0$]
+             (0,0)
+             to[short]
+             (3,0)
+             to[C,l=$-j4\si{\ohm}$]
+             (3,3)
+             to[V,l=$12\angle0 V$]
+             (0,3)
+             to[short]
+             (0,5)
+             to[L,l=$j2\si{\ohm}$]
+             (6,5)
+             to[short]
+             (6,3)
+             to[R,l=\SI{4}{\ohm}]
+             (3,3)
+            ;
+            \draw
+            (3,0)
+            to[short]
+            (6,0)
+            to[I,l=$0.2V_0$]
+            (6,3)
+            ;
+        \end{circuitikz}
+    \end{center}  
+    \end{enumerate}
+
+\newpage
+
+\textbf{Análisis de Mallas en CA}
+    
+\begin{enumerate}[resume]
+    
+
+    \item Aplicando el análisis de mallas, halle $I_0$ en el siguiente circuito.
+        \begin{center}
+        \begin{circuitikz}[scale = 1]
+            \draw
+            (0,3)
+            to[R,l=\SI{8}{\ohm},i=$I_0$]
+            (0,0)
+            to[short]
+            (6,0)
+            to[V,l=$50\angle30 V$]
+            (6,3)
+            to[short]
+            (6,6)
+            to[I,l=$10\angle0 A$]
+            (3,6)
+            to[short]
+            (3,3)
+            to[R,l=\SI{6}{\ohm}]
+            (6,3)
+            ;
+            \draw
+            (3,0)
+            to[L,l=$j4\si{\ohm}$]
+            (3,3)
+            to[C,l=$-j2\si{\ohm}$]
+            (0,3)
+            ;
+             
+        \end{circuitikz}
+        \end{center} 
+   
+   \item  Calcule la corriente $I_0$ en el siguiente circuito
+   \begin{center}
+       \begin{circuitikz}[scale = 1.4]
+           \draw
+             (0,4)   
+               to[R,l=\SI{10}{\ohm}, i=$I_0$]
+             (3,4)
+             (0,0)
+               to[V,l= $100\angle{0}V$]
+             (0,4)
+             (0,0)
+               to[short]
+             (4.5,0)
+             (3,4)
+               to[short]
+             (4.5,4)
+               to[L, L= $j8\si{\ohm}$]
+             (8,2)
+             (4.5,4)
+               to[C,C= $-j4\si{\ohm}$]
+             (1,2)
+             (1,2)
+               to[R,l=\SI{5}{\ohm}]
+             (4.5,0)
+             (3.5,2)
+               to[short]
+             (4,2)
+             (8,2)
+               to[I,l= $4\angle{0} A$, invert]
+             (1,2)  
+             (8,2)   
+               to[C,C= $-j6\si{\ohm}$]
+             (4.5,0)
+            ;
+       \end{circuitikz}
+    \end{center}  
+    
+      
+\end{enumerate}
+
+\textbf{Simulación LTSpice}
+
+\begin{enumerate}[resume]
+    \item Simule el ejercicio 1 en LTSpice y usando la directiva .ac lin obtenga los valores de \textbf{V1} y \textbf{V2} y compárelos con los obtenidos mediante la solución a mano.
+\end{enumerate}
+
+
+
+
+\end{document}
+
