@@ -1,21 +1,32 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{Bruno}
-\input{comunes/preamble}
-\title{Electricidad I: \\ \emph{Estructura atómica,}\\ \emph{carga eléctrica y}\\ \emph{campo eléctrico}}
+\input{../comunes/preamble}
+\title[Electricidad I: estructura atómica, carga y campo]{
+    Electricidad I:\\
+    \emph{Estructura atómica,}\\
+    \emph{carga eléctrica y}\\
+    \emph{campo eléctrico}
+}
 \author{
     Juan J. Rojas
 }
 \institute{Instituto Tecnológico de Costa Rica}
 \date{\today}
-\background{fig/background.jpg}
+\background{../fig/background.jpg}
+\titlelogo{../fig/logo.png}
 \begin{document}
-\input{comunes/postamble}
-\maketitle
+\input{../comunes/postamble}
+{
+    \setbeamertemplate{footline}{}
+    \maketitle
+}
+
+\setcounter{framenumber}{0}
 
 \begin{frame}{Estructura atómica}
     \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
-        \textbf{\elementname{H}}\\[8pt]
+        \alert{\elementname{H}}\\[8pt]
         Número atómico: \atomicnumber{H}\\[8pt]
         Configuración electrónica:\\[8pt] 
         \elconf{H}\\[8pt]  
@@ -32,7 +43,7 @@
 \begin{frame}{Estructura atómica}
     \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
-        \textbf{\elementname{Cu}}\\[8pt]
+        \alert{\elementname{Cu}}\\[8pt]
         Número atómico: \atomicnumber{Cu}\\[8pt]
         Configuración electrónica:\\[8pt] 
         \elconf{Cu}\\[8pt]  
@@ -49,7 +60,7 @@
 \begin{frame}{Estructura atómica}
     \begin{columns}[onlytextwidth]
     \begin{column}{0.6\textwidth}
-        \textbf{\elementname{Si}}\\[8pt]
+        \alert{\elementname{Si}}\\[8pt]
         Número atómico: \atomicnumber{Si}\\[8pt]
         Configuración electrónica:\\[8pt] 
         \elconf{Si}\\[8pt]  
@@ -162,8 +173,8 @@
     \end{column}
     \begin{column}{0.45\textwidth}
         \begin{center}
-            \includegraphics[scale=0.55]{fig/campo_unados.png}
-            \includegraphics[scale=0.55]{fig/campo_iguales.png}
+            \includegraphics[scale=0.55]{../fig/campo_unados.png}
+            \includegraphics[scale=0.55]{../fig/campo_iguales.png}
         \end{center}
     \end{column}
     \end{columns}

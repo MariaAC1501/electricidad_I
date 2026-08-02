@@ -37,6 +37,9 @@
 \newcommand{\background}[1]%
     {\newcommand{\bruno@background}{#1}}
 
+\newcommand{\titlelogo}[1]%
+    {\newcommand{\bruno@titlelogo}{#1}}
+    
 \tikzfading[
     name=title page picture fading,
     left color=transparent!0,
@@ -91,6 +94,23 @@
             rectangle
             ++(-10, \dimexpr\paperheight+1cm);
     \end{tikzpicture}
+    \fi
+
+    % Logo independiente, sin recorte
+    \ifdefined\bruno@titlelogo
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[
+                anchor=north east,
+                inner sep=0pt,
+                outer sep=0pt,
+                xshift=-0.45cm,
+                yshift=-0.35cm
+            ] at (current page.north east) {%
+                \includegraphics[
+                    width=4.1cm
+                ]{\bruno@titlelogo}%
+            };
+        \end{tikzpicture}
     \fi
 }
 

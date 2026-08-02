@@ -14,10 +14,12 @@
 \mode<presentation>
 
 % Normal slide header
-\setbeamertemplate{frametitle}{
-    \vskip1em\par
-    \usebeamerfont{frametitle}\insertframetitle\par
-    \usebeamerfont{framesubtitle}\insertframesubtitle\par
+\setbeamertemplate{frametitle}{%
+    \vskip0.5em
+    \usebeamerfont{frametitle}%
+    \insertframetitle\par
+    \usebeamerfont{framesubtitle}%
+    \insertframesubtitle\par
 }
 
 % Remove useless navigation symbols
@@ -29,24 +31,42 @@
 % Footer information line with title, author and slide number
 \setbeamertemplate{footline}{%
     \leavevmode%
-    \hbox{%
+    \begin{beamercolorbox}[
+        wd=\paperwidth,
+        ht=2.8ex,
+        dp=1.2ex,
+        leftskip=1cm,
+        rightskip=1cm
+    ]{footline}%
         \usebeamerfont{footline}%
-        \begin{beamercolorbox}[
-            wd=\textwidth,
-            ht=3ex,
-            dp=1.25ex
-        ]{footline}%
-            \hspace{1cm}%
-            \insertshorttitle%
-            \hfill%
-            \insertshortauthor%
-            \hspace{2em}%
-            \insertpagenumber/ \insertsectionendpage
-            %\insertframenumber{} / \inserttotalframenumber% 
-            \hspace{1cm}
-        \end{beamercolorbox}%
-    }
-    \vskip0pt%
+        \insertshorttitle%
+        \hfill%
+        \insertshortauthor%
+        \hspace{2em}%
+        \insertframenumber/\inserttotalframenumber%
+    \end{beamercolorbox}%
+
+    \begin{beamercolorbox}[
+        wd=\paperwidth,
+        ht=0.7ex,
+        dp=0ex
+    ]{progress bar background}%
+        \begin{tikzpicture}[remember picture,overlay]
+            \fill[azulClaro]
+                (current page.south west)
+                rectangle
+                (current page.south east);
+
+            \pgfmathsetmacro{\progress}{
+                \insertframenumber/\inserttotalframenumber
+            }
+
+            \fill[azulTEC]
+                (current page.south west)
+                rectangle
+                ([xshift=\progress\paperwidth]current page.south west |- current page.south east);
+        \end{tikzpicture}
+    \end{beamercolorbox}%
 }
 
 \mode<all>

@@ -1,30 +1,119 @@
-%% Bruno Beamer theme — Version 1.0
-%% A lightweight Beamer theme inspired from the Metropolis theme
-%%
-%% Written in 2017-2019 by:
-%% — Rémi Cérès <remiceres@msn.com>
-%% — Mattéo Delabre <bonjour@matteodelabre.me>
-%%
-%% This work is released under the CC0 1.0 Universal license. See the
-%% accompanying LICENSE file for details. To the extent possible under
-%% law, Rémi Cérès and Mattéo Delabre have waived all copyright and
-%% related or neighboring rights to the Bruno Beamer theme. This work
-%% is published from France.
-
 \mode<presentation>
 
-\definecolor{brunoblue}{HTML}{182936}
-\definecolor{brunomarroon}{HTML}{704730}
-\definecolor{brunolightgray}{HTML}{E6E6E6}
+\definecolor{azulTEC}{HTML}{275DA8}
+\definecolor{azulClaro}{HTML}{EAF2FB}
+\definecolor{cafeTEC}{HTML}{9A6A00}
+\definecolor{cafeClaro}{HTML}{FFF8E5}
+\definecolor{azulTabla}{HTML}{D9EEF8}
+\definecolor{grisEncabezado}{HTML}{B9B9B9}
+\definecolor{grisTexto}{HTML}{30343B}
 
-% Structure
-\setbeamercolor{structure}{fg=brunoblue}
-\setbeamercolor{normal text}{fg=brunoblue}
-\setbeamercolor{separator}{fg=brunomarroon, bg=brunomarroon}
-\setbeamercolor{footline}{bg=brunolightgray}
+% Colores generales
+\setbeamercolor{normal text}{
+    fg=grisTexto,
+    bg=white
+}
 
-% Blocs
-\setbeamercolor{block body}{bg=brunolightgray}
-\setbeamercolor{block title}{bg=brunoblue, fg=white}
+\setbeamercolor{alerted text}{
+    fg=cafeTEC
+}
+
+\setbeamercolor{structure}{
+    fg=azulTEC
+}
+
+\setbeamercolor{title}{
+    fg=azulTEC
+}
+
+\setbeamercolor{subtitle}{
+    fg=grisTexto
+}
+
+\setbeamercolor{frametitle}{
+    fg=azulTEC,
+    bg=white
+}
+
+\setbeamercolor{framesubtitle}{
+    fg=grisTexto
+}
+
+% Pie de página
+\setbeamercolor{footline}{
+    fg=grisTexto,
+    bg=white
+}
+
+% Bloque normal
+\setbeamercolor{block title}{
+    fg=white,
+    bg=azulTEC
+}
+
+\setbeamercolor{block body}{
+    fg=grisTexto,
+    bg=azulClaro
+}
+
+% Bloque de ejemplo
+\setbeamercolor{block title example}{
+    fg=white,
+    bg=cafeTEC
+}
+
+\setbeamercolor{block body example}{
+    fg=grisTexto,
+    bg=cafeClaro
+}
+
+% Bloque de alerta
+\setbeamercolor{block title alerted}{
+    fg=white,
+    bg=red!70!black
+}
+
+\setbeamercolor{block body alerted}{
+    fg=grisTexto,
+    bg=red!8
+}
+
+% Elementos enumerados
+\setbeamercolor{itemize item}{
+    fg=azulTEC
+}
+
+\setbeamercolor{itemize subitem}{
+    fg=cafeTEC
+}
+
+\setbeamercolor{enumerate item}{
+    fg=azulTEC
+}
+
+% Tablas y elementos secundarios
+\setbeamercolor{palette primary}{
+    fg=white,
+    bg=azulTEC
+}
+
+\setbeamercolor{palette secondary}{
+    fg=grisTexto,
+    bg=azulClaro
+}
+
+\setbeamercolor{palette tertiary}{
+    fg=grisTexto,
+    bg=azulTabla
+}
+
+\setbeamercolor{palette quaternary}{
+    fg=grisTexto,
+    bg=grisEncabezado
+}
+
+\setbeamercolor{progress bar background}{
+    bg=azulClaro
+}
 
 \mode<all>
