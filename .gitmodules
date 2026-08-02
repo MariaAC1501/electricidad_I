@@ -1,0 +1,3 @@
+[submodule "beamerTec"]
+	path = beamerTec
+	url = https://github.com/EIEM-TEC/beamerTec.git
