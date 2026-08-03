@@ -1,33 +1,10 @@
 \documentclass[12pt,letterpaper]{article}
-\input{comunes/preamble}
-\usepackage{geometry}  
-\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\lhead{Problemas de apoyo: Electricidad I}
-\rhead{\begin{picture}(0,0) \put(-110,0){\includegraphics[width=40mm]{fig/logo.png}} \end{picture}}
-\usepackage{titlesec}
-
-\titleformat{\section}{\normalfont \Large \bfseries}
-{Semana\ \thesection}{2.3ex plus .2ex}{} %% Text "Semana" is what you would like the section number to display with.
-%\titlespacing{\subsection}{2em}{*1}{*1}
-
-\titleformat{\subsection}[runin]{\normalfont \large \bfseries}
-{Problema\ \thesubsection}{0pt}{} %% Text "Problema" is what you would like the section number to display with.
-
-\newcommand{\asection}[2]{
-\setcounter{section}{#1}
-\addtocounter{section}{-1}
-\section{#2}
-}
-
-
+\title{Problemas Semana 3}
+\input{shared/preamble}
 \begin{document}
-\input{comunes/postamble}
+\input{shared/postamble}
 
 \asection{9}{Capacitores e Inductores}
-
 
 1.En condiciones cd. Halle la tensión en las terminales de los capacitores. 
  \begin{center}
@@ -119,7 +96,7 @@
 
 3. Suponiendo que los capacitores están inicialmente descargados, halle $V_o$ (t) en el circuito. 
  \\ 
- ver figura\includegraphics{fig/Capacitor cargado graf.PNG}
+ ver figura\includegraphics{figures/Capacitor cargado graf.PNG}
  \begin{center}
      \begin{circuitikz}
          \draw
@@ -152,13 +129,16 @@
  \end{center}
 
  
- R/   \\[16pt]
+ R/   No\\[16pt]
 
 4. La corriente que circula por un inductor de 40 mH es 
+    \(
+    i(t)=
     \begin{cases}
-        0, & t $<$ 0\\
-        te$^-2t$ A, & t $>$ 0
+    0, & t<0,\\
+    t e^{-2t}\,\mathrm{A}, & t>0.
     \end{cases}
+    \)
 
 halle la tensión v(t)
 \\[16pt]
@@ -238,7 +218,7 @@ R/
 R/
 \\[16pt]
 
-7. Un inductor de 100 mH se conecta en paralelo con un resistor de 2$\kilo\omh$. La corriente por el inductor es i(t)=50e$^{-400}$ mA. 
+7. Un inductor de 100 mH se conecta en paralelo con un resistor de 2$\si{\kilo\ohm}$. La corriente por el inductor es i(t)=50e$^{-400}$ mA. 
 a) Halle la tensión $V_L$ en el inductor.
 b) Halle la tensión $V_R$ en el resistor.
 c) ¿Es $V_R$(t) + $V_L$(t) =0?
@@ -278,7 +258,7 @@ c)v(t) mucho después de que el interruptor esta en la posición B.
             (0.7,3.2)node[above]{$B$}
             ;
         \end{circuitikz}
-\end{center}\\[16pt]
+\end{center}
 
 10. Considere el circuito. Dado que v(t)=12e$^{-3t}$mV para t>0 e $i_1$(0)=-10 mA, Halle:\\
 a) $i_2$(0)\\
@@ -345,10 +325,9 @@ c) La energía almacenada en el inductor de mH en t= 1 s.\\
         (-3.5,3.5)
             to[I, l=$i_s$, invert]
         (-3.5,0)
-        
-        \draw[thick] (-2.2,-1)node[right]{$L_{eq}$}-- (-2.2,1);
+        ;
+        \draw[thick] (-2.2,-1)node[right]{$L_{eq}$} -- (-2.2,1);
         \draw[thick,-latex] (-2.2,1) -- (-1.2,1);
-         ;
      \end{circuitikz}
  \end{center}
  

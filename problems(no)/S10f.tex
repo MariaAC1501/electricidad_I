@@ -1,30 +1,8 @@
 \documentclass[12pt,letterpaper]{article}
-\input{comunes/preamble}
-\usepackage{geometry}  
-\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm,headheight=15pt} % Tamaño del área de escritura de la página
-\setlength\parindent{0pt} % Removes all indentation from paragraphs
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\lhead{Problemas de apoyo: Electricidad I}
-\rhead{\begin{picture}(0,0) \put(-110,0){\includegraphics[width=40mm]{fig/logo.png}} \end{picture}}
-\usepackage{titlesec}
-
-\titleformat{\section}{\normalfont \Large \bfseries}
-{Semana\ \thesection}{2.3ex plus .2ex}{} %% Text "Semana" is what you would like the section number to display with.
-%\titlespacing{\subsection}{2em}{*1}{*1}
-
-\titleformat{\subsection}[runin]{\normalfont \large \bfseries}
-{Problema\ \thesubsection}{0pt}{} %% Text "Problema" is what you would like the section number to display with.
-
-\newcommand{\asection}[2]{
-\setcounter{section}{#1}
-\addtocounter{section}{-1}
-\section{#2}
-}
-
-
+\title{Problemas Semana 3}
+\input{shared/preamble}
 \begin{document}
-\input{comunes/postamble}
+\input{shared/postamble}
 
 \asection{10}{Funciones de Singularidad: Respuesta completa RC y RL}
 
@@ -109,9 +87,8 @@ a)
         (-3.5,3.5)
             to[V, l=\SI{10}{\volt}, invert]
         (-3.5,0)
-        \draw
-            (4.3,1.9) node[cute spdt up arrow, rotate = 270, yscale = -1, anchor=in] (Sw) {}
-         ;
+        ;
+        \draw (4.3,1.9) node[cute spdt up arrow, rotate = 270, yscale = -1, anchor=in] (Sw) {};
      \end{circuitikz}
  \end{center}
  
@@ -156,8 +133,7 @@ b)
            
             ;
         \end{circuitikz}
-\end{center}\\[16pt]
-\\
+\end{center}
 
 3.Considere el circuito. Halle i(t) para t<0 y t>0.\\
 \begin{center}
@@ -237,9 +213,9 @@ a)
            
             ;
         \end{circuitikz}
-\end{center}\\[16pt]
-\\
-\\
+\end{center}
+
+
 b)
 \begin{center}
     \begin{circuitikz}[scale=0.8]
@@ -284,8 +260,7 @@ b)
         \end{circuitikz}
 \end{center}
 R/
-\\[16pt]
-\\
+
 5.Determine la respuesta de escalón $V_0$(t) a $V_s$ = 18u(t) en el circuito.\\
  \begin{center}
      \begin{circuitikz}
@@ -371,39 +346,37 @@ R/
         \end{circuitikz}
 \end{center}
 R/
-\\[16pt]
-\\
 
 7. Determine el valor de $i_L$(t) y la energía total disipada por el circuito desde t=0 s hasta t=$\infty$ s. El valor de $V_in$(t) es igual a [40-40u(t)] volts.\\
- \begin{center}
-     \begin{circuitikz}
-         \draw
-         
-         (0,3.5)
-           to[R, l=\SI{40}{\ohm}]
-         (0,0)
-             
-         (-3.5,3.5)
+\begin{center}
+    \begin{circuitikz}
+        \draw
+        
+        (0,3.5)
+        to[R, l=\SI{40}{\ohm}]
+        (0,0)
+            
+        (-3.5,3.5)
             to[R, l=\SI{40}{\ohm}]
-         (0,3.5)   
-         (-3.5,0)
-             to [short]
-         (0,0)
-         ( 
-         (0,3.5)
-             to[short, i=$i_L$(t)]
-         (4,3.5)
-              to[L,l=\SI{10}{\henry}]
-         (4,0)
+        (0,3.5)   
+        (-3.5,0)
+            to [short]
+        (0,0)
+        ( 
+        (0,3.5)
+            to[short, i=$i_L$(t)]
+        (4,3.5)
+            to[L,l=\SI{10}{\henry}]
+        (4,0)
             to[short]
         (0,0)
         (-3.5,3.5)
             to[V, l=$V_in$(t), invert]
         (-3.5,0)
 
-         ;
-     \end{circuitikz}
- \end{center}
-\\
+        ;
+    \end{circuitikz}
+\end{center}
+
 
 \end{document}
