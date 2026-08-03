@@ -1,16 +1,13 @@
 \documentclass[aspectratio=169]{beamer}
-\usetheme{Bruno}
-\input{preamble}
-\title{Electricidad I: \\ \emph{Respuestas completa: RL}}
-\author{
-    Juan J. Rojas
+\input{shared/preamble}
+\title{
+    Electricidad I:\\
+    \alert{\emph{Respuesta completa}}\\
+    \alert{\emph{de un circuito RL}}\\
+    \alert{\emph{a un escalón}}
 }
-\institute{Instituto Tecnológico de Costa Rica}
-\date{\today}
-\background{fig/background.jpg}
 \begin{document}
-\input{postamble}
-\maketitle
+\input{shared/postamble}
 
 \begin{frame}{Circuito RL: respuesta a un escalón}
     \begin{columns}[onlytextwidth]
@@ -320,11 +317,11 @@
                 %smooth,
                 ]
                 \addplot [mark=none, color=blue, thick]       
-                table[x=t,y=il,col sep=comma] {progras/RLC/resp_comp_RL.csv};\addlegendentry{$i[\si{\ampere}]$}
+                table[x=t,y=il,col sep=comma] {data/resp_comp_RL.csv};\addlegendentry{$i[\si{\ampere}]$}
                 \addplot [mark=none, color=red, thick]       
-                table[x=t,y=vl,col sep=comma] {progras/RLC/resp_comp_RL.csv};\addlegendentry{$v[\si{\volt}]$}
+                table[x=t,y=vl,col sep=comma] {data/resp_comp_RL.csv};\addlegendentry{$v[\si{\volt}]$}
                 \addplot [mark=none, color=black, dashed]       
-                table[x=t,y=if,col sep=comma] {progras/RLC/resp_comp_RL.csv};\addlegendentry{$i_f[\si{\ampere}]$}
+                table[x=t,y=if,col sep=comma] {data/resp_comp_RL.csv};\addlegendentry{$i_f[\si{\ampere}]$}
             \end{axis}
         \end{tikzpicture}
         }

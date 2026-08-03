@@ -1,16 +1,13 @@
 \documentclass[aspectratio=169]{beamer}
-\usetheme{Bruno}
-\input{comunes/preamble}
-\title{Electricidad I: \\ \emph{Respuestas naturales}}
-\author{
-    Juan J. Rojas
+\input{shared/preamble}
+\title{
+    Electricidad I:\\
+    \alert{\emph{Respuestas naturales}}\\
+    \alert{\emph{de circuitos RC y RL}}
 }
-\institute{Instituto Tecnológico de Costa Rica}
-\date{\today}
-\background{fig/background.jpg}
 \begin{document}
-\input{comunes/postamble}
-\maketitle
+\input{shared/postamble}
+
 \begin{frame}{Resumen}
     \begin{center}
         \begin{tabularx}{14cm}{C C C}
@@ -130,7 +127,7 @@
                 %smooth,
                 ]
                 \addplot [mark=none, color=black,forget plot, thick]       
-                table[x=t,y=mag,col sep=comma] {progras/RLC/resp_nat.csv};
+                table[x=t,y=mag,col sep=comma] {data/resp_nat.csv};
                 \addplot[color=red,dashed,mark=none] coordinates {
             		(-0.5,0.368)
             		(1,0.368)
@@ -354,7 +351,7 @@
                 %smooth,
                 ]
                 \addplot [mark=none, color=black,forget plot, thick]       
-                table[x=t,y=mag,col sep=comma] {progras/RLC/resp_nat.csv};
+                table[x=t,y=mag,col sep=comma] {data/resp_nat.csv};
                 \addplot[color=red,dashed,mark=none] coordinates {
             		(-0.5,0.368)
             		(1,0.368)
